@@ -1,15 +1,36 @@
 {
-  "name": "rspwn-design-system",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@rspwn/design-system",
+  "private": false,
+  "version": "0.1.0",
+  "description": "RSPWN Design System - A React component library for modern gaming and AI platforms",
   "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:lib": "tsc && vite build --mode lib",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "prepublishOnly": "npm run build:lib"
+  },
+  "keywords": ["react", "design-system", "components", "gaming", "ui", "typescript", "styled-components"],
+  "author": "RSPWN",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rspwn/rspwn-design-system.git"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
+    "styled-components": ">=6.0.0"
   },
   "dependencies": {
     "react": "^18.2.0",
