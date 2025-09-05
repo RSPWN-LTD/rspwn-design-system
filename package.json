@@ -31,9 +31,12 @@
   ],
   "author": "RSPWN",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rspwn/rspwn-design-system.git"
+    "url": "git+https://github.com/RSPWN-LTD/rspwn-design-system.git"
   },
   "peerDependencies": {
     "react": ">=18.0.0",

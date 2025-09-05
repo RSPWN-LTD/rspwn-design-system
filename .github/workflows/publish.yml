@@ -15,6 +15,11 @@ on:
           - minor
           - major
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -50,13 +55,20 @@ jobs:
           git push
 
       - name: Publish to NPM
-        run: npm publish
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   publish-storybook:
     runs-on: ubuntu-latest
     if: github.event_name == 'release'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -72,8 +84,14 @@ jobs:
       - name: Build Storybook
         run: npm run build-storybook
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./storybook-static
+          path: ./storybook-static
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
