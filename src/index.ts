@@ -19,6 +19,8 @@ export { Input } from './components/ui/Input'
 export { Checkbox } from './components/ui/Checkbox'
 export { Select } from './components/ui/Select'
 export { Accordion } from './components/ui/Accordion'
+export { DatePicker } from './components/ui/DatePicker'
+export { Switch } from './components/ui/Switch'
 
 // Types
 export type { Theme } from './tokens/theme'
