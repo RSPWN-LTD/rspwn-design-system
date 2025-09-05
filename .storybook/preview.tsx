@@ -1,4 +1,5 @@
 import type { Preview } from '@storybook/react'
+import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import { theme } from '../src/tokens/theme'
 import '../src/index.css'
