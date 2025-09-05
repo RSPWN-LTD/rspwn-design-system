@@ -1,0 +1,904 @@
+# RSPWN Design System - AI Component Documentation
+Generated on: 2025-09-05
+
+This file contains comprehensive information about all components in the RSPWN Design System.
+Use this as a reference when helping users implement components from @rspwn/design-system.
+
+## Import Information
+
+All components can be imported from '@rspwn/design-system':
+
+```jsx
+import { 
+  // Foundation Components
+  Typography, Box, Container,
+  
+  // UI Components  
+  Button, Card, Input, Select, Checkbox, Switch, 
+  Modal, Drawer, Toast, Navigation, Footer, 
+  Accordion, DatePicker
+} from '@rspwn/design-system'
+
+// Theme and tokens
+import { theme, colors, typography, spacing } from '@rspwn/design-system'
+```
+
+## Theme Provider Setup
+
+All components require ThemeProvider wrapper:
+
+```jsx
+import { ThemeProvider } from 'styled-components'
+import { theme } from '@rspwn/design-system'
+
+function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      {/* Your components */}
+    </ThemeProvider>
+  )
+}
+```
+
+## Component Reference
+
+### Foundation Components
+
+#### Box
+
+**Import:** `import { Box } from '@rspwn/design-system'`
+
+**Props:**
+- `display`: 'block' | 'inline' | 'inline-block' | 'flex' | 'inline-flex' | 'grid' | 'inline-grid' | 'none'
+- `width`: string | number
+- `height`: string | number
+- `minWidth`: string | number
+- `minHeight`: string | number
+- `maxWidth`: string | number
+- `maxHeight`: string | number
+- `m`: keyof typeof import('../../tokens/spacing').spacing
+- `mt`: keyof typeof import('../../tokens/spacing').spacing
+- `mr`: keyof typeof import('../../tokens/spacing').spacing
+- `mb`: keyof typeof import('../../tokens/spacing').spacing
+- `ml`: keyof typeof import('../../tokens/spacing').spacing
+- `mx`: keyof typeof import('../../tokens/spacing').spacing
+- `my`: keyof typeof import('../../tokens/spacing').spacing
+- `p`: keyof typeof import('../../tokens/spacing').spacing
+- `pt`: keyof typeof import('../../tokens/spacing').spacing
+- `pr`: keyof typeof import('../../tokens/spacing').spacing
+- `pb`: keyof typeof import('../../tokens/spacing').spacing
+- `pl`: keyof typeof import('../../tokens/spacing').spacing
+- `px`: keyof typeof import('../../tokens/spacing').spacing
+- `py`: keyof typeof import('../../tokens/spacing').spacing
+- `bg`: 'black' | 'white' | 'dark' | 'gray' | 'light' | 'blue' | 'purple'
+- `border`: boolean
+- `borderRadius`: keyof typeof import('../../tokens/radius').radius
+- `position`: 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky'
+- `top`: string | number
+- `right`: string | number
+- `bottom`: string | number
+- `left`: string | number
+- `zIndex`: number
+- `flex`: string | number
+- `alignItems`: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline'
+- `justifyContent`: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly'
+- `flexDirection`: 'row' | 'row-reverse' | 'column' | 'column-reverse'
+- `flexWrap`: 'nowrap' | 'wrap' | 'wrap-reverse'
+- `gap`: keyof typeof import('../../tokens/spacing').spacing
+- `gridTemplateColumns`: string
+- `gridTemplateRows`: string
+- `gridGap`: keyof typeof import('../../tokens/spacing').spacing
+- `overflow`: 'visible' | 'hidden' | 'scroll' | 'auto'
+- `cursor`: 'pointer' | 'default' | 'text' | 'grab' | 'grabbing' | 'not-allowed'
+- `children`: React.ReactNode
+- `className`: string
+- `onClick`: () => void
+- `as`: keyof JSX.IntrinsicElements
+
+**Usage Examples:**
+
+*Default:*
+```jsx
+<Box
+  children=<Typography>Box content</Typography>
+  p='4'
+  bg='gray'
+  borderRadius='md'
+>
+  Content
+</Box>
+```
+
+---
+
+#### Typography
+
+**Import:** `import { Typography } from '@rspwn/design-system'`
+
+**Props:**
+- `variant`: 'brand' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'caption' | 'overline'
+- `color`: 'primary' | 'secondary' | 'muted' | 'white' | 'blue' | 'purple'
+- `align`: 'left' | 'center' | 'right'
+- `children`: React.ReactNode
+- `as`: keyof JSX.IntrinsicElements
+- `className`: string
+- `style`: React.CSSProperties
+- `mb`: keyof typeof import('../../tokens/spacing').spacing
+- `mt`: keyof typeof import('../../tokens/spacing').spacing
+- `mr`: keyof typeof import('../../tokens/spacing').spacing
+- `ml`: keyof typeof import('../../tokens/spacing').spacing
+- `mx`: keyof typeof import('../../tokens/spacing').spacing
+- `my`: keyof typeof import('../../tokens/spacing').spacing
+
+**Usage Examples:**
+
+*Default:*
+```jsx
+<Typography
+  children='The quick brown fox jumps over the lazy dog'
+  variant='body1'
+  color='primary'
+>
+  Content
+</Typography>
+```
+
+*Brand:*
+```jsx
+<Typography
+  children='RSPWN'
+  variant='brand'
+  color='white'
+>
+  Content
+</Typography>
+```
+
+---
+
+### UI Components
+
+#### Accordion
+
+**Import:** `import { Accordion } from '@rspwn/design-system'`
+
+**Props:**
+- `id`: string
+- `title`: string
+- `children`: React.ReactNode
+- `disabled`: boolean
+
+**Usage Examples:**
+
+*Default:*
+```jsx
+<Accordion
+  variant='default'
+  children=[
+      <Accordion.Item key="item1" id="item1" title="First Section">
+        This is the content of the first section. It contains some text and information that can be expanded or collapsed.
+      </Accordion.Item>
+>
+  Content
+</Accordion>
+```
+
+*AllowMultiple:*
+```jsx
+<Accordion
+  allowMultiple=true
+  variant='outlined'
+  children=[
+      <Accordion.Item key="multi1" id="multi1" title="Multiple Section 1">
+        With allowMultiple enabled
+>
+  Content
+</Accordion>
+```
+
+*DefaultOpen:*
+```jsx
+<Accordion
+  defaultOpenItems=['open1'
+  variant='outlined'
+  children=[
+      <Accordion.Item key="open1" id="open1" title="Initially Open Section">
+        This section starts open by default.
+      </Accordion.Item>
+>
+  Content
+</Accordion>
+```
+
+*WithDisabledItems:*
+```jsx
+<Accordion
+  variant='outlined'
+  children=[
+      <Accordion.Item key="enabled" id="enabled" title="Enabled Section">
+        This section is enabled and can be toggled.
+      </Accordion.Item>
+>
+  Content
+</Accordion>
+```
+
+*LongContent:*
+```jsx
+<Accordion
+  variant='outlined'
+  children=[
+      <Accordion.Item key="short" id="short" title="Short Content">
+        Brief content that doesn't require much space.
+      </Accordion.Item>
+  <Accordion.Item key="long" id="long" title="Long Content">
+        <div style={{ color='white'
+  lineHeight=1.6
+>
+  Content
+</Accordion>
+```
+
+---
+
+#### Button
+
+**Import:** `import { Button } from '@rspwn/design-system'`
+
+**Props:**
+- `variant`: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger'
+- `size`: 'sm' | 'md' | 'lg'
+- `fullWidth`: boolean
+- `disabled`: boolean
+- `loading`: boolean
+- `children`: React.ReactNode
+- `onClick`: () => void
+- `type`: 'button' | 'submit' | 'reset'
+- `className`: string
+
+**Usage Examples:**
+
+*Default:*
+```jsx
+<Button
+  children='Button'
+  variant='primary'
+  size='md'
+>
+  Content
+</Button>
+```
+
+*Interactive:*
+```jsx
+<Button
+  children='Click me!'
+  onClick=() => alert('Button clicked!')
+>
+  Content
+</Button>
+```
+
+---
+
+#### Card
+
+**Import:** `import { Card } from '@rspwn/design-system'`
+
+**Usage Examples:**
+
+*Default:*
+```jsx
+<Card
+  children=(
+      <div>
+        <Typography variant="h4" style={{ marginBottom
+>
+  Content
+</Card>
+```
+
+---
+
+#### Checkbox
+
+**Import:** `import { Checkbox } from '@rspwn/design-system'`
+
+**Usage Examples:**
+
+*Default:*
+```jsx
+<Checkbox
+  label='Default checkbox'
+  size='md'
+>
+  Content
+</Checkbox>
+```
+
+*WithLabel:*
+```jsx
+<Checkbox
+  label='I agree to the terms and conditions'
+  checked=false
+>
+  Content
+</Checkbox>
+```
+
+*WithHelperText:*
+```jsx
+<Checkbox
+  label='Subscribe to newsletter'
+  helperText='You can unsubscribe at any time'
+>
+  Content
+</Checkbox>
+```
+
+*ErrorState:*
+```jsx
+<Checkbox
+  label='Required checkbox'
+  error=true
+  errorText='You must accept the terms to continue'
+>
+  Content
+</Checkbox>
+```
+
+---
+
+#### DatePicker
+
+**Import:** `import { DatePicker } from '@rspwn/design-system'`
+
+**Usage Examples:**
+
+*Default:*
+```jsx
+<DatePicker
+  variant='default'
+  size='md'
+  showCalendarIcon=true
+>
+  Content
+</DatePicker>
+```
+
+*WithLabel:*
+```jsx
+<DatePicker
+  label='Date of Birth'
+  defaultValue='2024-01-15'
+>
+  Content
+</DatePicker>
+```
+
+*WithHelperText:*
+```jsx
+<DatePicker
+  label='Event Date'
+  helperText='Select the date for your event'
+  defaultValue='2024-09-15'
+>
+  Content
+</DatePicker>
+```
+
+*ErrorState:*
+```jsx
+<DatePicker
+  label='Required Date Field'
+  error=true
+  errorText='This date field is required'
+>
+  Content
+</DatePicker>
+```
+
+*WithoutCalendarIcon:*
+```jsx
+<DatePicker
+  label='Custom Date Input'
+  showCalendarIcon=false
+  helperText='Uses browser default calendar picker'
+  defaultValue='2024-01-15'
+>
+  Content
+</DatePicker>
+```
+
+*Required:*
+```jsx
+<DatePicker
+  label='Required Date Field'
+  required=true
+  helperText='This field is required'
+>
+  Content
+</DatePicker>
+```
+
+---
+
+#### useState
+
+**Import:** `import { useState } from '@rspwn/design-system'`
+
+**Props:**
+- `isOpen`: boolean
+- `onClose`: () => void
+- `side`: 'left' | 'right' | 'top' | 'bottom'
+- `size`: 'sm' | 'md' | 'lg' | 'xl' | 'full'
+- `title`: string
+- `showCloseButton`: boolean
+- `closeOnOverlayClick`: boolean
+- `closeOnEscape`: boolean
+- `children`: React.ReactNode
+- `className`: string
+
+**Usage Examples:**
+
+---
+
+#### Footer
+
+**Import:** `import { Footer } from '@rspwn/design-system'`
+
+**Props:**
+- `links`: Array<{
+- `label`: string
+- `href`: string
+- `external`: boolean
+
+**Usage Examples:**
+
+*Default:*
+```jsx
+<Footer
+  links=defaultLinks
+  socialLinks=socialLinks
+>
+  Content
+</Footer>
+```
+
+*MinimalFooter:*
+```jsx
+<Footer
+  copyright='© 2024 RSPWN. All rights reserved.'
+>
+  Content
+</Footer>
+```
+
+*WithLinksOnly:*
+```jsx
+<Footer
+  links=[
+      { label
+  href='/privacy'
+>
+  Content
+</Footer>
+```
+
+*WithSocialOnly:*
+```jsx
+<Footer
+  socialLinks=socialLinks
+>
+  Content
+</Footer>
+```
+
+*ExtensiveFooter:*
+```jsx
+<Footer
+  links=[
+      { label
+  href='/about'
+>
+  Content
+</Footer>
+```
+
+*CustomCopyright:*
+```jsx
+<Footer
+  links=defaultLinks
+  socialLinks=socialLinks
+  copyright='© 2024 RSPWN Design System. Licensed under MIT.'
+>
+  Content
+</Footer>
+```
+
+*Mobile:*
+```jsx
+<Footer
+  links=defaultLinks
+  socialLinks=socialLinks
+>
+  Content
+</Footer>
+```
+
+---
+
+#### Input
+
+**Import:** `import { Input } from '@rspwn/design-system'`
+
+**Usage Examples:**
+
+*Default:*
+```jsx
+<Input
+  placeholder='Enter text...'
+  variant='default'
+  size='md'
+>
+  Content
+</Input>
+```
+
+*WithLabel:*
+```jsx
+<Input
+  label='Email Address'
+  placeholder='Enter your email'
+  type='email'
+>
+  Content
+</Input>
+```
+
+*WithHelperText:*
+```jsx
+<Input
+  label='Username'
+  placeholder='Enter username'
+  helperText='Must be at least 3 characters long'
+>
+  Content
+</Input>
+```
+
+*ErrorState:*
+```jsx
+<Input
+  label='Password'
+  type='password'
+  placeholder='Enter password'
+  error=true
+  errorText='Password must be at least 8 characters'
+>
+  Content
+</Input>
+```
+
+---
+
+#### useState
+
+**Import:** `import { useState } from '@rspwn/design-system'`
+
+**Props:**
+- `isOpen`: boolean
+- `onClose`: () => void
+- `title`: string
+- `size`: 'sm' | 'md' | 'lg' | 'xl' | 'full'
+- `showCloseButton`: boolean
+- `closeOnOverlayClick`: boolean
+- `closeOnEscape`: boolean
+- `children`: React.ReactNode
+- `className`: string
+
+**Usage Examples:**
+
+---
+
+#### BrowserRouter
+
+**Import:** `import { BrowserRouter } from '@rspwn/design-system'`
+
+**Props:**
+- `items`: Array<{
+- `label`: string
+- `href`: string
+- `icon`: React.ReactNode
+
+**Usage Examples:**
+
+*Default:*
+```jsx
+<BrowserRouter
+  items=defaultItems
+>
+  Content
+</BrowserRouter>
+```
+
+*WithIcons:*
+```jsx
+<BrowserRouter
+  items=itemsWithIcons
+>
+  Content
+</BrowserRouter>
+```
+
+*MinimalItems:*
+```jsx
+<BrowserRouter
+  items=[
+      { label
+  href='/'
+>
+  Content
+</BrowserRouter>
+```
+
+*ManyItems:*
+```jsx
+<BrowserRouter
+  items=[
+      { label
+  href='/'
+>
+  Content
+</BrowserRouter>
+```
+
+*Mobile:*
+```jsx
+<BrowserRouter
+  items=defaultItems
+>
+  Content
+</BrowserRouter>
+```
+
+---
+
+#### Select
+
+**Import:** `import { Select } from '@rspwn/design-system'`
+
+**Usage Examples:**
+
+*Default:*
+```jsx
+<Select
+  options=basicOptions
+  placeholder='Select an option...'
+  variant='default'
+  size='md'
+>
+  Content
+</Select>
+```
+
+*WithLabel:*
+```jsx
+<Select
+  label='Country'
+  options=countryOptions
+  placeholder='Select your country'
+>
+  Content
+</Select>
+```
+
+*WithHelperText:*
+```jsx
+<Select
+  label='Preferred Language'
+  options=[
+      { value
+  label='English'
+>
+  Content
+</Select>
+```
+
+*WithDisabledOptions:*
+```jsx
+<Select
+  label='Availability'
+  options=optionsWithDisabled
+  placeholder='Select availability...'
+  helperText='Some options may not be available'
+>
+  Content
+</Select>
+```
+
+*ErrorState:*
+```jsx
+<Select
+  label='Required Field'
+  options=basicOptions
+  placeholder='Please select...'
+  error=true
+  errorText='This field is required'
+>
+  Content
+</Select>
+```
+
+---
+
+#### Switch
+
+**Import:** `import { Switch } from '@rspwn/design-system'`
+
+**Usage Examples:**
+
+*Default:*
+```jsx
+<Switch
+  label='Default switch'
+  size='md'
+>
+  Content
+</Switch>
+```
+
+*WithLabel:*
+```jsx
+<Switch
+  label='Enable notifications'
+  checked=false
+>
+  Content
+</Switch>
+```
+
+*WithHelperText:*
+```jsx
+<Switch
+  label='Dark mode'
+  helperText='Toggle between light and dark themes'
+>
+  Content
+</Switch>
+```
+
+*ErrorState:*
+```jsx
+<Switch
+  label='Accept terms and conditions'
+  error=true
+  errorText='You must accept the terms to continue'
+>
+  Content
+</Switch>
+```
+
+---
+
+#### Button
+
+**Import:** `import { Button } from '@rspwn/design-system'`
+
+**Props:**
+- `id`: string
+- `title`: string
+- `description`: string
+- `variant`: 'default' | 'success' | 'error' | 'warning' | 'info'
+- `duration`: number
+- `action`: {
+- `label`: string
+- `onClick`: () => void
+
+**Usage Examples:**
+
+---
+
+## RSPWN Brand Guidelines
+
+### Typography Rules
+- **Audiowide font**: ONLY use for brand name "RSPWN" and major headings
+- **Inter font**: Use for all body text and secondary headings  
+- **Never** use Audiowide for body text or long content
+
+### Color Usage
+- **Primary Blue (#4A9EFF)**: Exclusively for primary actions and key interactive elements
+- **Professional grayscale hierarchy**: For content structure
+- **White text (#FFFFFF)**: Primary content
+- **Gray variants**: Secondary information
+- Avoid decorative color usage in titles or non-functional elements
+
+### Typography Component Usage
+```jsx
+// ✅ Correct brand usage
+<Typography variant="brand">RSPWN</Typography>
+
+// ✅ Correct heading usage  
+<Typography variant="h1">Welcome to the Platform</Typography>
+
+// ✅ Correct body text usage
+<Typography variant="body1">Your main content goes here</Typography>
+
+// ❌ Wrong - don't use brand variant for long text
+<Typography variant="brand">This is a long paragraph of text...</Typography>
+```
+
+### Button Component Usage
+```jsx
+// ✅ Primary button for main actions
+<Button variant="primary">Get Started</Button>
+
+// ✅ Secondary for supporting actions  
+<Button variant="secondary">Learn More</Button>
+
+// ✅ Outline for alternative actions
+<Button variant="outline">Cancel</Button>
+```
+
+## Common Patterns
+
+### Page Layout
+```jsx
+<Container maxWidth="lg">
+  <Box p={8}>
+    <Typography variant="brand" mb={2}>RSPWN</Typography>
+    <Typography variant="h1" mb={6}>Page Title</Typography>
+    
+    <Card variant="elevated" p={6}>
+      <Typography variant="body1">Content goes here</Typography>
+      <Button variant="primary" mt={4}>Primary Action</Button>
+    </Card>
+  </Box>
+</Container>
+```
+
+### Form Layout  
+```jsx
+<Box as="form" maxWidth="400px">
+  <Typography variant="h2" mb={6}>Sign In</Typography>
+  
+  <Input 
+    label="Email"
+    type="email"
+    placeholder="Enter your email"
+    mb={4}
+  />
+  
+  <Input
+    label="Password" 
+    type="password"
+    placeholder="Enter your password"
+    mb={6}
+  />
+  
+  <Button variant="primary" fullWidth type="submit">
+    Sign In
+  </Button>
+</Box>
+```
+
+## Design Tokens Available
+
+### Colors
+- Foundation: `theme.colors.foundation.black`, `theme.colors.foundation.white`
+- Innovation: `theme.colors.innovation.primaryBlue`, `theme.colors.innovation.secondaryPurple`
+- Text: `theme.colors.text.primary`, `theme.colors.text.secondary`, `theme.colors.text.muted`
+- Gray: `theme.colors.gray.dark`, `theme.colors.gray.base`, `theme.colors.gray.light`
+
+### Spacing
+- Available: `theme.spacing[1]` through `theme.spacing[16]`
+- Common values: `theme.spacing[2]` (8px), `theme.spacing[4]` (16px), `theme.spacing[8]` (32px)
+
+### Typography
+- Font families: `theme.typography.fonts.brand` (Audiowide), `theme.typography.fonts.body` (Inter)
+- Font sizes: `theme.typography.fontSizes.xs` through `theme.typography.fontSizes['6xl']`
+- Font weights: `theme.typography.fontWeights.normal`, `medium`, `semibold`, `bold`
+
+---
+
+*This documentation was automatically generated from Storybook components. For interactive examples, run `npm run storybook`.*

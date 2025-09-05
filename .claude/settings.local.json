@@ -12,7 +12,8 @@
       "Bash(pkill:*)",
       "Bash(npx tsc:*)",
       "Bash(npm run lint:*)",
-      "Bash(taskkill:*)"
+      "Bash(taskkill:*)",
+      "Bash(npm run docs:ai:*)"
     ],
     "deny": [],
     "ask": []
