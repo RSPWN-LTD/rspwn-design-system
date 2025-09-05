@@ -58,7 +58,7 @@ const AccordionItemContainer = styled.div<{
   isFirst?: boolean
   isLast?: boolean 
 }>`
-  ${({ variant, isFirst, isLast, theme }) => {
+  ${({ variant, theme }) => {
     if (variant === 'outlined' || variant === 'filled') {
       return css`
         &:first-child {
@@ -200,7 +200,9 @@ const AccordionItem: React.FC<AccordionItemProps & {
   )
 }
 
-export const Accordion: React.FC<AccordionProps> = ({
+export const Accordion: React.FC<AccordionProps> & {
+  Item: React.FC<AccordionItemProps>
+} = ({
   variant = 'default',
   allowMultiple = false,
   defaultOpenItems = [],

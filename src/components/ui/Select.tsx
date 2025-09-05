@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react'
+import React, { forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 
 export interface SelectOption {
@@ -148,7 +148,9 @@ const SelectContainer = styled.div<{ fullWidth?: boolean }>`
   ${({ fullWidth }) => fullWidth && css`width: 100%;`}
 `
 
-const StyledSelect = styled.select<SelectProps>`
+interface StyledSelectProps extends Omit<SelectProps, 'options' | 'label' | 'helperText' | 'errorText'> {}
+
+const StyledSelect = styled.select<StyledSelectProps>`
   appearance: none;
   font-family: ${({ theme }) => theme.typography.fonts.body};
   font-weight: ${({ theme }) => theme.typography.fontWeights.normal};

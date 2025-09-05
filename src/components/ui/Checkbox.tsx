@@ -84,12 +84,12 @@ const StyledCheckbox = styled.span<{
     border-color: ${theme.colors.innovation.primaryBlue};
   `}
   
-  ${({ disabled, theme }) => disabled && css`
+  ${({ disabled, theme, checked, indeterminate }) => disabled && css`
     background-color: ${theme.colors.gray.dark};
     border-color: ${theme.colors.gray.base};
     cursor: not-allowed;
     
-    ${({ checked, indeterminate }) => (checked || indeterminate) && css`
+    ${(checked || indeterminate) && css`
       background-color: ${theme.colors.text.muted};
       border-color: ${theme.colors.text.muted};
     `}
@@ -105,43 +105,18 @@ const StyledCheckbox = styled.span<{
   &::after {
     content: '';
     display: ${({ checked, indeterminate }) => (checked || indeterminate) ? 'block' : 'none'};
-    width: ${({ size }) => {
-      switch (size) {
-        case 'sm': return '8px'
-        case 'lg': return '12px'
-        default: return '10px'
-      }
-    }};
-    height: ${({ size }) => {
-      switch (size) {
-        case 'sm': return '8px'
-        case 'lg': return '12px'
-        default: return '10px'
-      }
-    }};
     
-    ${({ indeterminate, theme }) => indeterminate ? css`
-      background-color: ${theme.colors.foundation.white};
+    ${({ indeterminate, theme, size }) => indeterminate ? css`
+      width: ${size === 'sm' ? '8px' : size === 'lg' ? '12px' : '10px'};
       height: 2px;
+      background-color: ${theme.colors.foundation.white};
       border-radius: 1px;
     ` : css`
+      width: ${size === 'sm' ? '4px' : size === 'lg' ? '6px' : '5px'};
+      height: ${size === 'sm' ? '8px' : size === 'lg' ? '10px' : '9px'};
       border: solid ${theme.colors.foundation.white};
       border-width: 0 2px 2px 0;
       transform: rotate(45deg);
-      width: ${({ size }) => {
-        switch (size) {
-          case 'sm': return '4px'
-          case 'lg': return '6px'
-          default: return '5px'
-        }
-      }};
-      height: ${({ size }) => {
-        switch (size) {
-          case 'sm': return '8px'
-          case 'lg': return '10px'
-          default: return '9px'
-        }
-      }};
       margin-top: -2px;
     `}
   }
