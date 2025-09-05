@@ -360,6 +360,19 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [toasts, setToasts] = useState<ToastProps[]>([])
   const [removingToasts, setRemovingToasts] = useState<Set<string>>(new Set())
 
+  const dismiss = useCallback((id: string) => {
+    setRemovingToasts(prev => new Set([...prev, id]))
+    
+    setTimeout(() => {
+      setToasts(prev => prev.filter(t => t.id !== id))
+      setRemovingToasts(prev => {
+        const newSet = new Set(prev)
+        newSet.delete(id)
+        return newSet
+      })
+    }, 300) // Match animation duration
+  }, [])
+
   const toast = useCallback((props: Omit<ToastProps, 'id'>): string => {
     const id = Math.random().toString(36).substr(2, 9)
     const newToast: ToastProps = {
@@ -379,19 +392,6 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     return id
   }, [dismiss])
-
-  const dismiss = useCallback((id: string) => {
-    setRemovingToasts(prev => new Set([...prev, id]))
-    
-    setTimeout(() => {
-      setToasts(prev => prev.filter(t => t.id !== id))
-      setRemovingToasts(prev => {
-        const newSet = new Set(prev)
-        newSet.delete(id)
-        return newSet
-      })
-    }, 300) // Match animation duration
-  }, [])
 
   const dismissAll = useCallback(() => {
     const allIds = toasts.map(t => t.id)
