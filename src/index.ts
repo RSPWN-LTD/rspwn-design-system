@@ -21,6 +21,7 @@ export { Select } from './components/ui/Select'
 export { Accordion } from './components/ui/Accordion'
 export { DatePicker } from './components/ui/DatePicker'
 export { Switch } from './components/ui/Switch'
+export { Modal } from './components/ui/Modal'
 
 // Types
 export type { Theme } from './tokens/theme'
