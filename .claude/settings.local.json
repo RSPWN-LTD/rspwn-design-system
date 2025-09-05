@@ -10,7 +10,9 @@
       "Bash(npm run storybook:*)",
       "Bash(storybook dev:*)",
       "Bash(pkill:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(npm run lint:*)",
+      "Bash(taskkill:*)"
     ],
     "deny": [],
     "ask": []

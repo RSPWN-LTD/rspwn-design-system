@@ -147,14 +147,14 @@ export const Footer: React.FC<FooterProps> = ({
             <Typography variant="brand" color="white">
               RSPWN
             </Typography>
-            <Typography variant="body" color="secondary" size="sm">
+            <Typography variant="body2" color="secondary">
               Professional gaming and AI platform design system.
             </Typography>
           </BrandSection>
           
           {links.length > 0 && (
             <LinksSection>
-              <Typography variant="h6" color="primary" size="sm">
+              <Typography variant="h6" color="primary">
                 Links
               </Typography>
               {links.map((link) => (
@@ -172,7 +172,7 @@ export const Footer: React.FC<FooterProps> = ({
           
           {socialLinks.length > 0 && (
             <SocialSection>
-              <Typography variant="h6" color="primary" size="sm">
+              <Typography variant="h6" color="primary">
                 Follow Us
               </Typography>
               <SocialLinks>
