@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useCallback } from 'react'
 import styled, { css } from 'styled-components'
 import { createPortal } from 'react-dom'
 
@@ -257,13 +257,13 @@ export const Tooltip: React.FC<TooltipProps> = ({
 
   const isOpen = controlledOpen !== undefined ? controlledOpen : internalOpen
 
-  const updatePosition = () => {
+  const updatePosition = useCallback(() => {
     if (triggerRef.current) {
       setTargetRect(triggerRef.current.getBoundingClientRect())
     }
-  }
+  }, [])
 
-  const setOpen = (open: boolean) => {
+  const setOpen = useCallback((open: boolean) => {
     if (disabled) return
     
     if (controlledOpen === undefined) {
@@ -274,7 +274,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
     if (open) {
       updatePosition()
     }
-  }
+  }, [disabled, controlledOpen, onOpenChange, updatePosition])
 
   const handleMouseEnter = () => {
     if (trigger !== 'hover' || disabled) return
@@ -355,7 +355,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
       window.removeEventListener('resize', handleResize)
       document.removeEventListener('click', handleClickOutside)
     }
-  }, [isOpen, trigger])
+  }, [isOpen, trigger, setOpen, updatePosition])
 
   useEffect(() => {
     return () => {

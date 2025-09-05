@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Icon, IconCatalog, iconPaths, IconName } from './Icon'
+import { Icon, IconCatalog } from './Icon'
+import { iconPaths, IconName } from './iconPaths'
 import { Box } from '../foundation/Box'
 import { Typography } from '../foundation/Typography'
 

@@ -379,13 +379,13 @@ export const Stepper: React.FC<StepperProps> = ({
   'aria-describedby': ariaDescribedBy,
   ...props
 }) => {
-  const getDefaultStepStatus = (stepIndex: number): StepStatus => {
-    if (stepIndex < activeStep) return 'completed'
-    if (stepIndex === activeStep) return 'active'
-    return 'pending'
-  }
-  
   const stepsWithStatus = useMemo(() => {
+    const getDefaultStepStatus = (stepIndex: number): StepStatus => {
+      if (stepIndex < activeStep) return 'completed'
+      if (stepIndex === activeStep) return 'active'
+      return 'pending'
+    }
+    
     return steps.map((step, index) => ({
       ...step,
       status: getStepStatus ? getStepStatus(index, step) : getDefaultStepStatus(index)
