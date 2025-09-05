@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import styled, { css, keyframes } from 'styled-components'
+import { ToastContext, ToastContextType } from './ToastContext'
 
 export interface ToastProps {
   id: string
@@ -16,14 +17,6 @@ export interface ToastProps {
   dismissible?: boolean
 }
 
-interface ToastContextType {
-  toasts: ToastProps[]
-  toast: (props: Omit<ToastProps, 'id'>) => string
-  dismiss: (id: string) => void
-  dismissAll: () => void
-}
-
-const ToastContext = createContext<ToastContextType | undefined>(undefined)
 
 const slideIn = keyframes`
   from {
@@ -428,30 +421,6 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       )}
     </ToastContext.Provider>
   )
-}
-
-export const useToast = (): ToastContextType => {
-  const context = useContext(ToastContext)
-  if (!context) {
-    throw new Error('useToast must be used within ToastProvider')
-  }
-  return context
-}
-
-// Convenience hook-based functions
-export const useToastHelpers = () => {
-  const { toast } = useToast()
-  
-  return {
-    success: useCallback((props: Omit<ToastProps, 'id' | 'variant'>) => 
-      toast({ ...props, variant: 'success' }), [toast]),
-    error: useCallback((props: Omit<ToastProps, 'id' | 'variant'>) => 
-      toast({ ...props, variant: 'error' }), [toast]),
-    warning: useCallback((props: Omit<ToastProps, 'id' | 'variant'>) => 
-      toast({ ...props, variant: 'warning' }), [toast]),
-    info: useCallback((props: Omit<ToastProps, 'id' | 'variant'>) => 
-      toast({ ...props, variant: 'info' }), [toast]),
-  }
 }
 
 export { ToastProvider as Toaster }
