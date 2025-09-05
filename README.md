@@ -2,6 +2,9 @@
 
 A comprehensive React component library built for modern gaming and AI platforms, following RSPWN brand guidelines.
 
+[![npm version](https://badge.fury.io/js/%40rspwn%2Fdesign-system.svg)](https://www.npmjs.com/package/@rspwn/design-system)
+[![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg)](https://rspwn-ltd.github.io/rspwn-design-system/)
+
 ## Features
 
 - 🎨 **Design Tokens** - Colors, typography, spacing, and shadows based on RSPWN brand guidelines
@@ -9,34 +12,66 @@ A comprehensive React component library built for modern gaming and AI platforms
 - 📚 **Storybook Documentation** - Interactive component playground and documentation
 - ⚡ **Modern Tooling** - Built with Vite, TypeScript, and Styled Components
 - 🌙 **Dark Theme** - Professional dark theme optimized for gaming platforms
+- 📦 **NPM Package** - Available as `@rspwn/design-system`
+
+## Installation
+
+```bash
+npm install @rspwn/design-system styled-components
+```
+
+### Peer Dependencies
+
+Make sure you have the required peer dependencies installed:
+
+```bash
+npm install react react-dom styled-components
+```
 
 ## Quick Start
 
-### Installation
+### Basic Setup
 
-```bash
-npm install
+```jsx
+import React from 'react'
+import { ThemeProvider } from 'styled-components'
+import { Button, Typography, theme } from '@rspwn/design-system'
+
+function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <div style={{ padding: '2rem', backgroundColor: '#000' }}>
+        <Typography variant="brand" color="primary">RSPWN</Typography>
+        <Typography variant="h1">Welcome to the future</Typography>
+        <Button variant="primary" size="lg">
+          Get Started
+        </Button>
+      </div>
+    </ThemeProvider>
+  )
+}
 ```
 
-### Development
+### Available Components
 
-```bash
-# Start the design system website
-npm run dev
-
-# Start Storybook for component development
-npm run storybook
+```jsx
+// Import individual components
+import { 
+  // Design tokens
+  theme, colors, typography, spacing, shadows, radius,
+  
+  // Foundation components
+  Typography, Box, Container,
+  
+  // UI components
+  Button, Card, Navigation
+} from '@rspwn/design-system'
 ```
 
-### Build
+## Documentation
 
-```bash
-# Build the project
-npm run build
-
-# Build Storybook
-npm run build-storybook
-```
+- 📚 **[Storybook Documentation](https://rspwn-ltd.github.io/rspwn-design-system/)** - Interactive component playground
+- 📦 **[NPM Package](https://www.npmjs.com/package/@rspwn/design-system)** - Package details and versions
 
 ## Design Tokens
 
@@ -65,29 +100,52 @@ The design system is built on a foundation of design tokens that encode RSPWN's 
 - **Card** - Default, elevated, outlined, and filled variants
 - **Navigation** - Responsive navigation with mobile menu
 
-## Usage
+## Advanced Usage
+
+### Theme Provider Setup
+
+The design system requires `ThemeProvider` from styled-components to work properly:
 
 ```jsx
-import { Button, Typography, Card } from '@rspwn/design-system'
+import React from 'react'
+import { ThemeProvider } from 'styled-components'
+import { theme } from '@rspwn/design-system'
 
+// Wrap your app with ThemeProvider
 function App() {
   return (
-    <div>
-      <Typography variant="brand">RSPWN</Typography>
-      <Typography variant="h1">Welcome to the future</Typography>
+    <ThemeProvider theme={theme}>
+      {/* Your app components */}
+    </ThemeProvider>
+  )
+}
+```
+
+### Component Examples
+
+```jsx
+import { Button, Typography, Card, Box } from '@rspwn/design-system'
+
+function ExamplePage() {
+  return (
+    <Box p={8} bg="dark">
+      <Typography variant="brand" mb={4}>RSPWN</Typography>
+      <Typography variant="h1" mb={6}>Welcome to the future</Typography>
       
-      <Card variant="elevated" hoverable>
-        <Typography variant="h4" mb="4">
-          Feature Card
-        </Typography>
-        <Typography variant="body2" color="secondary">
-          Build amazing gaming experiences with RSPWN components
-        </Typography>
-        <Button variant="primary" size="lg">
-          Get Started
-        </Button>
+      <Card variant="elevated" p={6} hoverable>
+        <Card.Content>
+          <Typography variant="h4" mb={4}>
+            Feature Card
+          </Typography>
+          <Typography variant="body2" color="secondary" mb={4}>
+            Build amazing gaming experiences with RSPWN components
+          </Typography>
+          <Button variant="primary" size="lg">
+            Get Started
+          </Button>
+        </Card.Content>
       </Card>
-    </div>
+    </Box>
   )
 }
 ```
@@ -115,7 +173,36 @@ function App() {
 
 ## Development
 
-The project structure follows modern React patterns:
+This section is for contributors working on the design system itself.
+
+### Setup
+
+```bash
+git clone https://github.com/RSPWN-LTD/rspwn-design-system.git
+cd rspwn-design-system
+npm install
+```
+
+### Development Scripts
+
+```bash
+# Start the design system website
+npm run dev
+
+# Start Storybook for component development
+npm run storybook
+
+# Build the library for publishing
+npm run build:lib
+
+# Build Storybook static files
+npm run build-storybook
+
+# Run linting
+npm run lint
+```
+
+### Project Structure
 
 ```
 src/
@@ -126,6 +213,10 @@ src/
 ├── pages/             # Design system website pages
 └── types/             # TypeScript definitions
 ```
+
+### Publishing
+
+The package is automatically published to npm via GitHub Actions when a new release is created. See the [deployment workflow](.github/workflows/publish.yml) for details.
 
 ## License
 
