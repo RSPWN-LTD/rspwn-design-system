@@ -85,7 +85,7 @@ export const Card: React.FC<CardProps> & {
   hoverable = false,
   clickable = false,
   children,
-  p = '6',
+  p = 6,
   ...props
 }) => {
   return (
