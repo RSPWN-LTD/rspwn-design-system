@@ -99,7 +99,7 @@ const AccordionHeader = styled.button<{
   };
   text-align: left;
   
-  transition: all ${({ theme }) => theme.durations.normal} ${({ theme }) => theme.easings.easeOut};
+  transition: all ${({ theme }) => theme.durations.fast} ${({ theme }) => theme.easings.easeOut};
   
   &:hover:not(:disabled) {
     background-color: ${({ theme }) => theme.colors.gray.base};
@@ -109,6 +109,10 @@ const AccordionHeader = styled.button<{
     outline: none;
     background-color: ${({ theme }) => theme.colors.gray.base};
     box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.innovation.primaryBlue}40;
+  }
+  
+  &:active:not(:disabled) {
+    background-color: ${({ theme }) => theme.colors.gray.light};
   }
 `
 
@@ -137,16 +141,22 @@ const ChevronIcon = styled.div<{ isOpen?: boolean }>`
 `
 
 const AccordionContent = styled.div<{ isOpen?: boolean }>`
-  overflow: hidden;
-  transition: max-height ${({ theme }) => theme.durations.normal} ${({ theme }) => theme.easings.easeOut};
+  display: grid;
+  transition: grid-template-rows ${({ theme }) => theme.durations.normal} ${({ theme }) => theme.easings.easeOut},
+              opacity ${({ theme }) => theme.durations.fast} ${({ theme }) => theme.easings.easeOut};
   
   ${({ isOpen }) => css`
-    max-height: ${isOpen ? '1000px' : '0'};
+    grid-template-rows: ${isOpen ? '1fr' : '0fr'};
+    opacity: ${isOpen ? '1' : '0'};
   `}
 `
 
+const AccordionContentWrapper = styled.div`
+  overflow: hidden;
+`
+
 const AccordionContentInner = styled.div`
-  padding: 0 ${({ theme }) => theme.spacing[4]} ${({ theme }) => theme.spacing[4]};
+  padding: ${({ theme }) => theme.spacing[3]} ${({ theme }) => theme.spacing[4]} ${({ theme }) => theme.spacing[4]};
   
   font-family: ${({ theme }) => theme.typography.fonts.body};
   font-size: ${({ theme }) => theme.typography.fontSizes.base};
@@ -192,9 +202,11 @@ const AccordionItem: React.FC<AccordionItemProps & {
         id={`accordion-content-${id}`}
         aria-hidden={!isOpen}
       >
-        <AccordionContentInner>
-          {children}
-        </AccordionContentInner>
+        <AccordionContentWrapper>
+          <AccordionContentInner>
+            {children}
+          </AccordionContentInner>
+        </AccordionContentWrapper>
       </AccordionContent>
     </AccordionItemContainer>
   )

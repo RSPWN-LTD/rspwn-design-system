@@ -45,6 +45,13 @@ const CheckboxContainer = styled.label`
   &:hover {
     input:not(:disabled) + span {
       border-color: ${({ theme }) => theme.colors.innovation.primaryBlue}60;
+      box-shadow: 0 0 0 1px ${({ theme }) => theme.colors.innovation.primaryBlue}20;
+    }
+  }
+  
+  &:active {
+    input:not(:disabled) + span {
+      transform: scale(0.95);
     }
   }
 `
@@ -82,6 +89,13 @@ const StyledCheckbox = styled.span<{
   ${({ checked, indeterminate, theme }) => (checked || indeterminate) && css`
     background-color: ${theme.colors.innovation.primaryBlue};
     border-color: ${theme.colors.innovation.primaryBlue};
+    box-shadow: 0 0 0 1px ${theme.colors.innovation.primaryBlue}40;
+    
+    &:hover {
+      background-color: rgba(74, 158, 255, 0.9);
+      border-color: rgba(74, 158, 255, 0.9);
+      box-shadow: 0 0 0 1px ${theme.colors.innovation.primaryBlue}60;
+    }
   `}
   
   ${({ disabled, theme, checked, indeterminate }) => disabled && css`
@@ -115,9 +129,10 @@ const StyledCheckbox = styled.span<{
       width: ${size === 'sm' ? '4px' : size === 'lg' ? '6px' : '5px'};
       height: ${size === 'sm' ? '8px' : size === 'lg' ? '10px' : '9px'};
       border: solid ${theme.colors.foundation.white};
-      border-width: 0 2px 2px 0;
+      border-width: 0 2.5px 2.5px 0;
       transform: rotate(45deg);
-      margin-top: -2px;
+      margin-top: ${size === 'sm' ? '-1px' : '-2px'};
+      margin-left: ${size === 'sm' ? '0.5px' : '1px'};
     `}
   }
 `
@@ -149,10 +164,29 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
   errorText,
   indeterminate = false,
   disabled = false,
-  checked = false,
+  checked,
   className,
+  onChange,
   ...props
 }, ref) => {
+  const [internalChecked, setInternalChecked] = React.useState(checked ?? false)
+  const isControlled = checked !== undefined
+  const checkedState = isControlled ? checked : internalChecked
+
+  // Update internal state when controlled value changes
+  React.useEffect(() => {
+    if (!isControlled && checked !== undefined) {
+      setInternalChecked(checked)
+    }
+  }, [checked, isControlled])
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isControlled) {
+      setInternalChecked(e.target.checked)
+    }
+    onChange?.(e)
+  }
+
   const displayHelperText = error && errorText ? errorText : helperText
 
   React.useEffect(() => {
@@ -166,12 +200,13 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
       <CheckboxContainer>
         <HiddenCheckbox
           ref={ref}
-          checked={checked}
+          checked={checkedState}
           disabled={disabled}
+          onChange={handleChange}
           {...props}
         />
         <StyledCheckbox
-          checked={checked}
+          checked={checkedState}
           indeterminate={indeterminate}
           error={error}
           disabled={disabled}

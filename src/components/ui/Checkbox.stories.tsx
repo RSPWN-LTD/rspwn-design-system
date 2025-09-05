@@ -92,34 +92,6 @@ export const WithoutLabel: Story = {
   ),
 }
 
-export const Interactive: Story = {
-  render: () => {
-    const [checked, setChecked] = React.useState(false)
-    
-    return (
-      <Checkbox
-        label="Toggle me!"
-        checked={checked}
-        onChange={(e) => setChecked(e.target.checked)}
-        helperText={checked ? 'Checked!' : 'Click to check'}
-      />
-    )
-  },
-}
-
-// Fix React import for the Interactive story
-Interactive.render = () => {
-  const [checked, setChecked] = (window as any).React.useState(false)
-  
-  return (
-    <Checkbox
-      label="Toggle me!"
-      checked={checked}
-      onChange={(e: any) => setChecked(e.target.checked)}
-      helperText={checked ? 'Checked!' : 'Click to check'}
-    />
-  )
-}
 
 export const Group: Story = {
   render: () => (

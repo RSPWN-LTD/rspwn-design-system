@@ -6,7 +6,8 @@
       "Bash(npm run dev:*)",
       "Bash(test:*)",
       "Bash(npm install:*)",
-      "Bash(npm run lint)"
+      "Bash(npm run lint)",
+      "Bash(npm run storybook:*)"
     ],
     "deny": [],
     "ask": []
