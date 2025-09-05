@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import { createPortal } from 'react-dom'
-import styled, { css, keyframes } from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { ToastContext, ToastContextType } from './ToastContext'
 import { getVariantStyles, getIcon } from './ToastUtils'
 
