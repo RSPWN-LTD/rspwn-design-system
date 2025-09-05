@@ -7,7 +7,9 @@
       "Bash(test:*)",
       "Bash(npm install:*)",
       "Bash(npm run lint)",
-      "Bash(npm run storybook:*)"
+      "Bash(npm run storybook:*)",
+      "Bash(storybook dev:*)",
+      "Bash(pkill:*)"
     ],
     "deny": [],
     "ask": []
