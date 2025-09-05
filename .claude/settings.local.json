@@ -13,7 +13,16 @@
       "Bash(npx tsc:*)",
       "Bash(npm run lint:*)",
       "Bash(taskkill:*)",
-      "Bash(npm run docs:ai:*)"
+      "Bash(npm run docs:ai:*)",
+      "mcp__linear-server__get_project",
+      "mcp__linear-server__get_user",
+      "mcp__linear-server__list_projects",
+      "mcp__linear-server__list_users",
+      "mcp__linear-server__create_issue",
+      "mcp__linear-server__list_teams",
+      "mcp__linear-server__list_issues",
+      "mcp__linear-server__update_issue",
+      "mcp__linear-server__get_issue"
     ],
     "deny": [],
     "ask": []
