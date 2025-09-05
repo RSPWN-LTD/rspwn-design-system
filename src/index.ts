@@ -22,7 +22,7 @@ export { Accordion } from './components/ui/Accordion'
 export { DatePicker } from './components/ui/DatePicker'
 export { Switch } from './components/ui/Switch'
 export { Modal } from './components/ui/Modal'
-export { ToastProvider, Toaster, useToast, toast } from './components/ui/Toast'
+export { ToastProvider, Toaster, useToast, useToastHelpers } from './components/ui/Toast'
 export { Drawer } from './components/ui/Drawer'
 
 // Types

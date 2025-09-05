@@ -378,7 +378,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
 
     return id
-  }, [])
+  }, [dismiss])
 
   const dismiss = useCallback((id: string) => {
     setRemovingToasts(prev => new Set([...prev, id]))
@@ -438,36 +438,20 @@ export const useToast = (): ToastContextType => {
   return context
 }
 
-// Convenience functions
-export const toast = {
-  success: (props: Omit<ToastProps, 'id' | 'variant'>) => {
-    if (typeof window !== 'undefined') {
-      const context = React.useContext ? React.useContext(ToastContext) : null
-      return context?.toast({ ...props, variant: 'success' }) || ''
-    }
-    return ''
-  },
-  error: (props: Omit<ToastProps, 'id' | 'variant'>) => {
-    if (typeof window !== 'undefined') {
-      const context = React.useContext ? React.useContext(ToastContext) : null
-      return context?.toast({ ...props, variant: 'error' }) || ''
-    }
-    return ''
-  },
-  warning: (props: Omit<ToastProps, 'id' | 'variant'>) => {
-    if (typeof window !== 'undefined') {
-      const context = React.useContext ? React.useContext(ToastContext) : null
-      return context?.toast({ ...props, variant: 'warning' }) || ''
-    }
-    return ''
-  },
-  info: (props: Omit<ToastProps, 'id' | 'variant'>) => {
-    if (typeof window !== 'undefined') {
-      const context = React.useContext ? React.useContext(ToastContext) : null
-      return context?.toast({ ...props, variant: 'info' }) || ''
-    }
-    return ''
-  },
+// Convenience hook-based functions
+export const useToastHelpers = () => {
+  const { toast } = useToast()
+  
+  return {
+    success: useCallback((props: Omit<ToastProps, 'id' | 'variant'>) => 
+      toast({ ...props, variant: 'success' }), [toast]),
+    error: useCallback((props: Omit<ToastProps, 'id' | 'variant'>) => 
+      toast({ ...props, variant: 'error' }), [toast]),
+    warning: useCallback((props: Omit<ToastProps, 'id' | 'variant'>) => 
+      toast({ ...props, variant: 'warning' }), [toast]),
+    info: useCallback((props: Omit<ToastProps, 'id' | 'variant'>) => 
+      toast({ ...props, variant: 'info' }), [toast]),
+  }
 }
 
 export { ToastProvider as Toaster }
