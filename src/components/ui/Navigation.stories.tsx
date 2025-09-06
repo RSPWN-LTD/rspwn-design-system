@@ -137,11 +137,24 @@ export const ManyItems: Story = {
   },
 }
 
-// Mobile responsive demo
+// Mobile responsive demo - Shows full-screen overlay menu
 export const Mobile: Story = {
   args: {
     items: defaultItems,
     currentPath: '/components',
+  },
+  parameters: {
+    viewport: {
+      defaultViewport: 'mobile1',
+    },
+  },
+}
+
+// Mobile with icons demo
+export const MobileWithIcons: Story = {
+  args: {
+    items: itemsWithIcons,
+    currentPath: '/dashboard',
   },
   parameters: {
     viewport: {

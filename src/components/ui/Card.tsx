@@ -1,7 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { Box, BoxProps } from '../foundation/Box'
-import { propFilters } from '../../utils/propFilters'
 
 export interface CardProps extends Omit<BoxProps, 'bg'> {
   variant?: 'default' | 'elevated' | 'outlined' | 'filled'
@@ -38,7 +37,10 @@ const getVariantStyles = (variant: CardProps['variant']) => {
 }
 
 const StyledCard = styled(Box).withConfig({
-  shouldForwardProp: propFilters.card
+  shouldForwardProp: (prop) => {
+    // Let Box handle its own props, only filter Card-specific props
+    return !['variant', 'hoverable', 'clickable'].includes(prop)
+  }
 })<CardProps>`
   border-radius: ${({ theme }) => theme.radius.lg};
   transition: all ${({ theme }) => theme.durations.normal} ${({ theme }) => theme.easings.easeOut};
