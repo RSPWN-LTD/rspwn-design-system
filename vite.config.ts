@@ -12,15 +12,26 @@ export default defineConfig(({ mode }) => {
           entry: resolve(__dirname, 'src/index.ts'),
           name: 'RSPWNDesignSystem',
           fileName: 'index',
-          formats: ['es']
+          formats: ['es', 'cjs']
         },
+        minify: false,
+        sourcemap: true,
+        emptyOutDir: false,
         rollupOptions: {
-          external: ['react', 'react-dom', 'styled-components'],
+          external: (id) => {
+            // Externalize React and all its internals
+            if (id === 'react' || id.startsWith('react/')) return true
+            if (id === 'react-dom' || id.startsWith('react-dom/')) return true
+            if (id === 'styled-components' || id.startsWith('styled-components/')) return true
+            if (id === 'react-router-dom' || id.startsWith('react-router-dom/')) return true
+            return false
+          },
           output: {
             globals: {
               react: 'React',
               'react-dom': 'ReactDOM',
-              'styled-components': 'styled'
+              'styled-components': 'styled',
+              'react-router-dom': 'ReactRouterDOM'
             }
           }
         }

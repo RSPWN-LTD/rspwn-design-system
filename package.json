@@ -1,19 +1,26 @@
 {
   "name": "@rspwn/design-system",
   "private": false,
-  "version": "0.1.0",
+  "version": "1.0.5",
   "description": "RSPWN Design System - A React component library for modern gaming and AI platforms",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "files": [
     "dist"
   ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "build:lib": "tsc --project tsconfig.lib.json && vite build --mode lib",
+    "build:lib": "rm -rf dist && tsc --project tsconfig.lib.json && vite build --mode lib",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
@@ -42,14 +49,15 @@
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0",
-    "styled-components": ">=6.0.0"
+    "styled-components": ">=6.0.0",
+    "react-router-dom": ">=6.0.0"
   },
-  "dependencies": {
-    "react": ">=18.0.0",
-    "react-dom": ">=18.0.0",
-    "react-router-dom": "^6.26.1",
-    "styled-components": ">=6.0.0"
+  "peerDependenciesMeta": {
+    "react-router-dom": {
+      "optional": true
+    }
   },
+  "dependencies": {},
   "devDependencies": {
     "@storybook/addon-essentials": "^8.2.9",
     "@storybook/addon-interactions": "^8.2.9",
@@ -67,7 +75,11 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "eslint-plugin-storybook": "^0.8.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.26.1",
     "storybook": "^8.2.9",
+    "styled-components": "^6.1.12",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
   }
