@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { createShouldForwardProp } from '../../utils/propFilters'
 
 export interface BadgeProps {
   // Content and display
@@ -152,7 +153,16 @@ const getBadgeSize = (size: BadgeProps['size']) => {
   }
 }
 
-const StyledBadge = styled.span<BadgeProps>`
+const StyledBadge = styled.span.withConfig({
+  shouldForwardProp: createShouldForwardProp([
+    'variant', 'size', 'color', 'dot'
+  ])
+})<{
+  $variant?: 'solid' | 'outline' | 'subtle'
+  $size?: 'sm' | 'md' | 'lg'
+  $color?: 'gray' | 'blue' | 'purple' | 'success' | 'warning' | 'error'
+  $dot?: boolean
+}>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -164,10 +174,10 @@ const StyledBadge = styled.span<BadgeProps>`
   border: 1px solid;
   transition: all ${({ theme }) => theme.durations.fast} ${({ theme }) => theme.easings.easeInOut};
   
-  ${({ size }) => getBadgeSize(size)}
-  ${({ color, variant }) => getBadgeColors(color, variant)}
+  ${({ $size }) => getBadgeSize($size)}
+  ${({ $color, $variant }) => getBadgeColors($color, $variant)}
   
-  ${({ dot }) => dot && css`
+  ${({ $dot }) => $dot && css`
     width: 8px;
     height: 8px;
     min-height: 8px;
@@ -188,10 +198,10 @@ export const Badge: React.FC<BadgeProps> = ({
   return (
     <StyledBadge
       className={className}
-      variant={variant}
-      size={size}
-      color={color}
-      dot={dot}
+      $variant={variant}
+      $size={size}
+      $color={color}
+      $dot={dot}
       {...props}
     >
       {!dot && children}

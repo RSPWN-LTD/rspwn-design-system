@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { createShouldForwardProp } from '../../utils/propFilters'
 
 export interface DividerProps {
   // Orientation
@@ -8,7 +9,7 @@ export interface DividerProps {
   // Visual styling
   thickness?: 'thin' | 'medium' | 'thick'
   color?: 'light' | 'medium' | 'dark'
-  style?: 'solid' | 'dashed' | 'dotted'
+  variant?: 'solid' | 'dashed' | 'dotted' // Renamed from 'style' to avoid conflict
   
   // Text/label support
   label?: string
@@ -53,33 +54,54 @@ const getDividerThickness = (thickness: DividerProps['thickness']) => {
   }
 }
 
-const StyledDivider = styled.div<DividerProps>`
-  ${({ orientation = 'horizontal', thickness = 'thin', color = 'light', style = 'solid', length }) => {
-    const thicknessValue = getDividerThickness(thickness)
+const StyledDivider = styled.div.withConfig({
+  shouldForwardProp: createShouldForwardProp([
+    'orientation', 'thickness', 'color', 'variant', 'length', 'margin'
+  ])
+})<{
+  $orientation?: 'horizontal' | 'vertical'
+  $thickness?: 'thin' | 'medium' | 'thick'
+  $color?: 'light' | 'medium' | 'dark'
+  $variant?: 'solid' | 'dashed' | 'dotted'
+  $length?: string | number
+  $margin?: keyof typeof import('../../tokens/spacing').spacing
+}>`
+  ${({ $orientation = 'horizontal', $thickness = 'thin', $color = 'light', $variant = 'solid', $length }) => {
+    const thicknessValue = getDividerThickness($thickness)
     
-    if (orientation === 'horizontal') {
+    if ($orientation === 'horizontal') {
       return css`
-        width: ${length ? (typeof length === 'number' ? `${length}px` : length) : '100%'};
+        width: ${$length ? (typeof $length === 'number' ? `${$length}px` : $length) : '100%'};
         height: ${thicknessValue};
-        border-top: ${thicknessValue} ${style} currentColor;
-        ${getDividerColor(color)}
+        border-top: ${thicknessValue} ${$variant} currentColor;
+        ${getDividerColor($color)}
       `
     } else {
       return css`
         width: ${thicknessValue};
-        height: ${length ? (typeof length === 'number' ? `${length}px` : length) : '100%'};
-        border-left: ${thicknessValue} ${style} currentColor;
-        ${getDividerColor(color)}
+        height: ${$length ? (typeof $length === 'number' ? `${$length}px` : $length) : '100%'};
+        border-left: ${thicknessValue} ${$variant} currentColor;
+        ${getDividerColor($color)}
       `
     }
   }}
   
-  ${({ margin, theme }) => margin && css`
-    margin: ${theme.spacing[margin]};
+  ${({ $margin, theme }) => $margin && css`
+    margin: ${theme.spacing[$margin]};
   `}
 `
 
-const StyledDividerWithLabel = styled.div<DividerProps>`
+const StyledDividerWithLabel = styled.div.withConfig({
+  shouldForwardProp: createShouldForwardProp([
+    'thickness', 'color', 'variant', 'labelPosition', 'margin'
+  ])
+})<{
+  $thickness?: 'thin' | 'medium' | 'thick'
+  $color?: 'light' | 'medium' | 'dark'
+  $variant?: 'solid' | 'dashed' | 'dotted'
+  $labelPosition?: 'left' | 'center' | 'right'
+  $margin?: keyof typeof import('../../tokens/spacing').spacing
+}>`
   display: flex;
   align-items: center;
   width: 100%;
@@ -88,13 +110,13 @@ const StyledDividerWithLabel = styled.div<DividerProps>`
   &::after {
     content: '';
     flex: 1;
-    height: ${({ thickness }) => getDividerThickness(thickness)};
-    border-top: ${({ thickness }) => getDividerThickness(thickness)} ${({ style = 'solid' }) => style} currentColor;
-    ${({ color }) => getDividerColor(color)}
+    height: ${({ $thickness }) => getDividerThickness($thickness)};
+    border-top: ${({ $thickness }) => getDividerThickness($thickness)} ${({ $variant = 'solid' }) => $variant} currentColor;
+    ${({ $color }) => getDividerColor($color)}
   }
   
-  ${({ labelPosition = 'center' }) => {
-    if (labelPosition === 'left') {
+  ${({ $labelPosition = 'center' }) => {
+    if ($labelPosition === 'left') {
       return css`
         &::before {
           flex: 0;
@@ -102,7 +124,7 @@ const StyledDividerWithLabel = styled.div<DividerProps>`
           width: ${({ theme }) => theme.spacing[4]};
         }
       `
-    } else if (labelPosition === 'right') {
+    } else if ($labelPosition === 'right') {
       return css`
         &::after {
           flex: 0;
@@ -122,8 +144,8 @@ const StyledDividerWithLabel = styled.div<DividerProps>`
     }
   }}
   
-  ${({ margin, theme }) => margin && css`
-    margin: ${theme.spacing[margin]};
+  ${({ $margin, theme }) => $margin && css`
+    margin: ${theme.spacing[$margin]};
   `}
 `
 
@@ -141,7 +163,7 @@ export const Divider: React.FC<DividerProps> = ({
   orientation = 'horizontal',
   thickness = 'thin',
   color = 'light',
-  style = 'solid',
+  variant = 'solid', // Renamed from style
   margin,
   length,
   className,
@@ -151,11 +173,11 @@ export const Divider: React.FC<DividerProps> = ({
     return (
       <StyledDividerWithLabel
         className={className}
-        labelPosition={labelPosition}
-        thickness={thickness}
-        color={color}
-        style={style}
-        margin={margin}
+        $labelPosition={labelPosition}
+        $thickness={thickness}
+        $color={color}
+        $variant={variant}
+        $margin={margin}
         {...props}
       >
         <DividerLabel>{label}</DividerLabel>
@@ -166,12 +188,12 @@ export const Divider: React.FC<DividerProps> = ({
   return (
     <StyledDivider
       className={className}
-      orientation={orientation}
-      thickness={thickness}
-      color={color}
-      style={style}
-      margin={margin}
-      length={length}
+      $orientation={orientation}
+      $thickness={thickness}
+      $color={color}
+      $variant={variant}
+      $margin={margin}
+      $length={length}
       {...props}
     />
   )

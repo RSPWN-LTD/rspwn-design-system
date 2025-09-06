@@ -102,55 +102,63 @@ const circularRotate = keyframes`
 `
 
 // Linear Progress Components
-const LinearProgressContainer = styled.div<{ size: ProgressProps['size'] }>`
+const LinearProgressContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['size'].includes(prop)
+})<{ $size: ProgressProps['size'] }>`
   position: relative;
   width: 100%;
-  height: ${({ size }) => getLinearSize(size)};
+  height: ${({ $size }) => getLinearSize($size)};
   background-color: ${({ theme }) => theme.colors.gray.dark};
   border-radius: ${({ theme }) => theme.radius.full};
   overflow: hidden;
 `
 
-const LinearProgressBar = styled.div<{
-  value: number
-  max: number
-  color: ProgressProps['color']
-  indeterminate?: boolean
+const LinearProgressBar = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['value', 'max', 'color', 'indeterminate'].includes(prop)
+})<{
+  $value: number
+  $max: number
+  $color: ProgressProps['color']
+  $indeterminate?: boolean
 }>`
   height: 100%;
   border-radius: ${({ theme }) => theme.radius.full};
   transition: width ${({ theme }) => theme.durations.normal} ${({ theme }) => theme.easings.easeOut};
   
-  ${({ indeterminate, color, value, max }) =>
-    indeterminate
+  ${({ $indeterminate, $color, $value, $max }) =>
+    $indeterminate
       ? css`
           position: absolute;
           width: 35%;
           background: linear-gradient(
             90deg,
             transparent,
-            ${getProgressColor(color)},
+            ${getProgressColor($color)},
             transparent
           );
           animation: ${indeterminateLinear} 2s ease-in-out infinite;
         `
       : css`
-          width: ${(value / max) * 100}%;
-          background-color: ${getProgressColor(color)};
+          width: ${($value / $max) * 100}%;
+          background-color: ${getProgressColor($color)};
         `}
 `
 
 // Circular Progress Components
-const CircularProgressContainer = styled.div<{ size: ProgressProps['size'] }>`
+const CircularProgressContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['size'].includes(prop)
+})<{ $size: ProgressProps['size'] }>`
   position: relative;
   display: inline-block;
 `
 
-const CircularProgressSvg = styled.svg<{
-  indeterminate?: boolean
+const CircularProgressSvg = styled.svg.withConfig({
+  shouldForwardProp: (prop) => !['indeterminate'].includes(prop)
+})<{
+  $indeterminate?: boolean
 }>`
-  ${({ indeterminate }) =>
-    indeterminate &&
+  ${({ $indeterminate }) =>
+    $indeterminate &&
     css`
       animation: ${circularRotate} 2s linear infinite;
     `}
@@ -252,7 +260,7 @@ export const Progress: React.FC<ProgressProps> = ({
     return (
       <CircularProgressContainer
         className={className}
-        size={size}
+        $size={size}
         role="progressbar"
         aria-valuenow={indeterminate ? undefined : value}
         aria-valuemin={0}
@@ -263,7 +271,7 @@ export const Progress: React.FC<ProgressProps> = ({
         <CircularProgressSvg
           width={circularSizes.width}
           height={circularSizes.width}
-          indeterminate={indeterminate}
+          $indeterminate={indeterminate}
         >
           <CircularProgressTrack
             cx="50%"
@@ -304,7 +312,7 @@ export const Progress: React.FC<ProgressProps> = ({
         </ProgressLabel>
       )}
       <LinearProgressContainer
-        size={size}
+        $size={size}
         role="progressbar"
         aria-valuenow={indeterminate ? undefined : value}
         aria-valuemin={0}
@@ -313,10 +321,10 @@ export const Progress: React.FC<ProgressProps> = ({
         {...props}
       >
         <LinearProgressBar
-          value={value}
-          max={max}
-          color={color}
-          indeterminate={indeterminate}
+          $value={value}
+          $max={max}
+          $color={color}
+          $indeterminate={indeterminate}
         />
       </LinearProgressContainer>
     </div>

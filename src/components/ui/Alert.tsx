@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { createShouldForwardProp } from '../../utils/propFilters'
 
 export interface AlertProps {
   // Content
@@ -112,14 +113,21 @@ const getDefaultIcon = (severity: AlertProps['severity']) => {
   }
 }
 
-const StyledAlert = styled.div<AlertProps>`
+const StyledAlert = styled.div.withConfig({
+  shouldForwardProp: createShouldForwardProp([
+    'severity', 'variant', 'dismissible', 'onClose', 'action', 'icon', 'showIcon', 'title'
+  ])
+})<{
+  $severity?: 'info' | 'success' | 'warning' | 'error'
+  $variant?: 'filled' | 'outlined' | 'subtle'
+}>`
   display: flex;
   align-items: flex-start;
   padding: ${({ theme }) => theme.spacing[4]};
   border-radius: ${({ theme }) => theme.radius.sm};
   font-family: ${({ theme }) => theme.typography.fonts.body};
   
-  ${({ severity, variant }) => getAlertColors(severity, variant)}
+  ${({ $severity, $variant }) => getAlertColors($severity, $variant)}
   
   transition: all ${({ theme }) => theme.durations.fast} ${({ theme }) => theme.easings.easeInOut};
 `
@@ -157,7 +165,9 @@ const AlertActions = styled.div`
   flex-shrink: 0;
 `
 
-const CloseButton = styled.button<{ variant?: AlertProps['variant'] }>`
+const CloseButton = styled.button.withConfig({
+  shouldForwardProp: (prop) => !['variant'].includes(prop)
+})<{ $variant?: AlertProps['variant'] }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -205,8 +215,8 @@ export const Alert: React.FC<AlertProps> = ({
   return (
     <StyledAlert
       className={className}
-      severity={severity}
-      variant={variant}
+      $severity={severity}
+      $variant={variant}
       role={role}
       {...props}
     >
@@ -233,7 +243,7 @@ export const Alert: React.FC<AlertProps> = ({
 
       {dismissible && onClose && (
         <CloseButton
-          variant={variant}
+          $variant={variant}
           onClick={onClose}
           aria-label="Close alert"
         >

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
+import { createShouldForwardProp } from '../../utils/propFilters'
 
 export interface AvatarProps {
   // Content options
@@ -91,7 +92,14 @@ const getInitials = (name: string): string => {
     .toUpperCase()
 }
 
-const StyledAvatar = styled.div<AvatarProps>`
+const StyledAvatar = styled.div.withConfig({
+  shouldForwardProp: createShouldForwardProp([
+    'size', 'variant', 'src', 'alt', 'name', 'icon', 'status', 'showStatus', 'loading', 'onError'
+  ])
+})<{
+  $size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+  $variant?: 'circular' | 'square'
+}>`
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -104,10 +112,10 @@ const StyledAvatar = styled.div<AvatarProps>`
   flex-shrink: 0;
   overflow: hidden;
   
-  ${({ size }) => getAvatarSize(size)}
+  ${({ $size }) => getAvatarSize($size)}
   
-  ${({ variant = 'circular' }) =>
-    variant === 'circular'
+  ${({ $variant = 'circular' }) =>
+    $variant === 'circular'
       ? css`border-radius: ${({ theme }) => theme.radius.full};`
       : css`border-radius: ${({ theme }) => theme.radius.sm};`
   }
@@ -131,14 +139,19 @@ const AvatarImage = styled.img`
   object-fit: cover;
 `
 
-const StatusIndicator = styled.div<{ status: AvatarProps['status']; size: AvatarProps['size'] }>`
+const StatusIndicator = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['status', 'size'].includes(prop)
+})<{ 
+  $status: AvatarProps['status']
+  $size: AvatarProps['size'] 
+}>`
   position: absolute;
   border: 2px solid ${({ theme }) => theme.colors.foundation.black};
   border-radius: ${({ theme }) => theme.radius.full};
-  background-color: ${({ status }) => getStatusColor(status)};
+  background-color: ${({ $status }) => getStatusColor($status)};
   
-  ${({ size }) => {
-    switch (size) {
+  ${({ $size }) => {
+    switch ($size) {
       case 'xs':
       case 'sm':
         return css`
@@ -167,9 +180,11 @@ const StatusIndicator = styled.div<{ status: AvatarProps['status']; size: Avatar
   }}
 `
 
-const LoadingSpinner = styled.div<{ size: AvatarProps['size'] }>`
-  ${({ size }) => {
-    const spinnerSize = size === 'xs' || size === 'sm' ? '16px' : size === 'lg' || size === 'xl' || size === '2xl' ? '24px' : '20px'
+const LoadingSpinner = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['size'].includes(prop)
+})<{ $size: AvatarProps['size'] }>`
+  ${({ $size }) => {
+    const spinnerSize = $size === 'xs' || $size === 'sm' ? '16px' : $size === 'lg' || $size === 'xl' || $size === '2xl' ? '24px' : '20px'
     return css`
       width: ${spinnerSize};
       height: ${spinnerSize};
@@ -217,7 +232,7 @@ export const Avatar: React.FC<AvatarProps> = ({
 
   const renderContent = () => {
     if (loading) {
-      return <LoadingSpinner size={size} />
+      return <LoadingSpinner $size={size} />
     }
 
     if (src && !imageError) {
@@ -257,14 +272,14 @@ export const Avatar: React.FC<AvatarProps> = ({
   return (
     <StyledAvatar
       className={className}
-      size={size}
-      variant={variant}
+      $size={size}
+      $variant={variant}
       onClick={onClick}
       {...props}
     >
       {renderContent()}
       {showStatus && status && (
-        <StatusIndicator status={status} size={size} />
+        <StatusIndicator $status={status} $size={size} />
       )}
     </StyledAvatar>
   )
