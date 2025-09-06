@@ -1,16 +1,46 @@
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import { Box } from '../foundation/Box'
 import { Typography } from '../foundation/Typography'
 
+export interface NavigationItem {
+  label: string
+  href: string
+  icon?: React.ReactNode
+  onClick?: (event: React.MouseEvent) => void
+}
+
 export interface NavigationProps {
-  items: Array<{
-    label: string
-    href: string
-    icon?: React.ReactNode
-  }>
+  items: NavigationItem[]
   className?: string
+  /**
+   * Custom link component (for frameworks other than React Router)
+   * If not provided, will use regular anchor tags
+   */
+  linkComponent?: React.ComponentType<{
+    to?: string
+    href?: string
+    children: React.ReactNode
+    className?: string
+    onClick?: (event: React.MouseEvent) => void
+  }>
+  /**
+   * Current pathname for active state (optional)
+   * If not provided, no active state will be shown
+   */
+  currentPath?: string
+  /**
+   * Brand/logo content
+   */
+  brand?: React.ReactNode
+  /**
+   * Brand/logo link (if clickable)
+   */
+  brandHref?: string
+  /**
+   * Brand/logo onClick handler
+   */
+  onBrandClick?: (event: React.MouseEvent) => void
 }
 
 const StyledNav = styled(Box)`
@@ -33,42 +63,50 @@ const NavContent = styled(Box)`
   align-items: center;
   justify-content: space-between;
   height: 64px;
+  
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    height: 80px;
+  }
 `
 
-const Logo = styled(Link)`
-  text-decoration: none;
+const BrandLink = styled.a`
   display: flex;
   align-items: center;
-  gap: ${({ theme }) => theme.spacing[3]};
+  text-decoration: none;
+  color: inherit;
+  
+  &:hover {
+    opacity: 0.8;
+  }
 `
 
 const NavItems = styled(Box)`
   display: none;
   align-items: center;
-  gap: ${({ theme }) => theme.spacing[8]};
+  gap: ${({ theme }) => theme.spacing[6]};
   
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     display: flex;
   }
 `
 
-const NavItem = styled(Link)<{ $isActive: boolean }>`
+const NavItemLink = styled.a<{ $isActive?: boolean }>`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing[2]};
   text-decoration: none;
-  padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[3]};
+  padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[4]};
   border-radius: ${({ theme }) => theme.radius.md};
   font-family: ${({ theme }) => theme.typography.fonts.body};
   font-size: ${({ theme }) => theme.typography.fontSizes.sm};
   font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
   color: ${({ theme }) => theme.colors.text.secondary};
-  transition: all ${({ theme }) => theme.durations.fast} ${({ theme }) => theme.easings.easeOut};
-  
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing[2]};
+  transition: all ${({ theme }) => theme.durations.fast} ${({ theme }) => theme.easings.easeInOut};
+  cursor: pointer;
   
   ${({ $isActive, theme }) => $isActive && css`
     color: ${theme.colors.innovation.primaryBlue};
-    background-color: rgba(74, 158, 255, 0.1);
+    background-color: rgba(74, 158, 255, 0.15);
   `}
   
   &:hover {
@@ -104,7 +142,7 @@ const MobileMenuButton = styled.button`
   }
 `
 
-const MobileMenu = styled(Box)<{ $isOpen: boolean }>`
+const MobileMenu = styled.div<{ $isOpen: boolean }>`
   position: absolute;
   top: 100%;
   left: 0;
@@ -112,6 +150,7 @@ const MobileMenu = styled(Box)<{ $isOpen: boolean }>`
   background-color: ${({ theme }) => theme.colors.foundation.black};
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray.light};
   padding: ${({ theme }) => theme.spacing[4]};
+  z-index: 50;
   
   display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
   
@@ -120,7 +159,7 @@ const MobileMenu = styled(Box)<{ $isOpen: boolean }>`
   }
 `
 
-const MobileNavItem = styled(Link)<{ $isActive: boolean }>`
+const MobileNavItem = styled.a<{ $isActive?: boolean }>`
   display: block;
   text-decoration: none;
   padding: ${({ theme }) => theme.spacing[3]} 0;
@@ -129,6 +168,7 @@ const MobileNavItem = styled(Link)<{ $isActive: boolean }>`
   font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
   color: ${({ theme }) => theme.colors.text.secondary};
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray.base};
+  transition: color ${({ theme }) => theme.durations.fast} ${({ theme }) => theme.easings.easeInOut};
   
   ${({ $isActive, theme }) => $isActive && css`
     color: ${theme.colors.innovation.primaryBlue};
@@ -143,53 +183,102 @@ const MobileNavItem = styled(Link)<{ $isActive: boolean }>`
   }
 `
 
-export const Navigation: React.FC<NavigationProps> = ({ items, className }) => {
-  const location = useLocation()
+// Hamburger menu icon component
+const MenuIcon: React.FC = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+    <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+  </svg>
+)
+
+export const Navigation: React.FC<NavigationProps> = ({ 
+  items, 
+  className,
+  linkComponent: CustomLink,
+  currentPath,
+  brand,
+  brandHref = "/",
+  onBrandClick
+}) => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
   
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen)
+  
+  // Determine which link component to use
+  const LinkComponent = CustomLink || NavItemLink
+  const MobileLinkComponent = CustomLink || MobileNavItem
+  
+  const renderBrand = () => {
+    const brandContent = brand || (
+      <Typography variant="brand" color="white">
+        RSPWN
+      </Typography>
+    )
+    
+    if (onBrandClick || brandHref) {
+      return (
+        <BrandLink 
+          href={brandHref} 
+          onClick={onBrandClick}
+          style={{ textDecoration: 'none' }}
+        >
+          {brandContent}
+        </BrandLink>
+      )
+    }
+    
+    return brandContent
+  }
+  
+  const isActive = (itemHref: string) => {
+    return currentPath ? currentPath === itemHref : false
+  }
+  
+  const handleItemClick = (item: NavigationItem) => (event: React.MouseEvent) => {
+    if (item.onClick) {
+      item.onClick(event)
+    }
+    // Close mobile menu when item is clicked
+    setMobileMenuOpen(false)
+  }
   
   return (
     <StyledNav as="nav" className={className} position="relative">
       <NavContainer>
         <NavContent>
-          <Logo to="/">
-            <Typography variant="brand" color="white">
-              RSPWN
-            </Typography>
-          </Logo>
+          {renderBrand()}
           
           <NavItems>
             {items.map((item) => (
-              <NavItem
+              <LinkComponent
                 key={item.href}
                 to={item.href}
-                $isActive={location.pathname === item.href}
+                href={item.href}
+                $isActive={isActive(item.href)}
+                onClick={handleItemClick(item)}
               >
-                {item.icon}
+                {item.icon && <span>{item.icon}</span>}
                 {item.label}
-              </NavItem>
+              </LinkComponent>
             ))}
           </NavItems>
           
           <MobileMenuButton onClick={toggleMobileMenu}>
-            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+            <MenuIcon />
           </MobileMenuButton>
         </NavContent>
       </NavContainer>
       
       <MobileMenu $isOpen={mobileMenuOpen}>
         {items.map((item) => (
-          <MobileNavItem
+          <MobileLinkComponent
             key={item.href}
             to={item.href}
-            $isActive={location.pathname === item.href}
-            onClick={() => setMobileMenuOpen(false)}
+            href={item.href}
+            $isActive={isActive(item.href)}
+            onClick={handleItemClick(item)}
           >
             {item.label}
-          </MobileNavItem>
+          </MobileLinkComponent>
         ))}
       </MobileMenu>
     </StyledNav>
