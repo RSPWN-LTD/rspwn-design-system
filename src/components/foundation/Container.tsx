@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Box, BoxProps } from './Box'
+import { createShouldForwardProp } from '../../utils/propFilters'
 
 export interface ContainerProps extends Omit<BoxProps, 'maxWidth'> {
   size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full'
@@ -26,7 +27,9 @@ const getMaxWidth = (size: ContainerProps['size']) => {
   }
 }
 
-const StyledContainer = styled(Box)<ContainerProps>`
+const StyledContainer = styled(Box).withConfig({
+  shouldForwardProp: createShouldForwardProp(['size', 'centerContent'])
+})<ContainerProps>`
   width: 100%;
   max-width: ${({ size }) => getMaxWidth(size)};
   margin-left: auto;

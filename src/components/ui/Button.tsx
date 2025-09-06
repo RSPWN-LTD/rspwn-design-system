@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { propFilters } from '../../utils/propFilters'
 
 export interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger'
@@ -134,7 +135,9 @@ const getSizeStyles = (size: ButtonProps['size']) => {
   }
 }
 
-const StyledButton = styled.button<ButtonProps>`
+const StyledButton = styled.button.withConfig({
+  shouldForwardProp: propFilters.button
+})<ButtonProps>`
   display: inline-flex;
   align-items: center;
   justify-content: center;

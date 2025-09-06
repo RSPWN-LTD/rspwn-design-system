@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react'
 import styled, { css } from 'styled-components'
+import { propFilters } from '../../utils/propFilters'
 
 export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
   variant?: 'default' | 'filled' | 'outline'
@@ -131,14 +132,18 @@ const getSizeStyles = (size: InputProps['size']) => {
   }
 }
 
-const InputWrapper = styled.div<{ fullWidth?: boolean }>`
+const InputWrapper = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['fullWidth'].includes(prop)
+})<{ fullWidth?: boolean }>`
   display: inline-flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing[1]};
   ${({ fullWidth }) => fullWidth && css`width: 100%;`}
 `
 
-const StyledInput = styled.input<InputProps>`
+const StyledInput = styled.input.withConfig({
+  shouldForwardProp: propFilters.input
+})<InputProps>`
   font-family: ${({ theme }) => theme.typography.fonts.body};
   font-weight: ${({ theme }) => theme.typography.fontWeights.normal};
   line-height: 1;

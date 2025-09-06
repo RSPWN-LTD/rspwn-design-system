@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { createShouldForwardProp } from '../../utils/propFilters'
 
 export interface GridProps {
   // Grid Layout
@@ -67,7 +68,9 @@ const getResponsiveColumns = (value: string | number, breakpoint: string) => css
   }
 `
 
-const StyledGrid = styled.div<GridProps>`
+const StyledGrid = styled.div.withConfig({
+  shouldForwardProp: createShouldForwardProp(['columns', 'rows', 'columnGap', 'rowGap', 'xs', 'sm', 'md', 'lg', 'xl', 'justifyItems', 'alignContent', 'autoFit', 'autoFill', 'minColumnWidth'])
+})<GridProps>`
   display: grid;
   
   ${({ columns }) => columns && css`

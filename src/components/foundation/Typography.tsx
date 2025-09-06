@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { propFilters } from '../../utils/propFilters'
 
 export interface TypographyProps {
   variant?: 'brand' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'caption' | 'overline'
@@ -123,7 +124,9 @@ const getColorStyles = (color: TypographyProps['color']) => {
   }
 }
 
-const StyledTypography = styled.p<TypographyProps>`
+const StyledTypography = styled.p.withConfig({
+  shouldForwardProp: propFilters.typography
+})<TypographyProps>`
   margin: 0;
   ${({ variant }) => getVariantStyles(variant)}
   ${({ color }) => getColorStyles(color)}

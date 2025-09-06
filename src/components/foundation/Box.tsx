@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { propFilters } from '../../utils/propFilters'
 
 export interface BoxProps {
   // Layout
@@ -85,7 +86,9 @@ const getBackgroundColor = (bg: BoxProps['bg']) => {
   }
 }
 
-const StyledBox = styled.div<BoxProps>`
+const StyledBox = styled.div.withConfig({
+  shouldForwardProp: propFilters.layout
+})<BoxProps>`
   ${({ display }) => display && css`display: ${display};`}
   
   ${({ width }) => width && css`width: ${typeof width === 'number' ? `${width}px` : width};`}
