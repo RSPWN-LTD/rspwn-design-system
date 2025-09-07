@@ -1,7 +1,7 @@
 import React from 'react'
 import { TemplateConfig } from './types'
 import { TemplateContext } from './context'
-import type { TemplateContextValue } from './context'
+import { useTemplateConfig } from './hooks'
 
 const defaultTemplateConfig: TemplateConfig = {
   spacing: 'normal',

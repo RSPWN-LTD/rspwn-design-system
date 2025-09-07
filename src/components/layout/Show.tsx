@@ -67,9 +67,6 @@ export const Show: React.FC<ShowProps> = ({
   children,
   fallback
 }) => {
-  // Always call all possible hooks at the top level
-  const breakpointOrder: Breakpoint[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl']
-  
   // Call useBreakpoint for all possible breakpoints
   const xs = useBreakpoint('xs')
   const sm = useBreakpoint('sm')
@@ -77,8 +74,14 @@ export const Show: React.FC<ShowProps> = ({
   const lg = useBreakpoint('lg')
   const xl = useBreakpoint('xl')
   const xxl = useBreakpoint('2xl')
+  const mobile = useBreakpoint('mobile')
+  const tablet = useBreakpoint('tablet')
+  const desktop = useBreakpoint('desktop')
+  const wide = useBreakpoint('wide')
   
-  const breakpointMap = { xs, sm, md, lg, xl, '2xl': xxl }
+  const breakpointMap: Record<Breakpoint, boolean> = { 
+    xs, sm, md, lg, xl, '2xl': xxl, mobile, tablet, desktop, wide 
+  }
 
   // Now determine if content should be shown
   let shouldShow = true
@@ -128,15 +131,21 @@ export const Show: React.FC<ShowProps> = ({
 export interface HideProps extends Omit<ShowProps, 'fallback'> {}
 
 export const Hide: React.FC<HideProps> = ({ above, below, only, between, children }) => {
-  // Always call all possible hooks at the top level
+  // Call useBreakpoint for all possible breakpoints
   const xs = useBreakpoint('xs')
   const sm = useBreakpoint('sm')
   const md = useBreakpoint('md')
   const lg = useBreakpoint('lg')
   const xl = useBreakpoint('xl')
   const xxl = useBreakpoint('2xl')
+  const mobile = useBreakpoint('mobile')
+  const tablet = useBreakpoint('tablet')
+  const desktop = useBreakpoint('desktop')
+  const wide = useBreakpoint('wide')
   
-  const breakpointMap = { xs, sm, md, lg, xl, '2xl': xxl }
+  const breakpointMap: Record<Breakpoint, boolean> = { 
+    xs, sm, md, lg, xl, '2xl': xxl, mobile, tablet, desktop, wide 
+  }
 
   // Inverse logic - hide when Show would show
   let shouldHide = false
