@@ -179,11 +179,16 @@ export function useBreakpointMatch(
 ): boolean {
   const currentBreakpoint = useCurrentBreakpoint()
   
+  // Always call useMediaQuery at the top level - calculate query regardless of condition
+  const nextBreakpoint = targetBreakpoint ? getNextBreakpoint(targetBreakpoint) : null
+  const maxWidth = nextBreakpoint ? breakpoints[nextBreakpoint] : '9999px'
+  const onlyQuery = targetBreakpoint 
+    ? `(min-width: ${breakpoints[targetBreakpoint]}) and (max-width: calc(${maxWidth} - 1px))`
+    : '(min-width: 0px)'
+  const onlyMatches = useMediaQuery(onlyQuery)
+  
   if (condition === 'only' && targetBreakpoint) {
-    const nextBreakpoint = getNextBreakpoint(targetBreakpoint)
-    const maxWidth = nextBreakpoint ? breakpoints[nextBreakpoint] : '9999px'
-    const query = `(min-width: ${breakpoints[targetBreakpoint]}) and (max-width: calc(${maxWidth} - 1px))`
-    return useMediaQuery(query)
+    return onlyMatches
   }
   
   if (condition === 'above' && targetBreakpoint) {

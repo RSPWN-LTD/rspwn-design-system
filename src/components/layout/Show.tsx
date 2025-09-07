@@ -67,25 +67,39 @@ export const Show: React.FC<ShowProps> = ({
   children,
   fallback
 }) => {
-  // Determine if content should be shown
+  // Always call all possible hooks at the top level
+  const breakpointOrder: Breakpoint[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl']
+  
+  // Call useBreakpoint for all possible breakpoints
+  const xs = useBreakpoint('xs')
+  const sm = useBreakpoint('sm')
+  const md = useBreakpoint('md')
+  const lg = useBreakpoint('lg')
+  const xl = useBreakpoint('xl')
+  const xxl = useBreakpoint('2xl')
+  
+  const breakpointMap = { xs, sm, md, lg, xl, '2xl': xxl }
+
+  // Now determine if content should be shown
   let shouldShow = true
 
   // Check 'above' condition
-  const isAbove = above ? useBreakpoint(above) : true
-  if (above && !isAbove) {
+  if (above && !breakpointMap[above]) {
     shouldShow = false
   }
 
   // Check 'below' condition  
-  const isBelow = below ? !useBreakpoint(below) : true
-  if (below && !isBelow) {
+  if (below && breakpointMap[below]) {
     shouldShow = false
   }
 
   // Check 'only' condition
   if (only) {
-    const breakpointsToCheck = Array.isArray(only) ? only : [only]
-    const matchesAny = breakpointsToCheck.some(bp => useBreakpoint(bp) && !useBreakpoint(getNextBreakpoint(bp) || '2xl'))
+    const onlyBreakpoints = Array.isArray(only) ? only : [only]
+    const matchesAny = onlyBreakpoints.some(bp => {
+      const nextBp = getNextBreakpoint(bp)
+      return breakpointMap[bp] && (!nextBp || !breakpointMap[nextBp])
+    })
     if (!matchesAny) {
       shouldShow = false
     }
@@ -94,7 +108,8 @@ export const Show: React.FC<ShowProps> = ({
   // Check 'between' condition
   if (between) {
     const [min, max] = between
-    const isInRange = useBreakpoint(min) && !useBreakpoint(getNextBreakpoint(max) || '2xl')
+    const nextBp = getNextBreakpoint(max)
+    const isInRange = breakpointMap[min] && (!nextBp || !breakpointMap[nextBp])
     if (!isInRange) {
       shouldShow = false
     }
@@ -113,22 +128,33 @@ export const Show: React.FC<ShowProps> = ({
 export interface HideProps extends Omit<ShowProps, 'fallback'> {}
 
 export const Hide: React.FC<HideProps> = ({ above, below, only, between, children }) => {
+  // Always call all possible hooks at the top level
+  const xs = useBreakpoint('xs')
+  const sm = useBreakpoint('sm')
+  const md = useBreakpoint('md')
+  const lg = useBreakpoint('lg')
+  const xl = useBreakpoint('xl')
+  const xxl = useBreakpoint('2xl')
+  
+  const breakpointMap = { xs, sm, md, lg, xl, '2xl': xxl }
+
   // Inverse logic - hide when Show would show
   let shouldHide = false
 
-  const isAbove = above ? useBreakpoint(above) : false
-  if (above && isAbove) {
+  if (above && breakpointMap[above]) {
     shouldHide = true
   }
 
-  const isBelow = below ? !useBreakpoint(below) : false
-  if (below && isBelow) {
+  if (below && !breakpointMap[below]) {
     shouldHide = true
   }
 
   if (only) {
-    const breakpointsToCheck = Array.isArray(only) ? only : [only]
-    const matchesAny = breakpointsToCheck.some(bp => useBreakpoint(bp) && !useBreakpoint(getNextBreakpoint(bp) || '2xl'))
+    const onlyBreakpoints = Array.isArray(only) ? only : [only]
+    const matchesAny = onlyBreakpoints.some(bp => {
+      const nextBp = getNextBreakpoint(bp)
+      return breakpointMap[bp] && (!nextBp || !breakpointMap[nextBp])
+    })
     if (matchesAny) {
       shouldHide = true
     }
@@ -136,7 +162,8 @@ export const Hide: React.FC<HideProps> = ({ above, below, only, between, childre
 
   if (between) {
     const [min, max] = between
-    const isInRange = useBreakpoint(min) && !useBreakpoint(getNextBreakpoint(max) || '2xl')
+    const nextBp = getNextBreakpoint(max)
+    const isInRange = breakpointMap[min] && (!nextBp || !breakpointMap[nextBp])
     if (isInRange) {
       shouldHide = true
     }

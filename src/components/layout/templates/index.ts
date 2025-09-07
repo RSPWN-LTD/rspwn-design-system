@@ -18,12 +18,16 @@ export { Section } from './Section'
 // Configuration System
 export { 
   TemplateProvider, 
+  ConfigurableComponent
+} from './TemplateProvider'
+
+// Template Configuration Hooks
+export {
   useTemplateConfig,
   useTemplateSpacing,
   useTemplateTheme,
-  useTemplateLayout,
-  ConfigurableComponent
-} from './TemplateProvider'
+  useTemplateLayout
+} from './hooks'
 
 // Template Layouts
 export { LandingPageTemplate } from './LandingPageTemplate'
