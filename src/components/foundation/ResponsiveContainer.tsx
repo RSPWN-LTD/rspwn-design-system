@@ -1,13 +1,22 @@
 import React from 'react'
 import { Container, ContainerProps } from './Container'
+import { SpacingKey } from '../../tokens/spacing'
+
+type ResponsiveSpacing = SpacingKey | {
+  xs?: SpacingKey
+  sm?: SpacingKey
+  md?: SpacingKey
+  lg?: SpacingKey
+  xl?: SpacingKey
+}
 
 /**
  * ResponsiveContainer provides sensible responsive defaults for AI usage.
  * It automatically applies responsive padding and max-width without requiring manual specification.
  */
-export interface ResponsiveContainerProps extends Omit<ContainerProps, 'px' | 'maxWidth'> {
+export interface ResponsiveContainerProps extends Omit<ContainerProps, 'paddingX' | 'maxWidth'> {
   /** Override the default responsive padding */
-  px?: ContainerProps['px']
+  paddingX?: ResponsiveSpacing
   /** Override the default max width */
   maxWidth?: ContainerProps['maxWidth']
   /** Size variant that applies different responsive patterns */
@@ -19,29 +28,29 @@ const getSizeDefaults = (size: ResponsiveContainerProps['size']) => {
     case 'sm':
       return {
         maxWidth: 'md' as const,
-        px: { xs: 4, md: 6 } as const
+        paddingX: { xs: 4, md: 6 } as ResponsiveSpacing
       }
     case 'lg':
       return {
         maxWidth: 'xl' as const,
-        px: { xs: 4, md: 6, lg: 8 } as const
+        paddingX: { xs: 4, md: 6, lg: 8 } as ResponsiveSpacing
       }
     case 'xl':
       return {
         maxWidth: 'xxl' as const,
-        px: { xs: 4, md: 6, lg: 8, xl: 10 } as const
+        paddingX: { xs: 4, md: 6, lg: 8, xl: 10 } as ResponsiveSpacing
       }
     default: // 'md'
       return {
         maxWidth: 'lg' as const,
-        px: { xs: 4, md: 6, lg: 8 } as const
+        paddingX: { xs: 4, md: 6, lg: 8 } as ResponsiveSpacing
       }
   }
 }
 
 export const ResponsiveContainer: React.FC<ResponsiveContainerProps> = ({ 
   size = 'md',
-  px,
+  paddingX,
   maxWidth,
   children,
   ...props 
@@ -51,7 +60,7 @@ export const ResponsiveContainer: React.FC<ResponsiveContainerProps> = ({
   return (
     <Container 
       maxWidth={maxWidth || defaults.maxWidth}
-      px={px || defaults.px}
+      paddingX={paddingX || defaults.paddingX}
       {...props}
     >
       {children}

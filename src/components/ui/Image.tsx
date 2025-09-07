@@ -320,8 +320,8 @@ export const Image: React.FC<ImageProps> = ({
     )
   }
   
-  // Filter out props that shouldn't be passed to the DOM
-  const { aspectRatio: _, width: __, height: ___, ...domProps } = props
+  // Filter out custom props that shouldn't be passed to the DOM - these are already destructured
+  const domProps = props
 
   return (
     <ImageContainer

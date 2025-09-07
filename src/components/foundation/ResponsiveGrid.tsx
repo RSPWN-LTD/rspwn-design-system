@@ -5,7 +5,7 @@ import { Grid, GridProps } from './Grid'
  * ResponsiveGrid provides common responsive grid patterns with sensible defaults for AI usage.
  * It automatically handles responsive columns and spacing without requiring manual specification.
  */
-export interface ResponsiveGridProps extends Omit<GridProps, 'templateColumns' | 'gap'> {
+export interface ResponsiveGridProps extends Omit<GridProps, 'templateColumns' | 'gap' | 'columns' | 'pattern'> {
   /** Override the default gap */
   gap?: GridProps['gap']
   /** 
@@ -15,12 +15,12 @@ export interface ResponsiveGridProps extends Omit<GridProps, 'templateColumns' |
    * - articles: Article/blog grid (1->2 columns)
    * - stats: Statistics grid (2->4 columns)
    */
-  pattern?: 'cards' | 'features' | 'articles' | 'stats' | 'custom'
+  pattern?: 'cards' | 'features' | 'articles' | 'stats' | 'sidebar' | 'holy-grail' | 'dashboard' | 'masonry' | 'custom'
   /** 
    * For custom pattern, specify responsive columns
    * @example { xs: 1, md: 2, lg: 3 }
    */
-  columns?: {
+  responsiveColumns?: {
     xs?: number
     sm?: number  
     md?: number
@@ -65,7 +65,7 @@ const getPatternColumns = (pattern: ResponsiveGridProps['pattern'], minColumnWid
   }
 }
 
-const convertColumnsToTemplate = (columns: ResponsiveGridProps['columns']) => {
+const convertColumnsToTemplate = (columns: ResponsiveGridProps['responsiveColumns']) => {
   if (!columns) return undefined
   
   const template: Record<string, string> = {}
@@ -80,15 +80,15 @@ const convertColumnsToTemplate = (columns: ResponsiveGridProps['columns']) => {
 export const ResponsiveGrid: React.FC<ResponsiveGridProps> = ({
   pattern = 'cards',
   gap = 6,
-  columns,
+  responsiveColumns,
   minColumnWidth,
   children,
   ...props
 }) => {
   let templateColumns: GridProps['templateColumns']
   
-  if (columns) {
-    templateColumns = convertColumnsToTemplate(columns)
+  if (responsiveColumns) {
+    templateColumns = convertColumnsToTemplate(responsiveColumns)
   } else {
     templateColumns = getPatternColumns(pattern, minColumnWidth)
   }

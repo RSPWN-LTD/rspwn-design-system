@@ -81,10 +81,20 @@ const CardFooter = styled(Box)`
   border-top: 1px solid ${({ theme }) => theme.colors.gray.light};
 `
 
+// Create wrapper components with default padding for better AI usage
+const CardHeaderWithDefaults: React.FC<BoxProps> = ({ p = 6, ...props }) => 
+  <CardHeader p={p} {...props} />
+
+const CardContentWithDefaults: React.FC<BoxProps> = ({ p = 6, ...props }) => 
+  <CardContent p={p} {...props} />
+
+const CardFooterWithDefaults: React.FC<BoxProps> = ({ p = 6, ...props }) => 
+  <CardFooter p={p} {...props} />
+
 export const Card: React.FC<CardProps> & {
-  Header: typeof CardHeader
-  Content: typeof CardContent
-  Footer: typeof CardFooter
+  Header: React.FC<BoxProps>
+  Content: React.FC<BoxProps>
+  Footer: React.FC<BoxProps>
 } = ({
   variant = 'default',
   hoverable = false,
@@ -106,7 +116,6 @@ export const Card: React.FC<CardProps> & {
   )
 }
 
-// Add default padding to sub-components for better AI usage
-Card.Header = ({ p = 6, ...props }: BoxProps) => <CardHeader p={p} {...props} />
-Card.Content = ({ p = 6, ...props }: BoxProps) => <CardContent p={p} {...props} />
-Card.Footer = ({ p = 6, ...props }: BoxProps) => <CardFooter p={p} {...props} />
+Card.Header = CardHeaderWithDefaults
+Card.Content = CardContentWithDefaults  
+Card.Footer = CardFooterWithDefaults

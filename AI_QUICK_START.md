@@ -43,6 +43,19 @@ import { ResponsiveGrid, Card } from '@rspwn/design-system'
 </ResponsiveGrid>
 ```
 
+### Custom Responsive Grid
+```jsx
+// Use responsiveColumns for custom breakpoint patterns
+<ResponsiveGrid responsiveColumns={{ xs: 1, md: 2, lg: 3 }}>
+  <Card>
+    <Card.Content>Content 1</Card.Content>  
+  </Card>
+  <Card>
+    <Card.Content>Content 2</Card.Content>
+  </Card>
+</ResponsiveGrid>
+```
+
 ### Card with Automatic Padding
 ```jsx
 // Card sub-components now have default padding - no manual p={6} needed

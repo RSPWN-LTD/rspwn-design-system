@@ -1,6 +1,15 @@
 import React from 'react'
 import { Section, SectionProps } from './Section'
 import { ResponsiveContainer, ResponsiveContainerProps } from './ResponsiveContainer'
+import { SpacingKey } from '../../tokens/spacing'
+
+type ResponsiveSectionSpacing = SpacingKey | {
+  xs?: SpacingKey
+  sm?: SpacingKey
+  md?: SpacingKey
+  lg?: SpacingKey
+  xl?: SpacingKey
+}
 
 /**
  * ResponsiveSection combines Section + ResponsiveContainer for easy AI usage.
@@ -12,7 +21,7 @@ export interface ResponsiveSectionProps extends Omit<SectionProps, 'children'> {
   /** Override container max-width */
   maxWidth?: ResponsiveContainerProps['maxWidth']
   /** Override container padding */
-  containerPx?: ResponsiveContainerProps['px']
+  containerPx?: ResponsiveContainerProps['paddingX']
   /** Section content */
   children: React.ReactNode
 }
@@ -22,15 +31,15 @@ export const ResponsiveSection: React.FC<ResponsiveSectionProps> = ({
   maxWidth,
   containerPx,
   children,
-  py = { xs: 8, md: 12, lg: 16 }, // Default responsive section padding
+  paddingY = { xs: 8, md: 12, lg: 16 } as ResponsiveSectionSpacing, // Default responsive section padding
   ...sectionProps
 }) => {
   return (
-    <Section py={py} {...sectionProps}>
+    <Section paddingY={paddingY} {...sectionProps}>
       <ResponsiveContainer 
         size={containerSize}
         maxWidth={maxWidth}
-        px={containerPx}
+        paddingX={containerPx}
       >
         {children}
       </ResponsiveContainer>
