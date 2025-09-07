@@ -438,7 +438,7 @@ export const PopoverTrigger = forwardRef<HTMLElement, PopoverTriggerProps>(({
       onMouseLeave: handleMouseLeave,
       'aria-expanded': isOpen,
       'aria-haspopup': true,
-      ...children.props
+      ...(children.props || {})
     })
   }
 

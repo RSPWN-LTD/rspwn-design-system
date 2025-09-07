@@ -337,18 +337,18 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(({
 
   // Register this tab with the context
   useEffect(() => {
-    setTabsData(prev => {
-      const exists = prev.some(tab => tab.value === value)
+    setTabsData((prev: Array<{ value: string | number; disabled?: boolean }>) => {
+      const exists = prev.some((tab: { value: string | number; disabled?: boolean }) => tab.value === value)
       if (!exists) {
         return [...prev, { value, disabled: isDisabled }]
       }
-      return prev.map(tab => 
+      return prev.map((tab: { value: string | number; disabled?: boolean }) => 
         tab.value === value ? { ...tab, disabled: isDisabled } : tab
       )
     })
 
     return () => {
-      setTabsData(prev => prev.filter(tab => tab.value !== value))
+      setTabsData((prev: Array<{ value: string | number; disabled?: boolean }>) => prev.filter((tab: { value: string | number; disabled?: boolean }) => tab.value !== value))
     }
   }, [value, isDisabled, setTabsData])
 
@@ -359,8 +359,8 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(({
   }
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
-    const enabledTabs = tabsData.filter(tab => !tab.disabled)
-    const currentIndex = enabledTabs.findIndex(tab => tab.value === value)
+    const enabledTabs = tabsData.filter((tab: { value: string | number; disabled?: boolean }) => !tab.disabled)
+    const currentIndex = enabledTabs.findIndex((tab: { value: string | number; disabled?: boolean }) => tab.value === value)
 
     let newIndex = currentIndex
     
@@ -405,8 +405,8 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(({
   }
 
   const handleFocus = (event: React.FocusEvent<HTMLButtonElement>) => {
-    const enabledTabs = tabsData.filter(tab => !tab.disabled)
-    const currentIndex = enabledTabs.findIndex(tab => tab.value === value)
+    const enabledTabs = tabsData.filter((tab: { value: string | number; disabled?: boolean }) => !tab.disabled)
+    const currentIndex = enabledTabs.findIndex((tab: { value: string | number; disabled?: boolean }) => tab.value === value)
     if (currentIndex >= 0) {
       setFocusedIndex(currentIndex)
     }
