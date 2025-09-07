@@ -341,12 +341,12 @@ export const DropdownTrigger = forwardRef<HTMLButtonElement, DropdownTriggerProp
 
   if (asChild && React.isValidElement(children)) {
     return React.cloneElement(children, {
-      ref: (node: HTMLElement) => {
+      ref: (node: HTMLButtonElement | null) => {
         if (ref) {
           if (typeof ref === 'function') ref(node)
-          else ref.current = node
+          else if (ref && 'current' in ref) (ref as any).current = node
         }
-        triggerRef.current = node
+        if (triggerRef && 'current' in triggerRef) (triggerRef as any).current = node
       },
       onClick: handleClick,
       onMouseEnter: handleMouseEnter,
@@ -362,9 +362,9 @@ export const DropdownTrigger = forwardRef<HTMLButtonElement, DropdownTriggerProp
       ref={(node) => {
         if (ref) {
           if (typeof ref === 'function') ref(node)
-          else ref.current = node
+          else if (ref && 'current' in ref) (ref as any).current = node
         }
-        triggerRef.current = node
+        if (triggerRef && 'current' in triggerRef) (triggerRef as any).current = node
       }}
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
@@ -396,7 +396,7 @@ export const DropdownContent = forwardRef<HTMLDivElement, DropdownContentProps>(
           if (typeof ref === 'function') ref(node)
           else ref.current = node
         }
-        contentRef.current = node
+        if (contentRef && 'current' in contentRef) (contentRef as any).current = node
       }}
       isOpen={isOpen}
       placement={placement}
@@ -493,7 +493,6 @@ export const SubMenu = forwardRef<HTMLDivElement, SubMenuProps>(({
   ...props
 }, ref) => {
   const [isSubMenuOpen, setIsSubMenuOpen] = useState(false)
-  const { closeOnSelect } = useDropdownContext()
 
   const handleMouseEnter = () => {
     if (!disabled) {

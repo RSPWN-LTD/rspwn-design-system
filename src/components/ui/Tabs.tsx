@@ -106,7 +106,7 @@ const getTabListStyles = (orientation: 'horizontal' | 'vertical', variant: 'line
   `
 }
 
-const TabList = styled.div.withConfig({
+const StyledTabList = styled.div.withConfig({
   shouldForwardProp: createShouldForwardProp(['orientation', 'variant'])
 })<{ orientation?: 'horizontal' | 'vertical'; variant?: 'line' | 'enclosed' | 'soft-rounded' }>`
   ${({ orientation = 'horizontal', variant = 'line' }) => 
@@ -193,7 +193,7 @@ const getTabStyles = (
     enclosed: css`
       border-radius: ${({ theme }) => theme.radius.sm};
       ${isSelected && css`
-        background-color: ${({ theme }) => theme.colors.background.primary};
+        background-color: ${({ theme }) => theme.colors.gray.base.primary};
         box-shadow: ${({ theme }) => theme.shadows.sm};
       `}
     `,
@@ -305,9 +305,9 @@ export const TabListComponent = forwardRef<HTMLDivElement, TabListProps>(({
   const { orientation, variant } = useTabsContext()
 
   return (
-    <TabList ref={ref} orientation={orientation} variant={variant} {...props}>
+    <StyledTabList ref={ref} orientation={orientation} variant={variant} {...props}>
       {children}
-    </TabList>
+    </StyledTabList>
   )
 })
 
@@ -327,7 +327,6 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(({
     variant,
     size,
     onSelect,
-    focusedIndex,
     setFocusedIndex,
     tabsData,
     setTabsData
@@ -338,18 +337,18 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(({
 
   // Register this tab with the context
   useEffect(() => {
-    setTabsData(prev => {
-      const exists = prev.some(tab => tab.value === value)
+    setTabsData((prev: { value: string | number; disabled?: boolean }[]) => {
+      const exists = prev.some((tab: { value: string | number; disabled?: boolean }) => tab.value === value)
       if (!exists) {
         return [...prev, { value, disabled: isDisabled }]
       }
-      return prev.map(tab => 
+      return prev.map((tab: { value: string | number; disabled?: boolean }) => 
         tab.value === value ? { ...tab, disabled: isDisabled } : tab
       )
     })
 
     return () => {
-      setTabsData(prev => prev.filter(tab => tab.value !== value))
+      setTabsData((prev: { value: string | number; disabled?: boolean }[]) => prev.filter((tab: { value: string | number; disabled?: boolean }) => tab.value !== value))
     }
   }, [value, isDisabled, setTabsData])
 

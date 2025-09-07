@@ -2,7 +2,7 @@ import React, { forwardRef, useCallback, useEffect, useRef, useState } from 'rea
 import styled, { css } from 'styled-components'
 import { createShouldForwardProp } from '../../utils/propFilters'
 
-export interface SliderProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'onChange'> {
+export interface SliderProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'onChange' | 'defaultValue'> {
   variant?: 'single' | 'range'
   orientation?: 'horizontal' | 'vertical'
   size?: 'sm' | 'md' | 'lg'
@@ -124,7 +124,7 @@ const SliderThumb = styled.div.withConfig({
 }>`
   position: absolute;
   background-color: ${({ theme }) => theme.colors.innovation.primaryBlue};
-  border: 2px solid ${({ theme }) => theme.colors.background.primary};
+  border: 2px solid ${({ theme }) => theme.colors.gray.base};
   border-radius: ${({ theme }) => theme.radius.full};
   cursor: pointer;
   transition: all ${({ theme }) => theme.durations.fast} ${({ theme }) => theme.easings.easeOut};

@@ -94,7 +94,7 @@ const PopoverContentContainer = styled.div.withConfig({
   transform: scale(${({ isOpen }) => (isOpen ? 1 : 0.95)});
   transition: all ${({ theme }) => theme.durations.fast} ${({ theme }) => theme.easings.easeOut};
   
-  background: ${({ theme }) => theme.colors.background.primary};
+  background: ${({ theme }) => theme.colors.gray.base};
   border: 1px solid ${({ theme }) => theme.colors.gray.light};
   border-radius: ${({ theme }) => theme.radius.md};
   box-shadow: ${({ theme }) => theme.shadows.lg};
@@ -129,7 +129,7 @@ const PopoverArrowContainer = styled.div.withConfig({
     position: absolute;
     width: ${({ size = 8 }) => size}px;
     height: ${({ size = 8 }) => size}px;
-    background: ${({ theme }) => theme.colors.background.primary};
+    background: ${({ theme }) => theme.colors.gray.base};
     border: 1px solid ${({ theme }) => theme.colors.gray.light};
     border-bottom: none;
     border-right: none;
@@ -411,14 +411,14 @@ export const PopoverTrigger = forwardRef<HTMLElement, PopoverTriggerProps>(({
     onClick?.(event)
   }
 
-  const handleMouseEnter = (event: React.MouseEvent) => {
+  const handleMouseEnter = (event: React.MouseEvent<HTMLElement>) => {
     if (trigger === 'hover') {
       setIsOpen(true)
     }
     onMouseEnter?.(event)
   }
 
-  const handleMouseLeave = (event: React.MouseEvent) => {
+  const handleMouseLeave = (event: React.MouseEvent<HTMLElement>) => {
     if (trigger === 'hover') {
       setIsOpen(false)
     }
@@ -432,33 +432,31 @@ export const PopoverTrigger = forwardRef<HTMLElement, PopoverTriggerProps>(({
           if (typeof ref === 'function') ref(node)
           else ref.current = node
         }
-        triggerRef.current = node
+        if (triggerRef && 'current' in triggerRef) (triggerRef as any).current = node
       },
       onClick: handleClick,
       onMouseEnter: handleMouseEnter,
       onMouseLeave: handleMouseLeave,
       'aria-expanded': isOpen,
       'aria-haspopup': true,
-      ...children.props,
-      ...props
+      ...children.props
     })
   }
 
   return React.cloneElement(children, {
-    ref: (node: HTMLElement) => {
+    ref: (node: HTMLElement | null) => {
       if (ref) {
         if (typeof ref === 'function') ref(node)
-        else ref.current = node
+        else if (ref && 'current' in ref) (ref as any).current = node
       }
-      triggerRef.current = node
+      if (triggerRef && 'current' in triggerRef) (triggerRef as any).current = node
     },
     onClick: handleClick,
     onMouseEnter: handleMouseEnter,
     onMouseLeave: handleMouseLeave,
     'aria-expanded': isOpen,
     'aria-haspopup': true,
-    ...children.props,
-    ...props
+    ...children.props
   })
 })
 
@@ -480,7 +478,7 @@ export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(({
           if (typeof ref === 'function') ref(node)
           else ref.current = node
         }
-        contentRef.current = node
+        if (contentRef && 'current' in contentRef) (contentRef as any).current = node
       }}
       isOpen={isOpen}
       x={position.x}
