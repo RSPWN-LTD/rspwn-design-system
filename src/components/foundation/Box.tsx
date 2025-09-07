@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { propFilters } from '../../utils/propFilters'
+import { SpacingKey } from '../../tokens/spacing'
 
 export interface BoxProps {
   // Layout
@@ -12,21 +13,59 @@ export interface BoxProps {
   maxWidth?: string | number
   maxHeight?: string | number
   
-  // Spacing
-  m?: keyof typeof import('../../tokens/spacing').spacing
-  mt?: keyof typeof import('../../tokens/spacing').spacing
-  mr?: keyof typeof import('../../tokens/spacing').spacing
-  mb?: keyof typeof import('../../tokens/spacing').spacing
-  ml?: keyof typeof import('../../tokens/spacing').spacing
-  mx?: keyof typeof import('../../tokens/spacing').spacing
-  my?: keyof typeof import('../../tokens/spacing').spacing
-  p?: keyof typeof import('../../tokens/spacing').spacing
-  pt?: keyof typeof import('../../tokens/spacing').spacing
-  pr?: keyof typeof import('../../tokens/spacing').spacing
-  pb?: keyof typeof import('../../tokens/spacing').spacing
-  pl?: keyof typeof import('../../tokens/spacing').spacing
-  px?: keyof typeof import('../../tokens/spacing').spacing
-  py?: keyof typeof import('../../tokens/spacing').spacing
+  // Standard spacing
+  m?: SpacingKey
+  mt?: SpacingKey
+  mr?: SpacingKey
+  mb?: SpacingKey
+  ml?: SpacingKey
+  mx?: SpacingKey
+  my?: SpacingKey
+  p?: SpacingKey
+  pt?: SpacingKey
+  pr?: SpacingKey
+  pb?: SpacingKey
+  pl?: SpacingKey
+  px?: SpacingKey
+  py?: SpacingKey
+  
+  // Advanced spacing features
+  // Logical spacing properties (for international layouts)
+  marginInline?: SpacingKey
+  marginBlock?: SpacingKey
+  paddingInline?: SpacingKey
+  paddingBlock?: SpacingKey
+  marginInlineStart?: SpacingKey
+  marginInlineEnd?: SpacingKey
+  marginBlockStart?: SpacingKey
+  marginBlockEnd?: SpacingKey
+  paddingInlineStart?: SpacingKey
+  paddingInlineEnd?: SpacingKey
+  paddingBlockStart?: SpacingKey
+  paddingBlockEnd?: SpacingKey
+  
+  // Negative margins
+  marginNegative?: SpacingKey
+  marginTopNegative?: SpacingKey
+  marginBottomNegative?: SpacingKey
+  marginLeftNegative?: SpacingKey
+  marginRightNegative?: SpacingKey
+  
+  // Auto margins
+  marginAuto?: boolean
+  marginXAuto?: boolean
+  marginYAuto?: boolean
+  
+  // Space between children
+  spaceX?: SpacingKey
+  spaceY?: SpacingKey
+  
+  // Safe area padding (for mobile)
+  paddingSafeArea?: boolean
+  paddingSafeAreaTop?: boolean
+  paddingSafeAreaBottom?: boolean
+  paddingSafeAreaLeft?: boolean
+  paddingSafeAreaRight?: boolean
   
   // Background
   bg?: 'black' | 'white' | 'dark' | 'gray' | 'light' | 'blue' | 'purple'
@@ -98,6 +137,7 @@ const StyledBox = styled.div.withConfig({
   ${({ maxWidth }) => maxWidth && css`max-width: ${typeof maxWidth === 'number' ? `${maxWidth}px` : maxWidth};`}
   ${({ maxHeight }) => maxHeight && css`max-height: ${typeof maxHeight === 'number' ? `${maxHeight}px` : maxHeight};`}
   
+  /* Standard spacing */
   ${({ m, theme }) => m && css`margin: ${theme.spacing[m]};`}
   ${({ mt, theme }) => mt && css`margin-top: ${theme.spacing[mt]};`}
   ${({ mr, theme }) => mr && css`margin-right: ${theme.spacing[mr]};`}
@@ -113,6 +153,64 @@ const StyledBox = styled.div.withConfig({
   ${({ pl, theme }) => pl && css`padding-left: ${theme.spacing[pl]};`}
   ${({ px, theme }) => px && css`padding-left: ${theme.spacing[px]}; padding-right: ${theme.spacing[px]};`}
   ${({ py, theme }) => py && css`padding-top: ${theme.spacing[py]}; padding-bottom: ${theme.spacing[py]};`}
+  
+  /* Logical spacing properties */
+  ${({ marginInline, theme }) => marginInline && css`margin-inline: ${theme.spacing[marginInline]};`}
+  ${({ marginBlock, theme }) => marginBlock && css`margin-block: ${theme.spacing[marginBlock]};`}
+  ${({ paddingInline, theme }) => paddingInline && css`padding-inline: ${theme.spacing[paddingInline]};`}
+  ${({ paddingBlock, theme }) => paddingBlock && css`padding-block: ${theme.spacing[paddingBlock]};`}
+  ${({ marginInlineStart, theme }) => marginInlineStart && css`margin-inline-start: ${theme.spacing[marginInlineStart]};`}
+  ${({ marginInlineEnd, theme }) => marginInlineEnd && css`margin-inline-end: ${theme.spacing[marginInlineEnd]};`}
+  ${({ marginBlockStart, theme }) => marginBlockStart && css`margin-block-start: ${theme.spacing[marginBlockStart]};`}
+  ${({ marginBlockEnd, theme }) => marginBlockEnd && css`margin-block-end: ${theme.spacing[marginBlockEnd]};`}
+  ${({ paddingInlineStart, theme }) => paddingInlineStart && css`padding-inline-start: ${theme.spacing[paddingInlineStart]};`}
+  ${({ paddingInlineEnd, theme }) => paddingInlineEnd && css`padding-inline-end: ${theme.spacing[paddingInlineEnd]};`}
+  ${({ paddingBlockStart, theme }) => paddingBlockStart && css`padding-block-start: ${theme.spacing[paddingBlockStart]};`}
+  ${({ paddingBlockEnd, theme }) => paddingBlockEnd && css`padding-block-end: ${theme.spacing[paddingBlockEnd]};`}
+  
+  /* Negative margins */
+  ${({ marginNegative, theme }) => marginNegative && css`margin: -${theme.spacing[marginNegative]};`}
+  ${({ marginTopNegative, theme }) => marginTopNegative && css`margin-top: -${theme.spacing[marginTopNegative]};`}
+  ${({ marginBottomNegative, theme }) => marginBottomNegative && css`margin-bottom: -${theme.spacing[marginBottomNegative]};`}
+  ${({ marginLeftNegative, theme }) => marginLeftNegative && css`margin-left: -${theme.spacing[marginLeftNegative]};`}
+  ${({ marginRightNegative, theme }) => marginRightNegative && css`margin-right: -${theme.spacing[marginRightNegative]};`}
+  
+  /* Auto margins */
+  ${({ marginAuto }) => marginAuto && css`margin: auto;`}
+  ${({ marginXAuto }) => marginXAuto && css`margin-left: auto; margin-right: auto;`}
+  ${({ marginYAuto }) => marginYAuto && css`margin-top: auto; margin-bottom: auto;`}
+  
+  /* Space between children */
+  ${({ spaceX, theme }) => spaceX && css`
+    > * + * {
+      margin-left: ${theme.spacing[spaceX]};
+    }
+  `}
+  ${({ spaceY, theme }) => spaceY && css`
+    > * + * {
+      margin-top: ${theme.spacing[spaceY]};
+    }
+  `}
+  
+  /* Safe area padding */
+  ${({ paddingSafeArea }) => paddingSafeArea && css`
+    padding-top: max(env(safe-area-inset-top), padding-top);
+    padding-bottom: max(env(safe-area-inset-bottom), padding-bottom);
+    padding-left: max(env(safe-area-inset-left), padding-left);
+    padding-right: max(env(safe-area-inset-right), padding-right);
+  `}
+  ${({ paddingSafeAreaTop }) => paddingSafeAreaTop && css`
+    padding-top: max(env(safe-area-inset-top), padding-top);
+  `}
+  ${({ paddingSafeAreaBottom }) => paddingSafeAreaBottom && css`
+    padding-bottom: max(env(safe-area-inset-bottom), padding-bottom);
+  `}
+  ${({ paddingSafeAreaLeft }) => paddingSafeAreaLeft && css`
+    padding-left: max(env(safe-area-inset-left), padding-left);
+  `}
+  ${({ paddingSafeAreaRight }) => paddingSafeAreaRight && css`
+    padding-right: max(env(safe-area-inset-right), padding-right);
+  `}
   
   ${({ bg }) => bg && getBackgroundColor(bg)}
   
