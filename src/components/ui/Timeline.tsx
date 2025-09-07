@@ -13,7 +13,7 @@ export interface TimelineItem {
 
 export interface TimelineProps {
   // Timeline configuration
-  items: TimelineItem[]
+  items?: TimelineItem[]
   
   // Layout options
   alternate?: boolean
@@ -373,6 +373,11 @@ export const Timeline: React.FC<TimelineProps> = ({
       default:
         return <DotIcon />
     }
+  }
+  
+  // Guard clause for undefined items
+  if (!items || !Array.isArray(items) || items.length === 0) {
+    return null
   }
   
   return (
