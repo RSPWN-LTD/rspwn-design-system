@@ -426,10 +426,10 @@ export const PopoverTrigger = forwardRef<HTMLElement, PopoverTriggerProps>(({
 
   if (asChild && React.isValidElement(children)) {
     return React.cloneElement(children, {
-      ref: (node: HTMLElement) => {
+      ref: (node: HTMLElement | null) => {
         if (ref) {
           if (typeof ref === 'function') ref(node)
-          else ref.current = node
+          else if (ref && 'current' in ref) (ref as any).current = node
         }
         if (triggerRef && 'current' in triggerRef) (triggerRef as any).current = node
       },
