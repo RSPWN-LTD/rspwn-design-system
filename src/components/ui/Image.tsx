@@ -320,6 +320,9 @@ export const Image: React.FC<ImageProps> = ({
     )
   }
   
+  // Filter out props that shouldn't be passed to the DOM
+  const { aspectRatio: _, width: __, height: ___, ...domProps } = props
+
   return (
     <ImageContainer
       ref={containerRef}
@@ -327,7 +330,7 @@ export const Image: React.FC<ImageProps> = ({
       width={width}
       height={height}
       aspectRatio={aspectRatio}
-      {...props}
+      {...domProps}
     >
       {shouldShowImage && (
         <StyledImage

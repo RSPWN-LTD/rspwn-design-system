@@ -106,6 +106,7 @@ export const Card: React.FC<CardProps> & {
   )
 }
 
-Card.Header = CardHeader
-Card.Content = CardContent
-Card.Footer = CardFooter
+// Add default padding to sub-components for better AI usage
+Card.Header = ({ p = 6, ...props }: BoxProps) => <CardHeader p={p} {...props} />
+Card.Content = ({ p = 6, ...props }: BoxProps) => <CardContent p={p} {...props} />
+Card.Footer = ({ p = 6, ...props }: BoxProps) => <CardFooter p={p} {...props} />

@@ -15,6 +15,10 @@ export { Divider } from './components/foundation/Divider'
 export { Flex } from './components/foundation/Flex'
 export { Stack } from './components/foundation/Stack'
 export { Section } from './components/foundation/Section'
+export { Space } from './components/foundation/Space'
+export { ResponsiveContainer } from './components/foundation/ResponsiveContainer'
+export { ResponsiveGrid } from './components/foundation/ResponsiveGrid'
+export { ResponsiveSection } from './components/foundation/ResponsiveSection'
 
 // UI Components
 export { Button } from './components/ui/Button'

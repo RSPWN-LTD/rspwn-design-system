@@ -422,8 +422,8 @@ const StyledGridItem = styled.div.withConfig({
   `}
 `
 
-export const Grid: React.FC<GridProps> = ({ children, ...props }) => {
-  return <StyledGrid {...props}>{children}</StyledGrid>
+export const Grid: React.FC<GridProps> = ({ children, gap = 4, ...props }) => {
+  return <StyledGrid gap={gap} {...props}>{children}</StyledGrid>
 }
 
 export const GridItem: React.FC<GridItemProps> = ({ children, ...props }) => {
