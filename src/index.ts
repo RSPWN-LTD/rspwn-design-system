@@ -10,8 +10,11 @@ export { theme } from './tokens/theme'
 export { Typography } from './components/foundation/Typography'
 export { Box } from './components/foundation/Box'
 export { Container } from './components/foundation/Container'
-export { Grid } from './components/foundation/Grid'
+export { Grid, GridItem } from './components/foundation/Grid'
 export { Divider } from './components/foundation/Divider'
+export { Flex } from './components/foundation/Flex'
+export { Stack } from './components/foundation/Stack'
+export { Section } from './components/foundation/Section'
 
 // UI Components
 export { Button } from './components/ui/Button'
@@ -47,6 +50,61 @@ export { Image } from './components/ui/Image'
 export { Icon, IconCatalog } from './components/ui/Icon'
 export { iconPaths } from './components/ui/iconPaths'
 
+// Layout Components  
+export { Show, Hide, ShowOnMobile, ShowOnTablet, ShowOnDesktop, HideOnMobile, HideOnTablet, HideOnDesktop } from './components/layout'
+
+// Layout Templates
+export { 
+  LandingPageTemplate, 
+  DashboardTemplate, 
+  ArticleTemplate, 
+  ProductGridTemplate, 
+  CheckoutTemplate,
+  BaseTemplate,
+  Templates,
+  TemplateProvider,
+  useTemplateConfig,
+  useTemplateSpacing,
+  useTemplateTheme,
+  useTemplateLayout
+} from './components/layout/templates'
+
+// Responsive Utilities
+export { 
+  breakpoints, 
+  mediaQueries, 
+  createResponsiveProps, 
+  createResponsiveSpacing,
+  getCurrentBreakpoint,
+  resolveResponsiveValue,
+  matchesBreakpoint
+} from './utils/responsive'
+
+// Responsive Hooks
+export { 
+  useMediaQuery,
+  useBreakpoint,
+  useCurrentBreakpoint,
+  useBreakpointValue,
+  useScreenSize,
+  useBreakpointMatch,
+  useOrientation
+} from './hooks'
+
 // Types
 export type { Theme } from './tokens/theme'
 export type { IconName } from './components/ui/iconPaths'
+export type { 
+  Breakpoint, 
+  ResponsiveValue 
+} from './utils/responsive'
+export type {
+  BaseTemplateProps,
+  TemplateConfig,
+  ConfigurableTemplateProps,
+  SectionProps,
+  HeaderProps,
+  SidebarProps,
+  MainContentProps,
+  FooterProps
+} from './components/layout/templates'

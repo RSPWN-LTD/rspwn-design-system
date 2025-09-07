@@ -2,6 +2,14 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { createShouldForwardProp } from '../../utils/propFilters'
 
+type ResponsiveValue<T> = T | {
+  xs?: T
+  sm?: T
+  md?: T
+  lg?: T
+  xl?: T
+}
+
 export interface GridProps {
   // Grid Layout
   columns?: string | number
@@ -10,12 +18,33 @@ export interface GridProps {
   columnGap?: keyof typeof import('../../tokens/spacing').spacing
   rowGap?: keyof typeof import('../../tokens/spacing').spacing
   
+  // Named grid areas and lines
+  areas?: string | ResponsiveValue<string>
+  columnLines?: string[]
+  rowLines?: string[]
+  
+  // Predefined patterns
+  pattern?: 'sidebar' | 'holy-grail' | 'dashboard' | 'cards' | 'masonry'
+  
+  // Masonry support
+  masonry?: boolean
+  masonryRows?: number
+  
   // Responsive columns (based on breakpoints)
   xs?: string | number
   sm?: string | number
   md?: string | number
   lg?: string | number
   xl?: string | number
+  
+  // Enhanced responsive props
+  responsive?: {
+    xs?: Partial<Pick<GridProps, 'columns' | 'rows' | 'gap' | 'areas'>>
+    sm?: Partial<Pick<GridProps, 'columns' | 'rows' | 'gap' | 'areas'>>
+    md?: Partial<Pick<GridProps, 'columns' | 'rows' | 'gap' | 'areas'>>
+    lg?: Partial<Pick<GridProps, 'columns' | 'rows' | 'gap' | 'areas'>>
+    xl?: Partial<Pick<GridProps, 'columns' | 'rows' | 'gap' | 'areas'>>
+  }
   
   // Grid alignment
   justifyItems?: 'start' | 'end' | 'center' | 'stretch'
@@ -55,6 +84,64 @@ export interface GridProps {
   as?: keyof JSX.IntrinsicElements
 }
 
+export interface GridItemProps {
+  // Grid item positioning
+  area?: string
+  column?: string | number
+  row?: string | number
+  columnSpan?: number
+  rowSpan?: number
+  columnStart?: string | number
+  columnEnd?: string | number
+  rowStart?: string | number
+  rowEnd?: string | number
+  
+  // Grid item alignment
+  justifySelf?: 'start' | 'end' | 'center' | 'stretch'
+  alignSelf?: 'start' | 'end' | 'center' | 'stretch'
+  
+  // Standard props
+  children?: React.ReactNode
+  className?: string
+  as?: keyof JSX.IntrinsicElements
+}
+
+// Predefined grid patterns
+const gridPatterns = {
+  'holy-grail': {
+    areas: `
+      "header header header"
+      "nav main aside"  
+      "footer footer footer"
+    `,
+    columns: "200px 1fr 200px",
+    rows: "auto 1fr auto"
+  },
+  'sidebar': {
+    areas: `
+      "sidebar main"
+    `,
+    columns: "250px 1fr",
+    rows: "1fr"
+  },
+  'dashboard': {
+    areas: `
+      "header header"
+      "sidebar main"
+    `,
+    columns: "280px 1fr",
+    rows: "auto 1fr"
+  },
+  'cards': {
+    columns: "repeat(auto-fit, minmax(250px, 1fr))",
+    gap: 4
+  },
+  'masonry': {
+    columns: "repeat(auto-fit, minmax(250px, 1fr))",
+    gap: 4
+  }
+}
+
 const getGridColumns = (columns: string | number) => {
   if (typeof columns === 'number') {
     return `repeat(${columns}, 1fr)`
@@ -68,8 +155,60 @@ const getResponsiveColumns = (value: string | number, breakpoint: string) => css
   }
 `
 
+const getResponsiveAreas = (areas: string | ResponsiveValue<string>) => {
+  if (typeof areas === 'string') {
+    return css`grid-template-areas: ${areas.replace(/\s+/g, ' ').trim()};`
+  }
+  
+  return css`
+    ${areas.xs && css`grid-template-areas: ${areas.xs.replace(/\s+/g, ' ').trim()};`}
+    ${areas.sm && css`
+      @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+        grid-template-areas: ${areas.sm!.replace(/\s+/g, ' ').trim()};
+      }
+    `}
+    ${areas.md && css`
+      @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+        grid-template-areas: ${areas.md!.replace(/\s+/g, ' ').trim()};
+      }
+    `}
+    ${areas.lg && css`
+      @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+        grid-template-areas: ${areas.lg!.replace(/\s+/g, ' ').trim()};
+      }
+    `}
+    ${areas.xl && css`
+      @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
+        grid-template-areas: ${areas.xl!.replace(/\s+/g, ' ').trim()};
+      }
+    `}
+  `
+}
+
+const getNamedGridLines = (lines: string[]) => {
+  return lines.map((line) => `[${line}] 1fr`).join(' ')
+}
+
+const getResponsiveProps = (responsive: GridProps['responsive'], breakpoint: keyof NonNullable<GridProps['responsive']>, theme: any) => {
+  const props = responsive?.[breakpoint]
+  if (!props) return ''
+  
+  return css`
+    @media (min-width: ${theme.breakpoints[breakpoint]}) {
+      ${props.columns && css`grid-template-columns: ${getGridColumns(props.columns)};`}
+      ${props.rows && css`grid-template-rows: ${typeof props.rows === 'number' ? `repeat(${props.rows}, 1fr)` : props.rows};`}
+      ${props.gap && css`gap: ${theme.spacing[props.gap]};`}
+      ${props.areas && css`grid-template-areas: ${(props.areas as string).replace(/\s+/g, ' ').trim()};`}
+    }
+  `
+}
+
 const StyledGrid = styled.div.withConfig({
-  shouldForwardProp: createShouldForwardProp(['columns', 'rows', 'columnGap', 'rowGap', 'xs', 'sm', 'md', 'lg', 'xl', 'justifyItems', 'alignContent', 'autoFit', 'autoFill', 'minColumnWidth'])
+  shouldForwardProp: createShouldForwardProp([
+    'columns', 'rows', 'gap', 'columnGap', 'rowGap', 'areas', 'columnLines', 'rowLines',
+    'pattern', 'masonry', 'masonryRows', 'xs', 'sm', 'md', 'lg', 'xl', 'responsive',
+    'justifyItems', 'alignItems', 'justifyContent', 'alignContent', 'autoFit', 'autoFill', 'minColumnWidth'
+  ])
 })<GridProps>`
   display: grid;
   
@@ -91,6 +230,51 @@ const StyledGrid = styled.div.withConfig({
   
   ${({ rowGap, theme }) => rowGap && css`
     row-gap: ${theme.spacing[rowGap]};
+  `}
+  
+  /* Named grid areas */
+  ${({ areas }) => areas && getResponsiveAreas(areas)}
+  
+  /* Named grid lines */
+  ${({ columnLines }) => columnLines && css`
+    grid-template-columns: ${getNamedGridLines(columnLines)};
+  `}
+  
+  ${({ rowLines }) => rowLines && css`
+    grid-template-rows: ${getNamedGridLines(rowLines)};
+  `}
+  
+  /* Predefined patterns */
+  ${({ pattern, theme }) => pattern && css`
+    ${(gridPatterns[pattern] as any).areas && css`
+      grid-template-areas: ${(gridPatterns[pattern] as any).areas.replace(/\s+/g, ' ').trim()};
+    `}
+    ${(gridPatterns[pattern] as any).columns && css`
+      grid-template-columns: ${(gridPatterns[pattern] as any).columns};
+    `}
+    ${(gridPatterns[pattern] as any).rows && css`
+      grid-template-rows: ${(gridPatterns[pattern] as any).rows};
+    `}
+    ${(gridPatterns[pattern] as any).gap && css`
+      gap: ${theme.spacing[(gridPatterns[pattern] as any).gap as keyof typeof theme.spacing]};
+    `}
+  `}
+  
+  /* Masonry layout */
+  ${({ masonry, masonryRows }) => masonry && css`
+    grid-template-rows: repeat(${masonryRows || 'auto-fit'}, min-content);
+    grid-auto-flow: column;
+    
+    /* Fallback for browsers that don't support masonry */
+    @supports not (grid-template-rows: masonry) {
+      display: grid;
+      grid-template-rows: repeat(${masonryRows || 4}, min-content);
+    }
+    
+    /* Future masonry support */
+    @supports (grid-template-rows: masonry) {
+      grid-template-rows: masonry;
+    }
   `}
   
   ${({ autoFit, minColumnWidth }) => autoFit && minColumnWidth && css`
@@ -145,14 +329,70 @@ const StyledGrid = styled.div.withConfig({
   ${({ px, theme }) => px && css`padding-left: ${theme.spacing[px]}; padding-right: ${theme.spacing[px]};`}
   ${({ py, theme }) => py && css`padding-top: ${theme.spacing[py]}; padding-bottom: ${theme.spacing[py]};`}
   
-  // Responsive breakpoints
+  // Legacy responsive breakpoints
   ${({ xs, theme }) => xs && getResponsiveColumns(xs, theme.breakpoints.xs)}
   ${({ sm, theme }) => sm && getResponsiveColumns(sm, theme.breakpoints.sm)}
   ${({ md, theme }) => md && getResponsiveColumns(md, theme.breakpoints.md)}
   ${({ lg, theme }) => lg && getResponsiveColumns(lg, theme.breakpoints.lg)}
   ${({ xl, theme }) => xl && getResponsiveColumns(xl, theme.breakpoints.xl)}
+  
+  // Enhanced responsive props
+  ${({ responsive, theme }) => responsive && css`
+    ${getResponsiveProps(responsive, 'xs', theme)}
+    ${getResponsiveProps(responsive, 'sm', theme)}
+    ${getResponsiveProps(responsive, 'md', theme)}
+    ${getResponsiveProps(responsive, 'lg', theme)}
+    ${getResponsiveProps(responsive, 'xl', theme)}
+  `}
+`
+
+const StyledGridItem = styled.div.withConfig({
+  shouldForwardProp: createShouldForwardProp([
+    'area', 'column', 'row', 'columnSpan', 'rowSpan', 'columnStart', 'columnEnd', 
+    'rowStart', 'rowEnd', 'justifySelf', 'alignSelf'
+  ])
+})<GridItemProps>`
+  ${({ area }) => area && css`
+    grid-area: ${area};
+  `}
+  
+  ${({ column }) => column && css`
+    grid-column: ${column};
+  `}
+  
+  ${({ row }) => row && css`
+    grid-row: ${row};
+  `}
+  
+  ${({ columnSpan }) => columnSpan && css`
+    grid-column: span ${columnSpan};
+  `}
+  
+  ${({ rowSpan }) => rowSpan && css`
+    grid-row: span ${rowSpan};
+  `}
+  
+  ${({ columnStart, columnEnd }) => (columnStart || columnEnd) && css`
+    grid-column: ${columnStart || 'auto'} / ${columnEnd || 'auto'};
+  `}
+  
+  ${({ rowStart, rowEnd }) => (rowStart || rowEnd) && css`
+    grid-row: ${rowStart || 'auto'} / ${rowEnd || 'auto'};
+  `}
+  
+  ${({ justifySelf }) => justifySelf && css`
+    justify-self: ${justifySelf};
+  `}
+  
+  ${({ alignSelf }) => alignSelf && css`
+    align-self: ${alignSelf};
+  `}
 `
 
 export const Grid: React.FC<GridProps> = ({ children, ...props }) => {
   return <StyledGrid {...props}>{children}</StyledGrid>
+}
+
+export const GridItem: React.FC<GridItemProps> = ({ children, ...props }) => {
+  return <StyledGridItem {...props}>{children}</StyledGridItem>
 }
