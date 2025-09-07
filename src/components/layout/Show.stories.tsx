@@ -74,9 +74,9 @@ const ScreenInfo = () => {
   const currentBreakpoint = useCurrentBreakpoint()
   
   return (
-    <Card padding="4" marginBottom="6" background="subtle">
-      <Typography variant="h6" marginBottom="3">Current Screen Info</Typography>
-      <Grid columns={2} gap="4">
+    <Card padding={4} marginBottom={6} background="subtle">
+      <Typography variant="h6" marginBottom={3}>Current Screen Info</Typography>
+      <Grid columns={2} gap={4}>
         <Box>
           <Typography variant="body2" color="muted">Screen Width:</Typography>
           <Typography fontWeight="medium">{screenSize.width}px</Typography>
@@ -105,21 +105,21 @@ export const Basic: Story = {
     <div>
       <ScreenInfo />
       
-      <Box display="flex" flexDirection="column" gap="4">
+      <Box display="flex" flexDirection="column" gap={4}>
         <Show above="md">
-          <Card padding="4" background="semantic.success" color="white">
+          <Card padding={4} background="semantic.success" color="white">
             <Typography>✅ Visible on medium screens and larger (md+)</Typography>
           </Card>
         </Show>
         
         <Show below="md">
-          <Card padding="4" background="semantic.info" color="white">
+          <Card padding={4} background="semantic.info" color="white">
             <Typography>📱 Visible on small screens only (below md)</Typography>
           </Card>
         </Show>
         
         <Show only="lg">
-          <Card padding="4" background="semantic.warning" color="white">
+          <Card padding={4} background="semantic.warning" color="white">
             <Typography>🖥️ Visible only on large screens (lg only)</Typography>
           </Card>
         </Show>
@@ -133,15 +133,15 @@ export const MultipleBreakpoints: Story = {
     <div>
       <ScreenInfo />
       
-      <Box display="flex" flexDirection="column" gap="4">
+      <Box display="flex" flexDirection="column" gap={4}>
         <Show only={['sm', 'md']}>
-          <Card padding="4" background="innovation.primaryBlue" color="white">
+          <Card padding={4} background="innovation.primaryBlue" color="white">
             <Typography>📱 Visible on small and medium screens (sm, md)</Typography>
           </Card>
         </Show>
         
         <Show between={['lg', 'xl']}>
-          <Card padding="4" background="innovation.secondaryPurple" color="white">
+          <Card padding={4} background="innovation.secondaryPurple" color="white">
             <Typography>🖥️ Visible between large and extra large (lg to xl)</Typography>
           </Card>
         </Show>
@@ -158,12 +158,12 @@ export const WithFallback: Story = {
       <Show 
         above="lg"
         fallback={
-          <Card padding="4" background="gray.dark" color="white">
+          <Card padding={4} background="gray.dark" color="white">
             <Typography>📱 Fallback content for smaller screens</Typography>
           </Card>
         }
       >
-        <Card padding="4" background="semantic.success" color="white">
+        <Card padding={4} background="semantic.success" color="white">
           <Typography>🖥️ Desktop content with fallback</Typography>
         </Card>
       </Show>
@@ -176,27 +176,27 @@ export const SemanticBreakpoints: Story = {
     <div>
       <ScreenInfo />
       
-      <Box display="flex" flexDirection="column" gap="4">
+      <Box display="flex" flexDirection="column" gap={4}>
         <Show below="mobile">
-          <Card padding="4" background="semantic.error" color="white">
+          <Card padding={4} background="semantic.error" color="white">
             <Typography>📱 Extra small screens (below mobile)</Typography>
           </Card>
         </Show>
         
         <Show only="tablet">
-          <Card padding="4" background="semantic.warning" color="white">
+          <Card padding={4} background="semantic.warning" color="white">
             <Typography>📱 Tablet screens only</Typography>
           </Card>
         </Show>
         
         <Show above="desktop">
-          <Card padding="4" background="semantic.success" color="white">
+          <Card padding={4} background="semantic.success" color="white">
             <Typography>🖥️ Desktop screens and larger</Typography>
           </Card>
         </Show>
         
         <Show above="wide">
-          <Card padding="4" background="innovation.primaryBlue" color="white">
+          <Card padding={4} background="innovation.primaryBlue" color="white">
             <Typography>🖥️ Wide screens (1280px+)</Typography>
           </Card>
         </Show>
@@ -210,21 +210,21 @@ export const ConvenienceComponents: Story = {
     <div>
       <ScreenInfo />
       
-      <Box display="flex" flexDirection="column" gap="4">
+      <Box display="flex" flexDirection="column" gap={4}>
         <ShowOnMobile>
-          <Card padding="4" background="semantic.info" color="white">
+          <Card padding={4} background="semantic.info" color="white">
             <Typography>📱 Mobile Only Content</Typography>
           </Card>
         </ShowOnMobile>
         
         <ShowOnTablet>
-          <Card padding="4" background="semantic.warning" color="white">
+          <Card padding={4} background="semantic.warning" color="white">
             <Typography>📱 Tablet Only Content</Typography>
           </Card>
         </ShowOnTablet>
         
         <ShowOnDesktop>
-          <Card padding="4" background="semantic.success" color="white">
+          <Card padding={4} background="semantic.success" color="white">
             <Typography>🖥️ Desktop Only Content</Typography>
           </Card>
         </ShowOnDesktop>
@@ -238,25 +238,25 @@ export const HideComponents: Story = {
     <div>
       <ScreenInfo />
       
-      <Box display="flex" flexDirection="column" gap="4">
-        <Card padding="4" background="gray.base" color="white">
+      <Box display="flex" flexDirection="column" gap={4}>
+        <Card padding={4} background="gray.base" color="white">
           <Typography>🔍 Always Visible Content</Typography>
         </Card>
         
         <HideOnMobile>
-          <Card padding="4" background="semantic.error" color="white">
+          <Card padding={4} background="semantic.error" color="white">
             <Typography>❌ Hidden on Mobile</Typography>
           </Card>
         </HideOnMobile>
         
         <HideOnTablet>
-          <Card padding="4" background="semantic.warning" color="white">
+          <Card padding={4} background="semantic.warning" color="white">
             <Typography>❌ Hidden on Tablet</Typography>
           </Card>
         </HideOnTablet>
         
         <HideOnDesktop>
-          <Card padding="4" background="semantic.info" color="white">
+          <Card padding={4} background="semantic.info" color="white">
             <Typography>❌ Hidden on Desktop</Typography>
           </Card>
         </HideOnDesktop>
@@ -270,12 +270,12 @@ export const ResponsiveNavigation: Story = {
     <div>
       <ScreenInfo />
       
-      <Card padding="4" background="dark" marginBottom="6">
-        <Box display="flex" alignItems="center" justifyContent="between" gap="4">
+      <Card padding={4} background="dark" marginBottom={6}>
+        <Box display="flex" alignItems="center" justifyContent="between" gap={4}>
           <Typography variant="h5" color="white">RSPWN</Typography>
           
           <Show above="md">
-            <Box display="flex" gap="6">
+            <Box display="flex" gap={6}>
               <Typography color="gray.light">Home</Typography>
               <Typography color="gray.light">About</Typography>
               <Typography color="gray.light">Services</Typography>
@@ -284,7 +284,7 @@ export const ResponsiveNavigation: Story = {
           </Show>
           
           <Show below="md">
-            <Card padding="2" background="innovation.primaryBlue">
+            <Card padding={2} background="innovation.primaryBlue">
               <Typography color="white" fontSize="sm">☰ Menu</Typography>
             </Card>
           </Show>
@@ -292,9 +292,9 @@ export const ResponsiveNavigation: Story = {
       </Card>
       
       <Show below="md">
-        <Card padding="4" background="gray.light" marginBottom="4">
-          <Typography variant="h6" marginBottom="3">Mobile Menu</Typography>
-          <Box display="flex" flexDirection="column" gap="3">
+        <Card padding={4} background="gray.light" marginBottom={4}>
+          <Typography variant="h6" marginBottom={3}>Mobile Menu</Typography>
+          <Box display="flex" flexDirection="column" gap={3}>
             <Typography>Home</Typography>
             <Typography>About</Typography>
             <Typography>Services</Typography>
@@ -319,21 +319,21 @@ export const ResponsiveGrid: Story = {
       <div>
         <ScreenInfo />
         
-        <Card padding="4" background="subtle" marginBottom="6">
-          <Typography variant="h6" marginBottom="2">Dynamic Grid Columns</Typography>
+        <Card padding={4} background="subtle" marginBottom={6}>
+          <Typography variant="h6" marginBottom={2}>Dynamic Grid Columns</Typography>
           <Typography variant="body2">Current columns: {columns}</Typography>
         </Card>
         
-        <Grid columns={columns} gap="4">
+        <Grid columns={columns} gap={4}>
           {Array.from({ length: 8 }, (_, i) => (
-            <Card key={i} padding="4">
-              <Box height="100px" background="innovation.primaryBlue" borderRadius="sm" marginBottom="3" />
+            <Card key={i} padding={4}>
+              <Box height="100px" background="innovation.primaryBlue" borderRadius="sm" marginBottom={3} />
               <Typography variant="body2">Card {i + 1}</Typography>
             </Card>
           ))}
         </Grid>
         
-        <Box marginTop="6">
+        <Box marginTop={6}>
           <Show above="lg">
             <Typography variant="body1">
               🖥️ Desktop view: Showing {columns} columns for optimal desktop experience
@@ -363,23 +363,23 @@ export const ComplexResponsiveLayout: Story = {
       <ScreenInfo />
       
       {/* Header */}
-      <Card padding="4" background="dark" marginBottom="4">
+      <Card padding={4} background="dark" marginBottom={4}>
         <Box display="flex" alignItems="center" justifyContent="between">
           <Typography variant="h4" color="white">Dashboard</Typography>
           
           <Show above="md">
-            <Box display="flex" gap="4">
-              <Card padding="2" background="innovation.primaryBlue">
+            <Box display="flex" gap={4}>
+              <Card padding={2} background="innovation.primaryBlue">
                 <Typography color="white" fontSize="sm">Profile</Typography>
               </Card>
-              <Card padding="2" background="semantic.success">
+              <Card padding={2} background="semantic.success">
                 <Typography color="white" fontSize="sm">Settings</Typography>
               </Card>
             </Box>
           </Show>
           
           <Show below="md">
-            <Card padding="2" background="gray.base">
+            <Card padding={2} background="gray.base">
               <Typography color="white" fontSize="sm">⚙️</Typography>
             </Card>
           </Show>
@@ -387,12 +387,12 @@ export const ComplexResponsiveLayout: Story = {
       </Card>
       
       {/* Main Content */}
-      <Grid columns={{ xs: 1, lg: 3 }} gap="4">
+      <Grid columns={{ xs: 1, lg: 3 }} gap={4}>
         {/* Sidebar */}
         <Show above="lg">
-          <Card padding="4" background="gray.light">
-            <Typography variant="h6" marginBottom="4">Sidebar</Typography>
-            <Box display="flex" flexDirection="column" gap="2">
+          <Card padding={4} background="gray.light">
+            <Typography variant="h6" marginBottom={4}>Sidebar</Typography>
+            <Box display="flex" flexDirection="column" gap={2}>
               <Typography fontSize="sm">Dashboard</Typography>
               <Typography fontSize="sm">Analytics</Typography>
               <Typography fontSize="sm">Reports</Typography>
@@ -403,9 +403,9 @@ export const ComplexResponsiveLayout: Story = {
         
         {/* Main Content Area */}
         <Box gridColumn={{ lg: 'span 2' }}>
-          <Grid columns={{ xs: 1, sm: 2 }} gap="4" marginBottom="4">
-            <Card padding="4">
-              <Typography variant="h6" marginBottom="2">Stats</Typography>
+          <Grid columns={{ xs: 1, sm: 2 }} gap={4} marginBottom={4}>
+            <Card padding={4}>
+              <Typography variant="h6" marginBottom={2}>Stats</Typography>
               <Typography variant="h3" color="innovation.primaryBlue">1,234</Typography>
               
               <Show above="sm">
@@ -413,8 +413,8 @@ export const ComplexResponsiveLayout: Story = {
               </Show>
             </Card>
             
-            <Card padding="4">
-              <Typography variant="h6" marginBottom="2">Revenue</Typography>
+            <Card padding={4}>
+              <Typography variant="h6" marginBottom={2}>Revenue</Typography>
               <Typography variant="h3" color="semantic.success">$45.6K</Typography>
               
               <Show above="sm">
@@ -423,11 +423,11 @@ export const ComplexResponsiveLayout: Story = {
             </Card>
           </Grid>
           
-          <Card padding="4">
-            <Typography variant="h6" marginBottom="4">Recent Activity</Typography>
-            <Box display="flex" flexDirection="column" gap="3">
+          <Card padding={4}>
+            <Typography variant="h6" marginBottom={4}>Recent Activity</Typography>
+            <Box display="flex" flexDirection="column" gap={3}>
               {Array.from({ length: 3 }, (_, i) => (
-                <Box key={i} display="flex" alignItems="center" gap="3">
+                <Box key={i} display="flex" alignItems="center" gap={3}>
                   <Box width="40px" height="40px" background="innovation.primaryBlue" borderRadius="full" />
                   <Box flex="1">
                     <Typography variant="body2">Activity {i + 1}</Typography>
@@ -453,16 +453,16 @@ export const ComplexResponsiveLayout: Story = {
       <Show below="lg">
         <Card 
           position="fixed" 
-          bottom="0" 
+          bottom={0} 
           left="0" 
           right="0" 
-          padding="3" 
+          padding={3} 
           background="dark"
           style={{ zIndex: 1000 }}
         >
           <Box display="flex" justifyContent="around">
             {['🏠', '📊', '📋', '⚙️'].map((icon, i) => (
-              <Box key={i} padding="2">
+              <Box key={i} padding={2}>
                 <Typography fontSize="lg">{icon}</Typography>
               </Box>
             ))}

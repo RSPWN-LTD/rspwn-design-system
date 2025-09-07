@@ -263,26 +263,26 @@ export const NamedGridAreas: Story = {
       `}
       columns="200px 1fr 200px"
       rows="auto 1fr auto"
-      gap="4"
+      gap={4}
       minHeight="400px"
       style={{ border: '1px solid #333' }}
     >
       <GridItem area="header">
-        <Box bg="innovation.primaryBlue" p="4" borderRadius="sm">
+        <Box bg="innovation.primaryBlue" p={4} borderRadius="sm">
           <Typography color="white" align="center" fontWeight="medium">
             Header Area
           </Typography>
         </Box>
       </GridItem>
       <GridItem area="sidebar">
-        <Box bg="gray.dark" p="4" borderRadius="sm" height="100%">
+        <Box bg="gray.dark" p={4} borderRadius="sm" height="100%">
           <Typography color="white" align="center">
             Sidebar
           </Typography>
         </Box>
       </GridItem>
       <GridItem area="main">
-        <Box bg="gray.base" p="6" borderRadius="sm" height="100%">
+        <Box bg="gray.base" p={6} borderRadius="sm" height="100%">
           <Typography color="white" align="center">
             Main Content Area<br />
             This area expands to fill available space
@@ -290,14 +290,14 @@ export const NamedGridAreas: Story = {
         </Box>
       </GridItem>
       <GridItem area="aside">
-        <Box bg="gray.dark" p="4" borderRadius="sm" height="100%">
+        <Box bg="gray.dark" p={4} borderRadius="sm" height="100%">
           <Typography color="white" align="center">
             Aside
           </Typography>
         </Box>
       </GridItem>
       <GridItem area="footer">
-        <Box bg="innovation.primaryBlue" p="4" borderRadius="sm">
+        <Box bg="innovation.primaryBlue" p={4} borderRadius="sm">
           <Typography color="white" align="center" fontWeight="medium">
             Footer Area
           </Typography>
@@ -332,19 +332,19 @@ export const ResponsiveGridAreas: Story = {
       }}
       columns={{ xs: '1fr', md: '200px 1fr', lg: '200px 1fr 200px' }}
       rows={{ xs: 'repeat(5, auto)', md: 'auto 1fr auto auto', lg: 'auto 1fr auto' }}
-      gap="4"
+      gap={4}
       minHeight="500px"
       style={{ border: '1px solid #333' }}
     >
       <GridItem area="header">
-        <Box bg="innovation.primaryBlue" p="4" borderRadius="sm">
+        <Box bg="innovation.primaryBlue" p={4} borderRadius="sm">
           <Typography color="white" align="center" fontWeight="medium">
             Responsive Header
           </Typography>
         </Box>
       </GridItem>
       <GridItem area="sidebar">
-        <Box bg="gray.dark" p="4" borderRadius="sm" height="100%">
+        <Box bg="gray.dark" p={4} borderRadius="sm" height="100%">
           <Typography color="white" align="center" fontSize="sm">
             Sidebar<br />
             (Stacks on mobile)
@@ -352,7 +352,7 @@ export const ResponsiveGridAreas: Story = {
         </Box>
       </GridItem>
       <GridItem area="main">
-        <Box bg="gray.base" p="6" borderRadius="sm" height="100%">
+        <Box bg="gray.base" p={6} borderRadius="sm" height="100%">
           <Typography color="white" align="center">
             Main Content<br />
             Responsive layout changes at md and lg breakpoints
@@ -360,7 +360,7 @@ export const ResponsiveGridAreas: Story = {
         </Box>
       </GridItem>
       <GridItem area="aside">
-        <Box bg="gray.dark" p="4" borderRadius="sm" height="100%">
+        <Box bg="gray.dark" p={4} borderRadius="sm" height="100%">
           <Typography color="white" align="center" fontSize="sm">
             Aside<br />
             (Moves around)
@@ -368,7 +368,7 @@ export const ResponsiveGridAreas: Story = {
         </Box>
       </GridItem>
       <GridItem area="footer">
-        <Box bg="innovation.primaryBlue" p="4" borderRadius="sm">
+        <Box bg="innovation.primaryBlue" p={4} borderRadius="sm">
           <Typography color="white" align="center" fontWeight="medium">
             Responsive Footer
           </Typography>
@@ -383,30 +383,30 @@ export const PredefinedPatterns: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
       {/* Holy Grail Pattern */}
       <div>
-        <Typography variant="h4" marginBottom="4" color="white">Holy Grail Layout</Typography>
-        <Grid pattern="holy-grail" gap="4" minHeight="300px" style={{ border: '1px solid #333' }}>
+        <Typography variant="h4" marginBottom={4} color="white">Holy Grail Layout</Typography>
+        <Grid pattern="holy-grail" gap={4} minHeight="300px" style={{ border: '1px solid #333' }}>
           <GridItem area="header">
-            <Box bg="innovation.primaryBlue" p="4" borderRadius="sm">
+            <Box bg="innovation.primaryBlue" p={4} borderRadius="sm">
               <Typography color="white" align="center">Header</Typography>
             </Box>
           </GridItem>
           <GridItem area="nav">
-            <Box bg="gray.dark" p="4" borderRadius="sm" height="100%">
+            <Box bg="gray.dark" p={4} borderRadius="sm" height="100%">
               <Typography color="white" align="center">Navigation</Typography>
             </Box>
           </GridItem>
           <GridItem area="main">
-            <Box bg="gray.base" p="6" borderRadius="sm" height="100%">
+            <Box bg="gray.base" p={6} borderRadius="sm" height="100%">
               <Typography color="white" align="center">Main Content</Typography>
             </Box>
           </GridItem>
           <GridItem area="aside">
-            <Box bg="gray.dark" p="4" borderRadius="sm" height="100%">
+            <Box bg="gray.dark" p={4} borderRadius="sm" height="100%">
               <Typography color="white" align="center">Aside</Typography>
             </Box>
           </GridItem>
           <GridItem area="footer">
-            <Box bg="innovation.primaryBlue" p="4" borderRadius="sm">
+            <Box bg="innovation.primaryBlue" p={4} borderRadius="sm">
               <Typography color="white" align="center">Footer</Typography>
             </Box>
           </GridItem>
@@ -415,15 +415,15 @@ export const PredefinedPatterns: Story = {
 
       {/* Sidebar Pattern */}
       <div>
-        <Typography variant="h4" marginBottom="4" color="white">Sidebar Layout</Typography>
-        <Grid pattern="sidebar" gap="4" minHeight="200px" style={{ border: '1px solid #333' }}>
+        <Typography variant="h4" marginBottom={4} color="white">Sidebar Layout</Typography>
+        <Grid pattern="sidebar" gap={4} minHeight="200px" style={{ border: '1px solid #333' }}>
           <GridItem area="sidebar">
-            <Box bg="gray.dark" p="4" borderRadius="sm" height="100%">
+            <Box bg="gray.dark" p={4} borderRadius="sm" height="100%">
               <Typography color="white" align="center">Sidebar</Typography>
             </Box>
           </GridItem>
           <GridItem area="main">
-            <Box bg="gray.base" p="6" borderRadius="sm" height="100%">
+            <Box bg="gray.base" p={6} borderRadius="sm" height="100%">
               <Typography color="white" align="center">Main Content</Typography>
             </Box>
           </GridItem>
@@ -432,20 +432,20 @@ export const PredefinedPatterns: Story = {
 
       {/* Dashboard Pattern */}
       <div>
-        <Typography variant="h4" marginBottom="4" color="white">Dashboard Layout</Typography>
-        <Grid pattern="dashboard" gap="4" minHeight="250px" style={{ border: '1px solid #333' }}>
+        <Typography variant="h4" marginBottom={4} color="white">Dashboard Layout</Typography>
+        <Grid pattern="dashboard" gap={4} minHeight="250px" style={{ border: '1px solid #333' }}>
           <GridItem area="header">
-            <Box bg="innovation.primaryBlue" p="4" borderRadius="sm">
+            <Box bg="innovation.primaryBlue" p={4} borderRadius="sm">
               <Typography color="white" align="center">Dashboard Header</Typography>
             </Box>
           </GridItem>
           <GridItem area="sidebar">
-            <Box bg="gray.dark" p="4" borderRadius="sm" height="100%">
+            <Box bg="gray.dark" p={4} borderRadius="sm" height="100%">
               <Typography color="white" align="center">Menu</Typography>
             </Box>
           </GridItem>
           <GridItem area="main">
-            <Box bg="gray.base" p="6" borderRadius="sm" height="100%">
+            <Box bg="gray.base" p={6} borderRadius="sm" height="100%">
               <Typography color="white" align="center">Dashboard Content</Typography>
             </Box>
           </GridItem>
@@ -460,44 +460,44 @@ export const GridItemPositioning: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       {/* Column and Row Spanning */}
       <div>
-        <Typography variant="h4" marginBottom="4" color="white">Column & Row Spanning</Typography>
-        <Grid columns={4} rows={3} gap="4" style={{ border: '1px solid #333' }}>
+        <Typography variant="h4" marginBottom={4} color="white">Column & Row Spanning</Typography>
+        <Grid columns={4} rows={3} gap={4} style={{ border: '1px solid #333' }}>
           <GridItem columnSpan={2} rowSpan={2}>
-            <Box bg="innovation.primaryBlue" p="4" borderRadius="sm" height="100%">
+            <Box bg="innovation.primaryBlue" p={4} borderRadius="sm" height="100%">
               <Typography color="white" align="center">
                 Spans 2 columns<br />& 2 rows
               </Typography>
             </Box>
           </GridItem>
           <GridItem>
-            <Box bg="gray.dark" p="4" borderRadius="sm" height="100%">
+            <Box bg="gray.dark" p={4} borderRadius="sm" height="100%">
               <Typography color="white" align="center">1</Typography>
             </Box>
           </GridItem>
           <GridItem>
-            <Box bg="gray.dark" p="4" borderRadius="sm" height="100%">
+            <Box bg="gray.dark" p={4} borderRadius="sm" height="100%">
               <Typography color="white" align="center">2</Typography>
             </Box>
           </GridItem>
           <GridItem>
-            <Box bg="gray.dark" p="4" borderRadius="sm" height="100%">
+            <Box bg="gray.dark" p={4} borderRadius="sm" height="100%">
               <Typography color="white" align="center">3</Typography>
             </Box>
           </GridItem>
           <GridItem>
-            <Box bg="gray.dark" p="4" borderRadius="sm" height="100%">
+            <Box bg="gray.dark" p={4} borderRadius="sm" height="100%">
               <Typography color="white" align="center">4</Typography>
             </Box>
           </GridItem>
           <GridItem columnSpan={2}>
-            <Box bg="innovation.secondaryPurple" p="4" borderRadius="sm" height="100%">
+            <Box bg="innovation.secondaryPurple" p={4} borderRadius="sm" height="100%">
               <Typography color="white" align="center">
                 Spans 2 columns
               </Typography>
             </Box>
           </GridItem>
           <GridItem>
-            <Box bg="gray.dark" p="4" borderRadius="sm" height="100%">
+            <Box bg="gray.dark" p={4} borderRadius="sm" height="100%">
               <Typography color="white" align="center">5</Typography>
             </Box>
           </GridItem>
@@ -506,25 +506,25 @@ export const GridItemPositioning: Story = {
 
       {/* Precise Positioning */}
       <div>
-        <Typography variant="h4" marginBottom="4" color="white">Precise Grid Positioning</Typography>
-        <Grid columns={4} rows={4} gap="4" style={{ border: '1px solid #333' }}>
+        <Typography variant="h4" marginBottom={4} color="white">Precise Grid Positioning</Typography>
+        <Grid columns={4} rows={4} gap={4} style={{ border: '1px solid #333' }}>
           <GridItem columnStart={1} columnEnd={3} rowStart={1} rowEnd={2}>
-            <Box bg="innovation.primaryBlue" p="4" borderRadius="sm" height="100%">
+            <Box bg="innovation.primaryBlue" p={4} borderRadius="sm" height="100%">
               <Typography color="white" align="center">Col 1-3, Row 1</Typography>
             </Box>
           </GridItem>
           <GridItem columnStart={3} columnEnd={5} rowStart={1} rowEnd={3}>
-            <Box bg="innovation.secondaryPurple" p="4" borderRadius="sm" height="100%">
+            <Box bg="innovation.secondaryPurple" p={4} borderRadius="sm" height="100%">
               <Typography color="white" align="center">Col 3-5, Row 1-3</Typography>
             </Box>
           </GridItem>
           <GridItem columnStart={1} columnEnd={2} rowStart={2} rowEnd={4}>
-            <Box bg="semantic.success" p="4" borderRadius="sm" height="100%">
+            <Box bg="semantic.success" p={4} borderRadius="sm" height="100%">
               <Typography color="white" align="center">Col 1, Row 2-4</Typography>
             </Box>
           </GridItem>
           <GridItem columnStart={2} columnEnd={3} rowStart={2} rowEnd={3}>
-            <Box bg="gray.dark" p="4" borderRadius="sm" height="100%">
+            <Box bg="gray.dark" p={4} borderRadius="sm" height="100%">
               <Typography color="white" align="center">2,2</Typography>
             </Box>
           </GridItem>
@@ -537,16 +537,16 @@ export const GridItemPositioning: Story = {
 export const MasonryLayout: Story = {
   render: () => (
     <div>
-      <Typography variant="h4" marginBottom="4" color="white">Masonry Layout (Pinterest-style)</Typography>
-      <Grid masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} gap="4">
+      <Typography variant="h4" marginBottom={4} color="white">Masonry Layout (Pinterest-style)</Typography>
+      <Grid masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} gap={4}>
         {Array.from({ length: 12 }, (_, i) => (
-          <Card key={i} padding="4">
-            <Box height={`${120 + (i % 4) * 60}px`} bg="gray.dark" borderRadius="sm" marginBottom="3">
+          <Card key={i} padding={4}>
+            <Box height={`${120 + (i % 4) * 60}px`} bg="gray.dark" borderRadius="sm" marginBottom={3}>
               <Box display="flex" alignItems="center" justifyContent="center" height="100%">
                 <Typography color="white">Image {i + 1}</Typography>
               </Box>
             </Box>
-            <Typography variant="body2" marginBottom="2">Card {i + 1}</Typography>
+            <Typography variant="body2" marginBottom={2}>Card {i + 1}</Typography>
             <Typography variant="caption" color="muted">
               {i % 3 === 0 ? 'Short content here.' : 
                i % 3 === 1 ? 'Medium length content that takes up more space and demonstrates varying heights.' :
@@ -572,7 +572,7 @@ export const EnhancedResponsive: Story = {
     >
       {Array.from({ length: 8 }, (_, i) => (
         <GridItem key={i}>
-          <Box bg="gray.dark" p="4" borderRadius="sm">
+          <Box bg="gray.dark" p={4} borderRadius="sm">
             <Typography color="white" align="center">
               Responsive {i + 1}
             </Typography>
@@ -586,7 +586,7 @@ export const EnhancedResponsive: Story = {
 export const DashboardExample: Story = {
   render: () => (
     <div>
-      <Typography variant="h4" marginBottom="4" color="white">Dashboard Layout Example</Typography>
+      <Typography variant="h4" marginBottom={4} color="white">Dashboard Layout Example</Typography>
       <Grid
         areas={`
           "header header header header"
@@ -596,12 +596,12 @@ export const DashboardExample: Story = {
         `}
         columns="200px 1fr 1fr 200px"
         rows="auto auto 1fr auto"
-        gap="4"
+        gap={4}
         minHeight="600px"
         style={{ border: '1px solid #333' }}
       >
         <GridItem area="header">
-          <Box bg="innovation.primaryBlue" p="4" borderRadius="sm">
+          <Box bg="innovation.primaryBlue" p={4} borderRadius="sm">
             <Typography color="white" variant="h5" align="center">
               Gaming Dashboard
             </Typography>
@@ -609,9 +609,9 @@ export const DashboardExample: Story = {
         </GridItem>
         
         <GridItem area="sidebar">
-          <Box bg="gray.dark" p="4" borderRadius="sm" height="100%">
-            <Typography color="white" variant="h6" marginBottom="4">Navigation</Typography>
-            <Box display="flex" flexDirection="column" gap="2">
+          <Box bg="gray.dark" p={4} borderRadius="sm" height="100%">
+            <Typography color="white" variant="h6" marginBottom={4}>Navigation</Typography>
+            <Box display="flex" flexDirection="column" gap={2}>
               <Typography color="gray.light" fontSize="sm">Overview</Typography>
               <Typography color="gray.light" fontSize="sm">Players</Typography>
               <Typography color="gray.light" fontSize="sm">Games</Typography>
@@ -622,18 +622,18 @@ export const DashboardExample: Story = {
         </GridItem>
         
         <GridItem area="stats">
-          <Box bg="gray.base" p="4" borderRadius="sm" height="100%">
-            <Typography color="white" variant="h6" marginBottom="4">Key Stats</Typography>
-            <Grid columns={3} gap="3">
-              <Box bg="innovation.primaryBlue" p="3" borderRadius="sm">
+          <Box bg="gray.base" p={4} borderRadius="sm" height="100%">
+            <Typography color="white" variant="h6" marginBottom={4}>Key Stats</Typography>
+            <Grid columns={3} gap={3}>
+              <Box bg="innovation.primaryBlue" p={3} borderRadius="sm">
                 <Typography color="white" fontSize="lg" fontWeight="bold">1.2K</Typography>
                 <Typography color="gray.light" fontSize="sm">Active Players</Typography>
               </Box>
-              <Box bg="semantic.success" p="3" borderRadius="sm">
+              <Box bg="semantic.success" p={3} borderRadius="sm">
                 <Typography color="white" fontSize="lg" fontWeight="bold">87%</Typography>
                 <Typography color="gray.light" fontSize="sm">Uptime</Typography>
               </Box>
-              <Box bg="innovation.secondaryPurple" p="3" borderRadius="sm">
+              <Box bg="innovation.secondaryPurple" p={3} borderRadius="sm">
                 <Typography color="white" fontSize="lg" fontWeight="bold">15</Typography>
                 <Typography color="gray.light" fontSize="sm">Live Games</Typography>
               </Box>
@@ -642,8 +642,8 @@ export const DashboardExample: Story = {
         </GridItem>
         
         <GridItem area="chart">
-          <Box bg="gray.base" p="4" borderRadius="sm" height="100%">
-            <Typography color="white" variant="h6" marginBottom="4">Performance Chart</Typography>
+          <Box bg="gray.base" p={4} borderRadius="sm" height="100%">
+            <Typography color="white" variant="h6" marginBottom={4}>Performance Chart</Typography>
             <Box bg="gray.dark" borderRadius="sm" height="200px" display="flex" alignItems="center" justifyContent="center">
               <Typography color="gray.light">Chart visualization</Typography>
             </Box>
@@ -651,24 +651,24 @@ export const DashboardExample: Story = {
         </GridItem>
         
         <GridItem area="metrics">
-          <Box bg="gray.dark" p="4" borderRadius="sm" height="100%">
-            <Typography color="white" variant="h6" marginBottom="4">Metrics</Typography>
-            <Box display="flex" flexDirection="column" gap="3">
+          <Box bg="gray.dark" p={4} borderRadius="sm" height="100%">
+            <Typography color="white" variant="h6" marginBottom={4}>Metrics</Typography>
+            <Box display="flex" flexDirection="column" gap={3}>
               <Box>
                 <Typography color="white" fontSize="sm">CPU Usage</Typography>
-                <Box bg="gray.base" height="8px" borderRadius="full" marginTop="1">
+                <Box bg="gray.base" height="8px" borderRadius="full" marginTop={1}>
                   <Box bg="semantic.warning" width="65%" height="100%" borderRadius="full" />
                 </Box>
               </Box>
               <Box>
                 <Typography color="white" fontSize="sm">Memory</Typography>
-                <Box bg="gray.base" height="8px" borderRadius="full" marginTop="1">
+                <Box bg="gray.base" height="8px" borderRadius="full" marginTop={1}>
                   <Box bg="innovation.primaryBlue" width="45%" height="100%" borderRadius="full" />
                 </Box>
               </Box>
               <Box>
                 <Typography color="white" fontSize="sm">Network</Typography>
-                <Box bg="gray.base" height="8px" borderRadius="full" marginTop="1">
+                <Box bg="gray.base" height="8px" borderRadius="full" marginTop={1}>
                   <Box bg="semantic.success" width="80%" height="100%" borderRadius="full" />
                 </Box>
               </Box>
@@ -677,9 +677,9 @@ export const DashboardExample: Story = {
         </GridItem>
         
         <GridItem area="recent">
-          <Box bg="gray.base" p="4" borderRadius="sm" height="100%">
-            <Typography color="white" variant="h6" marginBottom="4">Recent Activity</Typography>
-            <Box display="flex" flexDirection="column" gap="2">
+          <Box bg="gray.base" p={4} borderRadius="sm" height="100%">
+            <Typography color="white" variant="h6" marginBottom={4}>Recent Activity</Typography>
+            <Box display="flex" flexDirection="column" gap={2}>
               <Typography color="gray.light" fontSize="sm">• Player joined game #1</Typography>
               <Typography color="gray.light" fontSize="sm">• Server updated to v2.1</Typography>
               <Typography color="gray.light" fontSize="sm">• New tournament started</Typography>

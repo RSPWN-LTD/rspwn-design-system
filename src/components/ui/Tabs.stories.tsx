@@ -46,19 +46,19 @@ export const Default: Story = {
         </TabList>
         <TabPanels>
           <TabPanel value="tab1">
-            <Box p="4">
+            <Box p={4}>
               <h3>Panel 1 Content</h3>
               <p>This is the content for the first tab.</p>
             </Box>
           </TabPanel>
           <TabPanel value="tab2">
-            <Box p="4">
+            <Box p={4}>
               <h3>Panel 2 Content</h3>
               <p>This is the content for the second tab.</p>
             </Box>
           </TabPanel>
           <TabPanel value="tab3">
-            <Box p="4">
+            <Box p={4}>
               <h3>Panel 3 Content</h3>
               <p>This is the content for the third tab.</p>
             </Box>
@@ -81,25 +81,25 @@ export const Vertical: Story = {
         </TabList>
         <TabPanels>
           <TabPanel value="overview">
-            <Box p="4">
+            <Box p={4}>
               <h3>Overview</h3>
               <p>Get a quick overview of your dashboard metrics and key performance indicators.</p>
             </Box>
           </TabPanel>
           <TabPanel value="analytics">
-            <Box p="4">
+            <Box p={4}>
               <h3>Analytics</h3>
               <p>Dive deep into your analytics data and track user engagement.</p>
             </Box>
           </TabPanel>
           <TabPanel value="reports">
-            <Box p="4">
+            <Box p={4}>
               <h3>Reports</h3>
               <p>Generate and view detailed reports about your application.</p>
             </Box>
           </TabPanel>
           <TabPanel value="settings">
-            <Box p="4">
+            <Box p={4}>
               <h3>Settings</h3>
               <p>Configure your application settings and preferences.</p>
             </Box>
@@ -124,13 +124,13 @@ export const Variants: Story = {
           </TabList>
           <TabPanels>
             <TabPanel value="tab1">
-              <Box p="4">Home content</Box>
+              <Box p={4}>Home content</Box>
             </TabPanel>
             <TabPanel value="tab2">
-              <Box p="4">About content</Box>
+              <Box p={4}>About content</Box>
             </TabPanel>
             <TabPanel value="tab3">
-              <Box p="4">Contact content</Box>
+              <Box p={4}>Contact content</Box>
             </TabPanel>
           </TabPanels>
         </Tabs>
@@ -147,13 +147,13 @@ export const Variants: Story = {
           </TabList>
           <TabPanels>
             <TabPanel value="tab1">
-              <Box p="4">Dashboard content</Box>
+              <Box p={4}>Dashboard content</Box>
             </TabPanel>
             <TabPanel value="tab2">
-              <Box p="4">Projects content</Box>
+              <Box p={4}>Projects content</Box>
             </TabPanel>
             <TabPanel value="tab3">
-              <Box p="4">Team content</Box>
+              <Box p={4}>Team content</Box>
             </TabPanel>
           </TabPanels>
         </Tabs>
@@ -170,13 +170,13 @@ export const Variants: Story = {
           </TabList>
           <TabPanels>
             <TabPanel value="tab1">
-              <Box p="4">Orders content</Box>
+              <Box p={4}>Orders content</Box>
             </TabPanel>
             <TabPanel value="tab2">
-              <Box p="4">Customers content</Box>
+              <Box p={4}>Customers content</Box>
             </TabPanel>
             <TabPanel value="tab3">
-              <Box p="4">Products content</Box>
+              <Box p={4}>Products content</Box>
             </TabPanel>
           </TabPanels>
         </Tabs>
@@ -199,13 +199,13 @@ export const Sizes: Story = {
           </TabList>
           <TabPanels>
             <TabPanel value="tab1">
-              <Box p="4">Small content</Box>
+              <Box p={4}>Small content</Box>
             </TabPanel>
             <TabPanel value="tab2">
-              <Box p="4">Tabs content</Box>
+              <Box p={4}>Tabs content</Box>
             </TabPanel>
             <TabPanel value="tab3">
-              <Box p="4">Example content</Box>
+              <Box p={4}>Example content</Box>
             </TabPanel>
           </TabPanels>
         </Tabs>
@@ -222,13 +222,13 @@ export const Sizes: Story = {
           </TabList>
           <TabPanels>
             <TabPanel value="tab1">
-              <Box p="4">Medium content</Box>
+              <Box p={4}>Medium content</Box>
             </TabPanel>
             <TabPanel value="tab2">
-              <Box p="4">Tabs content</Box>
+              <Box p={4}>Tabs content</Box>
             </TabPanel>
             <TabPanel value="tab3">
-              <Box p="4">Example content</Box>
+              <Box p={4}>Example content</Box>
             </TabPanel>
           </TabPanels>
         </Tabs>
@@ -245,13 +245,13 @@ export const Sizes: Story = {
           </TabList>
           <TabPanels>
             <TabPanel value="tab1">
-              <Box p="4">Large content</Box>
+              <Box p={4}>Large content</Box>
             </TabPanel>
             <TabPanel value="tab2">
-              <Box p="4">Tabs content</Box>
+              <Box p={4}>Tabs content</Box>
             </TabPanel>
             <TabPanel value="tab3">
-              <Box p="4">Example content</Box>
+              <Box p={4}>Example content</Box>
             </TabPanel>
           </TabPanels>
         </Tabs>
@@ -276,25 +276,25 @@ export const WithDisabledTabs: Story = {
         </TabList>
         <TabPanels>
           <TabPanel value="tab1">
-            <Box p="4">
+            <Box p={4}>
               <h3>Available Content</h3>
               <p>This tab is available and accessible.</p>
             </Box>
           </TabPanel>
           <TabPanel value="tab2">
-            <Box p="4">
+            <Box p={4}>
               <h3>Disabled Content</h3>
               <p>This content won't be shown since the tab is disabled.</p>
             </Box>
           </TabPanel>
           <TabPanel value="tab3">
-            <Box p="4">
+            <Box p={4}>
               <h3>Another Tab Content</h3>
               <p>This is another available tab.</p>
             </Box>
           </TabPanel>
           <TabPanel value="tab4">
-            <Box p="4">
+            <Box p={4}>
               <h3>Also Disabled Content</h3>
               <p>This content also won't be shown.</p>
             </Box>
@@ -316,20 +316,20 @@ export const LazyLoading: Story = {
         </TabList>
         <TabPanels>
           <TabPanel value="tab1">
-            <Box p="4">
+            <Box p={4}>
               <h3>Immediate Content</h3>
               <p>This content loads immediately as it's the default tab.</p>
             </Box>
           </TabPanel>
           <TabPanel value="tab2">
-            <Box p="4">
+            <Box p={4}>
               <h3>Lazy Loaded Content</h3>
               <p>This content only loads when the tab is first clicked.</p>
               <p>Check the React DevTools to see the difference!</p>
             </Box>
           </TabPanel>
           <TabPanel value="tab3">
-            <Box p="4">
+            <Box p={4}>
               <h3>Another Lazy Tab</h3>
               <p>This is another lazy-loaded tab panel.</p>
             </Box>
@@ -360,19 +360,19 @@ export const Controlled: Story = {
           </TabList>
           <TabPanels>
             <TabPanel value="home">
-              <Box p="4">
+              <Box p={4}>
                 <h3>Home</h3>
                 <p>Welcome to the home page!</p>
               </Box>
             </TabPanel>
             <TabPanel value="dashboard">
-              <Box p="4">
+              <Box p={4}>
                 <h3>Dashboard</h3>
                 <p>View your dashboard metrics here.</p>
               </Box>
             </TabPanel>
             <TabPanel value="profile">
-              <Box p="4">
+              <Box p={4}>
                 <h3>Profile</h3>
                 <p>Manage your profile settings.</p>
               </Box>
@@ -405,19 +405,19 @@ export const KeyboardNavigation: Story = {
         </TabList>
         <TabPanels>
           <TabPanel value="nav1">
-            <Box p="4">First panel content</Box>
+            <Box p={4}>First panel content</Box>
           </TabPanel>
           <TabPanel value="nav2">
-            <Box p="4">Second panel content</Box>
+            <Box p={4}>Second panel content</Box>
           </TabPanel>
           <TabPanel value="nav3">
-            <Box p="4">Disabled panel content</Box>
+            <Box p={4}>Disabled panel content</Box>
           </TabPanel>
           <TabPanel value="nav4">
-            <Box p="4">Fourth panel content</Box>
+            <Box p={4}>Fourth panel content</Box>
           </TabPanel>
           <TabPanel value="nav5">
-            <Box p="4">Fifth panel content</Box>
+            <Box p={4}>Fifth panel content</Box>
           </TabPanel>
         </TabPanels>
       </Tabs>
@@ -436,22 +436,22 @@ export const ComplexContent: Story = {
         </TabList>
         <TabPanels>
           <TabPanel value="stats">
-            <Box p="6">
+            <Box p={6}>
               <h3 style={{ marginBottom: '1rem' }}>Statistics Overview</h3>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                <Box p="4" bg="gray.base" borderRadius="md">
+                <Box p={4} bg="gray.base" borderRadius="md">
                   <h4>Total Users</h4>
                   <p style={{ fontSize: '2rem', fontWeight: 'bold', color: '#4A9EFF' }}>1,234</p>
                 </Box>
-                <Box p="4" bg="gray.base" borderRadius="md">
+                <Box p={4} bg="gray.base" borderRadius="md">
                   <h4>Active Sessions</h4>
                   <p style={{ fontSize: '2rem', fontWeight: 'bold', color: '#4A9EFF' }}>456</p>
                 </Box>
-                <Box p="4" bg="gray.base" borderRadius="md">
+                <Box p={4} bg="gray.base" borderRadius="md">
                   <h4>Revenue</h4>
                   <p style={{ fontSize: '2rem', fontWeight: 'bold', color: '#4A9EFF' }}>$12,345</p>
                 </Box>
-                <Box p="4" bg="gray.base" borderRadius="md">
+                <Box p={4} bg="gray.base" borderRadius="md">
                   <h4>Growth Rate</h4>
                   <p style={{ fontSize: '2rem', fontWeight: 'bold', color: '#4A9EFF' }}>+15%</p>
                 </Box>
@@ -459,7 +459,7 @@ export const ComplexContent: Story = {
             </Box>
           </TabPanel>
           <TabPanel value="settings">
-            <Box p="6">
+            <Box p={6}>
               <h3 style={{ marginBottom: '1rem' }}>Application Settings</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <Box>
@@ -478,18 +478,18 @@ export const ComplexContent: Story = {
             </Box>
           </TabPanel>
           <TabPanel value="users">
-            <Box p="6">
+            <Box p={6}>
               <h3 style={{ marginBottom: '1rem' }}>User Management</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <Box p="3" bg="gray.base" borderRadius="sm">
+                <Box p={3} bg="gray.base" borderRadius="sm">
                   <h4>John Doe</h4>
                   <p>Administrator • john@example.com</p>
                 </Box>
-                <Box p="3" bg="gray.base" borderRadius="sm">
+                <Box p={3} bg="gray.base" borderRadius="sm">
                   <h4>Jane Smith</h4>
                   <p>Editor • jane@example.com</p>
                 </Box>
-                <Box p="3" bg="gray.base" borderRadius="sm">
+                <Box p={3} bg="gray.base" borderRadius="sm">
                   <h4>Mike Johnson</h4>
                   <p>Viewer • mike@example.com</p>
                 </Box>

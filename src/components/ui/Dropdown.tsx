@@ -29,13 +29,13 @@ export interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode
 }
 
-export interface MenuItemProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface MenuItemProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onSelect'> {
   children: React.ReactNode
   disabled?: boolean
   destructive?: boolean
   icon?: React.ReactNode
   rightIcon?: React.ReactNode
-  onSelect?: (event: React.MouseEvent) => void
+  onSelect?: (event: React.MouseEvent<HTMLDivElement>) => void
 }
 
 export interface MenuSeparatorProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -103,7 +103,7 @@ const DropdownContentContainer = styled.div.withConfig({
   visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
   transform: scale(${({ isOpen }) => (isOpen ? 1 : 0.95)});
   transition: all ${({ theme }) => theme.durations.fast} ${({ theme }) => theme.easings.easeOut};
-  background: ${({ theme }) => theme.colors.background.primary};
+  background: ${({ theme }) => theme.colors.gray.base};
   border: 1px solid ${({ theme }) => theme.colors.gray.light};
   border-radius: ${({ theme }) => theme.radius.md};
   box-shadow: ${({ theme }) => theme.shadows.lg};

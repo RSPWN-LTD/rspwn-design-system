@@ -96,10 +96,10 @@ export const Interactive: Story = {
 export const WithContent: Story = {
   render: () => (
     <Card style={{ maxWidth: '400px' }}>
-      <Card.Header p="6" pb="4">
+      <Card.Header p={6} pb={4}>
         <Typography variant="h4">Product Card</Typography>
       </Card.Header>
-      <Card.Content p="6" py="4">
+      <Card.Content p={6} py={4}>
         <Typography variant="body2" color="secondary" style={{ marginBottom: '1rem' }}>
           This is a more complex card example with header, content, and footer sections.
         </Typography>
@@ -107,7 +107,7 @@ export const WithContent: Story = {
           You can organize content using the Card.Header, Card.Content, and Card.Footer components.
         </Typography>
       </Card.Content>
-      <Card.Footer p="6" pt="4" display="flex" justifyContent="space-between" alignItems="center">
+      <Card.Footer p={6} pt={4} display="flex" justifyContent="space-between" alignItems="center">
         <Typography variant="caption" color="muted">$99.99</Typography>
         <Button size="sm">Add to Cart</Button>
       </Card.Footer>

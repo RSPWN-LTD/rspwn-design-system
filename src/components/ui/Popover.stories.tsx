@@ -58,7 +58,7 @@ export const Default: Story = {
         <Button>Open Popover</Button>
       </PopoverTrigger>
       <PopoverContent>
-        <Box p="4">
+        <Box p={4}>
           <h4 style={{ margin: '0 0 0.5rem 0' }}>Popover Title</h4>
           <p style={{ margin: 0, fontSize: '14px' }}>
             This is the popover content. You can put any content here.
@@ -76,7 +76,7 @@ export const WithArrow: Story = {
         <Button>With Arrow</Button>
       </PopoverTrigger>
       <PopoverContent>
-        <Box p="4">
+        <Box p={4}>
           <h4 style={{ margin: '0 0 0.5rem 0' }}>Popover with Arrow</h4>
           <p style={{ margin: 0, fontSize: '14px' }}>
             This popover has an arrow pointing to the trigger element.
@@ -95,7 +95,7 @@ export const HoverTrigger: Story = {
         <Button variant="outline">Hover Me</Button>
       </PopoverTrigger>
       <PopoverContent>
-        <Box p="4">
+        <Box p={4}>
           <h4 style={{ margin: '0 0 0.5rem 0' }}>Hover Popover</h4>
           <p style={{ margin: 0, fontSize: '14px' }}>
             This popover appears when you hover over the trigger.
@@ -137,7 +137,7 @@ export const Placements: Story = {
             <Button size="sm">{placement}</Button>
           </PopoverTrigger>
           <PopoverContent>
-            <Box p="3">
+            <Box p={3}>
               <p style={{ margin: 0, fontSize: '12px' }}>
                 Placement: {placement}
               </p>
@@ -157,7 +157,7 @@ export const CustomContent: Story = {
         <Button>User Profile</Button>
       </PopoverTrigger>
       <PopoverContent minWidth={280}>
-        <Box p="4">
+        <Box p={4}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
             <div style={{
               width: '48px',
@@ -195,7 +195,7 @@ export const FormInPopover: Story = {
         <Button>Add Comment</Button>
       </PopoverTrigger>
       <PopoverContent minWidth={320}>
-        <Box p="4">
+        <Box p={4}>
           <h4 style={{ margin: '0 0 1rem 0' }}>Add a Comment</h4>
           <div style={{ marginBottom: '1rem' }}>
             <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '14px', fontWeight: '500' }}>
@@ -232,7 +232,7 @@ export const ScrollableContent: Story = {
         <Button>View Items</Button>
       </PopoverTrigger>
       <PopoverContent maxHeight={200} minWidth={250}>
-        <Box p="4">
+        <Box p={4}>
           <h4 style={{ margin: '0 0 1rem 0' }}>Item List</h4>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {Array.from({ length: 20 }, (_, i) => (
@@ -278,7 +278,7 @@ export const Controlled: Story = {
             <Button>Controlled Popover</Button>
           </PopoverTrigger>
           <PopoverContent>
-            <Box p="4">
+            <Box p={4}>
               <h4 style={{ margin: '0 0 0.5rem 0' }}>Controlled Popover</h4>
               <p style={{ margin: 0, fontSize: '14px' }}>
                 This popover is controlled programmatically.
@@ -308,7 +308,7 @@ export const NonPortal: Story = {
           <Button>Non-Portal Popover</Button>
         </PopoverTrigger>
         <PopoverContent>
-          <Box p="4">
+          <Box p={4}>
             <h4 style={{ margin: '0 0 0.5rem 0' }}>Non-Portal Popover</h4>
             <p style={{ margin: 0, fontSize: '14px' }}>
               This popover is rendered within the container, not in a portal.
@@ -353,7 +353,7 @@ export const CustomTrigger: Story = {
         </div>
       </PopoverTrigger>
       <PopoverContent>
-        <Box p="4">
+        <Box p={4}>
           <h4 style={{ margin: '0 0 0.5rem 0' }}>Need Help?</h4>
           <p style={{ margin: 0, fontSize: '14px' }}>
             Click here to get help with this feature. We're here to assist you!
@@ -375,7 +375,7 @@ export const Interactive: Story = {
           <Button>Interactive Content</Button>
         </PopoverTrigger>
         <PopoverContent>
-          <Box p="4">
+          <Box p={4}>
             <h4 style={{ margin: '0 0 1rem 0' }}>Interactive Popover</h4>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
               <span>Count: {count}</span>

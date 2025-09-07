@@ -27,7 +27,7 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     children: <Typography>Box content</Typography>,
-    p: '4',
+    p: 4,
     bg: 'gray',
     borderRadius: 'md',
   },
@@ -36,22 +36,22 @@ export const Default: Story = {
 export const Backgrounds: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-      <Box bg="black" p="4" borderRadius="md" border>
+      <Box bg="black" p={4} borderRadius="md" border>
         <Typography color="white">Black</Typography>
       </Box>
-      <Box bg="dark" p="4" borderRadius="md">
+      <Box bg="dark" p={4} borderRadius="md">
         <Typography color="white">Dark</Typography>
       </Box>
-      <Box bg="gray" p="4" borderRadius="md">
+      <Box bg="gray" p={4} borderRadius="md">
         <Typography color="white">Gray</Typography>
       </Box>
-      <Box bg="light" p="4" borderRadius="md">
+      <Box bg="light" p={4} borderRadius="md">
         <Typography color="white">Light</Typography>
       </Box>
-      <Box bg="blue" p="4" borderRadius="md">
+      <Box bg="blue" p={4} borderRadius="md">
         <Typography color="white">Blue</Typography>
       </Box>
-      <Box bg="purple" p="4" borderRadius="md">
+      <Box bg="purple" p={4} borderRadius="md">
         <Typography color="white">Purple</Typography>
       </Box>
     </div>
@@ -61,16 +61,16 @@ export const Backgrounds: Story = {
 export const Spacing: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <Box bg="gray" p="2" borderRadius="md">
+      <Box bg="gray" p={2} borderRadius="md">
         <Typography>Padding 2</Typography>
       </Box>
-      <Box bg="gray" p="4" borderRadius="md">
+      <Box bg="gray" p={4} borderRadius="md">
         <Typography>Padding 4</Typography>
       </Box>
-      <Box bg="gray" p="6" borderRadius="md">
+      <Box bg="gray" p={6} borderRadius="md">
         <Typography>Padding 6</Typography>
       </Box>
-      <Box bg="gray" p="8" borderRadius="md">
+      <Box bg="gray" p={8} borderRadius="md">
         <Typography>Padding 8</Typography>
       </Box>
     </div>
@@ -79,14 +79,14 @@ export const Spacing: Story = {
 
 export const FlexLayout: Story = {
   render: () => (
-    <Box display="flex" gap="4" bg="dark" p="4" borderRadius="md">
-      <Box bg="blue" p="4" borderRadius="base" flex="1">
+    <Box display="flex" gap={4} bg="dark" p={4} borderRadius="md">
+      <Box bg="blue" p={4} borderRadius="base" flex="1">
         <Typography color="white">Flex 1</Typography>
       </Box>
-      <Box bg="purple" p="4" borderRadius="base" flex="1">
+      <Box bg="purple" p={4} borderRadius="base" flex="1">
         <Typography color="white">Flex 1</Typography>
       </Box>
-      <Box bg="gray" p="4" borderRadius="base" flex="2">
+      <Box bg="gray" p={4} borderRadius="base" flex="2">
         <Typography color="white">Flex 2</Typography>
       </Box>
     </Box>
@@ -98,18 +98,18 @@ export const GridLayout: Story = {
     <Box
       display="grid"
       gridTemplateColumns="repeat(3, 1fr)"
-      gap="4"
+      gap={4}
       bg="dark"
-      p="4"
+      p={4}
       borderRadius="md"
     >
-      <Box bg="blue" p="4" borderRadius="base">
+      <Box bg="blue" p={4} borderRadius="base">
         <Typography color="white">Grid 1</Typography>
       </Box>
-      <Box bg="purple" p="4" borderRadius="base">
+      <Box bg="purple" p={4} borderRadius="base">
         <Typography color="white">Grid 2</Typography>
       </Box>
-      <Box bg="gray" p="4" borderRadius="base">
+      <Box bg="gray" p={4} borderRadius="base">
         <Typography color="white">Grid 3</Typography>
       </Box>
     </Box>

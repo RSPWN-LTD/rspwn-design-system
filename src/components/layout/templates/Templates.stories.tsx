@@ -65,13 +65,13 @@ export const LandingPage: StoryObj = {
     <LandingPageTemplate>
       <LandingPageTemplate.Hero>
         <Container size="lg" centerContent>
-          <Typography variant="h1" fontSize="4xl" marginBottom="6" textAlign="center">
+          <Typography variant="h1" fontSize="4xl" marginBottom={6} textAlign="center">
             Welcome to RSPWN Gaming Platform
           </Typography>
-          <Typography variant="body1" fontSize="lg" color="muted" marginBottom="8" textAlign="center" maxWidth="600px">
+          <Typography variant="body1" fontSize="lg" color="muted" marginBottom={8} textAlign="center" maxWidth="600px">
             The ultimate gaming platform for competitive players. Join millions of gamers worldwide.
           </Typography>
-          <Flex gap="4" justifyContent="center">
+          <Flex gap={4} justifyContent="center">
             <Button size="lg" variant="primary">Get Started</Button>
             <Button size="lg" variant="outline">Learn More</Button>
           </Flex>
@@ -80,23 +80,23 @@ export const LandingPage: StoryObj = {
 
       <LandingPageTemplate.Features>
         <Container size="lg">
-          <Typography variant="h2" textAlign="center" marginBottom="12">
+          <Typography variant="h2" textAlign="center" marginBottom={12}>
             Powerful Features
           </Typography>
-          <Grid columns={{ xs: 1, md: 3 }} gap="8">
-            <Card padding="6" textAlign="center">
-              <Box width="60px" height="60px" background="innovation.primaryBlue" borderRadius="full" marginX="auto" marginBottom="4" />
-              <Typography variant="h3" marginBottom="3">Real-time Analytics</Typography>
+          <Grid columns={{ xs: 1, md: 3 }} gap={8}>
+            <Card padding={6} textAlign="center">
+              <Box width="60px" height="60px" background="innovation.primaryBlue" borderRadius="full" marginX={"auto"} marginBottom={4} />
+              <Typography variant="h3" marginBottom={3}>Real-time Analytics</Typography>
               <Typography color="muted">Track your gaming performance with detailed analytics and insights.</Typography>
             </Card>
-            <Card padding="6" textAlign="center">
-              <Box width="60px" height="60px" background="semantic.success" borderRadius="full" marginX="auto" marginBottom="4" />
-              <Typography variant="h3" marginBottom="3">Tournament Mode</Typography>
+            <Card padding={6} textAlign="center">
+              <Box width="60px" height="60px" background="semantic.success" borderRadius="full" marginX={"auto"} marginBottom={4} />
+              <Typography variant="h3" marginBottom={3}>Tournament Mode</Typography>
               <Typography color="muted">Compete in tournaments with players from around the world.</Typography>
             </Card>
-            <Card padding="6" textAlign="center">
-              <Box width="60px" height="60px" background="semantic.warning" borderRadius="full" marginX="auto" marginBottom="4" />
-              <Typography variant="h3" marginBottom="3">Team Management</Typography>
+            <Card padding={6} textAlign="center">
+              <Box width="60px" height="60px" background="semantic.warning" borderRadius="full" marginX={"auto"} marginBottom={4} />
+              <Typography variant="h3" marginBottom={3}>Team Management</Typography>
               <Typography color="muted">Create and manage your gaming team with advanced tools.</Typography>
             </Card>
           </Grid>
@@ -105,15 +105,15 @@ export const LandingPage: StoryObj = {
 
       <LandingPageTemplate.Testimonials>
         <Container size="lg">
-          <Typography variant="h2" textAlign="center" marginBottom="12">
+          <Typography variant="h2" textAlign="center" marginBottom={12}>
             What Gamers Say
           </Typography>
-          <Grid columns={{ xs: 1, md: 2 }} gap="8">
-            <Card padding="6">
-              <Typography variant="body1" marginBottom="4">
+          <Grid columns={{ xs: 1, md: 2 }} gap={8}>
+            <Card padding={6}>
+              <Typography variant="body1" marginBottom={4}>
                 "RSPWN has completely transformed my gaming experience. The analytics help me improve my gameplay significantly."
               </Typography>
-              <Flex gap="3" alignItems="center">
+              <Flex gap={3} alignItems="center">
                 <Box width="40px" height="40px" background="gray.base" borderRadius="full" />
                 <Box>
                   <Typography fontWeight="medium">Alex Chen</Typography>
@@ -121,11 +121,11 @@ export const LandingPage: StoryObj = {
                 </Box>
               </Flex>
             </Card>
-            <Card padding="6">
-              <Typography variant="body1" marginBottom="4">
+            <Card padding={6}>
+              <Typography variant="body1" marginBottom={4}>
                 "The tournament features are incredible. I've won three competitions already using this platform."
               </Typography>
-              <Flex gap="3" alignItems="center">
+              <Flex gap={3} alignItems="center">
                 <Box width="40px" height="40px" background="gray.base" borderRadius="full" />
                 <Box>
                   <Typography fontWeight="medium">Sarah Johnson</Typography>
@@ -139,10 +139,10 @@ export const LandingPage: StoryObj = {
 
       <LandingPageTemplate.CTA>
         <Container size="lg" centerContent>
-          <Typography variant="h2" marginBottom="4" textAlign="center" color="white">
+          <Typography variant="h2" marginBottom={4} textAlign="center" color="white">
             Ready to Level Up?
           </Typography>
-          <Typography variant="body1" marginBottom="6" textAlign="center" color="white" opacity="0.9">
+          <Typography variant="body1" marginBottom={6} textAlign="center" color="white" opacity="0.9">
             Join thousands of gamers who have improved their skills with RSPWN.
           </Typography>
           <Button size="lg" variant="secondary">Start Your Journey</Button>
@@ -151,33 +151,33 @@ export const LandingPage: StoryObj = {
 
       <LandingPageTemplate.Footer>
         <Container size="lg">
-          <Grid columns={{ xs: 1, md: 4 }} gap="8" marginBottom="8">
+          <Grid columns={{ xs: 1, md: 4 }} gap={8} marginBottom={8}>
             <Box>
-              <Typography variant="h5" color="white" marginBottom="4">RSPWN</Typography>
+              <Typography variant="h5" color="white" marginBottom={4}>RSPWN</Typography>
               <Typography variant="body2" color="gray.light">
                 The ultimate gaming platform for competitive players worldwide.
               </Typography>
             </Box>
             <Box>
-              <Typography variant="h6" color="white" marginBottom="3">Product</Typography>
-              <Typography variant="body2" color="gray.light" marginBottom="2">Features</Typography>
-              <Typography variant="body2" color="gray.light" marginBottom="2">Pricing</Typography>
+              <Typography variant="h6" color="white" marginBottom={3}>Product</Typography>
+              <Typography variant="body2" color="gray.light" marginBottom={2}>Features</Typography>
+              <Typography variant="body2" color="gray.light" marginBottom={2}>Pricing</Typography>
               <Typography variant="body2" color="gray.light">Support</Typography>
             </Box>
             <Box>
-              <Typography variant="h6" color="white" marginBottom="3">Company</Typography>
-              <Typography variant="body2" color="gray.light" marginBottom="2">About</Typography>
-              <Typography variant="body2" color="gray.light" marginBottom="2">Blog</Typography>
+              <Typography variant="h6" color="white" marginBottom={3}>Company</Typography>
+              <Typography variant="body2" color="gray.light" marginBottom={2}>About</Typography>
+              <Typography variant="body2" color="gray.light" marginBottom={2}>Blog</Typography>
               <Typography variant="body2" color="gray.light">Careers</Typography>
             </Box>
             <Box>
-              <Typography variant="h6" color="white" marginBottom="3">Connect</Typography>
-              <Typography variant="body2" color="gray.light" marginBottom="2">Twitter</Typography>
-              <Typography variant="body2" color="gray.light" marginBottom="2">Discord</Typography>
+              <Typography variant="h6" color="white" marginBottom={3}>Connect</Typography>
+              <Typography variant="body2" color="gray.light" marginBottom={2}>Twitter</Typography>
+              <Typography variant="body2" color="gray.light" marginBottom={2}>Discord</Typography>
               <Typography variant="body2" color="gray.light">GitHub</Typography>
             </Box>
           </Grid>
-          <Box borderTop="1px solid" borderColor="gray.border" paddingTop="6">
+          <Box borderTop="1px solid" borderColor="gray.border" paddingTop={6}>
             <Typography variant="body2" color="gray.light" textAlign="center">
               © 2024 RSPWN. All rights reserved.
             </Typography>
@@ -195,7 +195,7 @@ export const Dashboard: StoryObj = {
       <DashboardTemplate.Header background="dark">
         <Flex justifyContent="between" alignItems="center" width="100%">
           <Typography variant="h5" color="white">RSPWN Dashboard</Typography>
-          <Flex gap="4" alignItems="center">
+          <Flex gap={4} alignItems="center">
             <Badge variant="success">Online</Badge>
             <Box width="32px" height="32px" background="innovation.primaryBlue" borderRadius="full" />
           </Flex>
@@ -203,9 +203,9 @@ export const Dashboard: StoryObj = {
       </DashboardTemplate.Header>
 
       <DashboardTemplate.Sidebar width="250px">
-        <Box padding="6">
-          <Typography variant="h6" marginBottom="6">Navigation</Typography>
-          <Box display="flex" flexDirection="column" gap="2">
+        <Box padding={6}>
+          <Typography variant="h6" marginBottom={6}>Navigation</Typography>
+          <Box display="flex" flexDirection="column" gap={2}>
             <Button variant="ghost" width="100%" justifyContent="flex-start">
               📊 Dashboard
             </Button>
@@ -229,31 +229,31 @@ export const Dashboard: StoryObj = {
       </DashboardTemplate.Sidebar>
 
       <DashboardTemplate.Main>
-        <Typography variant="h4" marginBottom="6">Welcome back, Player!</Typography>
+        <Typography variant="h4" marginBottom={6}>Welcome back, Player!</Typography>
         
-        <Grid columns={{ xs: 1, md: 3 }} gap="6" marginBottom="8">
-          <Card padding="6">
-            <Typography variant="h6" marginBottom="2">Total Games</Typography>
+        <Grid columns={{ xs: 1, md: 3 }} gap={6} marginBottom={8}>
+          <Card padding={6}>
+            <Typography variant="h6" marginBottom={2}>Total Games</Typography>
             <Typography variant="h2" color="innovation.primaryBlue">1,247</Typography>
             <Typography variant="body2" color="semantic.success">+12% this week</Typography>
           </Card>
-          <Card padding="6">
-            <Typography variant="h6" marginBottom="2">Win Rate</Typography>
+          <Card padding={6}>
+            <Typography variant="h6" marginBottom={2}>Win Rate</Typography>
             <Typography variant="h2" color="semantic.success">73.5%</Typography>
             <Typography variant="body2" color="semantic.success">+2.3% this week</Typography>
           </Card>
-          <Card padding="6">
-            <Typography variant="h6" marginBottom="2">Ranking</Typography>
+          <Card padding={6}>
+            <Typography variant="h6" marginBottom={2}>Ranking</Typography>
             <Typography variant="h2" color="semantic.warning">#157</Typography>
             <Typography variant="body2" color="semantic.success">+5 positions</Typography>
           </Card>
         </Grid>
 
-        <Card padding="6">
-          <Typography variant="h5" marginBottom="4">Recent Activity</Typography>
-          <Box display="flex" flexDirection="column" gap="4">
+        <Card padding={6}>
+          <Typography variant="h5" marginBottom={4}>Recent Activity</Typography>
+          <Box display="flex" flexDirection="column" gap={4}>
             {[1, 2, 3].map((i) => (
-              <Flex key={i} gap="4" alignItems="center" padding="3" background="gray.subtle" borderRadius="md">
+              <Flex key={i} gap={4} alignItems="center" padding={3} background="gray.subtle" borderRadius="md">
                 <Box width="32px" height="32px" background="innovation.primaryBlue" borderRadius="full" />
                 <Box flex="1">
                   <Typography variant="body2">Victory in Tournament Match #{i}</Typography>
@@ -280,10 +280,10 @@ export const Article: StoryObj = {
   render: () => (
     <ArticleTemplate>
       <ArticleTemplate.Header>
-        <Typography variant="h1" marginBottom="4">
+        <Typography variant="h1" marginBottom={4}>
           Getting Started with RSPWN Gaming Platform
         </Typography>
-        <Flex gap="4" justifyContent="center" alignItems="center">
+        <Flex gap={4} justifyContent="center" alignItems="center">
           <Typography variant="body2" color="muted">By Alex Chen</Typography>
           <Typography variant="body2" color="muted">•</Typography>
           <Typography variant="body2" color="muted">December 15, 2024</Typography>
@@ -293,49 +293,49 @@ export const Article: StoryObj = {
       </ArticleTemplate.Header>
 
       <ArticleTemplate.Content>
-        <Typography variant="body1" marginBottom="6">
+        <Typography variant="body1" marginBottom={6}>
           Welcome to the ultimate guide for getting started with the RSPWN Gaming Platform. 
           Whether you're a casual gamer or aspiring professional, this comprehensive guide will 
           help you make the most of our platform's powerful features.
         </Typography>
 
-        <Typography variant="h2" marginBottom="4">
+        <Typography variant="h2" marginBottom={4}>
           Setting Up Your Profile
         </Typography>
 
-        <Typography variant="body1" marginBottom="4">
+        <Typography variant="body1" marginBottom={4}>
           The first step to success on RSPWN is creating a comprehensive profile. Here's what you need to know:
         </Typography>
 
-        <Box as="ul" marginBottom="6" paddingLeft="6">
-          <Box as="li" marginBottom="2">
+        <Box as="ul" marginBottom={6} paddingLeft={6}>
+          <Box as="li" marginBottom={2}>
             <Typography variant="body1">Choose a unique username that represents your gaming identity</Typography>
           </Box>
-          <Box as="li" marginBottom="2">
+          <Box as="li" marginBottom={2}>
             <Typography variant="body1">Upload a profile picture that stands out in tournaments</Typography>
           </Box>
-          <Box as="li" marginBottom="2">
+          <Box as="li" marginBottom={2}>
             <Typography variant="body1">Connect your gaming accounts for comprehensive statistics</Typography>
           </Box>
         </Box>
 
-        <Box as="blockquote" padding="4" background="gray.subtle" borderLeft="4px solid" borderColor="innovation.primaryBlue" marginBottom="6">
+        <Box as="blockquote" padding={4} background="gray.subtle" borderLeft="4px solid" borderColor="innovation.primaryBlue" marginBottom={6}>
           <Typography variant="body1" fontStyle="italic">
             "A well-optimized profile is the foundation of success on any gaming platform. 
             Take time to set it up properly from the start." - Pro Gamer Sarah Johnson
           </Typography>
         </Box>
 
-        <Typography variant="h3" marginBottom="4">
+        <Typography variant="h3" marginBottom={4}>
           Understanding the Dashboard
         </Typography>
 
-        <Typography variant="body1" marginBottom="6">
+        <Typography variant="body1" marginBottom={6}>
           Your dashboard is mission control for all gaming activities. From here, you can track performance, 
           join tournaments, manage teams, and analyze your gameplay patterns.
         </Typography>
 
-        <Card padding="4" background="dark" color="white" marginBottom="6">
+        <Card padding={4} background="dark" color="white" marginBottom={6}>
           <Typography variant="body2" fontFamily="monospace">
             # Quick Dashboard Navigation{'\n'}
             • Games → View match history and statistics{'\n'}
@@ -345,20 +345,20 @@ export const Article: StoryObj = {
           </Typography>
         </Card>
 
-        <Typography variant="h2" marginBottom="4">
+        <Typography variant="h2" marginBottom={4}>
           Your First Tournament
         </Typography>
 
-        <Typography variant="body1" marginBottom="6">
+        <Typography variant="body1" marginBottom={6}>
           Participating in tournaments is where RSPWN truly shines. Our matchmaking system ensures 
           fair competition while providing opportunities for skill development and recognition.
         </Typography>
       </ArticleTemplate.Content>
 
       <ArticleTemplate.Sidebar>
-        <Card padding="4" marginBottom="6">
-          <Typography variant="h6" marginBottom="4">Table of Contents</Typography>
-          <Box display="flex" flexDirection="column" gap="2">
+        <Card padding={4} marginBottom={6}>
+          <Typography variant="h6" marginBottom={4}>Table of Contents</Typography>
+          <Box display="flex" flexDirection="column" gap={2}>
             <Typography variant="body2" color="innovation.primaryBlue">Setting Up Your Profile</Typography>
             <Typography variant="body2" color="muted">Understanding the Dashboard</Typography>
             <Typography variant="body2" color="muted">Your First Tournament</Typography>
@@ -367,23 +367,23 @@ export const Article: StoryObj = {
           </Box>
         </Card>
 
-        <Card padding="4" marginBottom="6">
-          <Typography variant="h6" marginBottom="4">Related Articles</Typography>
-          <Box display="flex" flexDirection="column" gap="3">
+        <Card padding={4} marginBottom={6}>
+          <Typography variant="h6" marginBottom={4}>Related Articles</Typography>
+          <Box display="flex" flexDirection="column" gap={3}>
             <Box>
-              <Typography variant="body2" fontWeight="medium" marginBottom="1">
+              <Typography variant="body2" fontWeight="medium" marginBottom={1}>
                 Advanced Tournament Strategies
               </Typography>
               <Typography variant="caption" color="muted">Pro tips for competitive play</Typography>
             </Box>
             <Box>
-              <Typography variant="body2" fontWeight="medium" marginBottom="1">
+              <Typography variant="body2" fontWeight="medium" marginBottom={1}>
                 Team Building Guide
               </Typography>
               <Typography variant="caption" color="muted">Create winning team dynamics</Typography>
             </Box>
             <Box>
-              <Typography variant="body2" fontWeight="medium" marginBottom="1">
+              <Typography variant="body2" fontWeight="medium" marginBottom={1}>
                 Performance Analytics Deep Dive
               </Typography>
               <Typography variant="caption" color="muted">Understanding your stats</Typography>
@@ -391,9 +391,9 @@ export const Article: StoryObj = {
           </Box>
         </Card>
 
-        <Card padding="4">
-          <Typography variant="h6" marginBottom="3">About the Author</Typography>
-          <Flex gap="3" alignItems="center" marginBottom="3">
+        <Card padding={4}>
+          <Typography variant="h6" marginBottom={3}>About the Author</Typography>
+          <Flex gap={3} alignItems="center" marginBottom={3}>
             <Box width="48px" height="48px" background="innovation.primaryBlue" borderRadius="full" />
             <Box>
               <Typography variant="body2" fontWeight="medium">Alex Chen</Typography>
@@ -412,7 +412,7 @@ export const Article: StoryObj = {
           <Typography variant="body2" color="muted">
             Published on December 15, 2024 • Last updated December 20, 2024
           </Typography>
-          <Flex gap="3">
+          <Flex gap={3}>
             <Button variant="ghost" size="sm">Share</Button>
             <Button variant="ghost" size="sm">Bookmark</Button>
           </Flex>
@@ -428,18 +428,18 @@ export const ProductGrid: StoryObj = {
     <ProductGridTemplate>
       <ProductGridTemplate.Header>
         <Typography variant="h4">Gaming Gear</Typography>
-        <Flex gap="3" alignItems="center">
+        <Flex gap={3} alignItems="center">
           <Typography variant="body2" color="muted">Showing 24 of 156 products</Typography>
           <Button variant="outline" size="sm">Sort by Price</Button>
         </Flex>
       </ProductGridTemplate.Header>
 
       <ProductGridTemplate.Filters>
-        <Typography variant="h6" marginBottom="4">Filters</Typography>
+        <Typography variant="h6" marginBottom={4}>Filters</Typography>
         
-        <Box marginBottom="6">
-          <Typography variant="body2" fontWeight="medium" marginBottom="3">Category</Typography>
-          <Box display="flex" flexDirection="column" gap="2">
+        <Box marginBottom={6}>
+          <Typography variant="body2" fontWeight="medium" marginBottom={3}>Category</Typography>
+          <Box display="flex" flexDirection="column" gap={2}>
             <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <input type="checkbox" defaultChecked />
               <Typography variant="body2">Gaming Headsets</Typography>
@@ -459,9 +459,9 @@ export const ProductGrid: StoryObj = {
           </Box>
         </Box>
 
-        <Box marginBottom="6">
-          <Typography variant="body2" fontWeight="medium" marginBottom="3">Price Range</Typography>
-          <Box display="flex" gap="2" marginBottom="2">
+        <Box marginBottom={6}>
+          <Typography variant="body2" fontWeight="medium" marginBottom={3}>Price Range</Typography>
+          <Box display="flex" gap={2} marginBottom={2}>
             <Input placeholder="Min" size="sm" />
             <Input placeholder="Max" size="sm" />
           </Box>
@@ -469,8 +469,8 @@ export const ProductGrid: StoryObj = {
         </Box>
 
         <Box>
-          <Typography variant="body2" fontWeight="medium" marginBottom="3">Brand</Typography>
-          <Box display="flex" flexDirection="column" gap="2">
+          <Typography variant="body2" fontWeight="medium" marginBottom={3}>Brand</Typography>
+          <Box display="flex" flexDirection="column" gap={2}>
             <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <input type="checkbox" />
               <Typography variant="body2">RSPWN Pro</Typography>
@@ -488,20 +488,20 @@ export const ProductGrid: StoryObj = {
       </ProductGridTemplate.Filters>
 
       <ProductGridTemplate.Results>
-        <Grid columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} gap="6">
+        <Grid columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} gap={6}>
           {Array.from({ length: 8 }, (_, i) => (
-            <Card key={i} padding="0" overflow="hidden">
-              <Box height="200px" background="gray.subtle" marginBottom="4" />
-              <Box padding="4">
-                <Typography variant="body1" fontWeight="medium" marginBottom="2">
+            <Card key={i} padding={0} overflow="hidden">
+              <Box height="200px" background="gray.subtle" marginBottom={4} />
+              <Box padding={4}>
+                <Typography variant="body1" fontWeight="medium" marginBottom={2}>
                   RSPWN Pro Gaming Headset {i + 1}
                 </Typography>
-                <Typography variant="body2" color="muted" marginBottom="3">
+                <Typography variant="body2" color="muted" marginBottom={3}>
                   Premium wireless gaming headset with 7.1 surround sound
                 </Typography>
-                <Flex justifyContent="between" alignItems="center" marginBottom="3">
+                <Flex justifyContent="between" alignItems="center" marginBottom={3}>
                   <Typography variant="h6" color="innovation.primaryBlue">$199.99</Typography>
-                  <Box display="flex" alignItems="center" gap="1">
+                  <Box display="flex" alignItems="center" gap={1}>
                     <Typography variant="body2">4.8</Typography>
                     <Typography variant="body2" color="semantic.warning">★</Typography>
                   </Box>
@@ -527,7 +527,7 @@ export const Checkout: StoryObj = {
   render: () => (
     <CheckoutTemplate>
       <CheckoutTemplate.Header>
-        <Typography variant="h3" marginBottom="2">Checkout</Typography>
+        <Typography variant="h3" marginBottom={2}>Checkout</Typography>
         <Typography variant="body1" color="muted">
           Complete your order in just a few simple steps
         </Typography>
@@ -535,7 +535,7 @@ export const Checkout: StoryObj = {
 
       <CheckoutTemplate.Form>
         <CheckoutTemplate.Step number={1} title="Shipping Information" active>
-          <Grid columns={{ xs: 1, md: 2 }} gap="4">
+          <Grid columns={{ xs: 1, md: 2 }} gap={4}>
             <Input label="First Name" placeholder="Enter first name" />
             <Input label="Last Name" placeholder="Enter last name" />
             <Input label="Email" placeholder="Enter email address" style={{ gridColumn: '1 / -1' }} />
@@ -546,23 +546,23 @@ export const Checkout: StoryObj = {
         </CheckoutTemplate.Step>
 
         <CheckoutTemplate.Step number={2} title="Payment Method">
-          <Box marginBottom="4">
-            <Typography variant="body2" fontWeight="medium" marginBottom="3">Select Payment Method</Typography>
-            <Box display="flex" flexDirection="column" gap="3">
-              <Card padding="3" border="2px solid" borderColor="innovation.primaryBlue">
-                <Flex alignItems="center" gap="3">
+          <Box marginBottom={4}>
+            <Typography variant="body2" fontWeight="medium" marginBottom={3}>Select Payment Method</Typography>
+            <Box display="flex" flexDirection="column" gap={3}>
+              <Card padding={3} border="2px solid" borderColor="innovation.primaryBlue">
+                <Flex alignItems="center" gap={3}>
                   <input type="radio" name="payment" defaultChecked />
                   <Typography variant="body2">Credit Card</Typography>
                 </Flex>
               </Card>
-              <Card padding="3" border="1px solid" borderColor="gray.border">
-                <Flex alignItems="center" gap="3">
+              <Card padding={3} border="1px solid" borderColor="gray.border">
+                <Flex alignItems="center" gap={3}>
                   <input type="radio" name="payment" />
                   <Typography variant="body2">PayPal</Typography>
                 </Flex>
               </Card>
-              <Card padding="3" border="1px solid" borderColor="gray.border">
-                <Flex alignItems="center" gap="3">
+              <Card padding={3} border="1px solid" borderColor="gray.border">
+                <Flex alignItems="center" gap={3}>
                   <input type="radio" name="payment" />
                   <Typography variant="body2">Apple Pay</Typography>
                 </Flex>
@@ -570,7 +570,7 @@ export const Checkout: StoryObj = {
             </Box>
           </Box>
 
-          <Grid columns={{ xs: 1, md: 2 }} gap="4">
+          <Grid columns={{ xs: 1, md: 2 }} gap={4}>
             <Input label="Card Number" placeholder="1234 5678 9012 3456" style={{ gridColumn: '1 / -1' }} />
             <Input label="Expiry Date" placeholder="MM/YY" />
             <Input label="CVV" placeholder="123" />
@@ -585,10 +585,10 @@ export const Checkout: StoryObj = {
       </CheckoutTemplate.Form>
 
       <CheckoutTemplate.Summary>
-        <Typography variant="h6" marginBottom="4">Order Summary</Typography>
+        <Typography variant="h6" marginBottom={4}>Order Summary</Typography>
         
         <div className="summary-section">
-          <Typography variant="body2" fontWeight="medium" marginBottom="3">Items (2)</Typography>
+          <Typography variant="body2" fontWeight="medium" marginBottom={3}>Items (2)</Typography>
           <div className="summary-item">
             <Typography variant="body2">RSPWN Pro Gaming Headset</Typography>
             <Typography variant="body2">$199.99</Typography>
@@ -618,7 +618,7 @@ export const Checkout: StoryObj = {
           </div>
         </div>
 
-        <Button width="100%" size="lg" marginTop="4">
+        <Button width="100%" size="lg" marginTop={4}>
           Complete Order
         </Button>
       </CheckoutTemplate.Summary>
