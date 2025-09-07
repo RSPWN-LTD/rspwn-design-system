@@ -13,6 +13,7 @@ type ResponsiveValue<T> = T | {
 export interface GridProps {
   // Grid Layout
   columns?: string | number
+  templateColumns?: string | ResponsiveValue<string>  // Alias for grid-template-columns
   rows?: string | number
   gap?: keyof typeof import('../../tokens/spacing').spacing
   columnGap?: keyof typeof import('../../tokens/spacing').spacing
@@ -185,6 +186,36 @@ const getResponsiveAreas = (areas: string | ResponsiveValue<string>) => {
   `
 }
 
+const getResponsiveTemplateColumns = (templateColumns: string | ResponsiveValue<string>) => {
+  if (typeof templateColumns === 'string') {
+    return css`grid-template-columns: ${templateColumns};`
+  }
+  
+  return css`
+    ${templateColumns.xs && css`grid-template-columns: ${templateColumns.xs};`}
+    ${templateColumns.sm && css`
+      @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+        grid-template-columns: ${templateColumns.sm!};
+      }
+    `}
+    ${templateColumns.md && css`
+      @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+        grid-template-columns: ${templateColumns.md!};
+      }
+    `}
+    ${templateColumns.lg && css`
+      @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+        grid-template-columns: ${templateColumns.lg!};
+      }
+    `}
+    ${templateColumns.xl && css`
+      @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
+        grid-template-columns: ${templateColumns.xl!};
+      }
+    `}
+  `
+}
+
 const getNamedGridLines = (lines: string[]) => {
   return lines.map((line) => `[${line}] 1fr`).join(' ')
 }
@@ -205,7 +236,7 @@ const getResponsiveProps = (responsive: GridProps['responsive'], breakpoint: key
 
 const StyledGrid = styled.div.withConfig({
   shouldForwardProp: createShouldForwardProp([
-    'columns', 'rows', 'gap', 'columnGap', 'rowGap', 'areas', 'columnLines', 'rowLines',
+    'columns', 'templateColumns', 'rows', 'gap', 'columnGap', 'rowGap', 'areas', 'columnLines', 'rowLines',
     'pattern', 'masonry', 'masonryRows', 'xs', 'sm', 'md', 'lg', 'xl', 'responsive',
     'justifyItems', 'alignItems', 'justifyContent', 'alignContent', 'autoFit', 'autoFill', 'minColumnWidth'
   ])
@@ -215,6 +246,8 @@ const StyledGrid = styled.div.withConfig({
   ${({ columns }) => columns && css`
     grid-template-columns: ${getGridColumns(columns)};
   `}
+  
+  ${({ templateColumns }) => templateColumns && getResponsiveTemplateColumns(templateColumns)}
   
   ${({ rows }) => rows && css`
     grid-template-rows: ${typeof rows === 'number' ? `repeat(${rows}, 1fr)` : rows};

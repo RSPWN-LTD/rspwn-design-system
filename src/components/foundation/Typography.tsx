@@ -2,8 +2,10 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { propFilters } from '../../utils/propFilters'
 
+type VariantType = 'brand' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'caption' | 'overline'
+
 export interface TypographyProps {
-  variant?: 'brand' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'caption' | 'overline'
+  variant?: VariantType | Partial<Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', VariantType>>
   color?: 'primary' | 'secondary' | 'muted' | 'white' | 'blue' | 'purple'
   align?: 'left' | 'center' | 'right'
   children: React.ReactNode
@@ -19,8 +21,19 @@ export interface TypographyProps {
   my?: keyof typeof import('../../tokens/spacing').spacing
 }
 
+// Helper function to resolve responsive variant to string variant
+const resolveVariant = (variant: TypographyProps['variant']): VariantType => {
+  if (!variant) return 'body1'
+  if (typeof variant === 'string') return variant
+  
+  // For responsive object, use the first available value as fallback
+  // In a real responsive implementation, this would check current breakpoint
+  return variant.xl || variant.lg || variant.md || variant.sm || variant.xs || 'body1'
+}
+
 const getVariantStyles = (variant: TypographyProps['variant']) => {
-  switch (variant) {
+  const resolvedVariant = resolveVariant(variant)
+  switch (resolvedVariant) {
     case 'brand':
       return css`
         font-family: ${({ theme }) => theme.typography.fonts.brand};
@@ -29,6 +42,7 @@ const getVariantStyles = (variant: TypographyProps['variant']) => {
         line-height: ${({ theme }) => theme.typography.lineHeights.tight};
         letter-spacing: ${({ theme }) => theme.typography.letterSpacing.tight};
         text-transform: uppercase;
+        margin-bottom: ${({ theme }) => theme.spacing[4]};
       `
     case 'h1':
       return css`
@@ -36,6 +50,7 @@ const getVariantStyles = (variant: TypographyProps['variant']) => {
         font-size: ${({ theme }) => theme.typography.fontSizes['3xl']};
         font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
         line-height: ${({ theme }) => theme.typography.lineHeights.tight};
+        margin-bottom: ${({ theme }) => theme.spacing[6]};
       `
     case 'h2':
       return css`
@@ -43,6 +58,7 @@ const getVariantStyles = (variant: TypographyProps['variant']) => {
         font-size: ${({ theme }) => theme.typography.fontSizes['2xl']};
         font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
         line-height: ${({ theme }) => theme.typography.lineHeights.tight};
+        margin-bottom: ${({ theme }) => theme.spacing[4]};
       `
     case 'h3':
       return css`
@@ -50,6 +66,7 @@ const getVariantStyles = (variant: TypographyProps['variant']) => {
         font-size: ${({ theme }) => theme.typography.fontSizes.xl};
         font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
         line-height: ${({ theme }) => theme.typography.lineHeights.snug};
+        margin-bottom: ${({ theme }) => theme.spacing[4]};
       `
     case 'h4':
       return css`
@@ -57,6 +74,7 @@ const getVariantStyles = (variant: TypographyProps['variant']) => {
         font-size: ${({ theme }) => theme.typography.fontSizes.lg};
         font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
         line-height: ${({ theme }) => theme.typography.lineHeights.snug};
+        margin-bottom: ${({ theme }) => theme.spacing[3]};
       `
     case 'h5':
       return css`
@@ -64,6 +82,7 @@ const getVariantStyles = (variant: TypographyProps['variant']) => {
         font-size: ${({ theme }) => theme.typography.fontSizes.base};
         font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
         line-height: ${({ theme }) => theme.typography.lineHeights.normal};
+        margin-bottom: ${({ theme }) => theme.spacing[2]};
       `
     case 'h6':
       return css`
@@ -73,6 +92,7 @@ const getVariantStyles = (variant: TypographyProps['variant']) => {
         line-height: ${({ theme }) => theme.typography.lineHeights.normal};
         text-transform: uppercase;
         letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wide};
+        margin-bottom: ${({ theme }) => theme.spacing[2]};
       `
     case 'body2':
       return css`
@@ -80,6 +100,7 @@ const getVariantStyles = (variant: TypographyProps['variant']) => {
         font-size: ${({ theme }) => theme.typography.fontSizes.sm};
         font-weight: ${({ theme }) => theme.typography.fontWeights.normal};
         line-height: ${({ theme }) => theme.typography.lineHeights.normal};
+        margin-bottom: ${({ theme }) => theme.spacing[3]};
       `
     case 'caption':
       return css`
@@ -87,6 +108,7 @@ const getVariantStyles = (variant: TypographyProps['variant']) => {
         font-size: ${({ theme }) => theme.typography.fontSizes.xs};
         font-weight: ${({ theme }) => theme.typography.fontWeights.normal};
         line-height: ${({ theme }) => theme.typography.lineHeights.normal};
+        margin-bottom: ${({ theme }) => theme.spacing[1]};
       `
     case 'overline':
       return css`
@@ -96,6 +118,7 @@ const getVariantStyles = (variant: TypographyProps['variant']) => {
         line-height: ${({ theme }) => theme.typography.lineHeights.normal};
         text-transform: uppercase;
         letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wider};
+        margin-bottom: ${({ theme }) => theme.spacing[1]};
       `
     default: // body1
       return css`
@@ -103,6 +126,7 @@ const getVariantStyles = (variant: TypographyProps['variant']) => {
         font-size: ${({ theme }) => theme.typography.fontSizes.base};
         font-weight: ${({ theme }) => theme.typography.fontWeights.normal};
         line-height: ${({ theme }) => theme.typography.lineHeights.normal};
+        margin-bottom: ${({ theme }) => theme.spacing[4]};
       `
   }
 }
@@ -127,7 +151,7 @@ const getColorStyles = (color: TypographyProps['color']) => {
 const StyledTypography = styled.p.withConfig({
   shouldForwardProp: propFilters.typography
 })<TypographyProps>`
-  margin: 0;
+  margin: 0 0 0 0; /* Reset top, right, left - bottom will be set by variant */
   ${({ variant }) => getVariantStyles(variant)}
   ${({ color }) => getColorStyles(color)}
   text-align: ${({ align }) => align || 'left'};
@@ -156,9 +180,10 @@ export const Typography: React.FC<TypographyProps> = ({
   my,
   ...props
 }) => {
-  const defaultElement = variant === 'brand' ? 'h1' : 
-                         variant.startsWith('h') ? variant as keyof JSX.IntrinsicElements :
-                         variant === 'caption' || variant === 'overline' ? 'span' : 'p'
+  const resolvedVariant = resolveVariant(variant)
+  const defaultElement = resolvedVariant === 'brand' ? 'h1' : 
+                         resolvedVariant.startsWith('h') ? resolvedVariant as keyof JSX.IntrinsicElements :
+                         resolvedVariant === 'caption' || resolvedVariant === 'overline' ? 'span' : 'p'
 
   return (
     <StyledTypography

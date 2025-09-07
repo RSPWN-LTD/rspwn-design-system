@@ -39,7 +39,9 @@ interface ImageState {
   isInView: boolean
 }
 
-const ImageContainer = styled.div<{
+const ImageContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['width', 'height', 'aspectRatio'].includes(prop)
+})<{
   width?: string | number
   height?: string | number
   aspectRatio?: string
