@@ -425,7 +425,7 @@ export const PopoverTrigger = forwardRef<HTMLElement, PopoverTriggerProps>(({
   }
 
   if (asChild && React.isValidElement(children)) {
-    return React.cloneElement(children, {
+    return React.cloneElement(children as React.ReactElement<any>, {
       ref: (node: HTMLElement | null) => {
         if (ref) {
           if (typeof ref === 'function') ref(node)
@@ -442,7 +442,7 @@ export const PopoverTrigger = forwardRef<HTMLElement, PopoverTriggerProps>(({
     })
   }
 
-  return React.cloneElement(children, {
+  return React.cloneElement(children as React.ReactElement<any>, {
     ref: (node: HTMLElement | null) => {
       if (ref) {
         if (typeof ref === 'function') ref(node)
