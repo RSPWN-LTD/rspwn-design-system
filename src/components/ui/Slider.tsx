@@ -2,7 +2,7 @@ import React, { forwardRef, useCallback, useEffect, useRef, useState } from 'rea
 import styled, { css } from 'styled-components'
 import { createShouldForwardProp } from '../../utils/propFilters'
 
-export interface SliderProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'onChange' | 'defaultValue'> {
+export interface SliderProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'onChange' | 'defaultValue' | 'value'> {
   variant?: 'single' | 'range'
   orientation?: 'horizontal' | 'vertical'
   size?: 'sm' | 'md' | 'lg'

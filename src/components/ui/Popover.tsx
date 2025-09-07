@@ -399,12 +399,11 @@ export const PopoverTrigger = forwardRef<HTMLElement, PopoverTriggerProps>(({
   asChild = false,
   onClick,
   onMouseEnter,
-  onMouseLeave,
-  ...props
+  onMouseLeave
 }, ref) => {
   const { isOpen, setIsOpen, triggerRef, trigger } = usePopoverContext()
 
-  const handleClick = (event: React.MouseEvent) => {
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     if (trigger === 'click') {
       setIsOpen(!isOpen)
     }
@@ -519,7 +518,7 @@ export const PopoverArrow = forwardRef<HTMLDivElement, PopoverArrowProps>(({
           if (typeof ref === 'function') ref(node)
           else ref.current = node
         }
-        arrowRef.current = node
+        if (arrowRef && 'current' in arrowRef) (arrowRef as any).current = node
       }}
       x={arrowPosition.x}
       y={arrowPosition.y}

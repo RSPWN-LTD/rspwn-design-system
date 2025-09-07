@@ -193,7 +193,7 @@ const getTabStyles = (
     enclosed: css`
       border-radius: ${({ theme }) => theme.radius.sm};
       ${isSelected && css`
-        background-color: ${({ theme }) => theme.colors.gray.base.primary};
+        background-color: ${({ theme }) => theme.colors.gray.base};
         box-shadow: ${({ theme }) => theme.shadows.sm};
       `}
     `,
@@ -337,18 +337,18 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(({
 
   // Register this tab with the context
   useEffect(() => {
-    setTabsData((prev: { value: string | number; disabled?: boolean }[]) => {
-      const exists = prev.some((tab: { value: string | number; disabled?: boolean }) => tab.value === value)
+    setTabsData(prev => {
+      const exists = prev.some(tab => tab.value === value)
       if (!exists) {
         return [...prev, { value, disabled: isDisabled }]
       }
-      return prev.map((tab: { value: string | number; disabled?: boolean }) => 
+      return prev.map(tab => 
         tab.value === value ? { ...tab, disabled: isDisabled } : tab
       )
     })
 
     return () => {
-      setTabsData((prev: { value: string | number; disabled?: boolean }[]) => prev.filter((tab: { value: string | number; disabled?: boolean }) => tab.value !== value))
+      setTabsData(prev => prev.filter(tab => tab.value !== value))
     }
   }, [value, isDisabled, setTabsData])
 
