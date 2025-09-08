@@ -1,5 +1,5 @@
 # RSPWN Design System - AI Component Documentation
-Generated on: 2025-09-07
+Generated on: 2025-09-08
 
 This file contains comprehensive information about all components in the RSPWN Design System.
 Use this as a reference when helping users implement components from @rspwn/design-system.
@@ -48,83 +48,8 @@ function App() {
 
 **Import:** `import { Box } from '@rspwn/design-system'`
 
-**Usage Examples:**
-
----
-
-#### Box
-
-**Import:** `import { Box } from '@rspwn/design-system'`
-
 **Props:**
-- `display`: 'block' | 'inline' | 'inline-block' | 'flex' | 'inline-flex' | 'grid' | 'inline-grid' | 'none'
-- `width`: string | number
-- `height`: string | number
-- `minWidth`: string | number
-- `minHeight`: string | number
-- `maxWidth`: string | number
-- `maxHeight`: string | number
-- `m`: SpacingKey
-- `mt`: SpacingKey
-- `mr`: SpacingKey
-- `mb`: SpacingKey
-- `ml`: SpacingKey
-- `mx`: SpacingKey
-- `my`: SpacingKey
-- `p`: SpacingKey
-- `pt`: SpacingKey
-- `pr`: SpacingKey
-- `pb`: SpacingKey
-- `pl`: SpacingKey
-- `px`: SpacingKey
-- `py`: SpacingKey
-- `marginInline`: SpacingKey
-- `marginBlock`: SpacingKey
-- `paddingInline`: SpacingKey
-- `paddingBlock`: SpacingKey
-- `marginInlineStart`: SpacingKey
-- `marginInlineEnd`: SpacingKey
-- `marginBlockStart`: SpacingKey
-- `marginBlockEnd`: SpacingKey
-- `paddingInlineStart`: SpacingKey
-- `paddingInlineEnd`: SpacingKey
-- `paddingBlockStart`: SpacingKey
-- `paddingBlockEnd`: SpacingKey
-- `marginNegative`: SpacingKey
-- `marginTopNegative`: SpacingKey
-- `marginBottomNegative`: SpacingKey
-- `marginLeftNegative`: SpacingKey
-- `marginRightNegative`: SpacingKey
-- `marginAuto`: boolean
-- `marginXAuto`: boolean
-- `marginYAuto`: boolean
-- `spaceX`: SpacingKey
-- `spaceY`: SpacingKey
-- `paddingSafeArea`: boolean
-- `paddingSafeAreaTop`: boolean
-- `paddingSafeAreaBottom`: boolean
-- `paddingSafeAreaLeft`: boolean
-- `paddingSafeAreaRight`: boolean
-- `bg`: 'black' | 'white' | 'dark' | 'gray' | 'light' | 'blue' | 'purple'
-- `border`: boolean
-- `borderRadius`: keyof typeof import('../../tokens/radius').radius
-- `position`: 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky'
-- `top`: string | number
-- `right`: string | number
-- `bottom`: string | number
-- `left`: string | number
-- `zIndex`: number
-- `flex`: string | number
-- `alignItems`: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline'
-- `justifyContent`: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly'
-- `flexDirection`: 'row' | 'row-reverse' | 'column' | 'column-reverse'
-- `flexWrap`: 'nowrap' | 'wrap' | 'wrap-reverse'
-- `gap`: keyof typeof import('../../tokens/spacing').spacing
-- `gridTemplateColumns`: string
-- `gridTemplateRows`: string
-- `gridGap`: keyof typeof import('../../tokens/spacing').spacing
-- `overflow`: 'visible' | 'hidden' | 'scroll' | 'auto'
-- `cursor`: 'pointer' | 'default' | 'text' | 'grab' | 'grabbing' | 'not-allowed'
+- `variant`: BoxVariant
 - `children`: React.ReactNode
 - `className`: string
 - `onClick`: () => void
@@ -135,10 +60,7 @@ function App() {
 *Default:*
 ```jsx
 <Box
-  children=<Typography>Box content</Typography>
-  p=4
-  bg='gray'
-  borderRadius='md'
+  children=<Typography>Default Box - Basic container with minimal styling</Typography>
 >
   Content
 </Box>
@@ -150,12 +72,22 @@ function App() {
 
 **Import:** `import { Container } from '@rspwn/design-system'`
 
+**Props:**
+- `variant`: ContainerVariant
+- `children`: React.ReactNode
+- `className`: string
+- `as`: keyof JSX.IntrinsicElements
+
 **Usage Examples:**
 
 *Default:*
 ```jsx
 <Container
-  size='xl'
+  children=(
+      <ContentBox>
+        Default Container - Standard 1280px max-width with responsive padding. Perfect for most content layouts and general use cases.
+      </ContentBox>
+    )
 >
   Content
 </Container>
@@ -228,31 +160,26 @@ function App() {
 **Import:** `import { Box } from '@rspwn/design-system'`
 
 **Props:**
-- `columns`: string | number
-- `rows`: string | number
-- `gap`: keyof typeof import('../../tokens/spacing').spacing
-- `columnGap`: keyof typeof import('../../tokens/spacing').spacing
-- `rowGap`: keyof typeof import('../../tokens/spacing').spacing
-- `areas`: string | ResponsiveValue<string>
-- `columnLines`: string[]
-- `rowLines`: string[]
-- `pattern`: 'sidebar' | 'holy-grail' | 'dashboard' | 'cards' | 'masonry'
-- `masonry`: boolean
-- `masonryRows`: number
-- `xs`: Partial<Pick<GridProps, 'columns' | 'rows' | 'gap' | 'areas'>>
-- `sm`: Partial<Pick<GridProps, 'columns' | 'rows' | 'gap' | 'areas'>>
-- `md`: Partial<Pick<GridProps, 'columns' | 'rows' | 'gap' | 'areas'>>
-- `lg`: Partial<Pick<GridProps, 'columns' | 'rows' | 'gap' | 'areas'>>
-- `xl`: Partial<Pick<GridProps, 'columns' | 'rows' | 'gap' | 'areas'>>
-- `responsive`: {
+- `variant`: GridVariant
+- `children`: React.ReactNode
+- `className`: string
+- `as`: keyof JSX.IntrinsicElements
 
 **Usage Examples:**
 
-*Basic:*
+*Default:*
 ```jsx
 <Box
-  columns=3
-  gap='md'
+  children=(
+      <>
+        <GridCard>Item 1</GridCard>
+        <GridCard>Item 2</GridCard>
+        <GridCard>Item 3</GridCard>
+        <GridCard>Item 4</GridCard>
+        <GridCard>Item 5</GridCard>
+        <GridCard>Item 6</GridCard>
+      </>
+    )
 >
   Content
 </Box>
@@ -264,13 +191,22 @@ function App() {
 
 **Import:** `import { Section } from '@rspwn/design-system'`
 
+**Props:**
+- `variant`: SectionVariant
+- `children`: React.ReactNode
+- `className`: string
+- `as`: 'section' | 'header' | 'main' | 'aside' | 'footer' | 'article'
+
 **Usage Examples:**
 
 *Default:*
 ```jsx
 <Section
-  variant='default'
-  container=true
+  children=(
+      <Typography color="white">
+        Default Section - Basic section with standard padding and built-in container. Perfect for general content areas.
+      </Typography>
+    )
 >
   Content
 </Section>
@@ -290,12 +226,27 @@ function App() {
 
 **Import:** `import { Stack } from '@rspwn/design-system'`
 
+**Props:**
+- `variant`: StackVariant
+- `children`: React.ReactNode
+- `className`: string
+- `as`: keyof JSX.IntrinsicElements
+
 **Usage Examples:**
 
-*Basic:*
+*Default:*
 ```jsx
 <Stack
-  spacing='4'
+  children=(
+      <>
+        <Box variant="card">
+          <Typography color="white">Default Stack - Standard spacing with responsive behavior</Typography>
+        </Box>
+        <Box variant="card">
+          <Typography color="white">Perfect for general content stacking with optimal visual hierarchy</Typography>
+        </Box>
+        <Box variant="card">
+          <Typography color="white">Vertical on mobile
 >
   Content
 </Stack>
@@ -308,39 +259,18 @@ function App() {
 **Import:** `import { Typography } from '@rspwn/design-system'`
 
 **Props:**
-- `variant`: 'brand' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'caption' | 'overline'
-- `color`: 'primary' | 'secondary' | 'muted' | 'white' | 'blue' | 'purple'
-- `align`: 'left' | 'center' | 'right'
+- `variant`: TypographyVariant
+- `color`: 'white' | 'muted' | 'blue'
 - `children`: React.ReactNode
 - `as`: keyof JSX.IntrinsicElements
 - `className`: string
-- `style`: React.CSSProperties
-- `mb`: keyof typeof import('../../tokens/spacing').spacing
-- `mt`: keyof typeof import('../../tokens/spacing').spacing
-- `mr`: keyof typeof import('../../tokens/spacing').spacing
-- `ml`: keyof typeof import('../../tokens/spacing').spacing
-- `mx`: keyof typeof import('../../tokens/spacing').spacing
-- `my`: keyof typeof import('../../tokens/spacing').spacing
 
 **Usage Examples:**
 
 *Default:*
 ```jsx
 <Typography
-  children='The quick brown fox jumps over the lazy dog'
-  variant='body1'
-  color='primary'
->
-  Content
-</Typography>
-```
-
-*Brand:*
-```jsx
-<Typography
-  children='RSPWN'
-  variant='brand'
-  color='white'
+  children='Default body text optimized for gaming platform readability with professional typography'
 >
   Content
 </Typography>
@@ -366,9 +296,492 @@ function App() {
 
 ---
 
-#### Container
+#### Typography
 
-**Import:** `import { Container } from '@rspwn/design-system'`
+**Import:** `import { Typography } from '@rspwn/design-system'`
+
+---
+
+### Sections Components
+
+#### BentoGrid
+
+**Import:** `import { BentoGrid } from '@rspwn/design-system'`
+
+**Props:**
+- `title`: string
+- `subtitle`: string
+- `items`: BentoGridItem[]
+- `variant`: 'default' | 'compact' | 'spacious'
+- `className`: string
+
+**Usage Examples:**
+
+*GamingPlatform:*
+```jsx
+<BentoGrid
+  title='Complete Gaming Platform'
+  subtitle='Everything you need to build
+  items=gamingFeatures
+  variant='default'
+>
+  Content
+</BentoGrid>
+```
+
+*ProductShowcase:*
+```jsx
+<BentoGrid
+  title='Platform Features'
+  subtitle='Discover the tools that make RSPWN the ultimate gaming platform'
+  items=productFeatures
+  variant='spacious'
+>
+  Content
+</BentoGrid>
+```
+
+*ServiceGrid:*
+```jsx
+<BentoGrid
+  title='Our Services'
+  subtitle='Professional development services for modern applications'
+  items=serviceShowcase
+  variant='compact'
+>
+  Content
+</BentoGrid>
+```
+
+*WithoutHeader:*
+```jsx
+<BentoGrid
+  items=[
+      {
+        id
+  title='Lightning Fast'
+  description='Ultra-low latency gaming experience'
+  icon='⚡'
+  size='medium' as const
+  color='primary' as const
+>
+  Content
+</BentoGrid>
+```
+
+*Interactive:*
+```jsx
+<BentoGrid
+  title='Interactive Features'
+  subtitle='Click on any feature to learn more'
+  items=[
+      {
+        id
+  title='Create Tournament'
+  description='Set up your next competitive event'
+  icon='🏆'
+  size='large' as const
+  color='primary' as const
+  onClick=() => alert('Opening tournament creation wizard...')
+  content=(
+          <div style={{ marginTop
+>
+  Content
+</BentoGrid>
+```
+
+*MinimalGrid:*
+```jsx
+<BentoGrid
+  items=[
+      {
+        id
+  title='Fast'
+  icon='⚡'
+  size='small' as const
+  color='primary' as const
+>
+  Content
+</BentoGrid>
+```
+
+---
+
+#### CallToAction
+
+**Import:** `import { CallToAction } from '@rspwn/design-system'`
+
+**Props:**
+- `title`: string
+- `subtitle`: string
+- `description`: string
+- `primaryButton`: CTAButton
+- `secondaryButton`: CTAButton
+- `variant`: 'centered' | 'split' | 'banner' | 'minimal'
+- `backgroundImage`: string
+- `backgroundGradient`: boolean
+- `className`: string
+- `children`: React.ReactNode
+
+**Usage Examples:**
+
+*Centered:*
+```jsx
+<CallToAction
+  title='Ready to Dominate the Competition?'
+  description='Join thousands of professional gamers on RSPWN. Experience next-generation competitive gaming with cutting-edge technology and unmatched performance.'
+  primaryButton={
+      text
+  href='#signup'
+>
+  Content
+</CallToAction>
+```
+
+*Split:*
+```jsx
+<CallToAction
+  title='Take Your Gaming to the Next Level'
+  description='Professional tournaments
+  primaryButton={
+      text
+  href='#tournament'
+>
+  Content
+</CallToAction>
+```
+
+*Banner:*
+```jsx
+<CallToAction
+  subtitle='Limited Time Offer'
+  title='Championship Season Pass'
+  description='Get exclusive access to all tournaments
+  primaryButton={
+      text
+  href='#offer'
+>
+  Content
+</CallToAction>
+```
+
+*Minimal:*
+```jsx
+<CallToAction
+  title='Start Your Journey'
+  description='Create your RSPWN account and join the community.'
+  primaryButton={
+      text
+  href='#signup'
+>
+  Content
+</CallToAction>
+```
+
+*WithBackgroundImage:*
+```jsx
+<CallToAction
+  title='Epic Gaming Awaits'
+  description='Experience the thrill of competitive gaming with stunning visuals and immersive gameplay.'
+  primaryButton={
+      text
+  href='#play'
+>
+  Content
+</CallToAction>
+```
+
+*TournamentSignup:*
+```jsx
+<CallToAction
+  subtitle='World Championship 2024'
+  title='Registration Now Open'
+  description='Compete for the largest prize pool in esports history. Registration closes in 7 days.'
+  primaryButton={
+      text
+  onClick=() => alert('Opening team registration...')
+>
+  Content
+</CallToAction>
+```
+
+*ProductLaunch:*
+```jsx
+<CallToAction
+  subtitle='Now Available'
+  title='RSPWN Pro is Here'
+  description='Advanced analytics
+  and premium features for serious gamers. Limited time=50% off first year.'
+  primaryButton={
+      text
+  href='#upgrade'
+>
+  Content
+</CallToAction>
+```
+
+*TeamRecruitment:*
+```jsx
+<CallToAction
+  title='Join Team Phoenix'
+  description='We\'re looking for skilled players to join our competitive roster. Open tryouts this weekend.'
+  primaryButton={
+      text
+  href='#apply'
+>
+  Content
+</CallToAction>
+```
+
+*CustomContent:*
+```jsx
+<CallToAction
+  title='Stay Connected'
+  description='Follow us for the latest updates
+  variant='centered'
+  children=(
+      <div style={{ 
+        display
+  gap='1rem'
+  alignItems='center'
+  justifyContent='center'
+  flexWrap='wrap'
+  marginTop='1rem'
+>
+  Content
+</CallToAction>
+```
+
+*Newsletter:*
+```jsx
+<CallToAction
+  title='Never Miss a Match'
+  description='Get tournament updates
+  variant='minimal'
+  children=(
+      <div style={{ 
+        display
+  gap='1rem'
+  maxWidth='400px'
+  margin='1rem auto 0'
+  alignItems='center'
+>
+  Content
+</CallToAction>
+```
+
+---
+
+#### HeroSection
+
+**Import:** `import { HeroSection } from '@rspwn/design-system'`
+
+**Props:**
+- `variant`: HeroSectionVariant
+- `title`: string
+- `subtitle`: string
+- `announcement`: {
+- `text`: string
+- `link`: {
+- `href`: string
+
+**Usage Examples:**
+
+*Centered:*
+```jsx
+<HeroSection
+  variant='centered'
+  title='The Ultimate Competitive Gaming Platform'
+  subtitle='Join millions of professional gamers worldwide. Experience next-generation competitive gaming with cutting-edge technology and unmatched performance.'
+  announcement={
+      text
+  link={
+        text
+  href='#tournament'
+>
+  Content
+</HeroSection>
+```
+
+*WithoutNavigation:*
+```jsx
+<HeroSection
+  variant='centered'
+  title='Dominate the Competition'
+  subtitle='Professional gaming tools and infrastructure designed for competitive excellence. Built by gamers
+  primaryAction={
+      text
+  href='#play'
+>
+  Content
+</HeroSection>
+```
+
+*Minimal:*
+```jsx
+<HeroSection
+  variant='minimal'
+  title='Welcome to RSPWN'
+  subtitle='The future of competitive gaming starts here.'
+  primaryAction={
+      text
+  href='#join'
+>
+  Content
+</HeroSection>
+```
+
+*WithAnnouncement:*
+```jsx
+<HeroSection
+  variant='centered'
+  title='Championship Season 2024'
+  subtitle='Compete for the largest prize pool in esports history. Registration now open for professional teams and individual players.'
+  announcement={
+      text
+  link={
+        text
+  href='#register'
+>
+  Content
+</HeroSection>
+```
+
+*ProductLaunch:*
+```jsx
+<HeroSection
+  variant='centered'
+  title='RSPWN Pro is Here'
+  subtitle='Advanced analytics
+  announcement={
+      text
+  link={
+        text
+  href='#offer'
+>
+  Content
+</HeroSection>
+```
+
+*SimpleCallToAction:*
+```jsx
+<HeroSection
+  variant='centered'
+  title='Ready to Dominate?'
+  subtitle='Join thousands of professional gamers who trust RSPWN for competitive excellence.'
+  primaryAction={
+      text
+  href='#start'
+>
+  Content
+</HeroSection>
+```
+
+---
+
+#### SidebarNavigation
+
+**Import:** `import { SidebarNavigation } from '@rspwn/design-system'`
+
+**Props:**
+- `brandName`: string
+- `brandIcon`: string
+- `navigation`: NavigationItem[]
+- `teams`: TeamItem[]
+- `settingsItem`: NavigationItem
+- `userProfile`: {
+- `name`: string
+- `avatar`: string
+- `menuItems`: Array<{ name: string
+- `href`: string
+
+**Usage Examples:**
+
+*Default:*
+```jsx
+<SidebarNavigation
+  brandName='RSPWN'
+  navigation=defaultNavigation
+  teams=defaultTeams
+  settingsItem={ name
+  href='#settings'
+  icon='⚙️'
+  current=false
+>
+  Content
+</SidebarNavigation>
+```
+
+*WithoutTeams:*
+```jsx
+<SidebarNavigation
+  brandName='RSPWN'
+  navigation=defaultNavigation
+  settingsItem={ name
+  href='#settings'
+  icon='⚙️'
+  current=false
+>
+  Content
+</SidebarNavigation>
+```
+
+*WithoutSearch:*
+```jsx
+<SidebarNavigation
+  brandName='RSPWN'
+  navigation=defaultNavigation
+  teams=defaultTeams
+  settingsItem={ name
+  href='#settings'
+  icon='⚙️'
+  current=false
+>
+  Content
+</SidebarNavigation>
+```
+
+*MinimalNavigation:*
+```jsx
+<SidebarNavigation
+  brandName='RSPWN'
+  navigation=[
+      { name
+  href='#dashboard'
+  icon='🎯'
+  current=true
+>
+  Content
+</SidebarNavigation>
+```
+
+*GamingTeams:*
+```jsx
+<SidebarNavigation
+  brandName='RSPWN'
+  navigation=[
+      { name
+  href='#overview'
+  icon='🎯'
+  current=false
+>
+  Content
+</SidebarNavigation>
+```
+
+*CustomBranding:*
+```jsx
+<SidebarNavigation
+  brandName='GameStudio'
+  navigation=[
+      { name
+  href='#projects'
+  icon='📁'
+  current=true
+>
+  Content
+</SidebarNavigation>
+```
 
 ---
 
