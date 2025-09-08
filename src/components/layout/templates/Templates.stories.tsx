@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { LandingPageTemplate, DashboardTemplate } from './index'
+import { HeroSection, BentoGrid, CallToAction, SidebarNavigation } from '../../sections'
 import { Typography } from '../../foundation/Typography'
 import { Grid } from '../../foundation/Grid'
 import { Box } from '../../foundation/Box'
@@ -50,126 +51,124 @@ export const LandingPage: StoryObj = {
   render: () => (
     <LandingPageTemplate>
       <LandingPageTemplate.Hero>
-        <Stack variant="loose">
-          <Typography variant="brand">RSPWN</Typography>
-          <Typography variant="heading">
-            The Ultimate Competitive Gaming Platform
-          </Typography>
-          <Typography color="muted" style={{ fontSize: '1.25rem' }}>
-            Join millions of professional gamers worldwide. Experience next-generation competitive gaming with cutting-edge technology.
-          </Typography>
-          <Stack variant="tight" style={{ alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
-            <div style={{ 
-              background: '#4A9EFF', 
-              padding: '0.875rem 2rem', 
-              borderRadius: '0.375rem', 
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = '#3B8EF0';
-              e.currentTarget.style.transform = 'translateY(-1px)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = '#4A9EFF';
-              e.currentTarget.style.transform = 'translateY(0)';
-            }}>
-              <Typography style={{ fontWeight: 600, color: 'white' }}>Get Started</Typography>
-            </div>
-            <div style={{ 
-              border: '2px solid #4A9EFF', 
-              padding: '0.75rem 2rem', 
-              borderRadius: '0.375rem',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-              background: 'transparent'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#4A9EFF20';
-              e.currentTarget.style.borderColor = '#3B8EF0';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'transparent';
-              e.currentTarget.style.borderColor = '#4A9EFF';
-            }}>
-              <Typography style={{ fontWeight: 600, color: '#4A9EFF' }}>Watch Demo</Typography>
-            </div>
-          </Stack>
-        </Stack>
+        <HeroSection
+          variant="centered"
+          title="The Ultimate Competitive Gaming Platform"
+          subtitle="Join millions of professional gamers worldwide. Experience next-generation competitive gaming with cutting-edge technology."
+          announcement={{
+            text: 'Championship Season 2024 now open for registration.',
+            link: {
+              text: 'Register now',
+              href: '#register'
+            }
+          }}
+          primaryAction={{
+            text: 'Get Started',
+            href: '#signup'
+          }}
+          secondaryAction={{
+            text: 'Watch Demo',
+            href: '#demo'
+          }}
+          navigation={[
+            { name: 'Features', href: '#features' },
+            { name: 'Tournaments', href: '#tournaments' },
+            { name: 'Community', href: '#community' },
+            { name: 'Support', href: '#support' }
+          ]}
+        />
       </LandingPageTemplate.Hero>
 
       <LandingPageTemplate.Features>
-        <Grid variant="cards">
-          <Box variant="card" style={{ textAlign: 'center', padding: '2rem' }}>
-            <div style={{ background: '#4A9EFF', width: '80px', height: '80px', borderRadius: '50%', margin: '0 auto 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <Typography style={{ fontSize: '2rem' }}>⚡</Typography>
-            </div>
-            <Typography variant="subheading" style={{ marginBottom: '1rem' }}>Lightning Fast</Typography>
-            <Typography color="muted">
-              Ultra-low latency gaming with optimized performance for competitive play
-            </Typography>
-          </Box>
-          
-          <Box variant="card" style={{ textAlign: 'center', padding: '2rem' }}>
-            <div style={{ background: '#8B5CF6', width: '80px', height: '80px', borderRadius: '50%', margin: '0 auto 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <Typography style={{ fontSize: '2rem' }}>🎯</Typography>
-            </div>
-            <Typography variant="subheading" style={{ marginBottom: '1rem' }}>Precision Control</Typography>
-            <Typography color="muted">
-              Advanced input systems and customizable controls for every gaming style
-            </Typography>
-          </Box>
-          
-          <Box variant="card" style={{ textAlign: 'center', padding: '2rem' }}>
-            <div style={{ background: '#374151', width: '80px', height: '80px', borderRadius: '50%', margin: '0 auto 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <Typography style={{ fontSize: '2rem' }}>🛡️</Typography>
-            </div>
-            <Typography variant="subheading" style={{ marginBottom: '1rem' }}>Secure Platform</Typography>
-            <Typography color="muted">
-              Enterprise-grade security with advanced anti-cheat and data protection
-            </Typography>
-          </Box>
-        </Grid>
+        <BentoGrid
+          title="Platform Features"
+          subtitle="Everything you need for competitive gaming excellence"
+          items={[
+            {
+              id: 'lightning-fast',
+              title: 'Lightning Fast Performance',
+              description: 'Ultra-low latency gaming with optimized performance for competitive play.',
+              icon: '⚡',
+              size: 'large',
+              color: 'primary'
+            },
+            {
+              id: 'precision-control',
+              title: 'Precision Control',
+              description: 'Advanced input systems and customizable controls.',
+              icon: '🎯',
+              size: 'medium',
+              color: 'secondary'
+            },
+            {
+              id: 'secure-platform',
+              title: 'Secure Platform',
+              description: 'Enterprise-grade security with advanced anti-cheat.',
+              icon: '🛡️',
+              size: 'medium',
+              color: 'accent'
+            },
+            {
+              id: 'tournament-system',
+              title: 'Tournament Management',
+              description: 'Create and manage competitive tournaments with ease.',
+              icon: '🏆',
+              size: 'wide',
+              color: 'primary'
+            },
+            {
+              id: 'analytics',
+              title: 'Performance Analytics',
+              description: 'Advanced statistics and insights.',
+              icon: '📊',
+              size: 'small',
+              color: 'neutral'
+            },
+            {
+              id: 'team-management',
+              title: 'Team Tools',
+              description: 'Organize and coordinate teams.',
+              icon: '👥',
+              size: 'small',
+              color: 'accent'
+            }
+          ]}
+          variant="default"
+        />
       </LandingPageTemplate.Features>
 
       <LandingPageTemplate.About>
-        <Typography variant="body" style={{ fontSize: '1.125rem', lineHeight: 1.7 }}>
-          RSPWN represents the evolution of competitive gaming platforms. Built by professional gamers for professional gamers, 
-          we provide the tools, infrastructure, and community needed to excel in the modern esports landscape.
-        </Typography>
-        <Typography variant="body" style={{ fontSize: '1.125rem', lineHeight: 1.7 }}>
-          Our platform combines cutting-edge technology with proven gaming methodologies to deliver an unmatched competitive experience. 
-          From tournament organization to performance analytics, RSPWN is your complete esports solution.
-        </Typography>
+        <Stack variant="loose" style={{ textAlign: 'center', maxWidth: '50rem', margin: '0 auto' }}>
+          <Typography variant="heading" style={{ fontSize: '2.5rem', marginBottom: '2rem' }}>
+            Built by Gamers, for Gamers
+          </Typography>
+          <Typography variant="body" style={{ fontSize: '1.125rem', lineHeight: 1.7 }}>
+            RSPWN represents the evolution of competitive gaming platforms. Built by professional gamers for professional gamers, 
+            we provide the tools, infrastructure, and community needed to excel in the modern esports landscape.
+          </Typography>
+          <Typography variant="body" style={{ fontSize: '1.125rem', lineHeight: 1.7 }}>
+            Our platform combines cutting-edge technology with proven gaming methodologies to deliver an unmatched competitive experience. 
+            From tournament organization to performance analytics, RSPWN is your complete esports solution.
+          </Typography>
+        </Stack>
       </LandingPageTemplate.About>
 
       <LandingPageTemplate.CTA>
-        <Stack variant="tight">
-          <Typography variant="heading">Ready to Dominate?</Typography>
-          <Typography color="muted" style={{ fontSize: '1.125rem' }}>
-            Join thousands of professional gamers who trust RSPWN for competitive excellence
-          </Typography>
-          <div style={{ 
-            background: '#4A9EFF', 
-            padding: '0.875rem 2rem', 
-            borderRadius: '0.375rem',
-            cursor: 'pointer',
-            transition: 'all 0.2s ease',
-            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-            alignSelf: 'center'
+        <CallToAction
+          variant="centered"
+          title="Ready to Dominate the Competition?"
+          description="Join thousands of professional gamers who trust RSPWN for competitive excellence. Start your journey to esports greatness today."
+          primaryButton={{
+            text: 'Start Your Journey',
+            href: '#signup'
           }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = '#3B8EF0';
-            e.currentTarget.style.transform = 'translateY(-1px)';
+          secondaryButton={{
+            text: 'Explore Features',
+            href: '#features',
+            variant: 'outline'
           }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = '#4A9EFF';
-            e.currentTarget.style.transform = 'translateY(0)';
-          }}>
-            <Typography style={{ fontWeight: 600, color: 'white' }}>Start Your Journey</Typography>
-          </div>
-        </Stack>
+          backgroundGradient={true}
+        />
       </LandingPageTemplate.CTA>
 
       <LandingPageTemplate.Footer>
@@ -221,152 +220,353 @@ export const LandingPage: StoryObj = {
 
 export const Dashboard: StoryObj = {
   render: () => (
-    <DashboardTemplate>
-      <DashboardTemplate.Header>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-          <Stack variant="nav">
-            <Typography style={{ opacity: 0.8 }}>Dashboard</Typography>
-            <Typography style={{ opacity: 0.8 }}>Tournaments</Typography>
-            <Typography style={{ opacity: 0.8 }}>Analytics</Typography>
-            <Typography color="blue">Settings</Typography>
-          </Stack>
-          <div style={{ background: '#374151', width: '40px', height: '40px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Typography style={{ fontSize: '1.2rem' }}>👤</Typography>
-          </div>
+    <SidebarNavigation
+      brandName="RSPWN"
+      navigation={[
+        { name: 'Overview', href: '#overview', icon: '🎯', current: true },
+        { name: 'My Games', href: '#games', icon: '🎮', current: false },
+        { name: 'Tournaments', href: '#tournaments', icon: '🏆', current: false },
+        { name: 'Team', href: '#team', icon: '👥', current: false },
+        { name: 'Analytics', href: '#analytics', icon: '📊', current: false },
+        { name: 'Matches', href: '#matches', icon: '⚔️', current: false }
+      ]}
+      teams={[
+        { id: 1, name: 'Team Alpha', href: '#team-alpha', initial: 'A', current: false },
+        { id: 2, name: 'RSPWN Elite', href: '#rspwn-elite', initial: 'R', current: false },
+        { id: 3, name: 'Pro Squad', href: '#pro-squad', initial: 'P', current: true }
+      ]}
+      settingsItem={{ name: 'Settings', href: '#settings', icon: '⚙️', current: false }}
+      userProfile={{
+        name: 'ProGamer',
+        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        menuItems: [
+          { name: 'Your Profile', href: '#profile' },
+          { name: 'Settings', href: '#settings' },
+          { name: 'Sign out', href: '#signout' }
+        ]
+      }}
+      showSearch={true}
+    >
+      <Stack variant="loose">
+        <div>
+          <Typography variant="heading">Welcome back, ProGamer!</Typography>
+          <Typography color="muted" style={{ marginTop: '0.5rem' }}>
+            Ready to dominate today's matches?
+          </Typography>
         </div>
-      </DashboardTemplate.Header>
+        
+        <BentoGrid
+          items={[
+            {
+              id: 'total-matches',
+              title: 'Total Matches',
+              description: '+12% this week',
+              icon: '🎮',
+              size: 'medium',
+              color: 'primary',
+              content: (
+                <Typography variant="heading" style={{ fontSize: '2rem', color: '#4A9EFF', marginTop: '0.5rem' }}>
+                  1,247
+                </Typography>
+              )
+            },
+            {
+              id: 'win-rate',
+              title: 'Win Rate',
+              description: '+2.1% improvement',
+              icon: '🏆',
+              size: 'medium',
+              color: 'accent',
+              content: (
+                <Typography variant="heading" style={{ fontSize: '2rem', color: '#10B981', marginTop: '0.5rem' }}>
+                  89.3%
+                </Typography>
+              )
+            },
+            {
+              id: 'global-rank',
+              title: 'Global Rank',
+              description: '+15 positions',
+              icon: '⭐',
+              size: 'medium',
+              color: 'secondary',
+              content: (
+                <Typography variant="heading" style={{ fontSize: '2rem', color: '#F59E0B', marginTop: '0.5rem' }}>
+                  #127
+                </Typography>
+              )
+            },
+            {
+              id: 'tournament-activity',
+              title: 'Recent Activity',
+              description: 'Latest achievements',
+              icon: '📈',
+              size: 'large',
+              color: 'neutral',
+              content: (
+                <Stack variant="default" style={{ marginTop: '0.5rem' }}>
+                  <div>
+                    <Typography style={{ fontWeight: 600, fontSize: '0.875rem' }}>Championship Finals</Typography>
+                    <Typography variant="caption" color="muted">+150 XP • +$2,500</Typography>
+                  </div>
+                  <div>
+                    <Typography style={{ fontWeight: 600, fontSize: '0.875rem' }}>Qualifier Tournament</Typography>
+                    <Typography variant="caption" color="muted">+75 XP • Advanced</Typography>
+                  </div>
+                </Stack>
+              )
+            }
+          ]}
+          variant="compact"
+        />
 
-      <DashboardTemplate.Sidebar>
-        <Stack variant="default">
-          <div style={{ 
-            padding: '0.75rem 1rem', 
-            borderRadius: '0.375rem', 
-            backgroundColor: '#4A9EFF20', 
-            borderLeft: '3px solid #4A9EFF',
-            cursor: 'pointer'
-          }}>
-            <Typography style={{ fontWeight: 600, color: '#4A9EFF', marginBottom: '0.25rem', display: 'block' }}>🎯 Overview</Typography>
-            <Typography variant="caption" color="muted">Main dashboard</Typography>
-          </div>
-          
-          <div style={{ 
-            padding: '0.75rem 1rem', 
-            borderRadius: '0.375rem',
-            cursor: 'pointer',
-            transition: 'background-color 0.2s ease'
-          }} 
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} 
-          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
-            <Typography style={{ fontWeight: 600, marginBottom: '0.25rem', display: 'block' }}>🎮 My Games</Typography>
-            <Typography variant="caption" color="muted">Match history</Typography>
-          </div>
-          
-          <div style={{ 
-            padding: '0.75rem 1rem', 
-            borderRadius: '0.375rem',
-            cursor: 'pointer',
-            transition: 'background-color 0.2s ease'
+        <CallToAction
+          variant="banner"
+          subtitle="Live Match"
+          title="Semi-Final Tonight"
+          description="vs Team Phoenix • 8:00 PM EST"
+          primaryButton={{
+            text: 'Join Match',
+            href: '#join-match'
           }}
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} 
-          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
-            <Typography style={{ fontWeight: 600, marginBottom: '0.25rem', display: 'block' }}>🏆 Tournaments</Typography>
-            <Typography variant="caption" color="muted">Active competitions</Typography>
-          </div>
-          
-          <div style={{ 
-            padding: '0.75rem 1rem', 
-            borderRadius: '0.375rem',
-            cursor: 'pointer',
-            transition: 'background-color 0.2s ease'
+          secondaryButton={{
+            text: 'Details',
+            href: '#match-details',
+            variant: 'outline'
           }}
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} 
-          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
-            <Typography style={{ fontWeight: 600, marginBottom: '0.25rem', display: 'block' }}>👥 Team</Typography>
-            <Typography variant="caption" color="muted">Manage your squad</Typography>
-          </div>
-          
-          <div style={{ 
-            padding: '0.75rem 1rem', 
-            borderRadius: '0.375rem',
-            cursor: 'pointer',
-            transition: 'background-color 0.2s ease'
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} 
-          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
-            <Typography style={{ fontWeight: 600, marginBottom: '0.25rem', display: 'block' }}>📊 Analytics</Typography>
-            <Typography variant="caption" color="muted">Performance insights</Typography>
-          </div>
-        </Stack>
-      </DashboardTemplate.Sidebar>
+        />
 
-      <DashboardTemplate.Main>
-        <Stack variant="loose">
-          <div>
-            <Typography variant="heading">Welcome back, ProGamer!</Typography>
-            <Typography color="muted">Ready to dominate today's matches?</Typography>
-          </div>
-          
+        <Box variant="section">
+          <Typography variant="subheading" style={{ marginBottom: '1rem' }}>Upcoming</Typography>
           <Grid variant="cards">
-            <Box variant="card">
-              <Typography variant="label">Total Matches</Typography>
-              <Typography variant="heading" color="blue" style={{ fontSize: '2.5rem', margin: '0.5rem 0' }}>1,247</Typography>
-              <Typography variant="caption" color="muted">+12% this week</Typography>
+            <Box variant="card" style={{ padding: '1rem' }}>
+              <Typography variant="label" style={{ marginBottom: '0.5rem', display: 'block', color: '#4A9EFF' }}>
+                Tomorrow 6PM
+              </Typography>
+              <Typography variant="subheading" style={{ marginBottom: '0.25rem', fontSize: '1rem' }}>Weekly Qualifier</Typography>
+              <Typography color="muted" style={{ fontSize: '0.875rem' }}>Open bracket</Typography>
             </Box>
-            
-            <Box variant="card">
-              <Typography variant="label">Win Rate</Typography>
-              <Typography variant="heading" style={{ fontSize: '2.5rem', margin: '0.5rem 0', color: '#10B981' }}>89.3%</Typography>
-              <Typography variant="caption" color="muted">+2.1% improvement</Typography>
-            </Box>
-            
-            <Box variant="card">
-              <Typography variant="label">Global Rank</Typography>
-              <Typography variant="heading" style={{ fontSize: '2.5rem', margin: '0.5rem 0', color: '#F59E0B' }}>#127</Typography>
-              <Typography variant="caption" color="muted">+15 positions</Typography>
+            <Box variant="card" style={{ padding: '1rem' }}>
+              <Typography variant="label" style={{ marginBottom: '0.5rem', display: 'block', color: '#8B5CF6' }}>
+                This Weekend
+              </Typography>
+              <Typography variant="subheading" style={{ marginBottom: '0.25rem', fontSize: '1rem' }}>Championship</Typography>
+              <Typography color="muted" style={{ fontSize: '0.875rem' }}>$50K prize pool</Typography>
             </Box>
           </Grid>
+        </Box>
+      </Stack>
+    </SidebarNavigation>
+  )
+}
 
-          <Box variant="section">
-            <Typography variant="subheading">Recent Tournament Activity</Typography>
-            <Stack variant="divided">
-              <Box variant="inline">
-                <Typography style={{ fontWeight: 600 }}>Championship Finals Victory</Typography>
-                <Typography variant="caption" color="muted">2 hours ago • +150 XP • +$2,500</Typography>
-              </Box>
-              <Box variant="inline">
-                <Typography style={{ fontWeight: 600 }}>Qualifier Tournament</Typography>
-                <Typography variant="caption" color="muted">1 day ago • +75 XP • Advanced to Finals</Typography>
-              </Box>
-              <Box variant="inline">
-                <Typography style={{ fontWeight: 600 }}>Weekly Ranked Match</Typography>
-                <Typography variant="caption" color="muted">2 days ago • +25 XP • Rank increased</Typography>
-              </Box>
-            </Stack>
-          </Box>
+export const ModernLanding: StoryObj = {
+  render: () => (
+    <div>
+      <HeroSection
+        variant="centered"
+        title="RSPWN Pro is Here"
+        subtitle="Advanced analytics, custom tournaments, and premium features for serious gamers."
+        announcement={{
+          text: 'Limited time: 50% off first year.',
+          link: {
+            text: 'Get offer',
+            href: '#offer'
+          }
+        }}
+        primaryAction={{
+          text: 'Upgrade to Pro',
+          href: '#upgrade'
+        }}
+        secondaryAction={{
+          text: 'Compare Plans',
+          href: '#pricing'
+        }}
+        navigation={[
+          { name: 'Features', href: '#features' },
+          { name: 'Pricing', href: '#pricing' },
+          { name: 'Enterprise', href: '#enterprise' },
+          { name: 'Contact', href: '#contact' }
+        ]}
+        backgroundGradient={true}
+      />
+      
+      <BentoGrid
+        title="Pro Features"
+        subtitle="Everything you need to dominate competitive gaming"
+        items={[
+          {
+            id: 'advanced-analytics',
+            title: 'Advanced Analytics',
+            description: 'Deep insights into your gaming performance with AI-powered recommendations.',
+            icon: '📊',
+            size: 'large',
+            color: 'primary'
+          },
+          {
+            id: 'custom-tournaments',
+            title: 'Custom Tournaments',
+            description: 'Create private tournaments for your organization.',
+            icon: '🏆',
+            size: 'medium',
+            color: 'secondary'
+          },
+          {
+            id: 'priority-support',
+            title: 'Priority Support',
+            description: '24/7 dedicated support for Pro users.',
+            icon: '🚀',
+            size: 'medium',
+            color: 'accent'
+          },
+          {
+            id: 'team-management',
+            title: 'Advanced Team Management',
+            description: 'Comprehensive tools for managing professional gaming teams.',
+            icon: '👥',
+            size: 'wide',
+            color: 'primary'
+          }
+        ]}
+        variant="spacious"
+      />
+      
+      <CallToAction
+        variant="split"
+        title="Ready to Go Pro?"
+        description="Join thousands of professional gamers who have upgraded to RSPWN Pro. Get access to advanced features, priority support, and exclusive tournaments."
+        primaryButton={{
+          text: 'Start Free Trial',
+          href: '#trial'
+        }}
+        secondaryButton={{
+          text: 'View Pricing',
+          href: '#pricing',
+          variant: 'outline'
+        }}
+        backgroundGradient={true}
+      />
+    </div>
+  )
+}
 
-          <Box variant="section">
-            <Typography variant="subheading">Upcoming Matches</Typography>
-            <Grid variant="cards">
-              <Box variant="card" style={{ padding: '1.5rem' }}>
-                <Typography variant="label" style={{ marginBottom: '0.5rem', display: 'block' }}>Tonight 8:00 PM EST</Typography>
-                <Typography variant="subheading" style={{ marginBottom: '0.5rem' }}>Pro League Semi-Final</Typography>
-                <Typography color="muted">vs Team Phoenix • Best of 5</Typography>
-              </Box>
-              <Box variant="card" style={{ padding: '1.5rem' }}>
-                <Typography variant="label" style={{ marginBottom: '0.5rem', display: 'block' }}>Tomorrow 6:00 PM EST</Typography>
-                <Typography variant="subheading" style={{ marginBottom: '0.5rem' }}>Weekly Qualifier</Typography>
-                <Typography color="muted">Open bracket • Single elimination</Typography>
-              </Box>
-              <Box variant="card" style={{ padding: '1.5rem' }}>
-                <Typography variant="label" style={{ marginBottom: '0.5rem', display: 'block' }}>This Weekend</Typography>
-                <Typography variant="subheading" style={{ marginBottom: '0.5rem' }}>RSPWN Championship</Typography>
-                <Typography color="muted">$50,000 prize pool • 64 teams</Typography>
-              </Box>
-            </Grid>
-          </Box>
-        </Stack>
-      </DashboardTemplate.Main>
-    </DashboardTemplate>
+export const CompleteDashboard: StoryObj = {
+  render: () => (
+    <SidebarNavigation
+      brandName="RSPWN"
+      navigation={[
+        { name: 'Dashboard', href: '#dashboard', icon: '🎯', current: true },
+        { name: 'Live Matches', href: '#live', icon: '🔴', current: false },
+        { name: 'Tournaments', href: '#tournaments', icon: '🏆', current: false },
+        { name: 'Leaderboard', href: '#leaderboard', icon: '📊', current: false },
+        { name: 'Training', href: '#training', icon: '🎯', current: false }
+      ]}
+      teams={[
+        { id: 1, name: 'Fnatic', href: '#fnatic', initial: 'F', current: false },
+        { id: 2, name: 'Team Liquid', href: '#liquid', initial: 'T', current: true },
+        { id: 3, name: 'G2 Esports', href: '#g2', initial: 'G', current: false }
+      ]}
+      settingsItem={{ name: 'Tournament Settings', href: '#settings', icon: '⚙️', current: false }}
+      userProfile={{
+        name: 'ProPlayer2024',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        menuItems: [
+          { name: 'Player Stats', href: '#stats' },
+          { name: 'Account Settings', href: '#account' },
+          { name: 'Sign out', href: '#signout' }
+        ]
+      }}
+      showSearch={true}
+    >
+      <Stack variant="loose">
+        <CallToAction
+          variant="banner"
+          subtitle="Championship Finals"
+          title="Team Liquid vs Fnatic - LIVE NOW"
+          description="Watch the most anticipated match of the tournament"
+          primaryButton={{
+            text: 'Watch Live',
+            href: '#watch-live'
+          }}
+          secondaryButton={{
+            text: 'Join Chat',
+            href: '#chat',
+            variant: 'outline'
+          }}
+        />
+
+        <BentoGrid
+          title="Live Tournament Dashboard"
+          subtitle="Monitor active tournaments and team performance"
+          items={[
+            {
+              id: 'live-viewers',
+              title: 'Live Viewers',
+              description: '+2.3K in last hour',
+              icon: '👀',
+              size: 'medium',
+              color: 'primary',
+              content: (
+                <Typography variant="heading" style={{ fontSize: '2rem', color: '#4A9EFF', marginTop: '0.5rem' }}>
+                  47.2K
+                </Typography>
+              )
+            },
+            {
+              id: 'prize-pool',
+              title: 'Prize Pool',
+              description: 'World Championship',
+              icon: '💰',
+              size: 'medium',
+              color: 'accent',
+              content: (
+                <Typography variant="heading" style={{ fontSize: '2rem', color: '#10B981', marginTop: '0.5rem' }}>
+                  $2.5M
+                </Typography>
+              )
+            },
+            {
+              id: 'teams-remaining',
+              title: 'Teams Left',
+              description: 'Championship bracket',
+              icon: '🏆',
+              size: 'medium',
+              color: 'secondary',
+              content: (
+                <Typography variant="heading" style={{ fontSize: '2rem', color: '#8B5CF6', marginTop: '0.5rem' }}>
+                  8
+                </Typography>
+              )
+            },
+            {
+              id: 'match-schedule',
+              title: 'Today\'s Schedule',
+              description: 'Remaining matches and timings',
+              icon: '⏰',
+              size: 'large',
+              color: 'neutral',
+              content: (
+                <Stack variant="default" style={{ marginTop: '1rem' }}>
+                  <div>
+                    <Typography style={{ fontWeight: 600, marginBottom: '0.25rem' }}>Semi-Final #1</Typography>
+                    <Typography variant="caption" color="muted">Team Liquid vs Fnatic • LIVE</Typography>
+                  </div>
+                  <div>
+                    <Typography style={{ fontWeight: 600, marginBottom: '0.25rem' }}>Semi-Final #2</Typography>
+                    <Typography variant="caption" color="muted">G2 vs Cloud9 • Starting in 2h</Typography>
+                  </div>
+                  <div>
+                    <Typography style={{ fontWeight: 600, marginBottom: '0.25rem' }}>Grand Final</Typography>
+                    <Typography variant="caption" color="muted">Winners • Tomorrow 6PM EST</Typography>
+                  </div>
+                </Stack>
+              )
+            }
+          ]}
+          variant="default"
+        />
+      </Stack>
+    </SidebarNavigation>
   )
 }
 
