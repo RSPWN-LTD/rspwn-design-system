@@ -1,91 +1,46 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ConfigurableTemplateProps, TemplateConfig } from './types'
+import { Container } from '../../foundation/Container'
 
-const StyledTemplate = styled.div<{ $config: TemplateConfig }>`
-  display: flex;
-  flex-direction: column;
+export type BaseTemplateVariant = 'app' | 'website' | 'fullscreen'
+
+export interface BaseTemplateProps {
+  variant?: BaseTemplateVariant
+  children: React.ReactNode
+  className?: string
+}
+
+const StyledTemplate = styled.div<{ $variant: BaseTemplateVariant }>`
   min-height: 100vh;
+  background-color: ${({ theme }) => theme.colors.foundation.black};
+  color: ${({ theme }) => theme.colors.foundation.white};
+  box-sizing: border-box;
+  overflow-x: hidden;
   
-  ${({ $config, theme }) => {
-    switch ($config.theme) {
-      case 'dark':
-        return `
-          background-color: ${theme.colors.gray.dark};
-          color: ${theme.colors.foundation.white};
-        `
-      case 'gaming':
-        return `
-          background: linear-gradient(135deg, 
-            ${theme.colors.gray.dark} 0%, 
-            ${theme.colors.gray.base} 100%);
-          color: ${theme.colors.foundation.white};
-        `
-      case 'light':
-      default:
-        return `
-          background-color: ${theme.colors.foundation.white};
-          color: ${theme.colors.gray.dark};
-        `
-    }
-  }}
-  
-  > * {
-    ${({ $config }) => {
-      switch ($config.spacing) {
-        case 'compact':
-          return 'margin-bottom: 0.5rem;'
-        case 'relaxed':
-          return 'margin-bottom: 2rem;'
-        case 'normal':
-        default:
-          return 'margin-bottom: 1rem;'
-      }
-    }}
-    
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-  
-  ${({ $config }) => {
-    switch ($config.layout) {
-      case 'narrow':
-        return 'max-width: 800px; margin: 0 auto;'
-      case 'full':
-        return 'max-width: 100%; width: 100%;'
-      case 'wide':
-      default:
-        return 'max-width: 1200px; margin: 0 auto;'
-    }
-  }}
+  ${({ $variant }) => $variant === 'fullscreen' && `
+    width: 100%;
+    max-width: 100vw;
+  `}
 `
 
-const defaultConfig: TemplateConfig = {
-  spacing: 'normal',
-  theme: 'light',
-  layout: 'wide'
-}
-
-export interface BaseTemplateProps extends ConfigurableTemplateProps {
-  children: React.ReactNode
-}
-
 export const BaseTemplate: React.FC<BaseTemplateProps> = ({ 
+  variant = 'app',
   children, 
-  config = {}, 
-  className,
-  id 
+  className
 }) => {
-  const mergedConfig = { ...defaultConfig, ...config }
-  
+  if (variant === 'fullscreen') {
+    return (
+      <StyledTemplate $variant={variant} className={className}>
+        {children}
+      </StyledTemplate>
+    )
+  }
+
   return (
-    <StyledTemplate 
-      $config={mergedConfig}
-      className={className}
-      id={id}
-    >
-      {children}
+    <StyledTemplate $variant={variant} className={className}>
+      <Container variant={variant === 'website' ? 'wide' : 'default'}>
+        {children}
+      </Container>
     </StyledTemplate>
   )
 }

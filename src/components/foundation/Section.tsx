@@ -1,226 +1,100 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Box, BoxProps } from './Box'
-import { Container, ContainerProps } from './Container'
-import { createShouldForwardProp } from '../../utils/propFilters'
+import { Container } from './Container'
 
-type ResponsiveSpacing = keyof typeof import('../../tokens/spacing').spacing
+export type SectionVariant = 'default' | 'hero' | 'feature' | 'content' | 'footer'
 
-type ResponsivePaddingValue = ResponsiveSpacing | {
-  xs?: ResponsiveSpacing
-  sm?: ResponsiveSpacing
-  md?: ResponsiveSpacing
-  lg?: ResponsiveSpacing
-  xl?: ResponsiveSpacing
-}
-
-export interface SectionProps extends Omit<BoxProps, 'as' | 'paddingY' | 'marginY'> {
-  // Semantic element type
-  as?: 'section' | 'header' | 'main' | 'aside' | 'footer' | 'article'
-  
-  // Layout variants
-  variant?: 'default' | 'hero' | 'feature' | 'content' | 'footer'
-  
-  // Container integration
-  container?: boolean | ContainerProps['size'] | ContainerProps['variant']
-  
-  // Spacing system
-  paddingY?: ResponsivePaddingValue
-  marginY?: ResponsivePaddingValue
-  
-  // Background options
-  background?: 'default' | 'subtle' | 'accent' | 'dark' | 'transparent'
-  
-  // Borders
-  bordered?: boolean | 'top' | 'bottom' | 'both'
-  
-  // Full-height sections
-  minHeight?: 'screen' | 'auto' | string
-  
-  // Standard props
+export interface SectionProps {
+  variant?: SectionVariant
   children?: React.ReactNode
   className?: string
+  as?: 'section' | 'header' | 'main' | 'aside' | 'footer' | 'article'
 }
 
-const sectionVariants = {
-  default: {
-    paddingY: { xs: 8, lg: 12 } as ResponsivePaddingValue,
-    background: 'transparent' as const
-  },
-  hero: {
-    paddingY: { xs: 16, lg: 24 } as ResponsivePaddingValue,
-    minHeight: '100vh',
-    background: 'dark' as const
-  },
-  feature: {
-    paddingY: { xs: 12, lg: 20 } as ResponsivePaddingValue,
-    background: 'subtle' as const
-  },
-  content: {
-    paddingY: { xs: 8, lg: 12 } as ResponsivePaddingValue,
-    background: 'transparent' as const
-  },
-  footer: {
-    paddingY: { xs: 8, lg: 10 } as ResponsivePaddingValue,
-    background: 'dark' as const,
-    bordered: 'top' as const
-  }
-}
-
-const getBackgroundColor = (background: SectionProps['background']) => {
-  switch (background) {
-    case 'subtle':
-      return css`background-color: ${({ theme }) => theme.colors.gray.light};`
-    case 'accent':
-      return css`background-color: ${({ theme }) => theme.colors.innovation.primaryBlue};`
-    case 'dark':
-      return css`background-color: ${({ theme }) => theme.colors.gray.dark};`
-    case 'transparent':
-      return css`background-color: transparent;`
-    default:
-      return css`background-color: ${({ theme }) => theme.colors.foundation.white};`
-  }
-}
-
-const getBorders = (bordered: SectionProps['bordered']) => {
-  if (!bordered) return ''
-  
-  const borderStyle = css`1px solid ${({ theme }) => theme.colors.gray.base}`
-  
-  switch (bordered) {
-    case 'top':
-      return css`border-top: ${borderStyle};`
-    case 'bottom':
-      return css`border-bottom: ${borderStyle};`
-    case 'both':
+const getVariantStyles = (variant: SectionVariant) => {
+  switch (variant) {
+    case 'hero':
       return css`
-        border-top: ${borderStyle};
-        border-bottom: ${borderStyle};
+        background-color: ${({ theme }) => theme.colors.foundation.black};
+        padding: ${({ theme }) => theme.spacing[20]} ${({ theme }) => theme.spacing[6]};
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        
+        @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+          padding: ${({ theme }) => theme.spacing[24]} ${({ theme }) => theme.spacing[8]};
+        }
       `
-    default:
+    case 'feature':
       return css`
-        border-top: ${borderStyle};
-        border-bottom: ${borderStyle};
+        background-color: ${({ theme }) => theme.colors.gray.dark};
+        padding: ${({ theme }) => theme.spacing[16]} ${({ theme }) => theme.spacing[6]};
+        
+        @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+          padding: ${({ theme }) => theme.spacing[20]} ${({ theme }) => theme.spacing[8]};
+        }
+      `
+    case 'content':
+      return css`
+        background-color: transparent;
+        padding: ${({ theme }) => theme.spacing[12]} ${({ theme }) => theme.spacing[6]};
+        
+        @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+          padding: ${({ theme }) => theme.spacing[16]} ${({ theme }) => theme.spacing[8]};
+        }
+      `
+    case 'footer':
+      return css`
+        background-color: ${({ theme }) => theme.colors.foundation.black};
+        border-top: 1px solid ${({ theme }) => theme.colors.gray.base}40;
+        padding: ${({ theme }) => theme.spacing[12]} ${({ theme }) => theme.spacing[6]};
+        
+        @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+          padding: ${({ theme }) => theme.spacing[16]} ${({ theme }) => theme.spacing[8]};
+        }
+      `
+    default: // 'default'
+      return css`
+        background-color: transparent;
+        padding: ${({ theme }) => theme.spacing[8]} ${({ theme }) => theme.spacing[6]};
+        
+        @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+          padding: ${({ theme }) => theme.spacing[12]} ${({ theme }) => theme.spacing[8]};
+        }
       `
   }
 }
 
-const getResponsivePadding = (
-  value: ResponsivePaddingValue | undefined, 
-  property: 'padding-top' | 'padding-bottom' | 'margin-top' | 'margin-bottom'
-) => {
-  if (!value) return ''
-  
-  if (typeof value === 'string' || typeof value === 'number') {
-    return css`${property}: ${({ theme }) => theme.spacing[value as ResponsiveSpacing]};`
-  }
-  
-  return css`
-    ${value.xs && css`${property}: ${({ theme }) => theme.spacing[value.xs!]};`}
-    ${value.sm && css`
-      @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
-        ${property}: ${({ theme }) => theme.spacing[value.sm!]};
-      }
-    `}
-    ${value.md && css`
-      @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-        ${property}: ${({ theme }) => theme.spacing[value.md!]};
-      }
-    `}
-    ${value.lg && css`
-      @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-        ${property}: ${({ theme }) => theme.spacing[value.lg!]};
-      }
-    `}
-    ${value.xl && css`
-      @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
-        ${property}: ${({ theme }) => theme.spacing[value.xl!]};
-      }
-    `}
-  `
-}
-
-const getMinHeight = (minHeight: SectionProps['minHeight']) => {
-  switch (minHeight) {
-    case 'screen':
-      return css`min-height: 100vh;`
-    case 'auto':
-      return css`min-height: auto;`
-    default:
-      return minHeight ? css`min-height: ${minHeight};` : ''
-  }
-}
-
-const StyledSection = styled(Box).withConfig({
-  shouldForwardProp: createShouldForwardProp([
-    'variant', 'container', 'paddingY', 'marginY', 'background', 'bordered', 'minHeight'
-  ])
-})<SectionProps>`
+const StyledSection = styled.div<SectionProps>`
   width: 100%;
+  box-sizing: border-box;
   
-  /* Background */
-  ${({ background }) => getBackgroundColor(background)}
-  
-  /* Borders */
-  ${({ bordered }) => getBorders(bordered)}
-  
-  /* Min height */
-  ${({ minHeight }) => getMinHeight(minHeight)}
-  
-  /* Responsive paddingY */
-  ${({ paddingY }) => paddingY && css`
-    ${getResponsivePadding(paddingY, 'padding-top')}
-    ${getResponsivePadding(paddingY, 'padding-bottom')}
-  `}
-  
-  /* Responsive marginY */
-  ${({ marginY }) => marginY && css`
-    ${getResponsivePadding(marginY, 'margin-top')}
-    ${getResponsivePadding(marginY, 'margin-bottom')}
-  `}
+  ${({ variant = 'default' }) => getVariantStyles(variant)}
 `
 
-export const Section: React.FC<SectionProps> = ({
-  as = 'section',
-  variant = 'default',
-  container = false,
-  paddingY,
-  marginY,
-  background,
-  bordered,
-  minHeight,
-  children,
-  ...props
+export const Section: React.FC<SectionProps> = ({ 
+  as = 'section', 
+  variant = 'default', 
+  children, 
+  ...props 
 }) => {
-  // Get variant configuration
-  const variantConfig = sectionVariants[variant]
-  
-  // Merge props with variant defaults
-  const finalPaddingY = paddingY ?? variantConfig.paddingY
-  const finalBackground = background ?? variantConfig.background
-  const finalBordered = bordered ?? (variantConfig as any).bordered
-  const finalMinHeight = minHeight ?? (variantConfig as any).minHeight
-  
-  const sectionContent = container ? (
-    <Container
-      size={typeof container === 'boolean' ? 'xl' : container as ContainerProps['size']}
-      variant={typeof container === 'string' && ['prose', 'narrow', 'wide', 'fluid'].includes(container) ? container as ContainerProps['variant'] : undefined}
-    >
+  // Each section variant includes its own appropriate container
+  const sectionContent = variant === 'hero' || variant === 'feature' || variant === 'footer' ? (
+    <Container variant={variant === 'hero' ? 'default' : variant === 'footer' ? 'wide' : 'default'}>
       {children}
     </Container>
-  ) : children
+  ) : variant === 'content' ? (
+    <Container variant="prose">
+      {children}
+    </Container>
+  ) : (
+    <Container>
+      {children}
+    </Container>
+  )
   
   return (
-    <StyledSection
-      as={as}
-      variant={variant}
-      paddingY={finalPaddingY}
-      marginY={marginY}
-      background={finalBackground}
-      bordered={finalBordered}
-      minHeight={finalMinHeight}
-      {...props}
-    >
+    <StyledSection as={as} variant={variant} {...props}>
       {sectionContent}
     </StyledSection>
   )

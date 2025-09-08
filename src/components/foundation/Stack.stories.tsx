@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Stack } from './Stack'
 import { Box } from './Box'
 import { Typography } from './Typography'
-import { Divider } from './Divider'
 
 const meta: Meta<typeof Stack> = {
   title: 'Foundation/Stack',
@@ -12,20 +11,10 @@ const meta: Meta<typeof Stack> = {
   },
   tags: ['autodocs'],
   argTypes: {
-    direction: {
+    variant: {
       control: { type: 'select' },
-      options: ['vertical', 'horizontal'],
-    },
-    spacing: {
-      control: { type: 'select' },
-      options: ['0', '1', '2', '3', '4', '5', '6', '8', '10', '12'],
-    },
-    align: {
-      control: { type: 'select' },
-      options: ['start', 'center', 'end', 'stretch'],
-    },
-    divider: {
-      control: { type: 'boolean' },
+      options: ['default', 'tight', 'loose', 'divided', 'nav'],
+      description: 'Pre-designed stack variants optimized for common stacking patterns',
     },
   },
 }
@@ -33,401 +22,203 @@ const meta: Meta<typeof Stack> = {
 export default meta
 type Story = StoryObj<typeof Stack>
 
-const StackItem = ({ children, bg = 'blue', ...props }: { children: React.ReactNode, bg?: string }) => (
-  <Box 
-    bg={bg as any} 
-    p={4} 
-    borderRadius="base" 
-    display="flex" 
-    alignItems="center" 
-    justifyContent="center"
-    minWidth="120px"
-    {...props}
-  >
-    <Typography color="white" variant="body1" align="center">{children}</Typography>
-  </Box>
-)
-
-const Card = ({ children, ...props }: { children: React.ReactNode }) => (
-  <Box bg="dark" p={4} borderRadius="md" {...props}>
-    <Typography color="white">{children}</Typography>
-  </Box>
-)
-
-export const Basic: Story = {
+export const Default: Story = {
   args: {
-    spacing: '4',
+    children: (
+      <>
+        <Box variant="card">
+          <Typography color="white">Default Stack - Standard spacing with responsive behavior</Typography>
+        </Box>
+        <Box variant="card">
+          <Typography color="white">Perfect for general content stacking with optimal visual hierarchy</Typography>
+        </Box>
+        <Box variant="card">
+          <Typography color="white">Vertical on mobile, enhanced spacing on larger screens</Typography>
+        </Box>
+      </>
+    ),
   },
-  render: (args) => (
-    <Stack {...args}>
-      <StackItem>Item 1</StackItem>
-      <StackItem bg="purple">Item 2</StackItem>
-      <StackItem bg="gray">Item 3</StackItem>
-    </Stack>
-  ),
 }
 
-export const Direction: Story = {
+export const AllVariants: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem', background: '#0a0a0a', padding: '2rem' }}>
       <div>
-        <Typography variant="h3" mb={4}>Vertical Stack (Default)</Typography>
-        <Stack spacing={4}>
-          <StackItem>Item 1</StackItem>
-          <StackItem bg="purple">Item 2</StackItem>
-          <StackItem bg="gray">Item 3</StackItem>
-        </Stack>
-      </div>
-      
-      <div>
-        <Typography variant="h3" mb={4}>Horizontal Stack</Typography>
-        <Stack direction="horizontal" spacing={4}>
-          <StackItem>Item 1</StackItem>
-          <StackItem bg="purple">Item 2</StackItem>
-          <StackItem bg="gray">Item 3</StackItem>
-        </Stack>
-      </div>
-    </div>
-  ),
-}
-
-export const Spacing: Story = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
-      <div>
-        <Typography variant="h3" mb={4}>Small Spacing (2)</Typography>
-        <Stack spacing={2}>
-          <StackItem minWidth="auto" p={3}>Tight</StackItem>
-          <StackItem bg="purple" minWidth="auto" p={3}>Spacing</StackItem>
-          <StackItem bg="gray" minWidth="auto" p={3}>Stack</StackItem>
-        </Stack>
-      </div>
-      
-      <div>
-        <Typography variant="h3" mb={4}>Medium Spacing (4)</Typography>
-        <Stack spacing={4}>
-          <StackItem minWidth="auto" p={3}>Normal</StackItem>
-          <StackItem bg="purple" minWidth="auto" p={3}>Spacing</StackItem>
-          <StackItem bg="gray" minWidth="auto" p={3}>Stack</StackItem>
-        </Stack>
-      </div>
-      
-      <div>
-        <Typography variant="h3" mb={4}>Large Spacing (8)</Typography>
-        <Stack spacing={8}>
-          <StackItem minWidth="auto" p={3}>Wide</StackItem>
-          <StackItem bg="purple" minWidth="auto" p={3}>Spacing</StackItem>
-          <StackItem bg="gray" minWidth="auto" p={3}>Stack</StackItem>
-        </Stack>
-      </div>
-    </div>
-  ),
-}
-
-export const WithDividers: Story = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
-      <div>
-        <Typography variant="h3" mb={4}>Vertical Stack with Default Dividers</Typography>
-        <Stack spacing={3} divider={true} bg="dark" p={6} borderRadius="md" maxWidth="300px">
-          <Box>
-            <Typography color="white" variant="h5">Profile Settings</Typography>
-            <Typography color="gray.light" variant="body2">Manage your account</Typography>
-          </Box>
-          <Box>
-            <Typography color="white" variant="h5">Privacy Settings</Typography>
-            <Typography color="gray.light" variant="body2">Control your privacy</Typography>
-          </Box>
-          <Box>
-            <Typography color="white" variant="h5">Notifications</Typography>
-            <Typography color="gray.light" variant="body2">Email and push settings</Typography>
-          </Box>
-        </Stack>
-      </div>
-      
-      <div>
-        <Typography variant="h3" mb={4}>Horizontal Stack with Default Dividers</Typography>
-        <Stack direction="horizontal" spacing={4} divider={true} bg="dark" p={4} borderRadius="md">
-          <StackItem minWidth="auto" p={3}>Save</StackItem>
-          <StackItem bg="gray" minWidth="auto" p={3}>Cancel</StackItem>
-          <StackItem bg="purple" minWidth="auto" p={3}>Delete</StackItem>
-        </Stack>
-      </div>
-    </div>
-  ),
-}
-
-export const CustomDividers: Story = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
-      <div>
-        <Typography variant="h3" mb={4}>Custom Divider Styling</Typography>
-        <Stack 
-          spacing={4} 
-          divider={<Divider color="medium" thickness="medium" />}
-          bg="dark" 
-          p={6} 
-          borderRadius="md"
-          maxWidth="400px"
-        >
-          <Box>
-            <Typography color="white" variant="h4">Dashboard</Typography>
-            <Typography color="gray.light">Overview of your data</Typography>
-          </Box>
-          <Box>
-            <Typography color="white" variant="h4">Analytics</Typography>
-            <Typography color="gray.light">Detailed insights and reports</Typography>
-          </Box>
-          <Box>
-            <Typography color="white" variant="h4">Settings</Typography>
-            <Typography color="gray.light">Configure your preferences</Typography>
-          </Box>
-        </Stack>
-      </div>
-      
-      <div>
-        <Typography variant="h3" mb={4}>Horizontal with Custom Divider</Typography>
-        <Stack 
-          direction="horizontal" 
-          spacing={6} 
-          divider={<Divider orientation="vertical" thickness="thick" color="dark" length="40px" />}
-          align="center"
-          bg="light" 
-          p={6} 
-          borderRadius="md"
-        >
-          <Box textAlign="center">
-            <Typography variant="h2" color="blue" fontWeight="bold">127</Typography>
-            <Typography variant="body2" color="gray.dark">Active Users</Typography>
-          </Box>
-          <Box textAlign="center">
-            <Typography variant="h2" color="purple" fontWeight="bold">89%</Typography>
-            <Typography variant="body2" color="gray.dark">Success Rate</Typography>
-          </Box>
-          <Box textAlign="center">
-            <Typography variant="h2" color="gray.dark" fontWeight="bold">2.4s</Typography>
-            <Typography variant="body2" color="gray.dark">Avg Response</Typography>
-          </Box>
-        </Stack>
-      </div>
-    </div>
-  ),
-}
-
-export const Alignment: Story = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
-      <div>
-        <Typography variant="h3" mb={4}>Align Start</Typography>
-        <Stack direction="horizontal" spacing={4} align="start" bg="dark" p={4} borderRadius="md">
-          <StackItem height="60px">Short</StackItem>
-          <StackItem bg="purple" height="100px">Tall Item</StackItem>
-          <StackItem bg="gray" height="80px">Medium</StackItem>
-        </Stack>
-      </div>
-      
-      <div>
-        <Typography variant="h3" mb={4}>Align Center</Typography>
-        <Stack direction="horizontal" spacing={4} align="center" bg="dark" p={4} borderRadius="md">
-          <StackItem height="60px">Short</StackItem>
-          <StackItem bg="purple" height="100px">Tall Item</StackItem>
-          <StackItem bg="gray" height="80px">Medium</StackItem>
-        </Stack>
-      </div>
-      
-      <div>
-        <Typography variant="h3" mb={4}>Align Stretch</Typography>
-        <Stack direction="horizontal" spacing={4} align="stretch" bg="dark" p={4} borderRadius="md" height="120px">
-          <StackItem>Stretched</StackItem>
-          <StackItem bg="purple">All Same</StackItem>
-          <StackItem bg="gray">Height</StackItem>
-        </Stack>
-      </div>
-    </div>
-  ),
-}
-
-export const Responsive: Story = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
-      <div>
-        <Typography variant="h3" mb={4}>Responsive Direction</Typography>
-        <Typography variant="body1" mb={4} color="gray.light">
-          Vertical on mobile, horizontal on tablet and up
+        <Typography variant="h3" color="white" style={{ marginBottom: '1rem' }}>Default</Typography>
+        <Typography color="white" style={{ marginBottom: '1.5rem', opacity: 0.8 }}>
+          Standard vertical stack with responsive spacing. Optimized for general content layouts.
         </Typography>
-        <Stack 
-          direction="vertical" 
-          md="horizontal" 
-          spacing={4} 
-          bg="dark" 
-          p={4} 
-          borderRadius="md"
-        >
-          <StackItem>Responsive 1</StackItem>
-          <StackItem bg="purple">Responsive 2</StackItem>
-          <StackItem bg="gray">Responsive 3</StackItem>
+        <Stack>
+          <Box variant="card">
+            <Typography color="white">Feature Overview</Typography>
+          </Box>
+          <Box variant="card">
+            <Typography color="white">Technical Specifications</Typography>
+          </Box>
+          <Box variant="card">
+            <Typography color="white">Getting Started Guide</Typography>
+          </Box>
         </Stack>
       </div>
-      
+
       <div>
-        <Typography variant="h3" mb={4}>Multi-breakpoint Responsive</Typography>
-        <Typography variant="body1" mb={4} color="gray.light">
-          Vertical → horizontal (md) → vertical (lg) → horizontal (xl)
+        <Typography variant="h3" color="white" style={{ marginBottom: '1rem' }}>Tight</Typography>
+        <Typography color="white" style={{ marginBottom: '1.5rem', opacity: 0.8 }}>
+          Minimal spacing, responsive layout. Perfect for compact UI elements and form controls.
         </Typography>
-        <Stack 
-          direction="vertical"
-          md="horizontal"
-          lg="vertical" 
-          xl="horizontal"
-          spacing={4} 
-          divider={true}
-          bg="dark" 
-          p={4} 
-          borderRadius="md"
-        >
-          <StackItem>Multi 1</StackItem>
-          <StackItem bg="purple">Multi 2</StackItem>
-          <StackItem bg="gray">Multi 3</StackItem>
+        <Stack variant="tight">
+          <Box variant="inline" style={{ background: '#4A9EFF', padding: '0.75rem 1.5rem', borderRadius: '0.375rem' }}>
+            <Typography color="white">Primary Action</Typography>
+          </Box>
+          <Box variant="inline" style={{ border: '1px solid #4A9EFF', padding: '0.75rem 1.5rem', borderRadius: '0.375rem' }}>
+            <Typography color="white">Secondary Action</Typography>
+          </Box>
+          <Box variant="inline" style={{ padding: '0.75rem 1.5rem' }}>
+            <Typography color="white">Tertiary Action</Typography>
+          </Box>
+        </Stack>
+      </div>
+
+      <div>
+        <Typography variant="h3" color="white" style={{ marginBottom: '1rem' }}>Loose</Typography>
+        <Typography color="white" style={{ marginBottom: '1.5rem', opacity: 0.8 }}>
+          Generous spacing for visual breathing room. Ideal for major content sections.
+        </Typography>
+        <Stack variant="loose">
+          <Box variant="section">
+            <Typography variant="h4" color="white" style={{ marginBottom: '0.5rem' }}>Gaming Performance</Typography>
+            <Typography color="white" style={{ opacity: 0.8 }}>
+              Ultra-low latency gaming optimized for competitive play
+            </Typography>
+          </Box>
+          <Box variant="section">
+            <Typography variant="h4" color="white" style={{ marginBottom: '0.5rem' }}>Advanced Security</Typography>
+            <Typography color="white" style={{ opacity: 0.8 }}>
+              Enterprise-grade protection and anti-cheat systems
+            </Typography>
+          </Box>
+        </Stack>
+      </div>
+
+      <div>
+        <Typography variant="h3" color="white" style={{ marginBottom: '1rem' }}>Divided</Typography>
+        <Typography color="white" style={{ marginBottom: '1.5rem', opacity: 0.8 }}>
+          Visual separators between elements. Great for menu items and structured lists.
+        </Typography>
+        <div style={{ maxWidth: '300px' }}>
+          <Stack variant="divided">
+            <Box variant="inline">
+              <Typography color="white" style={{ fontWeight: 600 }}>Profile Settings</Typography>
+              <Typography color="white" style={{ opacity: 0.7, fontSize: '0.9rem' }}>Manage your account</Typography>
+            </Box>
+            <Box variant="inline">
+              <Typography color="white" style={{ fontWeight: 600 }}>Privacy Controls</Typography>
+              <Typography color="white" style={{ opacity: 0.7, fontSize: '0.9rem' }}>Data and visibility</Typography>
+            </Box>
+            <Box variant="inline">
+              <Typography color="white" style={{ fontWeight: 600 }}>Notifications</Typography>
+              <Typography color="white" style={{ opacity: 0.7, fontSize: '0.9rem' }}>Email and alerts</Typography>
+            </Box>
+          </Stack>
+        </div>
+      </div>
+
+      <div>
+        <Typography variant="h3" color="white" style={{ marginBottom: '1rem' }}>Nav</Typography>
+        <Typography color="white" style={{ marginBottom: '1.5rem', opacity: 0.8 }}>
+          Optimized for navigation elements. Tight mobile, spaced horizontal on desktop.
+        </Typography>
+        <Stack variant="nav">
+          <Typography color="white" style={{ fontWeight: 600, color: '#4A9EFF' }}>Dashboard</Typography>
+          <Typography color="white" style={{ opacity: 0.8 }}>Players</Typography>
+          <Typography color="white" style={{ opacity: 0.8 }}>Tournaments</Typography>
+          <Typography color="white" style={{ opacity: 0.8 }}>Analytics</Typography>
+          <Typography color="white" style={{ opacity: 0.8 }}>Settings</Typography>
         </Stack>
       </div>
     </div>
   ),
 }
 
-export const CommonPatterns: Story = {
+export const PracticalExamples: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem', background: '#0a0a0a', padding: '2rem' }}>
       <div>
-        <Typography variant="h3" mb={4}>Navigation Menu</Typography>
-        <Stack direction="horizontal" spacing={0} bg="dark" borderRadius="md" p={1}>
-          <Box p={3} borderRadius="base" bg="blue" style={{ backgroundColor: '#4A9EFF' }}>
-            <Typography color="white" fontWeight="medium">Home</Typography>
+        <Typography variant="h3" color="white" style={{ marginBottom: '2rem' }}>Gaming Dashboard Layout</Typography>
+        <Stack variant="loose">
+          <Box variant="section">
+            <Typography variant="h4" color="white" style={{ marginBottom: '1rem' }}>Player Statistics</Typography>
+            <Stack variant="tight">
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem' }}>
+                <Box variant="card">
+                  <Typography color="white" style={{ fontWeight: 600, fontSize: '1.5rem' }}>2,847</Typography>
+                  <Typography color="white" style={{ opacity: 0.7, fontSize: '0.8rem' }}>Active Players</Typography>
+                </Box>
+                <Box variant="card">
+                  <Typography color="white" style={{ fontWeight: 600, fontSize: '1.5rem' }}>98.5%</Typography>
+                  <Typography color="white" style={{ opacity: 0.7, fontSize: '0.8rem' }}>Uptime</Typography>
+                </Box>
+                <Box variant="card">
+                  <Typography color="white" style={{ fontWeight: 600, fontSize: '1.5rem' }}>1.2ms</Typography>
+                  <Typography color="white" style={{ opacity: 0.7, fontSize: '0.8rem' }}>Avg Latency</Typography>
+                </Box>
+              </div>
+            </Stack>
           </Box>
-          <Box p={3} borderRadius="base">
-            <Typography color="gray.light">About</Typography>
-          </Box>
-          <Box p={3} borderRadius="base">
-            <Typography color="gray.light">Services</Typography>
-          </Box>
-          <Box p={3} borderRadius="base">
-            <Typography color="gray.light">Contact</Typography>
+          
+          <Box variant="section">
+            <Typography variant="h4" color="white" style={{ marginBottom: '1rem' }}>Tournament Schedule</Typography>
+            <Stack variant="divided">
+              <Box variant="inline">
+                <Typography color="white" style={{ fontWeight: 600 }}>RSPWN Championship Finals</Typography>
+                <Typography color="white" style={{ opacity: 0.7, fontSize: '0.9rem' }}>March 15, 2024 - 8:00 PM EST</Typography>
+              </Box>
+              <Box variant="inline">
+                <Typography color="white" style={{ fontWeight: 600 }}>Weekly Qualifier #12</Typography>
+                <Typography color="white" style={{ opacity: 0.7, fontSize: '0.9rem' }}>March 18, 2024 - 6:00 PM EST</Typography>
+              </Box>
+              <Box variant="inline">
+                <Typography color="white" style={{ fontWeight: 600 }}>Pro League Match Day</Typography>
+                <Typography color="white" style={{ opacity: 0.7, fontSize: '0.9rem' }}>March 20, 2024 - 7:30 PM EST</Typography>
+              </Box>
+            </Stack>
           </Box>
         </Stack>
       </div>
       
       <div>
-        <Typography variant="h3" mb={4}>Form Layout</Typography>
-        <Stack spacing={6} maxWidth="400px">
-          <Card>
-            <Typography variant="h5" mb={3}>User Profile</Typography>
-            <Stack spacing={4}>
-              <Box>
-                <Typography variant="body2" color="gray.light" mb={1}>Full Name</Typography>
-                <Box bg="gray.base" p={3} borderRadius="base">
-                  <Typography color="white">John Doe</Typography>
-                </Box>
+        <Typography variant="h3" color="white" style={{ marginBottom: '2rem' }}>Application Interface</Typography>
+        <Box variant="card" style={{ maxWidth: '400px' }}>
+          <Stack variant="default">
+            <Typography variant="h4" color="white">Account Settings</Typography>
+            
+            <Stack variant="divided">
+              <Box variant="inline">
+                <Typography color="white" style={{ fontWeight: 600 }}>Profile Information</Typography>
+                <Typography color="white" style={{ opacity: 0.7, fontSize: '0.9rem' }}>Update your personal details</Typography>
               </Box>
-              <Box>
-                <Typography variant="body2" color="gray.light" mb={1}>Email</Typography>
-                <Box bg="gray.base" p={3} borderRadius="base">
-                  <Typography color="white">john@example.com</Typography>
-                </Box>
+              <Box variant="inline">
+                <Typography color="white" style={{ fontWeight: 600 }}>Gaming Preferences</Typography>
+                <Typography color="white" style={{ opacity: 0.7, fontSize: '0.9rem' }}>Configure gameplay settings</Typography>
               </Box>
-              <Box>
-                <Typography variant="body2" color="gray.light" mb={1}>Role</Typography>
-                <Box bg="gray.base" p={3} borderRadius="base">
-                  <Typography color="white">Administrator</Typography>
-                </Box>
+              <Box variant="inline">
+                <Typography color="white" style={{ fontWeight: 600 }}>Privacy & Security</Typography>
+                <Typography color="white" style={{ opacity: 0.7, fontSize: '0.9rem' }}>Manage your data and security</Typography>
               </Box>
             </Stack>
-          </Card>
-        </Stack>
-      </div>
-
-      <div>
-        <Typography variant="h3" mb={4}>Action Bar</Typography>
-        <Stack 
-          direction="horizontal" 
-          spacing={2} 
-          divider={<Divider orientation="vertical" length="24px" />}
-          align="center"
-          bg="dark" 
-          p={4} 
-          borderRadius="md"
-        >
-          <StackItem bg="blue" minWidth="auto" p={2}>New</StackItem>
-          <StackItem bg="gray" minWidth="auto" p={2}>Edit</StackItem>
-          <StackItem bg="gray" minWidth="auto" p={2}>Delete</StackItem>
-          <StackItem bg="purple" minWidth="auto" p={2}>Export</StackItem>
-        </Stack>
-      </div>
-
-      <div>
-        <Typography variant="h3" mb={4}>Card Stack</Typography>
-        <Stack spacing={4} maxWidth="500px">
-          <Card>
-            <Typography variant="h5" mb={2}>Feature Release 2.1</Typography>
-            <Typography color="gray.light" mb={3}>
-              New dashboard improvements and performance optimizations
-            </Typography>
-            <Stack direction="horizontal" spacing={2}>
-              <Box bg="blue" p={1} px={3} borderRadius="base">
-                <Typography color="white" variant="caption">New</Typography>
+            
+            <Stack variant="tight">
+              <Box variant="inline" style={{ background: '#4A9EFF', padding: '0.75rem 1.5rem', borderRadius: '0.375rem', textAlign: 'center' }}>
+                <Typography color="white" style={{ fontWeight: 600 }}>Save Changes</Typography>
               </Box>
-              <Box bg="gray.base" p={1} px={3} borderRadius="base">
-                <Typography color="white" variant="caption">Important</Typography>
+              <Box variant="inline" style={{ border: '1px solid rgba(255,255,255,0.3)', padding: '0.75rem 1.5rem', borderRadius: '0.375rem', textAlign: 'center' }}>
+                <Typography color="white">Cancel</Typography>
               </Box>
             </Stack>
-          </Card>
-          
-          <Card>
-            <Typography variant="h5" mb={2}>Security Update</Typography>
-            <Typography color="gray.light" mb={3}>
-              Critical security patches and authentication improvements
-            </Typography>
-            <Stack direction="horizontal" spacing={2}>
-              <Box bg="purple" p={1} px={3} borderRadius="base">
-                <Typography color="white" variant="caption">Security</Typography>
-              </Box>
-              <Box bg="gray.base" p={1} px={3} borderRadius="base">
-                <Typography color="white" variant="caption">Critical</Typography>
-              </Box>
-            </Stack>
-          </Card>
-          
-          <Card>
-            <Typography variant="h5" mb={2}>UI Improvements</Typography>
-            <Typography color="gray.light" mb={3}>
-              Better mobile experience and accessibility enhancements
-            </Typography>
-            <Stack direction="horizontal" spacing={2}>
-              <Box bg="gray.base" p={1} px={3} borderRadius="base">
-                <Typography color="white" variant="caption">UI/UX</Typography>
-              </Box>
-              <Box bg="gray.base" p={1} px={3} borderRadius="base">
-                <Typography color="white" variant="caption">Mobile</Typography>
-              </Box>
-            </Stack>
-          </Card>
-        </Stack>
+          </Stack>
+        </Box>
       </div>
     </div>
   ),
 }
 
-export const WithWrapping: Story = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-      <div>
-        <Typography variant="h3" mb={4}>Horizontal Stack with Wrapping</Typography>
-        <Stack direction="horizontal" spacing={4} wrap bg="dark" p={4} borderRadius="md" maxWidth="400px">
-          <StackItem minWidth="150px">Item 1</StackItem>
-          <StackItem bg="purple" minWidth="150px">Item 2</StackItem>
-          <StackItem bg="gray" minWidth="150px">Item 3</StackItem>
-          <StackItem minWidth="150px">Item 4</StackItem>
-          <StackItem bg="blue" minWidth="150px">Item 5</StackItem>
-        </Stack>
-      </div>
-    </div>
-  ),
-}

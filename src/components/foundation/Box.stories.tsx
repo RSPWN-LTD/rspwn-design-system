@@ -10,13 +10,10 @@ const meta: Meta<typeof Box> = {
   },
   tags: ['autodocs'],
   argTypes: {
-    display: {
+    variant: {
       control: { type: 'select' },
-      options: ['block', 'inline', 'inline-block', 'flex', 'inline-flex', 'grid', 'inline-grid', 'none'],
-    },
-    bg: {
-      control: { type: 'select' },
-      options: ['black', 'white', 'dark', 'gray', 'light', 'blue', 'purple'],
+      options: ['default', 'card', 'section', 'inline'],
+      description: 'Pre-designed box variants with optimal styling for common use cases',
     },
   },
 }
@@ -26,92 +23,75 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    children: <Typography>Box content</Typography>,
-    p: 4,
-    bg: 'gray',
-    borderRadius: 'md',
+    children: <Typography>Default Box - Basic container with minimal styling</Typography>,
   },
 }
 
-export const Backgrounds: Story = {
+export const AllVariants: Story = {
   render: () => (
-    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-      <Box bg="black" p={4} borderRadius="md" border>
-        <Typography color="white">Black</Typography>
-      </Box>
-      <Box bg="dark" p={4} borderRadius="md">
-        <Typography color="white">Dark</Typography>
-      </Box>
-      <Box bg="gray" p={4} borderRadius="md">
-        <Typography color="white">Gray</Typography>
-      </Box>
-      <Box bg="light" p={4} borderRadius="md">
-        <Typography color="white">Light</Typography>
-      </Box>
-      <Box bg="blue" p={4} borderRadius="md">
-        <Typography color="white">Blue</Typography>
-      </Box>
-      <Box bg="purple" p={4} borderRadius="md">
-        <Typography color="white">Purple</Typography>
-      </Box>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+      <div>
+        <Typography variant="h3" style={{ marginBottom: '1rem' }}>Default</Typography>
+        <Box>
+          <Typography>Basic container with transparent background and standard padding. Perfect for general layout purposes.</Typography>
+        </Box>
+      </div>
+
+      <div>
+        <Typography variant="h3" style={{ marginBottom: '1rem' }}>Card</Typography>
+        <Box variant="card">
+          <Typography color="white">Elevated card with dark background, rounded corners, subtle border, and generous padding. Ideal for content containers and feature highlights.</Typography>
+        </Box>
+      </div>
+
+      <div>
+        <Typography variant="h3" style={{ marginBottom: '1rem' }}>Section</Typography>
+        <Box variant="section">
+          <Typography color="white">Full-width section with black background and large padding. Perfect for major content areas and page sections.</Typography>
+        </Box>
+      </div>
+
+      <div>
+        <Typography variant="h3" style={{ marginBottom: '1rem' }}>Inline</Typography>
+        <Typography>
+          Use inline boxes like <Box variant="inline" as="span"><Typography as="span" color="white">this inline element</Typography></Box> within text content for badges, tags, or inline highlights.
+        </Typography>
+      </div>
     </div>
   ),
 }
 
-export const Spacing: Story = {
+export const InteractiveBox: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <Box bg="gray" p={2} borderRadius="md">
-        <Typography>Padding 2</Typography>
+      <Typography variant="h3">Clickable Boxes</Typography>
+      <Box variant="card" onClick={() => alert('Card clicked!')}>
+        <Typography color="white">Click me! This card has hover and active states.</Typography>
       </Box>
-      <Box bg="gray" p={4} borderRadius="md">
-        <Typography>Padding 4</Typography>
-      </Box>
-      <Box bg="gray" p={6} borderRadius="md">
-        <Typography>Padding 6</Typography>
-      </Box>
-      <Box bg="gray" p={8} borderRadius="md">
-        <Typography>Padding 8</Typography>
+      
+      <Box variant="inline" onClick={() => alert('Inline clicked!')} as="button">
+        <Typography as="span" color="white">Clickable inline box</Typography>
       </Box>
     </div>
   ),
 }
 
-export const FlexLayout: Story = {
+export const SemanticElements: Story = {
   render: () => (
-    <Box display="flex" gap={4} bg="dark" p={4} borderRadius="md">
-      <Box bg="blue" p={4} borderRadius="base" flex="1">
-        <Typography color="white">Flex 1</Typography>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <Typography variant="h3">Semantic HTML Elements</Typography>
+      
+      <Box variant="section" as="section">
+        <Typography color="white">This is a semantic &lt;section&gt; element</Typography>
       </Box>
-      <Box bg="purple" p={4} borderRadius="base" flex="1">
-        <Typography color="white">Flex 1</Typography>
+      
+      <Box variant="card" as="article">
+        <Typography color="white">This is a semantic &lt;article&gt; element</Typography>
       </Box>
-      <Box bg="gray" p={4} borderRadius="base" flex="2">
-        <Typography color="white">Flex 2</Typography>
+      
+      <Box as="aside">
+        <Typography>This is a semantic &lt;aside&gt; element</Typography>
       </Box>
-    </Box>
-  ),
-}
-
-export const GridLayout: Story = {
-  render: () => (
-    <Box
-      display="grid"
-      gridTemplateColumns="repeat(3, 1fr)"
-      gap={4}
-      bg="dark"
-      p={4}
-      borderRadius="md"
-    >
-      <Box bg="blue" p={4} borderRadius="base">
-        <Typography color="white">Grid 1</Typography>
-      </Box>
-      <Box bg="purple" p={4} borderRadius="base">
-        <Typography color="white">Grid 2</Typography>
-      </Box>
-      <Box bg="gray" p={4} borderRadius="base">
-        <Typography color="white">Grid 3</Typography>
-      </Box>
-    </Box>
+    </div>
   ),
 }

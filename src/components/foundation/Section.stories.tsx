@@ -2,8 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Section } from './Section'
 import { Box } from './Box'
 import { Typography } from './Typography'
-import { Stack } from './Stack'
-import { Grid } from './Grid'
 
 const meta: Meta<typeof Section> = {
   title: 'Foundation/Section',
@@ -13,29 +11,15 @@ const meta: Meta<typeof Section> = {
   },
   tags: ['autodocs'],
   argTypes: {
-    as: {
-      control: { type: 'select' },
-      options: ['section', 'header', 'main', 'aside', 'footer', 'article'],
-    },
     variant: {
       control: { type: 'select' },
       options: ['default', 'hero', 'feature', 'content', 'footer'],
+      description: 'Pre-designed section variants with optimal styling and built-in containers for different page areas',
     },
-    background: {
+    as: {
       control: { type: 'select' },
-      options: ['default', 'subtle', 'accent', 'dark', 'transparent'],
-    },
-    bordered: {
-      control: { type: 'select' },
-      options: [false, true, 'top', 'bottom', 'both'],
-    },
-    minHeight: {
-      control: { type: 'select' },
-      options: ['auto', 'screen', '400px', '600px'],
-    },
-    container: {
-      control: { type: 'select' },
-      options: [false, true, 'sm', 'md', 'lg', 'xl', '2xl', 'prose', 'narrow', 'wide', 'fluid'],
+      options: ['section', 'header', 'main', 'aside', 'footer', 'article'],
+      description: 'Semantic HTML element type',
     },
   },
 }
@@ -43,106 +27,97 @@ const meta: Meta<typeof Section> = {
 export default meta
 type Story = StoryObj<typeof Section>
 
-const ContentBox = ({ children, height = "auto" }: { children: React.ReactNode, height?: string }) => (
-  <Box bg="blue" p={6} borderRadius="md" height={height} display="flex" alignItems="center" justifyContent="center">
-    <Typography color="white" align="center">{children}</Typography>
-  </Box>
-)
-
 export const Default: Story = {
   args: {
-    variant: 'default',
-    container: true,
+    children: (
+      <Typography color="white">
+        Default Section - Basic section with standard padding and built-in container. Perfect for general content areas.
+      </Typography>
+    ),
   },
-  render: (args) => (
-    <Section {...args}>
-      <ContentBox>
-        Default Section - Basic section with standard padding and transparent background
-      </ContentBox>
-    </Section>
-  ),
 }
 
-export const Variants: Story = {
+export const AllVariants: Story = {
   render: () => (
     <div>
-      <Section variant="hero" container="xl">
-        <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" textAlign="center">
-          <Typography variant="h1" color="white" mb={4}>Hero Section</Typography>
-          <Typography color="gray.light" mb={6} maxWidth="600px">
-            Full-height hero section with dark background, perfect for landing page headers.
-            Features large padding and center-aligned content.
+      <Section variant="hero">
+        <div style={{ textAlign: 'center' }}>
+          <Typography variant="h1" color="white" style={{ marginBottom: '1.5rem' }}>
+            Hero Section
           </Typography>
-          <Box bg="blue" p={4} borderRadius="base" minWidth="160px">
-            <Typography color="white" fontWeight="medium" align="center">Call to Action</Typography>
+          <Typography color="white" style={{ marginBottom: '2rem', opacity: 0.8, fontSize: '1.25rem' }}>
+            Full-height hero section with dark background and center alignment. Perfect for landing page headers and major announcements.
+          </Typography>
+          <Box variant="inline" style={{ background: '#4A9EFF', padding: '1rem 2rem', borderRadius: '0.5rem' }}>
+            <Typography color="white" style={{ fontWeight: 600 }}>Get Started</Typography>
           </Box>
-        </Box>
+        </div>
       </Section>
       
-      <Section variant="feature" container="lg">
-        <Stack spacing={8} align="center">
-          <Typography variant="h2" align="center" color="dark">Feature Section</Typography>
-          <Typography align="center" color="gray.dark" maxWidth="600px">
-            Feature section with subtle background, ideal for showcasing key features and benefits.
+      <Section variant="feature">
+        <div style={{ textAlign: 'center' }}>
+          <Typography variant="h2" color="white" style={{ marginBottom: '1.5rem' }}>
+            Feature Section
           </Typography>
-          <Grid columns={{ xs: 1, md: 3 }} gap={6} width="100%">
-            <ContentBox>Feature 1</ContentBox>
-            <ContentBox>Feature 2</ContentBox>
-            <ContentBox>Feature 3</ContentBox>
-          </Grid>
-        </Stack>
+          <Typography color="white" style={{ marginBottom: '2rem', opacity: 0.8 }}>
+            Feature section with dark background, ideal for showcasing key features and benefits. Includes generous padding and optimal contrast.
+          </Typography>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem' }}>
+            <Box variant="card">
+              <Typography color="white" style={{ fontWeight: 600, marginBottom: '0.5rem' }}>Lightning Fast</Typography>
+              <Typography color="white" style={{ opacity: 0.8 }}>Optimized performance for competitive gaming</Typography>
+            </Box>
+            <Box variant="card">
+              <Typography color="white" style={{ fontWeight: 600, marginBottom: '0.5rem' }}>Secure Platform</Typography>
+              <Typography color="white" style={{ opacity: 0.8 }}>Enterprise-grade security and anti-cheat</Typography>
+            </Box>
+            <Box variant="card">
+              <Typography color="white" style={{ fontWeight: 600, marginBottom: '0.5rem' }}>24/7 Support</Typography>
+              <Typography color="white" style={{ opacity: 0.8 }}>Round-the-clock technical assistance</Typography>
+            </Box>
+          </div>
+        </div>
       </Section>
       
-      <Section variant="content" container="prose">
-        <Stack spacing={6}>
-          <Typography variant="h2" color="dark">Content Section</Typography>
-          <Typography color="gray.dark">
-            Content section optimized for readability with prose container width.
-            Perfect for articles, blog posts, and text-heavy content.
-          </Typography>
-          <Typography color="gray.dark">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </Typography>
-        </Stack>
+      <Section variant="content">
+        <Typography variant="h2" color="white" style={{ marginBottom: '2rem' }}>
+          Content Section
+        </Typography>
+        <Typography color="white" style={{ marginBottom: '1.5rem', lineHeight: 1.7, opacity: 0.9 }}>
+          Content section with prose container width, optimized for readability. Perfect for articles, blog posts, and text-heavy content where reading experience is paramount.
+        </Typography>
+        <Typography color="white" style={{ marginBottom: '1.5rem', lineHeight: 1.7, opacity: 0.9 }}>
+          The prose variant automatically constrains content to an optimal reading width of 65 characters, ensuring comfortable line lengths that don't strain the eyes. This makes it ideal for documentation, news articles, and any long-form written content.
+        </Typography>
       </Section>
       
-      <Section variant="footer" container="xl">
-        <Grid columns={{ xs: 1, md: 4 }} gap={8}>
-          <Stack spacing={4}>
-            <Typography variant="h5" color="white">Company</Typography>
-            <Stack spacing={2}>
-              <Typography color="gray.light">About</Typography>
-              <Typography color="gray.light">Careers</Typography>
-              <Typography color="gray.light">Contact</Typography>
-            </Stack>
-          </Stack>
-          <Stack spacing={4}>
-            <Typography variant="h5" color="white">Product</Typography>
-            <Stack spacing={2}>
-              <Typography color="gray.light">Features</Typography>
-              <Typography color="gray.light">Pricing</Typography>
-              <Typography color="gray.light">Support</Typography>
-            </Stack>
-          </Stack>
-          <Stack spacing={4}>
-            <Typography variant="h5" color="white">Resources</Typography>
-            <Stack spacing={2}>
-              <Typography color="gray.light">Documentation</Typography>
-              <Typography color="gray.light">Blog</Typography>
-              <Typography color="gray.light">Community</Typography>
-            </Stack>
-          </Stack>
-          <Stack spacing={4}>
-            <Typography variant="h5" color="white">Legal</Typography>
-            <Stack spacing={2}>
-              <Typography color="gray.light">Privacy</Typography>
-              <Typography color="gray.light">Terms</Typography>
-              <Typography color="gray.light">Security</Typography>
-            </Stack>
-          </Stack>
-        </Grid>
+      <Section variant="footer">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem' }}>
+          <div>
+            <Typography variant="h4" color="white" style={{ marginBottom: '1rem' }}>RSPWN</Typography>
+            <Typography color="white" style={{ opacity: 0.7 }}>
+              The ultimate gaming platform for professionals and enthusiasts.
+            </Typography>
+          </div>
+          <div>
+            <Typography variant="h5" color="white" style={{ marginBottom: '1rem' }}>Product</Typography>
+            <Typography color="white" style={{ opacity: 0.7, fontSize: '0.9rem', lineHeight: 2 }}>
+              Features<br />Pricing<br />API<br />Support
+            </Typography>
+          </div>
+          <div>
+            <Typography variant="h5" color="white" style={{ marginBottom: '1rem' }}>Company</Typography>
+            <Typography color="white" style={{ opacity: 0.7, fontSize: '0.9rem', lineHeight: 2 }}>
+              About<br />Careers<br />News<br />Contact
+            </Typography>
+          </div>
+          <div>
+            <Typography variant="h5" color="white" style={{ marginBottom: '1rem' }}>Legal</Typography>
+            <Typography color="white" style={{ opacity: 0.7, fontSize: '0.9rem', lineHeight: 2 }}>
+              Privacy<br />Terms<br />Security<br />Compliance
+            </Typography>
+          </div>
+        </div>
       </Section>
     </div>
   ),
@@ -151,31 +126,25 @@ export const Variants: Story = {
 export const SemanticElements: Story = {
   render: () => (
     <div>
-      <Section as="header" variant="default" container="xl" background="dark">
-        <Box display="flex" justifyContent="between" alignItems="center" py={4}>
+      <Section as="header" variant="default">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography variant="h4" color="white">RSPWN</Typography>
-          <Box display="flex" gap={6}>
-            <Typography color="gray.light">Home</Typography>
-            <Typography color="gray.light">About</Typography>
-            <Typography color="gray.light">Contact</Typography>
-          </Box>
-        </Box>
+          <div style={{ display: 'flex', gap: '2rem' }}>
+            <Typography color="white" style={{ opacity: 0.8 }}>Home</Typography>
+            <Typography color="white" style={{ opacity: 0.8 }}>About</Typography>
+            <Typography color="white" style={{ opacity: 0.8 }}>Contact</Typography>
+          </div>
+        </div>
       </Section>
       
-      <Section as="main" variant="content" container="lg">
-        <ContentBox height="300px">
-          Main Content Area - Uses semantic &lt;main&gt; element
-        </ContentBox>
+      <Section as="main" variant="content">
+        <Typography color="white">
+          Main Content Area - Uses semantic &lt;main&gt; element with prose container for optimal readability
+        </Typography>
       </Section>
       
-      <Section as="aside" variant="feature" container="narrow">
-        <ContentBox height="200px">
-          Sidebar Content - Uses semantic &lt;aside&gt; element
-        </ContentBox>
-      </Section>
-      
-      <Section as="footer" variant="footer" container="xl">
-        <Typography color="gray.light" align="center">
+      <Section as="footer" variant="footer">
+        <Typography color="white" style={{ textAlign: 'center', opacity: 0.7 }}>
           © 2024 RSPWN. All rights reserved. - Uses semantic &lt;footer&gt; element
         </Typography>
       </Section>
@@ -183,297 +152,99 @@ export const SemanticElements: Story = {
   ),
 }
 
-export const BackgroundOptions: Story = {
-  render: () => (
-    <Stack spacing={0}>
-      <Section background="default" paddingY={8} container="lg">
-        <ContentBox>Default Background (White)</ContentBox>
-      </Section>
-      
-      <Section background="subtle" paddingY={8} container="lg">
-        <Box bg="dark" p={6} borderRadius="md" display="flex" alignItems="center" justifyContent="center">
-          <Typography color="white" align="center">Subtle Background (Light Gray)</Typography>
-        </Box>
-      </Section>
-      
-      <Section background="dark" paddingY={8} container="lg">
-        <ContentBox>Dark Background</ContentBox>
-      </Section>
-      
-      <Section background="accent" paddingY={8} container="lg">
-        <Box bg="white" p={6} borderRadius="md" display="flex" alignItems="center" justifyContent="center">
-          <Typography color="dark" align="center">Accent Background (Blue)</Typography>
-        </Box>
-      </Section>
-      
-      <Section background="transparent" paddingY={8} container="lg" style={{ backgroundColor: '#f0f0f0' }}>
-        <ContentBox>Transparent Background</ContentBox>
-      </Section>
-    </Stack>
-  ),
-}
-
-export const Borders: Story = {
-  render: () => (
-    <Stack spacing={0}>
-      <Section paddingY={6} container="lg" bordered="top">
-        <ContentBox>Top Border Only</ContentBox>
-      </Section>
-      
-      <Section paddingY={6} container="lg" bordered="bottom">
-        <ContentBox>Bottom Border Only</ContentBox>
-      </Section>
-      
-      <Section paddingY={6} container="lg" bordered="both">
-        <ContentBox>Top and Bottom Borders</ContentBox>
-      </Section>
-      
-      <Section paddingY={6} container="lg" bordered={true}>
-        <ContentBox>Boolean Border (Both)</ContentBox>
-      </Section>
-    </Stack>
-  ),
-}
-
-export const ContainerIntegration: Story = {
-  render: () => (
-    <Stack spacing={8}>
-      <div>
-        <Typography variant="h3" mb={4} align="center" color="dark">Container Integration</Typography>
-        
-        <Section paddingY={6} background="subtle">
-          <ContentBox>No Container - Full Width</ContentBox>
-        </Section>
-      </div>
-      
-      <Section paddingY={6} container="sm" background="subtle">
-        <ContentBox>Small Container (640px)</ContentBox>
-      </Section>
-      
-      <Section paddingY={6} container="lg" background="subtle">
-        <ContentBox>Large Container (1024px)</ContentBox>
-      </Section>
-      
-      <Section paddingY={6} container="prose" background="subtle">
-        <Box bg="dark" p={6} borderRadius="md">
-          <Typography color="white">
-            Prose Container (65ch) - Optimized for reading. This text demonstrates 
-            the optimal line length for readability. The prose container ensures 
-            text doesn't get too wide, making it easier to read long-form content.
-          </Typography>
-        </Box>
-      </Section>
-      
-      <Section paddingY={6} container="wide" background="subtle">
-        <ContentBox>Wide Container (1536px) - Great for dashboards</ContentBox>
-      </Section>
-    </Stack>
-  ),
-}
-
-export const ResponsivePadding: Story = {
-  render: () => (
-    <Stack spacing={6}>
-      <Section 
-        paddingY={{ xs: '4', md: '8', lg: '16' }}
-        container="lg"
-        background="subtle"
-      >
-        <ContentBox>
-          Responsive Vertical Padding<br/>
-          XS: 16px, MD: 32px, LG: 64px
-        </ContentBox>
-      </Section>
-      
-      <Section 
-        paddingY={12}
-        marginY={{ xs: '4', lg: '8' }}
-        container="lg"
-        background="dark"
-      >
-        <ContentBox>
-          Fixed Padding with Responsive Margin<br/>
-          Padding: 48px, Margin: 16px → 32px
-        </ContentBox>
-      </Section>
-    </Stack>
-  ),
-}
-
-export const MinHeight: Story = {
-  render: () => (
-    <Stack spacing={0}>
-      <Section minHeight="screen" background="dark" container="xl">
-        <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" height="100%">
-          <Typography variant="h1" color="white" mb={4}>Full Screen Height</Typography>
-          <Typography color="gray.light" align="center">
-            This section uses minHeight="screen" to fill the viewport height
-          </Typography>
-        </Box>
-      </Section>
-      
-      <Section minHeight="400px" background="subtle" container="lg">
-        <Box display="flex" alignItems="center" justifyContent="center" height="100%">
-          <ContentBox>Fixed Height (400px)</ContentBox>
-        </Box>
-      </Section>
-    </Stack>
-  ),
-}
-
 export const LandingPageExample: Story = {
   render: () => (
     <div>
-      {/* Hero Section */}
-      <Section variant="hero" container="xl">
-        <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" textAlign="center">
-          <Typography variant="h1" color="white" mb={6} style={{ fontSize: '3.5rem' }}>
+      <Section variant="hero">
+        <div style={{ textAlign: 'center' }}>
+          <Typography variant="h1" color="white" style={{ fontSize: '3.5rem', marginBottom: '2rem' }}>
             Welcome to RSPWN
           </Typography>
-          <Typography color="gray.light" mb={8} maxWidth="600px" variant="h5">
+          <Typography color="white" style={{ fontSize: '1.25rem', marginBottom: '3rem', opacity: 0.8 }}>
             The ultimate gaming platform designed for professionals and enthusiasts alike.
             Experience next-generation gaming with our cutting-edge technology.
           </Typography>
-          <Stack direction="horizontal" spacing={4} align="center">
-            <Box bg="blue" p={4} borderRadius="base" minWidth="160px">
-              <Typography color="white" fontWeight="medium" align="center">Get Started</Typography>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Box variant="inline" style={{ background: '#4A9EFF', padding: '1rem 2rem', borderRadius: '0.5rem' }}>
+              <Typography color="white" style={{ fontWeight: 600 }}>Get Started</Typography>
             </Box>
-            <Box border="1px solid" borderColor="gray.base" p={4} borderRadius="base" minWidth="160px">
-              <Typography color="gray.light" fontWeight="medium" align="center">Learn More</Typography>
+            <Box variant="inline" style={{ border: '1px solid #4A9EFF', padding: '1rem 2rem', borderRadius: '0.5rem' }}>
+              <Typography color="white" style={{ fontWeight: 600 }}>Learn More</Typography>
             </Box>
-          </Stack>
-        </Box>
+          </div>
+        </div>
       </Section>
 
-      {/* Features Section */}
-      <Section variant="feature" container="xl">
-        <Stack spacing={12} align="center">
-          <Stack spacing={4} align="center" maxWidth="800px">
-            <Typography variant="h2" align="center" color="dark">
-              Everything You Need
-            </Typography>
-            <Typography align="center" color="gray.dark" variant="body1">
-              Comprehensive tools and features designed to elevate your gaming experience
-              to professional levels with industry-leading performance.
-            </Typography>
-          </Stack>
-          
-          <Grid columns={{ xs: 1, md: 3 }} gap={8}>
-            <Stack spacing={4} align="center">
-              <Box bg="blue" p={4} borderRadius="full" width="80px" height="80px" display="flex" alignItems="center" justifyContent="center">
-                <Typography color="white" variant="h3">⚡</Typography>
-              </Box>
-              <Typography variant="h4" color="dark" align="center">Lightning Fast</Typography>
-              <Typography color="gray.dark" align="center">
-                Ultra-low latency gaming with optimized performance for competitive play.
-              </Typography>
-            </Stack>
-            
-            <Stack spacing={4} align="center">
-              <Box bg="purple" p={4} borderRadius="full" width="80px" height="80px" display="flex" alignItems="center" justifyContent="center">
-                <Typography color="white" variant="h3">🎯</Typography>
-              </Box>
-              <Typography variant="h4" color="dark" align="center">Precision Control</Typography>
-              <Typography color="gray.dark" align="center">
-                Advanced input systems and customizable controls for every gaming style.
-              </Typography>
-            </Stack>
-            
-            <Stack spacing={4} align="center">
-              <Box bg="gray.dark" p={4} borderRadius="full" width="80px" height="80px" display="flex" alignItems="center" justifyContent="center">
-                <Typography color="white" variant="h3">🛡️</Typography>
-              </Box>
-              <Typography variant="h4" color="dark" align="center">Secure Platform</Typography>
-              <Typography color="gray.dark" align="center">
-                Enterprise-grade security with advanced anti-cheat and data protection.
-              </Typography>
-            </Stack>
-          </Grid>
-        </Stack>
-      </Section>
-
-      {/* Stats Section */}
-      <Section paddingY={16} background="dark" container="xl">
-        <Grid columns={{ xs: 1, sm: 2, lg: 4 }} gap={8}>
-          <Stack spacing={2} align="center">
-            <Typography variant="h1" color="blue" fontWeight="bold">1M+</Typography>
-            <Typography color="gray.light" align="center">Active Players</Typography>
-          </Stack>
-          <Stack spacing={2} align="center">
-            <Typography variant="h1" color="blue" fontWeight="bold">99.9%</Typography>
-            <Typography color="gray.light" align="center">Uptime</Typography>
-          </Stack>
-          <Stack spacing={2} align="center">
-            <Typography variant="h1" color="blue" fontWeight="bold">50+</Typography>
-            <Typography color="gray.light" align="center">Game Titles</Typography>
-          </Stack>
-          <Stack spacing={2} align="center">
-            <Typography variant="h1" color="blue" fontWeight="bold">24/7</Typography>
-            <Typography color="gray.light" align="center">Support</Typography>
-          </Stack>
-        </Grid>
-      </Section>
-
-      {/* CTA Section */}
-      <Section paddingY={20} background="subtle" container="narrow">
-        <Stack spacing={8} align="center">
-          <Typography variant="h2" align="center" color="dark">
-            Ready to Level Up?
+      <Section variant="feature">
+        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <Typography variant="h2" color="white" style={{ marginBottom: '1rem' }}>
+            Everything You Need
           </Typography>
-          <Typography align="center" color="gray.dark" maxWidth="500px">
-            Join millions of gamers already using RSPWN to dominate the competition.
-            Start your journey today with our free tier.
+          <Typography color="white" style={{ opacity: 0.8, fontSize: '1.125rem' }}>
+            Comprehensive tools and features designed to elevate your gaming experience
           </Typography>
-          <Box bg="blue" p={5} borderRadius="base" minWidth="200px">
-            <Typography color="white" fontWeight="medium" align="center" variant="h5">
-              Start Free Trial
+        </div>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ background: '#4A9EFF', width: '80px', height: '80px', borderRadius: '50%', margin: '0 auto 1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Typography style={{ fontSize: '2rem' }}>⚡</Typography>
+            </div>
+            <Typography variant="h4" color="white" style={{ marginBottom: '1rem' }}>Lightning Fast</Typography>
+            <Typography color="white" style={{ opacity: 0.8 }}>
+              Ultra-low latency gaming with optimized performance for competitive play.
             </Typography>
-          </Box>
-        </Stack>
+          </div>
+          
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ background: '#8B5CF6', width: '80px', height: '80px', borderRadius: '50%', margin: '0 auto 1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Typography style={{ fontSize: '2rem' }}>🎯</Typography>
+            </div>
+            <Typography variant="h4" color="white" style={{ marginBottom: '1rem' }}>Precision Control</Typography>
+            <Typography color="white" style={{ opacity: 0.8 }}>
+              Advanced input systems and customizable controls for every gaming style.
+            </Typography>
+          </div>
+          
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ background: '#374151', width: '80px', height: '80px', borderRadius: '50%', margin: '0 auto 1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Typography style={{ fontSize: '2rem' }}>🛡️</Typography>
+            </div>
+            <Typography variant="h4" color="white" style={{ marginBottom: '1rem' }}>Secure Platform</Typography>
+            <Typography color="white" style={{ opacity: 0.8 }}>
+              Enterprise-grade security with advanced anti-cheat and data protection.
+            </Typography>
+          </div>
+        </div>
       </Section>
 
-      {/* Footer */}
-      <Section variant="footer" container="xl">
-        <Stack spacing={8}>
-          <Grid columns={{ xs: 1, sm: 2, lg: 4 }} gap={8}>
-            <Stack spacing={4}>
-              <Typography variant="h4" color="white">RSPWN</Typography>
-              <Typography color="gray.light">
-                The ultimate gaming platform for professionals and enthusiasts.
-              </Typography>
-            </Stack>
-            <Stack spacing={4}>
-              <Typography variant="h5" color="white">Product</Typography>
-              <Stack spacing={2}>
-                <Typography color="gray.light">Features</Typography>
-                <Typography color="gray.light">Pricing</Typography>
-                <Typography color="gray.light">API</Typography>
-              </Stack>
-            </Stack>
-            <Stack spacing={4}>
-              <Typography variant="h5" color="white">Support</Typography>
-              <Stack spacing={2}>
-                <Typography color="gray.light">Documentation</Typography>
-                <Typography color="gray.light">Help Center</Typography>
-                <Typography color="gray.light">Contact</Typography>
-              </Stack>
-            </Stack>
-            <Stack spacing={4}>
-              <Typography variant="h5" color="white">Company</Typography>
-              <Stack spacing={2}>
-                <Typography color="gray.light">About</Typography>
-                <Typography color="gray.light">Careers</Typography>
-                <Typography color="gray.light">News</Typography>
-              </Stack>
-            </Stack>
-          </Grid>
-          
-          <Box borderTop="1px solid" borderColor="gray.base" pt={6}>
-            <Typography color="gray.light" align="center">
-              © 2024 RSPWN. All rights reserved.
+      <Section variant="footer">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem' }}>
+          <div>
+            <Typography variant="h4" color="white" style={{ marginBottom: '1rem' }}>RSPWN</Typography>
+            <Typography color="white" style={{ opacity: 0.7 }}>
+              The ultimate gaming platform for professionals and enthusiasts.
             </Typography>
-          </Box>
-        </Stack>
+          </div>
+          <div>
+            <Typography variant="h5" color="white" style={{ marginBottom: '1rem' }}>Product</Typography>
+            <Typography color="white" style={{ opacity: 0.7, fontSize: '0.9rem', lineHeight: 2 }}>
+              Features<br />Pricing<br />API<br />Support
+            </Typography>
+          </div>
+          <div>
+            <Typography variant="h5" color="white" style={{ marginBottom: '1rem' }}>Company</Typography>
+            <Typography color="white" style={{ opacity: 0.7, fontSize: '0.9rem', lineHeight: 2 }}>
+              About<br />Careers<br />News<br />Contact
+            </Typography>
+          </div>
+        </div>
+        
+        <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.2)', marginTop: '2rem', paddingTop: '2rem' }}>
+          <Typography color="white" style={{ textAlign: 'center', opacity: 0.7 }}>
+            © 2024 RSPWN. All rights reserved.
+          </Typography>
+        </div>
       </Section>
     </div>
   ),
