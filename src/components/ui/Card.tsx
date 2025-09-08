@@ -82,14 +82,14 @@ const CardFooter = styled(Box)`
 `
 
 // Create wrapper components with default padding for better AI usage
-const CardHeaderWithDefaults: React.FC<BoxProps> = ({ p = 6, ...props }) => 
-  <CardHeader p={p} {...props} />
+const CardHeaderWithDefaults: React.FC<BoxProps> = (props) => 
+  <CardHeader {...props} />
 
-const CardContentWithDefaults: React.FC<BoxProps> = ({ p = 6, ...props }) => 
-  <CardContent p={p} {...props} />
+const CardContentWithDefaults: React.FC<BoxProps> = (props) => 
+  <CardContent {...props} />
 
-const CardFooterWithDefaults: React.FC<BoxProps> = ({ p = 6, ...props }) => 
-  <CardFooter p={p} {...props} />
+const CardFooterWithDefaults: React.FC<BoxProps> = (props) => 
+  <CardFooter {...props} />
 
 export const Card: React.FC<CardProps> & {
   Header: React.FC<BoxProps>
@@ -100,7 +100,6 @@ export const Card: React.FC<CardProps> & {
   hoverable = false,
   clickable = false,
   children,
-  p = 6,
   ...props
 }) => {
   return (
@@ -108,7 +107,6 @@ export const Card: React.FC<CardProps> & {
       variant={variant}
       hoverable={hoverable}
       clickable={clickable}
-      p={p}
       {...props}
     >
       {children}

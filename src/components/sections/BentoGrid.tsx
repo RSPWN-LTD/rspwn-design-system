@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { Typography } from '../foundation/Typography'
 import { Container } from '../foundation/Container'
-import { Stack } from '../foundation/Stack'
 
 export interface BentoGridItem {
   id: string
@@ -277,12 +276,12 @@ export const BentoGrid: React.FC<BentoGridProps> = ({
         {(title || subtitle) && (
           <StyledSectionHeader>
             {title && (
-              <Typography variant="heading" style={{ marginBottom: '1rem' }}>
+              <Typography variant="heading">
                 {title}
               </Typography>
             )}
             {subtitle && (
-              <Typography color="muted" style={{ fontSize: '1.125rem', maxWidth: '42rem', margin: '0 auto' }}>
+              <Typography color="muted">
                 {subtitle}
               </Typography>
             )}
@@ -309,23 +308,11 @@ export const BentoGrid: React.FC<BentoGridProps> = ({
                       </StyledItemIcon>
                     )}
                     <div style={{ flex: 1 }}>
-                      <Typography 
-                        variant="subheading" 
-                        style={{ 
-                          marginBottom: '0.5rem',
-                          fontSize: item.size === 'large' ? '1.5rem' : '1.125rem'
-                        }}
-                      >
+                      <Typography variant="subheading">
                         {item.title}
                       </Typography>
                       {item.description && (
-                        <Typography 
-                          color="muted" 
-                          style={{ 
-                            fontSize: '0.875rem',
-                            lineHeight: 1.5
-                          }}
-                        >
+                        <Typography color="muted">
                           {item.description}
                         </Typography>
                       )}

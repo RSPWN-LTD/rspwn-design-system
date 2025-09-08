@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { Typography } from '../foundation/Typography'
 import { Container } from '../foundation/Container'
-import { Stack } from '../foundation/Stack'
 
 export interface CTAButton {
   text: string
@@ -418,18 +417,7 @@ export const CallToAction: React.FC<CallToActionProps> = ({
         <StyledCTAContent $variant={variant}>
           <StyledCTAHeader $variant={variant}>
             {subtitle && (
-              <Typography 
-                variant="label" 
-                style={{ 
-                  color: variant === 'banner' ? '#4A9EFF' : '#8B5CF6',
-                  marginBottom: '1rem',
-                  display: 'block',
-                  fontSize: '0.875rem',
-                  fontWeight: 600,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em'
-                }}
-              >
+              <Typography variant="label">
                 {subtitle}
               </Typography>
             )}
@@ -439,16 +427,7 @@ export const CallToAction: React.FC<CallToActionProps> = ({
             </StyledCTATitle>
             
             {description && (
-              <Typography 
-                color="muted" 
-                style={{ 
-                  fontSize: '1rem',
-                  lineHeight: 1.6,
-                  maxWidth: variant === 'centered' ? '36rem' : variant === 'split' ? '24rem' : 'none',
-                  margin: variant === 'centered' ? '0 auto' : '0',
-                  marginBottom: variant === 'split' ? '0' : '1.5rem'
-                }}
-              >
+              <Typography color="muted">
                 {description}
               </Typography>
             )}

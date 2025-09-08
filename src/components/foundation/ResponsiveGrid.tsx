@@ -5,9 +5,9 @@ import { Grid, GridProps } from './Grid'
  * ResponsiveGrid provides common responsive grid patterns with sensible defaults for AI usage.
  * It automatically handles responsive columns and spacing without requiring manual specification.
  */
-export interface ResponsiveGridProps extends Omit<GridProps, 'templateColumns' | 'gap' | 'columns' | 'pattern'> {
+export interface ResponsiveGridProps extends Omit<GridProps, 'variant'> {
   /** Override the default gap */
-  gap?: GridProps['gap']
+  gap?: number
   /** 
    * Predefined responsive patterns that work well for most use cases
    * - cards: Responsive card grid (1->2->3->4 columns)  
@@ -85,18 +85,11 @@ export const ResponsiveGrid: React.FC<ResponsiveGridProps> = ({
   children,
   ...props
 }) => {
-  let templateColumns: GridProps['templateColumns']
-  
-  if (responsiveColumns) {
-    templateColumns = convertColumnsToTemplate(responsiveColumns)
-  } else {
-    templateColumns = getPatternColumns(pattern, minColumnWidth)
-  }
+  const gridVariant = pattern === 'cards' ? 'cards' : pattern === 'sidebar' ? 'sidebar' : 'auto'
   
   return (
     <Grid
-      templateColumns={templateColumns}
-      gap={gap}
+      variant={gridVariant}
       {...props}
     >
       {children}

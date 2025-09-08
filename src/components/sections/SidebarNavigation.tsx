@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Typography } from '../foundation/Typography'
-import { Stack } from '../foundation/Stack'
 
 export interface NavigationItem {
   name: string
@@ -147,7 +146,7 @@ const StyledNavList = styled.ul`
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing[7]};
+  gap: ${({ theme }) => theme.spacing[6]};
   list-style: none;
   margin: 0;
   padding: 0;
@@ -496,7 +495,7 @@ export const SidebarNavigation: React.FC<SidebarNavigationProps> = ({
             {brandName.charAt(0)}
           </StyledBrandIcon>
         )}
-        <Typography variant="brand" style={{ fontSize: '1rem', whiteSpace: 'nowrap' }}>
+        <Typography variant="brand">
           {brandName}
         </Typography>
       </StyledBrandContainer>
@@ -526,7 +525,7 @@ export const SidebarNavigation: React.FC<SidebarNavigationProps> = ({
                       <StyledTeamBadge $current={team.current}>
                         {team.initial}
                       </StyledTeamBadge>
-                      <span style={{ truncate: 'true' }}>{team.name}</span>
+                      <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{team.name}</span>
                     </StyledNavLink>
                   </StyledNavItem>
                 ))}
@@ -612,7 +611,7 @@ export const SidebarNavigation: React.FC<SidebarNavigationProps> = ({
           {children || (
             <div>
               <Typography variant="heading">Dashboard Content</Typography>
-              <Typography color="muted" style={{ marginTop: '1rem' }}>
+              <Typography color="muted">
                 Your main dashboard content goes here.
               </Typography>
             </div>
