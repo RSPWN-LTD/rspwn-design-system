@@ -146,10 +146,8 @@ const ArticleFooter = styled.footer`
 `
 
 const ArticleRoot: React.FC<ArticleTemplateProps> = ({ 
-  children, 
-  config,
-  className,
-  id 
+  children,
+  className
 }) => (
   <BaseTemplate className={className}>
     <ArticleContainer>

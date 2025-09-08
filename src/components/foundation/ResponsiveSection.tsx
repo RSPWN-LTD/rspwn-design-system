@@ -1,15 +1,7 @@
 import React from 'react'
 import { Section, SectionProps } from './Section'
 import { ResponsiveContainer, ResponsiveContainerProps } from './ResponsiveContainer'
-import { SpacingKey } from '../../tokens/spacing'
 
-type ResponsiveSectionSpacing = SpacingKey | {
-  xs?: SpacingKey
-  sm?: SpacingKey
-  md?: SpacingKey
-  lg?: SpacingKey
-  xl?: SpacingKey
-}
 
 /**
  * ResponsiveSection combines Section + ResponsiveContainer for easy AI usage.

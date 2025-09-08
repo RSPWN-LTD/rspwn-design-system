@@ -106,9 +106,7 @@ export type {
   BaseTemplateProps,
   TemplateConfig,
   ConfigurableTemplateProps,
-  SectionProps,
   HeaderProps,
   SidebarProps,
-  MainContentProps,
-  FooterProps
+  MainContentProps
 } from './components/layout/templates'

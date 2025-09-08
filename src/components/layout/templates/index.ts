@@ -3,17 +3,14 @@ export type {
   BaseTemplateProps,
   TemplateConfig,
   ConfigurableTemplateProps,
-  SectionProps,
   ResponsiveLayoutProps,
   HeaderProps,
   SidebarProps,
-  MainContentProps,
-  FooterProps
+  MainContentProps
 } from './types'
 
 // Base Components
 export { BaseTemplate } from './BaseTemplate'
-export { Section } from './Section'
 
 // Configuration System
 export { 

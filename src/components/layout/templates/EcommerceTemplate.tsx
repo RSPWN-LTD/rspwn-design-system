@@ -172,10 +172,8 @@ const CommonFooter = styled.footer`
 
 // Product Grid Components
 const ProductGridRoot: React.FC<EcommerceTemplateProps> = ({ 
-  children, 
-  config,
-  className,
-  id 
+  children,
+  className
 }) => (
   <BaseTemplate className={className}>
     <ProductGridContainer>
@@ -210,10 +208,8 @@ const ProductGridFooterComponent: React.FC<BaseTemplateProps> = ({ children, cla
 
 // Checkout Components
 const CheckoutRoot: React.FC<EcommerceTemplateProps> = ({ 
-  children, 
-  config,
-  className,
-  id 
+  children,
+  className
 }) => (
   <BaseTemplate className={className}>
     <CheckoutContainer>
