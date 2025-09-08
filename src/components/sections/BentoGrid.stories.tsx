@@ -1,6 +1,75 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { BentoGrid } from './BentoGrid'
 import { Typography } from '../foundation/Typography'
+import React from 'react'
+
+// Sample icon components (in real usage, you'd import from your icon library)
+const FileIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
+  </svg>
+)
+
+const BellIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M21,19V20H3V19L5,17V11C5,7.9 7.03,5.17 10,4.29C10,4.19 10,4.1 10,4A2,2 0 0,1 12,2A2,2 0 0,1 14,4C14,4.1 14,4.19 14,4.29C16.97,5.17 19,7.9 19,11V17L21,19M14,21A2,2 0 0,1 12,23A2,2 0 0,1 10,21" />
+  </svg>
+)
+
+const ChartIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M22,21H2V3H4V19H6V10H10V19H12V6H16V19H18V14H22V21Z" />
+  </svg>
+)
+
+const ShareIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L15.96,7.19C16.5,7.69 17.21,8 18,8A3,3 0 0,0 21,5A3,3 0 0,0 18,2A3,3 0 0,0 15,5C15,5.24 15.04,5.47 15.09,5.7L8.04,9.81C7.5,9.31 6.79,9 6,9A3,3 0 0,0 3,12A3,3 0 0,0 6,15C6.79,15 7.5,14.69 8.04,14.19L15.16,18.34C15.11,18.55 15.08,18.77 15.08,19C15.08,20.61 16.39,21.91 18,21.91C19.61,21.91 20.92,20.6 20.92,19A2.92,2.92 0 0,0 18,16.08Z" />
+  </svg>
+)
+
+const CalendarIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19,3H18V1H16V3H8V1H6V3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z" />
+  </svg>
+)
+
+// Mock content components
+const FileList = () => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '1rem' }}>
+    {['document.pdf', 'spreadsheet.xlsx', 'presentation.pptx'].map((file, index) => (
+      <div key={index} style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        gap: '0.5rem', 
+        padding: '0.5rem',
+        background: 'rgba(255, 255, 255, 0.05)',
+        borderRadius: '0.5rem'
+      }}>
+        <FileIcon />
+        <Typography variant="caption" color="muted">{file}</Typography>
+      </div>
+    ))}
+  </div>
+)
+
+const ChartDemo = () => (
+  <div style={{ marginTop: '1rem' }}>
+    <div style={{ display: 'flex', gap: '0.25rem', height: '60px', alignItems: 'end' }}>
+      {[40, 65, 30, 80, 45, 70, 85].map((height, index) => (
+        <div
+          key={index}
+          style={{
+            flex: 1,
+            height: `${height}%`,
+            background: `rgba(74, 158, 255, ${0.4 + (height / 100) * 0.6})`,
+            borderRadius: '0.125rem'
+          }}
+        />
+      ))}
+    </div>
+  </div>
+)
 
 const meta: Meta<typeof BentoGrid> = {
   title: 'Sections/BentoGrid',
@@ -10,42 +79,32 @@ const meta: Meta<typeof BentoGrid> = {
     docs: {
       description: {
         component: `
-# Bento Grid
+# Professional Bento Grid
 
-Modern grid layout component inspired by bento box designs. Perfect for showcasing features, services, or content in an attractive asymmetrical grid layout.
+A clean, professional grid layout component perfect for enterprise applications and modern dashboards.
 
 ## Features
 
-- **Flexible Grid System**: Auto-fit responsive grid with no empty spaces
-- **Multiple Item Sizes**: Small, medium, large, wide, and tall variants
-- **Color Themes**: Primary, secondary, accent, and neutral color options
-- **Interactive Elements**: Click handlers and hover effects
-- **Background Images**: Support for background images with overlays
-- **Responsive Design**: Adapts from multi-column desktop to single column mobile
-- **Gaming Aesthetic**: Optimized for RSPWN brand guidelines
-
-## Item Sizes
-
-- **Small**: Single grid item (1x1)
-- **Medium**: Single grid item (1x1) - default
-- **Large**: Large item (2x2 on desktop)
-- **Wide**: Wide item (2x1 on desktop)
-- **Tall**: Tall item (1x2 on desktop)
+- **Responsive Grid**: Adapts from 3-column desktop to single column mobile
+- **Professional Styling**: Subtle glass morphism effects and clean typography
+- **Multiple Sizes**: Support for different grid item sizes (small, medium, large, wide, tall)
+- **Interactive Elements**: Click handlers with smooth hover effects
+- **Custom Content**: Support for any React content within grid items
 
 ## Usage
 
 \`\`\`typescript
 <BentoGrid
   title="Platform Features"
-  subtitle="Everything you need for competitive gaming"
+  subtitle="Everything you need for your business"
   items={[
     {
-      id: "analytics",
-      title: "Performance Analytics",
-      description: "Track your gaming performance",
-      icon: "📊",
-      size: "large",
-      color: "primary"
+      id: "files",
+      title: "File Management",
+      description: "Organize and manage your documents",
+      icon: <FileIcon />,
+      size: "medium",
+      content: <FileList />
     }
   ]}
 />
@@ -60,294 +119,148 @@ Modern grid layout component inspired by bento box designs. Perfect for showcasi
 export default meta
 type Story = StoryObj<typeof BentoGrid>
 
-const gamingFeatures = [
-  {
-    id: 'tournaments',
-    title: 'Tournament System',
-    description: 'Create and manage competitive tournaments with bracket generation, scheduling, and prize distribution.',
-    icon: '🏆',
-    size: 'large' as const,
-    color: 'primary' as const,
-    content: (
-      <div style={{ marginTop: '1rem' }}>
-        <Typography variant="caption" style={{ color: '#4A9EFF' }}>
-          • Automated brackets • Prize pools • Live streaming
-        </Typography>
-      </div>
-    )
-  },
-  {
-    id: 'analytics',
-    title: 'Performance Analytics',
-    description: 'Advanced statistics and performance tracking for competitive improvement.',
-    icon: '📊',
-    size: 'medium' as const,
-    color: 'secondary' as const
-  },
-  {
-    id: 'team-management',
-    title: 'Team Management',
-    description: 'Organize teams, manage rosters, and coordinate practice sessions.',
-    icon: '👥',
-    size: 'medium' as const,
-    color: 'accent' as const
-  },
-  {
-    id: 'live-streaming',
-    title: 'Live Streaming Integration',
-    description: 'Built-in streaming tools with chat moderation and viewer engagement features.',
-    icon: '📺',
-    size: 'wide' as const,
-    color: 'primary' as const
-  },
-  {
-    id: 'anti-cheat',
-    title: 'Anti-Cheat System',
-    description: 'Advanced detection algorithms ensure fair play.',
-    icon: '🛡️',
-    size: 'small' as const,
-    color: 'neutral' as const
-  },
-  {
-    id: 'matchmaking',
-    title: 'Smart Matchmaking',
-    description: 'AI-powered matchmaking for balanced competitive matches.',
-    icon: '⚡',
-    size: 'small' as const,
-    color: 'secondary' as const
-  },
-  {
-    id: 'training',
-    title: 'Training Modes',
-    description: 'Practice facilities with AI opponents and skill development programs.',
-    icon: '🎯',
-    size: 'tall' as const,
-    color: 'accent' as const,
-    content: (
-      <div style={{ marginTop: '1rem' }}>
-        <Typography variant="caption" style={{ color: '#10B981' }}>
-          AI Training • Skill Assessment • Progress Tracking
-        </Typography>
-      </div>
-    )
-  }
-]
-
-const productFeatures = [
-  {
-    id: 'dashboard',
-    title: 'Unified Dashboard',
-    description: 'Everything you need in one place - analytics, matches, and team management.',
-    icon: '🎯',
-    size: 'large' as const,
-    color: 'primary' as const,
-    image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop'
-  },
-  {
-    id: 'mobile',
-    title: 'Mobile App',
-    description: 'Stay connected on the go with our native mobile experience.',
-    icon: '📱',
-    size: 'medium' as const,
-    color: 'secondary' as const
-  },
-  {
-    id: 'api',
-    title: 'Developer API',
-    description: 'Build custom integrations with our comprehensive API.',
-    icon: '⚙️',
-    size: 'medium' as const,
-    color: 'neutral' as const
-  },
-  {
-    id: 'support',
-    title: '24/7 Support',
-    description: 'Round-the-clock technical support for all users.',
-    icon: '🚀',
-    size: 'small' as const,
-    color: 'accent' as const
-  },
-  {
-    id: 'security',
-    title: 'Enterprise Security',
-    description: 'Bank-level security with advanced encryption.',
-    icon: '🔒',
-    size: 'small' as const,
-    color: 'primary' as const
-  }
-]
-
-const serviceShowcase = [
-  {
-    id: 'design',
-    title: 'UI/UX Design',
-    description: 'Beautiful, intuitive interfaces that users love to interact with.',
-    icon: '🎨',
-    size: 'medium' as const,
-    color: 'primary' as const
-  },
-  {
-    id: 'development',
-    title: 'Full-Stack Development',
-    description: 'End-to-end development from concept to deployment.',
-    icon: '💻',
-    size: 'large' as const,
-    color: 'secondary' as const,
-    image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop'
-  },
-  {
-    id: 'consulting',
-    title: 'Technical Consulting',
-    description: 'Expert advice on architecture and technology choices.',
-    icon: '🧠',
-    size: 'small' as const,
-    color: 'accent' as const
-  },
-  {
-    id: 'maintenance',
-    title: 'Maintenance & Support',
-    description: 'Ongoing support to keep your systems running smoothly.',
-    icon: '🔧',
-    size: 'small' as const,
-    color: 'neutral' as const
-  }
-]
-
-export const GamingPlatform: Story = {
+export const Default: Story = {
   args: {
-    title: 'Complete Gaming Platform',
-    subtitle: 'Everything you need to build, manage, and scale competitive gaming experiences',
-    items: gamingFeatures,
-    variant: 'default'
-  }
-}
-
-export const ProductShowcase: Story = {
-  args: {
-    title: 'Platform Features',
-    subtitle: 'Discover the tools that make RSPWN the ultimate gaming platform',
-    items: productFeatures,
-    variant: 'spacious'
-  }
-}
-
-export const ServiceGrid: Story = {
-  args: {
-    title: 'Our Services',
-    subtitle: 'Professional development services for modern applications',
-    items: serviceShowcase,
-    variant: 'compact'
-  }
-}
-
-export const WithoutHeader: Story = {
-  args: {
+    title: "Platform Features",
+    subtitle: "Everything you need for your business",
     items: [
       {
-        id: 'feature-1',
-        title: 'Lightning Fast',
-        description: 'Ultra-low latency gaming experience',
-        icon: '⚡',
-        size: 'medium' as const,
-        color: 'primary' as const
+        id: "files",
+        title: "File Management",
+        description: "Organize and manage your documents efficiently",
+        icon: <FileIcon />,
+        size: "medium",
+        content: <FileList />
       },
       {
-        id: 'feature-2',
-        title: 'Secure Platform',
-        description: 'Enterprise-grade security for all users',
-        icon: '🛡️',
-        size: 'medium' as const,
-        color: 'accent' as const
+        id: "notifications",
+        title: "Smart Notifications",
+        description: "Stay updated with intelligent alerts and reminders",
+        icon: <BellIcon />,
+        size: "wide"
       },
       {
-        id: 'feature-3',
-        title: 'Global Reach',
-        description: 'Connect with players worldwide',
-        icon: '🌍',
-        size: 'medium' as const,
-        color: 'secondary' as const
+        id: "analytics",
+        title: "Analytics Dashboard",
+        description: "Track performance with detailed insights and reports",
+        icon: <ChartIcon />,
+        size: "medium",
+        content: <ChartDemo />
+      },
+      {
+        id: "integrations",
+        title: "Integrations",
+        description: "Connect with 100+ tools and services",
+        icon: <ShareIcon />,
+        size: "tall"
+      },
+      {
+        id: "calendar",
+        title: "Calendar",
+        description: "Schedule and manage your time effectively",
+        icon: <CalendarIcon />,
+        size: "medium"
       }
-    ],
-    variant: 'compact'
+    ]
+  }
+}
+
+export const Compact: Story = {
+  args: {
+    variant: "compact",
+    items: [
+      {
+        id: "files",
+        title: "Files",
+        description: "Document management",
+        icon: <FileIcon />,
+        size: "medium"
+      },
+      {
+        id: "notifications",
+        title: "Notifications",
+        description: "Real-time alerts",
+        icon: <BellIcon />,
+        size: "medium"
+      },
+      {
+        id: "analytics",
+        title: "Analytics",
+        description: "Performance tracking",
+        icon: <ChartIcon />,
+        size: "medium"
+      },
+      {
+        id: "integrations",
+        title: "Integrations",
+        description: "Third-party connections",
+        icon: <ShareIcon />,
+        size: "medium"
+      }
+    ]
+  }
+}
+
+export const WithBackground: Story = {
+  args: {
+    title: "Feature Showcase",
+    items: [
+      {
+        id: "dashboard",
+        title: "Dashboard Overview",
+        description: "Get a complete view of your business metrics",
+        size: "large",
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
+      },
+      {
+        id: "reports",
+        title: "Advanced Reports",
+        description: "Generate detailed reports with custom filters",
+        icon: <ChartIcon />,
+        size: "medium"
+      },
+      {
+        id: "team",
+        title: "Team Collaboration",
+        description: "Work together seamlessly with your team",
+        icon: <ShareIcon />,
+        size: "wide",
+        image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=400&fit=crop"
+      }
+    ]
   }
 }
 
 export const Interactive: Story = {
   args: {
-    title: 'Interactive Features',
-    subtitle: 'Click on any feature to learn more',
+    title: "Interactive Features",
+    subtitle: "Click on any card to explore",
     items: [
       {
-        id: 'tournaments-interactive',
-        title: 'Create Tournament',
-        description: 'Set up your next competitive event',
-        icon: '🏆',
-        size: 'large' as const,
-        color: 'primary' as const,
-        onClick: () => alert('Opening tournament creation wizard...'),
-        content: (
-          <div style={{ marginTop: '1rem' }}>
-            <Typography variant="caption" style={{ color: '#4A9EFF' }}>
-              Click to get started →
-            </Typography>
-          </div>
-        )
+        id: "files",
+        title: "File Manager",
+        description: "Click to open file explorer",
+        icon: <FileIcon />,
+        size: "medium",
+        onClick: () => alert('Opening file manager...')
       },
       {
-        id: 'stats-interactive',
-        title: 'View Statistics',
-        description: 'Detailed performance analytics',
-        icon: '📈',
-        size: 'medium' as const,
-        color: 'secondary' as const,
-        href: '#stats'
+        id: "notifications",
+        title: "Notification Center",
+        description: "View all your notifications",
+        icon: <BellIcon />,
+        size: "medium",
+        href: "https://example.com/notifications"
       },
       {
-        id: 'team-interactive',
-        title: 'Join Team',
-        description: 'Find and join competitive teams',
-        icon: '👥',
-        size: 'medium' as const,
-        color: 'accent' as const,
-        onClick: () => alert('Redirecting to team finder...')
+        id: "analytics",
+        title: "Analytics Portal",
+        description: "Deep dive into your data",
+        icon: <ChartIcon />,
+        size: "large",
+        href: "https://example.com/analytics",
+        content: <ChartDemo />
       }
-    ],
-    variant: 'default'
-  }
-}
-
-export const MinimalGrid: Story = {
-  args: {
-    items: [
-      {
-        id: 'simple-1',
-        title: 'Fast',
-        icon: '⚡',
-        size: 'small' as const,
-        color: 'primary' as const
-      },
-      {
-        id: 'simple-2',
-        title: 'Secure',
-        icon: '🔒',
-        size: 'small' as const,
-        color: 'accent' as const
-      },
-      {
-        id: 'simple-3',
-        title: 'Reliable',
-        icon: '✅',
-        size: 'small' as const,
-        color: 'secondary' as const
-      },
-      {
-        id: 'simple-4',
-        title: 'Scalable',
-        icon: '📈',
-        size: 'small' as const,
-        color: 'neutral' as const
-      }
-    ],
-    variant: 'compact'
+    ]
   }
 }
