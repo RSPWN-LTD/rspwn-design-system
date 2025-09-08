@@ -201,31 +201,31 @@ export const Compact: Story = {
   }
 }
 
-export const WithBackground: Story = {
+export const LargeCards: Story = {
   args: {
     title: "Feature Showcase",
     items: [
       {
         id: "dashboard",
         title: "Dashboard Overview",
-        description: "Get a complete view of your business metrics",
+        description: "Get a complete view of your business metrics and KPIs",
+        icon: <ChartIcon />,
         size: "large",
-        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
+        content: <ChartDemo />
       },
       {
         id: "reports",
         title: "Advanced Reports",
         description: "Generate detailed reports with custom filters",
-        icon: <ChartIcon />,
+        icon: <FileIcon />,
         size: "medium"
       },
       {
         id: "team",
         title: "Team Collaboration",
-        description: "Work together seamlessly with your team",
+        description: "Work together seamlessly with your team members",
         icon: <ShareIcon />,
-        size: "wide",
-        image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=400&fit=crop"
+        size: "wide"
       }
     ]
   }

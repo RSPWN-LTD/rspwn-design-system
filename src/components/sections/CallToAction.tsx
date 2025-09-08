@@ -16,177 +16,117 @@ export interface CallToActionProps {
   description?: string
   primaryButton?: CTAButton
   secondaryButton?: CTAButton
-  variant?: 'centered' | 'split' | 'banner' | 'minimal'
-  backgroundImage?: string
-  backgroundGradient?: boolean
+  variant?: 'centered' | 'split' | 'minimal'
   className?: string
   children?: React.ReactNode
 }
 
-const getVariantStyles = (variant: string) => {
-  switch (variant) {
-    case 'split':
-      return `
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-        gap: 2rem;
-        
-        @media (min-width: 768px) {
-          display: grid;
-          grid-template-columns: 1fr auto;
-          align-items: center;
-          text-align: left;
-          gap: 3rem;
-        }
-      `
-    case 'banner':
-      return `
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-        
-        &::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(135deg, rgba(74, 158, 255, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
-          border-radius: 1.5rem;
-          z-index: 1;
-        }
-        
-        &::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 1.5rem;
-          z-index: 2;
-        }
-      `
-    case 'minimal':
-      return `
-        text-align: center;
-        padding: 0;
-      `
-    default: // centered
-      return `
-        text-align: center;
-        position: relative;
-      `
-  }
-}
-
-const StyledCTAWrapper = styled.section<{ 
-  $variant: string
-  $hasBackground: boolean 
-}>`
+const StyledCTAWrapper = styled.section<{ $variant: string }>`
   position: relative;
   padding: ${({ $variant }) => 
     $variant === 'minimal' 
-      ? `clamp(1rem, 3vw, 3rem) 0`
-      : $variant === 'banner'
-      ? `clamp(1.5rem, 4vw, 4rem) 0`
-      : `clamp(2rem, 5vw, 5rem) 0`
+      ? `clamp(2rem, 4vw, 3rem) 0`
+      : `clamp(3rem, 6vw, 5rem) 0`
   };
-  background-color: ${({ theme }) => theme.colors.foundation.black};
+  background: ${({ theme }) => theme.colors.foundation.black};
   color: ${({ theme }) => theme.colors.foundation.white};
   overflow: hidden;
   width: 100%;
   box-sizing: border-box;
 `
 
-const StyledBackgroundImage = styled.div<{ $image: string }>`
+const StyledBackgroundGradient = styled.div`
   position: absolute;
-  inset: 0;
-  background-image: url(${({ $image }) => $image});
-  background-size: cover;
-  background-position: center;
-  opacity: 0.3;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 80%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(74, 158, 255, 0.06) 0%,
+    rgba(139, 92, 246, 0.04) 35%,
+    transparent 70%
+  );
   z-index: 0;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.8) 100%);
-  }
 `
 
 const StyledCTAContent = styled.div<{ $variant: string }>`
   position: relative;
-  z-index: 3;
-  max-width: 100%;
+  z-index: 2;
   
-  ${({ $variant }) => getVariantStyles($variant)}
-  
-  ${({ $variant }) => $variant === 'banner' && `
-    padding: 1.5rem;
-    border-radius: 1rem;
+  ${({ $variant }) => $variant === 'split' ? `
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
     
-    @media (min-width: 1200px) {
-      padding: 3rem 4rem;
-      border-radius: 1.5rem;
+    @media (min-width: 768px) {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 3rem;
     }
-    
-    @media (max-width: 900px) {
-      padding: 1rem;
-      border-radius: 0.75rem;
-    }
+  ` : `
+    text-align: center;
+    max-width: 48rem;
+    margin: 0 auto;
   `}
-`
-
-const StyledCTATitle = styled(Typography)<{ $variant: string }>`
-  && {
-    font-size: ${({ $variant }) => 
-      $variant === 'minimal' ? '1.5rem' : 
-      $variant === 'banner' ? '1.75rem' : '2rem'
-    };
-    line-height: 1.1;
-    margin-bottom: 1rem;
-    font-weight: 700;
-    
-    @media (min-width: 1200px) {
-      font-size: ${({ $variant }) => 
-        $variant === 'minimal' ? '1.875rem' : 
-        $variant === 'banner' ? '2.25rem' : '3rem'
-      };
-    }
-    
-    @media (max-width: 900px) {
-      font-size: ${({ $variant }) => 
-        $variant === 'minimal' ? '1.25rem' : 
-        $variant === 'banner' ? '1.5rem' : '1.75rem'
-      };
-    }
-  }
 `
 
 const StyledCTAHeader = styled.div<{ $variant: string }>`
   ${({ $variant }) => $variant === 'split' ? `
     flex: 1;
-    
-    @media (min-width: 768px) {
-      margin-right: 2rem;
-    }
   ` : ''}
-  
-  ${({ $variant }) => $variant === 'banner' && `
+`
+
+const StyledCTATitle = styled(Typography)<{ $variant: string }>`
+  && {
+    font-size: ${({ $variant }) => 
+      $variant === 'minimal' ? '1.875rem' : '2.25rem'
+    };
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+    
+    @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+      font-size: ${({ $variant }) => 
+        $variant === 'minimal' ? '2.25rem' : '3rem'
+      };
+    }
+    
+    @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+      font-size: ${({ $variant }) => 
+        $variant === 'minimal' ? '1.5rem' : '1.875rem'
+      };
+    }
+  }
+`
+
+const StyledCTADescription = styled(Typography)`
+  && {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
     margin-bottom: 2rem;
-  `}
+    max-width: 36rem;
+    margin-left: auto;
+    margin-right: auto;
+    
+    @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+  }
 `
 
 const StyledCTAActions = styled.div<{ $variant: string }>`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing[3]};
-  align-items: ${({ $variant }) => 
-    $variant === 'split' ? 'stretch' : 'center'
-  };
+  gap: ${({ theme }) => theme.spacing[4]};
+  align-items: center;
   
   @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
     flex-direction: row;
-    gap: ${({ theme }) => theme.spacing[4]};
+    gap: ${({ theme }) => theme.spacing[6]};
     justify-content: ${({ $variant }) => 
       $variant === 'split' ? 'flex-start' : 'center'
     };
@@ -195,8 +135,6 @@ const StyledCTAActions = styled.div<{ $variant: string }>`
   ${({ $variant }) => $variant === 'split' ? `
     @media (min-width: 768px) {
       flex-shrink: 0;
-      align-items: center;
-      justify-content: center;
     }
   ` : ''}
 `
@@ -205,178 +143,96 @@ const StyledCTAButton = styled.a<{ $variant: 'primary' | 'secondary' | 'outline'
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(0.5rem, 1vw, 0.75rem) clamp(1rem, 2vw, 2rem);
-  border-radius: clamp(0.375rem, 0.5vw, 0.75rem);
-  font-weight: 600;
-  font-size: clamp(0.75rem, 1vw, 1rem);
+  gap: ${({ theme }) => theme.spacing[2]};
+  padding: ${({ theme }) => theme.spacing[4]} ${({ theme }) => theme.spacing[8]};
+  border-radius: ${({ theme }) => theme.radius.lg};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
+  font-size: ${({ theme }) => theme.typography.fontSizes.base};
   text-decoration: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  border: 2px solid transparent;
-  min-width: clamp(100px, 15vw, 160px);
+  border: 1px solid transparent;
+  min-width: 140px;
   white-space: nowrap;
   position: relative;
-  overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    transition: opacity 0.3s ease;
-    opacity: 0;
-    z-index: 1;
-  }
-  
-  & > * {
-    position: relative;
-    z-index: 2;
-  }
   
   ${({ $variant, theme }) => {
     switch ($variant) {
       case 'primary':
         return `
-          background: linear-gradient(135deg, ${theme.colors.innovation.primaryBlue} 0%, #3B8EF0 100%);
+          background: ${theme.colors.innovation.primaryBlue};
           color: white;
-          box-shadow: 0 4px 20px rgba(74, 158, 255, 0.25);
-          
-          &::before {
-            background: linear-gradient(135deg, #3B8EF0 0%, #2980E8 100%);
-          }
+          box-shadow: 
+            0 4px 12px rgba(74, 158, 255, 0.3),
+            0 2px 4px rgba(0, 0, 0, 0.1);
           
           &:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(74, 158, 255, 0.4);
-            
-            &::before {
-              opacity: 1;
-            }
+            background: #3B8EF0;
+            transform: translateY(-2px);
+            box-shadow: 
+              0 8px 20px rgba(74, 158, 255, 0.4),
+              0 4px 8px rgba(0, 0, 0, 0.15);
           }
           
           &:active {
             transform: translateY(-1px);
-            transition-duration: 0.1s;
           }
         `
       case 'outline':
         return `
-          background-color: transparent;
-          color: ${theme.colors.innovation.primaryBlue};
-          border-color: ${theme.colors.innovation.primaryBlue};
-          
-          &::before {
-            background-color: ${theme.colors.innovation.primaryBlue}15;
-          }
+          background: transparent;
+          color: ${theme.colors.foundation.white};
+          border-color: rgba(255, 255, 255, 0.2);
           
           &:hover {
-            border-color: #3B8EF0;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(74, 158, 255, 0.2);
-            
-            &::before {
-              opacity: 1;
-            }
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
           }
         `
       default: // secondary
         return `
-          background-color: rgba(255, 255, 255, 0.08);
+          background: rgba(255, 255, 255, 0.08);
           color: ${theme.colors.foundation.white};
-          border-color: rgba(255, 255, 255, 0.15);
+          border-color: rgba(255, 255, 255, 0.1);
           backdrop-filter: blur(10px);
           
-          &::before {
-            background-color: rgba(255, 255, 255, 0.12);
-          }
-          
           &:hover {
-            border-color: rgba(255, 255, 255, 0.25);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            
-            &::before {
-              opacity: 1;
-            }
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
           }
         `
     }
   }}
 `
 
-const StyledGradientBackground = styled.div`
-  position: absolute;
-  top: -25%;
-  left: -15%;
-  right: -15%;
-  bottom: -25%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(74, 158, 255, 0.08) 0%,
-    rgba(139, 92, 246, 0.04) 40%,
-    transparent 70%
-  );
-  z-index: 0;
-  animation: gradientFloat 12s ease-in-out infinite;
+const StyledSubtitle = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing[2]};
+  padding: ${({ theme }) => theme.spacing[1]} ${({ theme }) => theme.spacing[3]};
+  background: rgba(74, 158, 255, 0.1);
+  border: 1px solid rgba(74, 158, 255, 0.2);
+  border-radius: ${({ theme }) => theme.radius.full};
+  margin-bottom: ${({ theme }) => theme.spacing[6]};
   
-  @keyframes gradientFloat {
-    0%, 100% {
-      opacity: 0.6;
-      transform: scale(1) rotate(0deg);
-    }
-    33% {
-      opacity: 0.8;
-      transform: scale(1.05) rotate(1deg);
-    }
-    66% {
-      opacity: 0.4;
-      transform: scale(0.95) rotate(-1deg);
-    }
+  span {
+    font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+    font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
+    color: ${({ theme }) => theme.colors.foundation.white};
   }
 `
 
-const StyledFloatingElements = styled.div`
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  overflow: hidden;
-  pointer-events: none;
-  
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(74, 158, 255, 0.1) 0%, transparent 70%);
-    animation: float 15s ease-in-out infinite;
-  }
-  
-  &::before {
-    width: 200px;
-    height: 200px;
-    top: 10%;
-    left: 10%;
-    animation-delay: -5s;
-  }
-  
-  &::after {
-    width: 300px;
-    height: 300px;
-    bottom: 10%;
-    right: 10%;
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
-    animation-delay: -10s;
-  }
-  
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0) scale(1);
-      opacity: 0.3;
-    }
-    50% {
-      transform: translateY(-20px) scale(1.1);
-      opacity: 0.6;
-    }
-  }
+const StyledSubtitleBadge = styled.div`
+  background: ${({ theme }) => theme.colors.innovation.primaryBlue};
+  color: white;
+  font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
+  padding: 0.125rem ${({ theme }) => theme.spacing[2]};
+  border-radius: ${({ theme }) => theme.radius.sm};
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 `
 
 export const CallToAction: React.FC<CallToActionProps> = ({
@@ -386,8 +242,6 @@ export const CallToAction: React.FC<CallToActionProps> = ({
   primaryButton,
   secondaryButton,
   variant = 'centered',
-  backgroundImage,
-  backgroundGradient = false,
   className,
   children
 }) => {
@@ -395,31 +249,22 @@ export const CallToAction: React.FC<CallToActionProps> = ({
     if (button.onClick) {
       button.onClick()
     } else if (button.href) {
-      window.location.href = button.href
+      window.open(button.href, '_blank', 'noopener,noreferrer')
     }
   }
 
   return (
-    <StyledCTAWrapper 
-      $variant={variant} 
-      $hasBackground={backgroundGradient || !!backgroundImage}
-      className={className}
-    >
-      {backgroundImage && <StyledBackgroundImage $image={backgroundImage} />}
-      {backgroundGradient && (
-        <>
-          <StyledGradientBackground />
-          <StyledFloatingElements />
-        </>
-      )}
+    <StyledCTAWrapper $variant={variant} className={className}>
+      <StyledBackgroundGradient />
       
       <Container variant="wide">
         <StyledCTAContent $variant={variant}>
           <StyledCTAHeader $variant={variant}>
             {subtitle && (
-              <Typography variant="label">
-                {subtitle}
-              </Typography>
+              <StyledSubtitle>
+                <StyledSubtitleBadge>New</StyledSubtitleBadge>
+                <span>{subtitle}</span>
+              </StyledSubtitle>
             )}
             
             <StyledCTATitle variant="heading" $variant={variant}>
@@ -427,9 +272,9 @@ export const CallToAction: React.FC<CallToActionProps> = ({
             </StyledCTATitle>
             
             {description && (
-              <Typography color="muted">
+              <StyledCTADescription color="muted">
                 {description}
-              </Typography>
+              </StyledCTADescription>
             )}
           </StyledCTAHeader>
           

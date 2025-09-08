@@ -37,7 +37,7 @@ export interface HeroSectionProps {
 const StyledHeroWrapper = styled.div`
   min-height: 100vh;
   position: relative;
-  background-color: ${({ theme }) => theme.colors.foundation.black};
+  background: ${({ theme }) => theme.colors.foundation.black};
   color: ${({ theme }) => theme.colors.foundation.white};
   overflow: hidden;
 `
@@ -48,7 +48,10 @@ const StyledHeroHeader = styled.header`
   left: 0;
   right: 0;
   z-index: 50;
-  padding: ${({ theme }) => theme.spacing[6]} ${({ theme }) => theme.spacing[6]};
+  padding: ${({ theme }) => theme.spacing[6]};
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     padding: ${({ theme }) => theme.spacing[6]} ${({ theme }) => theme.spacing[8]};
@@ -63,11 +66,40 @@ const StyledNavigation = styled.nav`
 
 const StyledNavLinks = styled.div`
   display: none;
-  gap: ${({ theme }) => theme.spacing[6]};
+  gap: ${({ theme }) => theme.spacing[8]};
   
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: flex;
     align-items: center;
+  }
+`
+
+const StyledNavLink = styled.a`
+  color: ${({ theme }) => theme.colors.text.secondary};
+  text-decoration: none;
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
+  transition: all 0.2s ease;
+  position: relative;
+  padding: ${({ theme }) => theme.spacing[2]} 0;
+  
+  &:hover {
+    color: ${({ theme }) => theme.colors.foundation.white};
+  }
+  
+  &:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background: ${({ theme }) => theme.colors.innovation.primaryBlue};
+    transition: width 0.3s ease;
+  }
+  
+  &:hover:after {
+    width: 100%;
   }
 `
 
@@ -76,15 +108,17 @@ const StyledMobileMenuButton = styled.button`
   align-items: center;
   justify-content: center;
   padding: ${({ theme }) => theme.spacing[2]};
-  border-radius: 0.375rem;
+  border-radius: ${({ theme }) => theme.radius.md};
   color: ${({ theme }) => theme.colors.text.secondary};
-  background: transparent;
-  border: none;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
   
   &:hover {
     color: ${({ theme }) => theme.colors.foundation.white};
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
   }
   
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
@@ -97,14 +131,15 @@ const StyledMobileMenu = styled.div<{ $isOpen: boolean }>`
   top: 0;
   right: 0;
   bottom: 0;
-  z-index: 50;
+  z-index: 60;
   width: 100%;
-  max-width: 24rem;
-  background-color: ${({ theme }) => theme.colors.foundation.black};
-  border-left: 1px solid ${({ theme }) => theme.colors.gray.base}40;
+  max-width: 20rem;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(20px);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
   padding: ${({ theme }) => theme.spacing[6]};
   transform: translateX(${({ $isOpen }) => ($isOpen ? '0' : '100%')});
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: none;
@@ -113,10 +148,10 @@ const StyledMobileMenu = styled.div<{ $isOpen: boolean }>`
 
 const StyledHeroContent = styled.div<{ $variant: HeroSectionVariant }>`
   position: relative;
-  padding: ${({ theme }) => theme.spacing[12]} ${({ theme }) => theme.spacing[6]} ${({ theme }) => theme.spacing[32]};
+  padding: ${({ theme }) => theme.spacing[20]} ${({ theme }) => theme.spacing[6]} ${({ theme }) => theme.spacing[16]};
   
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    padding: ${({ theme }) => theme.spacing[12]} ${({ theme }) => theme.spacing[8]} ${({ theme }) => theme.spacing[56]};
+    padding: ${({ theme }) => theme.spacing[24]} ${({ theme }) => theme.spacing[8]} ${({ theme }) => theme.spacing[20]};
   }
   
   ${({ $variant }) => $variant === 'centered' && `
@@ -125,11 +160,6 @@ const StyledHeroContent = styled.div<{ $variant: HeroSectionVariant }>`
     justify-content: center;
     min-height: 100vh;
     text-align: center;
-    padding-top: 8rem;
-    
-    @media (min-width: 768px) {
-      padding-top: 6rem;
-    }
   `}
   
   ${({ $variant }) => $variant === 'minimal' && `
@@ -140,80 +170,107 @@ const StyledHeroContent = styled.div<{ $variant: HeroSectionVariant }>`
     @media (min-width: 768px) {
       padding-top: 7rem;
     }
-    
-    @media (min-width: 1024px) {
-      padding-top: 6rem;
-    }
   `}
 `
 
-const StyledBackgroundGradient = styled.div<{ $position: 'top' | 'bottom' }>`
+const StyledBackgroundGradient = styled.div`
   position: absolute;
-  ${({ $position }) => $position === 'top' ? 'top: -10rem' : 'bottom: 13rem'};
-  left: calc(50% - ${({ $position }) => $position === 'top' ? '11rem' : '3rem'});
-  width: ${({ $position }) => $position === 'top' ? '36rem' : '36rem'};
-  height: 20rem;
-  background: linear-gradient(135deg, #4A9EFF40 0%, #8B5CF640 100%);
-  border-radius: 50%;
-  filter: blur(64px);
-  transform: translateX(-50%) ${({ $position }) => $position === 'top' ? 'rotate(30deg)' : 'rotate(-30deg)'};
-  z-index: -10;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 60%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(74, 158, 255, 0.08) 0%,
+    rgba(139, 92, 246, 0.06) 35%,
+    transparent 70%
+  );
+  z-index: -1;
   
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    width: 24rem;
-    left: calc(50% - 12rem);
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    width: 120%;
+    height: 40%;
   }
 `
 
 const StyledAnnouncement = styled.div`
   display: inline-flex;
   align-items: center;
-  padding: ${({ theme }) => theme.spacing[1]} ${({ theme }) => theme.spacing[3]};
-  background-color: ${({ theme }) => theme.colors.gray.dark};
-  border: 1px solid ${({ theme }) => theme.colors.gray.base}40;
-  border-radius: 1.5rem;
+  gap: ${({ theme }) => theme.spacing[2]};
+  padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[4]};
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: ${({ theme }) => theme.radius.full};
   margin-bottom: ${({ theme }) => theme.spacing[8]};
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   cursor: pointer;
-  margin-top: ${({ theme }) => theme.spacing[4]};
   
   &:hover {
-    border-color: ${({ theme }) => theme.colors.gray.base}60;
-    background-color: ${({ theme }) => theme.colors.gray.base}10;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
   }
-  
-  @media (min-width: 768px) {
-    margin-top: 0;
-  }
+`
+
+const StyledAnnouncementBadge = styled.span`
+  background: ${({ theme }) => theme.colors.innovation.primaryBlue};
+  color: white;
+  font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
+  padding: 0.125rem ${({ theme }) => theme.spacing[2]};
+  border-radius: ${({ theme }) => theme.radius.sm};
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 `
 
 const StyledActionButton = styled.a<{ $isPrimary?: boolean }>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: ${({ theme }) => theme.spacing[3]} ${({ theme }) => theme.spacing[6]};
-  border-radius: 0.375rem;
-  font-weight: 600;
+  gap: ${({ theme }) => theme.spacing[2]};
+  padding: ${({ theme }) => theme.spacing[4]} ${({ theme }) => theme.spacing[8]};
+  border-radius: ${({ theme }) => theme.radius.lg};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  font-size: ${({ theme }) => theme.typography.fontSizes.base};
   
   ${({ $isPrimary, theme }) => $isPrimary ? `
-    background-color: ${theme.colors.innovation.primaryBlue};
+    background: ${theme.colors.innovation.primaryBlue};
     color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 
+      0 4px 12px rgba(74, 158, 255, 0.3),
+      0 2px 4px rgba(0, 0, 0, 0.1);
     
     &:hover {
-      background-color: #3B8EF0;
+      background: #3B8EF0;
+      transform: translateY(-2px);
+      box-shadow: 
+        0 8px 20px rgba(74, 158, 255, 0.4),
+        0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    &:active {
       transform: translateY(-1px);
     }
   ` : `
+    background: rgba(255, 255, 255, 0.05);
     color: ${theme.colors.foundation.white};
+    border: 1px solid rgba(255, 255, 255, 0.1);
     
     &:hover {
-      color: ${theme.colors.innovation.primaryBlue};
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
     }
   `}
+`
+
+const StyledTitleWrapper = styled.div`
+  max-width: 64rem;
+  margin: 0 auto;
 `
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
@@ -239,41 +296,43 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           <Typography variant="brand">{brandName}</Typography>
           
           <StyledMobileMenuButton onClick={() => setMobileMenuOpen(true)}>
-            <span style={{ fontSize: '1.5rem' }}>☰</span>
+            <span>☰</span>
           </StyledMobileMenuButton>
           
           <StyledNavLinks>
             {navigation.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                style={{
-                  color: 'inherit',
-                  textDecoration: 'none',
-                  fontSize: '0.875rem',
-                  fontWeight: 600,
-                  transition: 'color 0.2s ease'
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.color = '#4A9EFF'}
-                onMouseLeave={(e) => e.currentTarget.style.color = 'inherit'}
-              >
+              <StyledNavLink key={item.name} href={item.href}>
                 {item.name}
-              </a>
+              </StyledNavLink>
             ))}
           </StyledNavLinks>
         </StyledNavigation>
         
         <StyledMobileMenu $isOpen={mobileMenuOpen}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center', 
+            marginBottom: '2rem',
+            paddingBottom: '1rem',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+          }}>
             <Typography variant="brand">{brandName}</Typography>
             <button
               onClick={() => setMobileMenuOpen(false)}
               style={{
-                background: 'transparent',
-                border: 'none',
+                background: 'rgba(255, 255, 255, 0.1)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                borderRadius: '0.375rem',
                 color: 'inherit',
-                fontSize: '1.5rem',
-                cursor: 'pointer'
+                fontSize: '1.25rem',
+                padding: '0.5rem',
+                cursor: 'pointer',
+                width: '2.5rem',
+                height: '2.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
               }}
             >
               ×
@@ -287,10 +346,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 style={{
                   color: 'inherit',
                   textDecoration: 'none',
-                  padding: '0.75rem 0',
+                  padding: '1rem 0',
                   fontSize: '1rem',
-                  fontWeight: 600,
-                  borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+                  fontWeight: 500,
+                  borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+                  transition: 'color 0.2s ease'
                 }}
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -307,57 +367,79 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     <StyledHeroWrapper className={className}>
       {renderNavigation()}
       
-      <StyledBackgroundGradient $position="top" />
-      <StyledBackgroundGradient $position="bottom" />
+      <StyledBackgroundGradient />
       
       <StyledHeroContent $variant={variant}>
         <Container variant="wide">
-          <Stack variant="loose">
-            {announcement && (
-              <StyledAnnouncement>
-                <Typography variant="caption" color="muted">
-                  {announcement.text}
-                  {announcement.link && (
-                    <>
-                      {' '}
-                      <a 
-                        href={announcement.link.href} 
-                      >
-                        {announcement.link.text} →
-                      </a>
-                    </>
-                  )}
-                </Typography>
-              </StyledAnnouncement>
-            )}
-            
-            <Typography variant="heading">
-              {title}
-            </Typography>
-            
-            {subtitle && (
-              <Typography color="muted">
-                {subtitle}
+          <StyledTitleWrapper>
+            <Stack variant="loose">
+              {announcement && (
+                <StyledAnnouncement>
+                  <StyledAnnouncementBadge>New</StyledAnnouncementBadge>
+                  <Typography variant="caption" color="muted">
+                    {announcement.text}
+                    {announcement.link && (
+                      <>
+                        {' '}
+                        <a 
+                          href={announcement.link.href}
+                          style={{ 
+                            color: '#4A9EFF', 
+                            textDecoration: 'none',
+                            fontWeight: 500
+                          }}
+                        >
+                          {announcement.link.text} →
+                        </a>
+                      </>
+                    )}
+                  </Typography>
+                </StyledAnnouncement>
+              )}
+              
+              <Typography variant="heading" style={{ marginBottom: '1.5rem' }}>
+                {title}
               </Typography>
-            )}
-            
-            {(primaryAction || secondaryAction) && (
-              <Stack variant="tight">
-                {primaryAction && (
-                  <StyledActionButton href={primaryAction.href} $isPrimary>
-                    {primaryAction.text}
-                  </StyledActionButton>
-                )}
-                {secondaryAction && (
-                  <StyledActionButton href={secondaryAction.href}>
-                    {secondaryAction.text} →
-                  </StyledActionButton>
-                )}
-              </Stack>
-            )}
-            
-            {children}
-          </Stack>
+              
+              {subtitle && (
+                <Typography 
+                  color="muted" 
+                  style={{ 
+                    fontSize: '1.25rem',
+                    lineHeight: '1.75rem',
+                    maxWidth: '48rem',
+                    margin: variant === 'centered' ? '0 auto' : '0'
+                  }}
+                >
+                  {subtitle}
+                </Typography>
+              )}
+              
+              {(primaryAction || secondaryAction) && (
+                <div style={{ 
+                  display: 'flex', 
+                  gap: '1rem', 
+                  flexWrap: 'wrap',
+                  justifyContent: variant === 'centered' ? 'center' : 'flex-start',
+                  marginTop: '2rem'
+                }}>
+                  {primaryAction && (
+                    <StyledActionButton href={primaryAction.href} $isPrimary>
+                      {primaryAction.text}
+                    </StyledActionButton>
+                  )}
+                  {secondaryAction && (
+                    <StyledActionButton href={secondaryAction.href}>
+                      {secondaryAction.text}
+                      <span style={{ marginLeft: '0.5rem' }}>→</span>
+                    </StyledActionButton>
+                  )}
+                </div>
+              )}
+              
+              {children}
+            </Stack>
+          </StyledTitleWrapper>
         </Container>
       </StyledHeroContent>
     </StyledHeroWrapper>

@@ -44,8 +44,12 @@ export interface NavigationProps {
 }
 
 const StyledNav = styled(Box)`
-  border-bottom: 1px solid ${({ theme }) => theme.colors.gray.light};
-  background-color: ${({ theme }) => theme.colors.foundation.black};
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 50;
 `
 
 const NavContainer = styled(Box)`
@@ -62,11 +66,7 @@ const NavContent = styled(Box)`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
-  
-  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    height: 80px;
-  }
+  height: 72px;
 `
 
 const BrandLink = styled.a`
@@ -74,6 +74,7 @@ const BrandLink = styled.a`
   align-items: center;
   text-decoration: none;
   color: inherit;
+  transition: opacity 0.2s ease;
   
   &:hover {
     opacity: 0.8;
@@ -83,7 +84,7 @@ const BrandLink = styled.a`
 const NavItems = styled(Box)`
   display: none;
   align-items: center;
-  gap: ${({ theme }) => theme.spacing[6]};
+  gap: ${({ theme }) => theme.spacing[1]};
   
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     display: flex;
@@ -96,27 +97,31 @@ const NavItemLink = styled.a<{ $isActive?: boolean }>`
   gap: ${({ theme }) => theme.spacing[2]};
   text-decoration: none;
   padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[4]};
-  border-radius: ${({ theme }) => theme.radius.md};
-  font-family: ${({ theme }) => theme.typography.fonts.body};
+  border-radius: ${({ theme }) => theme.radius.lg};
   font-size: ${({ theme }) => theme.typography.fontSizes.sm};
   font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
   color: ${({ theme }) => theme.colors.text.secondary};
-  transition: all ${({ theme }) => theme.durations.fast} ${({ theme }) => theme.easings.easeInOut};
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  position: relative;
   
   ${({ $isActive, theme }) => $isActive && css`
-    color: ${theme.colors.innovation.primaryBlue};
-    background-color: rgba(74, 158, 255, 0.15);
+    color: ${theme.colors.foundation.white};
+    background: rgba(255, 255, 255, 0.08);
   `}
   
   &:hover {
-    color: ${({ theme }) => theme.colors.text.primary};
-    background-color: ${({ theme }) => theme.colors.gray.base};
+    color: ${({ theme }) => theme.colors.foundation.white};
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-1px);
     
     ${({ $isActive, theme }) => $isActive && css`
-      color: ${theme.colors.innovation.primaryBlue};
-      background-color: rgba(74, 158, 255, 0.15);
+      background: rgba(255, 255, 255, 0.12);
     `}
+  }
+  
+  &:active {
+    transform: translateY(0);
   }
 `
 
@@ -127,18 +132,21 @@ const MobileMenuButton = styled.button`
   width: 40px;
   height: 40px;
   border: none;
-  background-color: transparent;
+  background: rgba(255, 255, 255, 0.05);
   color: ${({ theme }) => theme.colors.text.secondary};
   cursor: pointer;
-  border-radius: ${({ theme }) => theme.radius.md};
+  border-radius: ${({ theme }) => theme.radius.lg};
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
   
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     display: none;
   }
   
   &:hover {
-    background-color: ${({ theme }) => theme.colors.gray.base};
-    color: ${({ theme }) => theme.colors.text.primary};
+    background: rgba(255, 255, 255, 0.1);
+    color: ${({ theme }) => theme.colors.foundation.white};
+    border-color: rgba(255, 255, 255, 0.2);
   }
 `
 
@@ -148,98 +156,96 @@ const MobileMenuOverlay = styled.div<{ $isOpen: boolean }>`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
   z-index: 100;
-  
-  display: ${({ $isOpen }) => ($isOpen ? 'flex' : 'none')};
-  align-items: center;
-  justify-content: center;
+  opacity: ${({ $isOpen }) => ($isOpen ? '1' : '0')};
+  visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     display: none;
   }
 `
 
-const MobileMenu = styled.div`
-  background-color: ${({ theme }) => theme.colors.foundation.black};
-  border-radius: ${({ theme }) => theme.radius.xl};
-  padding: ${({ theme }) => theme.spacing[8]};
-  margin: ${({ theme }) => theme.spacing[4]};
-  width: calc(100% - ${({ theme }) => theme.spacing[8]});
-  max-width: 400px;
-  max-height: 80vh;
+const MobileMenu = styled.div<{ $isOpen: boolean }>`
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 20rem;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(20px);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  padding: ${({ theme }) => theme.spacing[6]};
+  transform: translateX(${({ $isOpen }) => ($isOpen ? '0' : '100%')});
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow-y: auto;
-  position: relative;
-  border: 1px solid ${({ theme }) => theme.colors.gray.light};
-  box-shadow: ${({ theme }) => theme.shadows.xl};
 `
 
 const MobileMenuHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: ${({ theme }) => theme.spacing[6]};
+  margin-bottom: ${({ theme }) => theme.spacing[8]};
   padding-bottom: ${({ theme }) => theme.spacing[4]};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.gray.light};
-`
-
-const MobileMenuTitle = styled.h2`
-  font-family: ${({ theme }) => theme.typography.fonts.body};
-  font-size: ${({ theme }) => theme.typography.fontSizes.xl};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
-  color: ${({ theme }) => theme.colors.text.primary};
-  margin: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 `
 
 const CloseButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border: none;
-  background-color: transparent;
+  background: rgba(255, 255, 255, 0.1);
   color: ${({ theme }) => theme.colors.text.secondary};
   cursor: pointer;
-  border-radius: ${({ theme }) => theme.radius.md};
-  transition: all ${({ theme }) => theme.durations.fast} ${({ theme }) => theme.easings.easeInOut};
+  border-radius: ${({ theme }) => theme.radius.lg};
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
   
   &:hover {
-    background-color: ${({ theme }) => theme.colors.gray.base};
-    color: ${({ theme }) => theme.colors.text.primary};
+    background: rgba(255, 255, 255, 0.15);
+    color: ${({ theme }) => theme.colors.foundation.white};
+    border-color: rgba(255, 255, 255, 0.2);
   }
 `
 
 const MobileNavItem = styled.a<{ $isActive?: boolean }>`
   display: flex;
   align-items: center;
+  gap: ${({ theme }) => theme.spacing[3]};
   text-decoration: none;
   padding: ${({ theme }) => theme.spacing[4]};
   margin-bottom: ${({ theme }) => theme.spacing[2]};
-  font-family: ${({ theme }) => theme.typography.fonts.body};
-  font-size: ${({ theme }) => theme.typography.fontSizes.lg};
+  font-size: ${({ theme }) => theme.typography.fontSizes.base};
   font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
   color: ${({ theme }) => theme.colors.text.secondary};
   border-radius: ${({ theme }) => theme.radius.lg};
-  transition: all ${({ theme }) => theme.durations.fast} ${({ theme }) => theme.easings.easeInOut};
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   
   ${({ $isActive, theme }) => $isActive && css`
-    color: ${theme.colors.innovation.primaryBlue};
-    background-color: rgba(74, 158, 255, 0.15);
+    color: ${theme.colors.foundation.white};
+    background: rgba(255, 255, 255, 0.08);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
   `}
   
   &:hover {
-    color: ${({ theme }) => theme.colors.text.primary};
-    background-color: ${({ theme }) => theme.colors.gray.base};
+    color: ${({ theme }) => theme.colors.foundation.white};
+    background: rgba(255, 255, 255, 0.05);
     
     ${({ $isActive, theme }) => $isActive && css`
-      color: ${theme.colors.innovation.primaryBlue};
-      background-color: rgba(74, 158, 255, 0.15);
+      background: rgba(255, 255, 255, 0.12);
     `}
   }
   
   &:last-child {
     margin-bottom: 0;
+    border-bottom: none;
   }
 `
 
@@ -357,9 +363,9 @@ export const Navigation: React.FC<NavigationProps> = ({
       </NavContainer>
       
       <MobileMenuOverlay $isOpen={mobileMenuOpen} onClick={handleOverlayClick}>
-        <MobileMenu>
+        <MobileMenu $isOpen={mobileMenuOpen}>
           <MobileMenuHeader>
-            <MobileMenuTitle>Menu</MobileMenuTitle>
+            {renderBrand()}
             <CloseButton onClick={toggleMobileMenu}>
               <CloseIcon />
             </CloseButton>
@@ -373,7 +379,7 @@ export const Navigation: React.FC<NavigationProps> = ({
               $isActive={isActive(item.href)}
               onClick={handleItemClick(item)}
             >
-              {item.icon && <span style={{ marginRight: '12px' }}>{item.icon}</span>}
+              {item.icon && <span>{item.icon}</span>}
               {item.label}
             </MobileLinkComponent>
           ))}
