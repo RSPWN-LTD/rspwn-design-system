@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { Box, BoxProps } from '../foundation/Box'
 
-export interface CardProps extends Omit<BoxProps, 'bg'> {
+export interface CardProps extends Omit<BoxProps, 'variant'> {
   variant?: 'default' | 'elevated' | 'outlined' | 'filled'
   hoverable?: boolean
   clickable?: boolean

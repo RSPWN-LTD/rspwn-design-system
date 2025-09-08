@@ -31,51 +31,6 @@ export interface ResponsiveGridProps extends Omit<GridProps, 'variant'> {
   minColumnWidth?: string
 }
 
-const getPatternColumns = (pattern: ResponsiveGridProps['pattern'], minColumnWidth?: string) => {
-  if (minColumnWidth) {
-    return `repeat(auto-fit, minmax(${minColumnWidth}, 1fr))`
-  }
-  
-  switch (pattern) {
-    case 'cards':
-      return {
-        xs: 'repeat(1, 1fr)',
-        sm: 'repeat(2, 1fr)', 
-        md: 'repeat(3, 1fr)',
-        lg: 'repeat(4, 1fr)'
-      }
-    case 'features':
-      return {
-        xs: 'repeat(1, 1fr)',
-        md: 'repeat(2, 1fr)',
-        lg: 'repeat(3, 1fr)'
-      }
-    case 'articles':
-      return {
-        xs: 'repeat(1, 1fr)',
-        md: 'repeat(2, 1fr)'
-      }
-    case 'stats':
-      return {
-        xs: 'repeat(2, 1fr)',
-        md: 'repeat(4, 1fr)'
-      }
-    default:
-      return 'repeat(auto-fit, minmax(280px, 1fr))'
-  }
-}
-
-const convertColumnsToTemplate = (columns: ResponsiveGridProps['responsiveColumns']) => {
-  if (!columns) return undefined
-  
-  const template: Record<string, string> = {}
-  
-  Object.entries(columns).forEach(([breakpoint, count]) => {
-    template[breakpoint] = `repeat(${count}, 1fr)`
-  })
-  
-  return template
-}
 
 export const ResponsiveGrid: React.FC<ResponsiveGridProps> = ({
   pattern = 'cards',

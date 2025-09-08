@@ -330,7 +330,7 @@ export const Navigation: React.FC<NavigationProps> = ({
   }, [mobileMenuOpen])
   
   return (
-    <StyledNav as="nav" className={className} position="relative">
+    <StyledNav as="nav" className={className}>
       <NavContainer>
         <NavContent>
           {renderBrand()}

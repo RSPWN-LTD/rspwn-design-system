@@ -1,6 +1,5 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Divider } from './Divider'
 
 export type StackVariant = 'default' | 'tight' | 'loose' | 'divided' | 'nav'
 

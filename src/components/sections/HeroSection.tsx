@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { Typography } from '../foundation/Typography'
 import { Container } from '../foundation/Container'
 import { Stack } from '../foundation/Stack'
-import { Box } from '../foundation/Box'
 
 export type HeroSectionVariant = 'centered' | 'split' | 'minimal'
 
@@ -114,10 +113,10 @@ const StyledMobileMenu = styled.div<{ $isOpen: boolean }>`
 
 const StyledHeroContent = styled.div<{ $variant: HeroSectionVariant }>`
   position: relative;
-  padding: ${({ theme }) => theme.spacing[14]} ${({ theme }) => theme.spacing[6]} ${({ theme }) => theme.spacing[32]};
+  padding: ${({ theme }) => theme.spacing[12]} ${({ theme }) => theme.spacing[6]} ${({ theme }) => theme.spacing[32]};
   
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    padding: ${({ theme }) => theme.spacing[14]} ${({ theme }) => theme.spacing[8]} ${({ theme }) => theme.spacing[56]};
+    padding: ${({ theme }) => theme.spacing[12]} ${({ theme }) => theme.spacing[8]} ${({ theme }) => theme.spacing[56]};
   }
   
   ${({ $variant }) => $variant === 'centered' && `
@@ -313,7 +312,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       
       <StyledHeroContent $variant={variant}>
         <Container variant="wide">
-          <Stack variant="loose" style={{ alignItems: variant === 'centered' ? 'center' : 'flex-start' }}>
+          <Stack variant="loose">
             {announcement && (
               <StyledAnnouncement>
                 <Typography variant="caption" color="muted">
@@ -323,7 +322,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                       {' '}
                       <a 
                         href={announcement.link.href} 
-                        style={{ color: '#4A9EFF', fontWeight: 600, textDecoration: 'none' }}
                       >
                         {announcement.link.text} →
                       </a>
@@ -333,41 +331,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </StyledAnnouncement>
             )}
             
-            <Typography 
-              variant="heading" 
-              style={{ 
-                fontSize: '3rem',
-                lineHeight: 1.1,
-                textAlign: variant === 'centered' ? 'center' : 'left'
-              }}
-            >
+            <Typography variant="heading">
               {title}
             </Typography>
             
             {subtitle && (
-              <Typography 
-                color="muted" 
-                style={{ 
-                  fontSize: '1.25rem',
-                  lineHeight: 1.6,
-                  maxWidth: '42rem',
-                  textAlign: variant === 'centered' ? 'center' : 'left'
-                }}
-              >
+              <Typography color="muted">
                 {subtitle}
               </Typography>
             )}
             
             {(primaryAction || secondaryAction) && (
-              <Stack 
-                variant="tight" 
-                style={{ 
-                  alignItems: 'center', 
-                  justifyContent: variant === 'centered' ? 'center' : 'flex-start',
-                  gap: '1.5rem',
-                  marginTop: '1rem'
-                }}
-              >
+              <Stack variant="tight">
                 {primaryAction && (
                   <StyledActionButton href={primaryAction.href} $isPrimary>
                     {primaryAction.text}

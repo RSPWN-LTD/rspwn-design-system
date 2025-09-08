@@ -151,7 +151,7 @@ const ArticleRoot: React.FC<ArticleTemplateProps> = ({
   className,
   id 
 }) => (
-  <BaseTemplate config={config} className={className} id={id}>
+  <BaseTemplate className={className}>
     <ArticleContainer>
       {children}
     </ArticleContainer>

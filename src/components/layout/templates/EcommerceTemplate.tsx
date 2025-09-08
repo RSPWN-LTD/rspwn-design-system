@@ -177,7 +177,7 @@ const ProductGridRoot: React.FC<EcommerceTemplateProps> = ({
   className,
   id 
 }) => (
-  <BaseTemplate config={config} className={className} id={id}>
+  <BaseTemplate className={className}>
     <ProductGridContainer>
       {children}
     </ProductGridContainer>
@@ -215,7 +215,7 @@ const CheckoutRoot: React.FC<EcommerceTemplateProps> = ({
   className,
   id 
 }) => (
-  <BaseTemplate config={config} className={className} id={id}>
+  <BaseTemplate className={className}>
     <CheckoutContainer>
       {children}
     </CheckoutContainer>
