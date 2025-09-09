@@ -1,5 +1,5 @@
 # RSPWN Design System - AI Component Documentation
-Generated on: 2025-09-08
+Generated on: 2025-09-09
 
 This file contains comprehensive information about all components in the RSPWN Design System.
 Use this as a reference when helping users implement components from @rspwn/design-system.
@@ -317,53 +317,52 @@ function App() {
 
 **Usage Examples:**
 
-*GamingPlatform:*
+*Default:*
 ```jsx
 <BentoGrid
-  title='Complete Gaming Platform'
-  subtitle='Everything you need to build
-  items=gamingFeatures
-  variant='default'
->
-  Content
-</BentoGrid>
-```
-
-*ProductShowcase:*
-```jsx
-<BentoGrid
-  title='Platform Features'
-  subtitle='Discover the tools that make RSPWN the ultimate gaming platform'
-  items=productFeatures
-  variant='spacious'
->
-  Content
-</BentoGrid>
-```
-
-*ServiceGrid:*
-```jsx
-<BentoGrid
-  title='Our Services'
-  subtitle='Professional development services for modern applications'
-  items=serviceShowcase
-  variant='compact'
->
-  Content
-</BentoGrid>
-```
-
-*WithoutHeader:*
-```jsx
-<BentoGrid
+  title="Platform Features"
+  subtitle="Everything you need for your business"
   items=[
       {
         id
-  title='Lightning Fast'
-  description='Ultra-low latency gaming experience'
-  icon='⚡'
-  size='medium' as const
-  color='primary' as const
+  title="File Management"
+  description="Organize and manage your documents efficiently"
+  icon=<FileIcon />
+  size="medium"
+  content=<FileList />
+>
+  Content
+</BentoGrid>
+```
+
+*Compact:*
+```jsx
+<BentoGrid
+  variant="compact"
+  items=[
+      {
+        id
+  title="Files"
+  description="Document management"
+  icon=<FileIcon />
+  size="medium"
+>
+  Content
+</BentoGrid>
+```
+
+*LargeCards:*
+```jsx
+<BentoGrid
+  title="Feature Showcase"
+  items=[
+      {
+        id
+  title="Dashboard Overview"
+  description="Get a complete view of your business metrics and KPIs"
+  icon=<ChartIcon />
+  size="large"
+  content=<ChartDemo />
 >
   Content
 </BentoGrid>
@@ -372,34 +371,16 @@ function App() {
 *Interactive:*
 ```jsx
 <BentoGrid
-  title='Interactive Features'
-  subtitle='Click on any feature to learn more'
+  title="Interactive Features"
+  subtitle="Click on any card to explore"
   items=[
       {
         id
-  title='Create Tournament'
-  description='Set up your next competitive event'
-  icon='🏆'
-  size='large' as const
-  color='primary' as const
-  onClick=() => alert('Opening tournament creation wizard...')
-  content=(
-          <div style={{ marginTop
->
-  Content
-</BentoGrid>
-```
-
-*MinimalGrid:*
-```jsx
-<BentoGrid
-  items=[
-      {
-        id
-  title='Fast'
-  icon='⚡'
-  size='small' as const
-  color='primary' as const
+  title="File Manager"
+  description="Click to open file explorer"
+  icon=<FileIcon />
+  size="medium"
+  onClick=() => alert('Opening file manager...')
 >
   Content
 </BentoGrid>
@@ -417,9 +398,7 @@ function App() {
 - `description`: string
 - `primaryButton`: CTAButton
 - `secondaryButton`: CTAButton
-- `variant`: 'centered' | 'split' | 'banner' | 'minimal'
-- `backgroundImage`: string
-- `backgroundGradient`: boolean
+- `variant`: 'centered' | 'split' | 'minimal'
 - `className`: string
 - `children`: React.ReactNode
 
@@ -688,12 +667,9 @@ function App() {
 - `brandIcon`: string
 - `navigation`: NavigationItem[]
 - `teams`: TeamItem[]
-- `settingsItem`: NavigationItem
 - `userProfile`: {
 - `name`: string
 - `avatar`: string
-- `menuItems`: Array<{ name: string
-- `href`: string
 
 **Usage Examples:**
 
@@ -1084,6 +1060,230 @@ function App() {
 >
   Content
 </Card>
+```
+
+---
+
+#### Chart
+
+**Import:** `import { Chart } from '@rspwn/design-system'`
+
+**Props:**
+- `data`: ChartDataPoint[]
+- `title`: string
+- `subtitle`: string
+- `type`: 'bar' | 'line' | 'area' | 'pie'
+- `height`: number
+- `showLegend`: boolean
+- `showGrid`: boolean
+- `showTooltips`: boolean
+- `showValues`: boolean
+- `formatValue`: (value: number) => string
+- `className`: string
+
+**Usage Examples:**
+
+*BarChart:*
+```jsx
+<Chart
+  type='bar'
+  data=sampleData
+  title='Monthly Sales'
+  subtitle='Revenue in thousands (hover for details)'
+  height=300
+  showLegend=true
+  showGrid=true
+  showTooltips=true
+  formatValue=(value
+>
+  Content
+</Chart>
+```
+
+*LineChart:*
+```jsx
+<Chart
+  type='line'
+  data=sampleData
+  title='User Growth'
+  subtitle='Active users over time'
+  height=300
+  showLegend=true
+  showGrid=true
+>
+  Content
+</Chart>
+```
+
+*AreaChart:*
+```jsx
+<Chart
+  type='area'
+  data=revenueData
+  title='Revenue Trend'
+  subtitle='Quarterly revenue performance'
+  height=300
+  showLegend=true
+  showGrid=true
+>
+  Content
+</Chart>
+```
+
+*PieChart:*
+```jsx
+<Chart
+  type='pie'
+  data=pieData
+  title='Traffic Sources'
+  subtitle='Breakdown by device type (hover for percentages)'
+  height=300
+  showLegend=true
+  showTooltips=true
+  formatValue=(value
+>
+  Content
+</Chart>
+```
+
+*WithoutTitle:*
+```jsx
+<Chart
+  type='bar'
+  data=sampleData
+  height=250
+  showLegend=false
+>
+  Content
+</Chart>
+```
+
+*WithoutLegend:*
+```jsx
+<Chart
+  type='line'
+  data=sampleData
+  title='Performance Metrics'
+  height=300
+  showLegend=false
+>
+  Content
+</Chart>
+```
+
+*WithoutGrid:*
+```jsx
+<Chart
+  type='line'
+  data=revenueData
+  title='Clean Line Chart'
+  subtitle='Without grid lines'
+  height=300
+  showGrid=false
+>
+  Content
+</Chart>
+```
+
+*CustomColors:*
+```jsx
+<Chart
+  type='bar'
+  data=[
+      { label
+  value=85
+  color='#10B981'
+>
+  Content
+</Chart>
+```
+
+*LargeDataset:*
+```jsx
+<Chart
+  type='line'
+  data=[
+      { label
+  value=45
+>
+  Content
+</Chart>
+```
+
+*SmallChart:*
+```jsx
+<Chart
+  type='bar'
+  data=sampleData.slice(0
+  title='Compact View'
+  height=200
+  showLegend=false
+>
+  Content
+</Chart>
+```
+
+*TallChart:*
+```jsx
+<Chart
+  type='area'
+  data=revenueData
+  title='Extended View'
+  subtitle='Taller chart for detailed analysis'
+  height=400
+  showGrid=true
+>
+  Content
+</Chart>
+```
+
+*WithTooltipsAndValues:*
+```jsx
+<Chart
+  type='bar'
+  data=[
+      { label
+  value=15420
+>
+  Content
+</Chart>
+```
+
+*CurrencyFormatting:*
+```jsx
+<Chart
+  type='line'
+  data=[
+      { label
+  value=45230
+>
+  Content
+</Chart>
+```
+
+*PercentageChart:*
+```jsx
+<Chart
+  type='bar'
+  data=[
+      { label
+  value=3.2
+>
+  Content
+</Chart>
+```
+
+*InteractiveDemo:*
+```jsx
+<Chart
+  type='pie'
+  data=[
+      { label
+  value=2847
+  color='#4A9EFF'
+>
+  Content
+</Chart>
 ```
 
 ---
@@ -2084,6 +2284,99 @@ function App() {
 >
   Content
 </useState>
+```
+
+---
+
+#### Stats
+
+**Import:** `import { Stats } from '@rspwn/design-system'`
+
+**Props:**
+- `items`: StatItem[]
+- `variant`: 'default' | 'compact' | 'detailed'
+- `className`: string
+
+**Usage Examples:**
+
+*Default:*
+```jsx
+<Stats
+  items=[
+      {
+        id
+  name='Total Users'
+  value='2
+  change={
+          value
+  type='increase'
+>
+  Content
+</Stats>
+```
+
+*Compact:*
+```jsx
+<Stats
+  variant='compact'
+  items=[
+      {
+        id
+  name='Users'
+  value='2.5K'
+  change={
+          value
+  type='increase'
+>
+  Content
+</Stats>
+```
+
+*Detailed:*
+```jsx
+<Stats
+  variant='detailed'
+  items=[
+      {
+        id
+  name='Total Active Users'
+  value='2
+  change={
+          value
+  type='increase'
+>
+  Content
+</Stats>
+```
+
+*WithoutIcons:*
+```jsx
+<Stats
+  items=[
+      {
+        id
+  name='Total Users'
+  value='2
+  change={
+          value
+  type='increase'
+>
+  Content
+</Stats>
+```
+
+*WithoutChange:*
+```jsx
+<Stats
+  items=[
+      {
+        id
+  name='Total Users'
+  value='2
+  icon=<UsersIcon />
+>
+  Content
+</Stats>
 ```
 
 ---

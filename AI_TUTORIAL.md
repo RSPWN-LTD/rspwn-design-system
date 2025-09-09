@@ -115,10 +115,11 @@ import {
   
   // UI Components  
   Button, Card, Input, TextArea, Select, Checkbox, Switch, DatePicker,
-  Modal, Drawer, Navigation, Footer, 
-  Accordion, Alert, Avatar, Badge, Image,
+  Modal, Drawer, Navigation, Footer, Toast,
+  Accordion, Alert, Avatar, Badge, Image, Icon,
   Progress, Rating, Skeleton, Pagination,
-  Table, Timeline, Search, Tooltip,
+  Table, Timeline, Search, Tooltip, Chart,
+  Breadcrumb, RadioGroup, Slider, Stepper, Stats,
   
   // Sections Components
   BentoGrid, CallToAction, HeroSection, SidebarNavigation
@@ -263,7 +264,7 @@ import { Card } from '@rspwn/design-system'
 
 #### Form Components
 ```jsx
-import { Input, TextArea, Select, Checkbox, Switch, DatePicker } from '@rspwn/design-system'
+import { Input, TextArea, Select, Checkbox, Switch, DatePicker, RadioGroup, Slider, Stepper } from '@rspwn/design-system'
 
 // Text Input
 <Input 
@@ -312,11 +313,46 @@ import { Input, TextArea, Select, Checkbox, Switch, DatePicker } from '@rspwn/de
   size="md"
   showCalendarIcon={true}
 />
+
+// Radio Group
+<RadioGroup 
+  options={[
+    { value: "beginner", label: "Beginner" },
+    { value: "intermediate", label: "Intermediate" },  
+    { value: "expert", label: "Expert" }
+  ]}
+  label="Skill Level"
+  variant="default"
+  size="md"
+/>
+
+// Slider
+<Slider 
+  min={0}
+  max={100}
+  defaultValue={50}
+  label="Audio Volume"
+  variant="single"
+  size="md"
+  showTicks={true}
+/>
+
+// Stepper
+<Stepper 
+  steps={[
+    { id: "1", title: "Create Account", description: "Set up your gaming profile" },
+    { id: "2", title: "Choose Plan", description: "Select your subscription tier" },
+    { id: "3", title: "Start Gaming", description: "Begin your journey" }
+  ]}
+  activeStep={1}
+  orientation="horizontal"
+  size="md"
+/>
 ```
 
 #### Interactive Components
 ```jsx
-import { Modal, Drawer, Accordion, Alert, Avatar, Badge, Search, Image } from '@rspwn/design-system'
+import { Modal, Drawer, Accordion, Alert, Avatar, Badge, Search, Image, Icon, Toast } from '@rspwn/design-system'
 
 // Modal Dialog
 <Modal 
@@ -360,6 +396,22 @@ import { Modal, Drawer, Accordion, Alert, Avatar, Badge, Search, Image } from '@
   loading="lazy"
 />
 
+// Icon Component
+<Icon 
+  name="gamepad"
+  size="md"
+  color="#4A9EFF"
+/>
+
+// Toast Notifications
+<Toast 
+  id="notification"
+  title="Success"
+  description="Your game settings have been saved"
+  variant="success"
+  duration={5000}
+/>
+
 // Alert Messages
 <Alert 
   severity="info"
@@ -395,7 +447,7 @@ import { Modal, Drawer, Accordion, Alert, Avatar, Badge, Search, Image } from '@
 
 #### Data Display Components
 ```jsx
-import { Progress, Rating, Skeleton, Pagination, Tooltip, Table, Timeline } from '@rspwn/design-system'
+import { Progress, Rating, Skeleton, Pagination, Tooltip, Table, Timeline, Chart, Breadcrumb, Stats } from '@rspwn/design-system'
 
 // Data Table
 <Table 
@@ -471,6 +523,53 @@ import { Progress, Rating, Skeleton, Pagination, Tooltip, Table, Timeline } from
 <Tooltip content="This feature uses advanced AI algorithms">
   <Button variant="primary">AI Gaming Mode</Button>
 </Tooltip>
+
+// Chart Component
+<Chart 
+  type="bar"
+  data={[
+    { label: "Wins", value: 45, color: "#4A9EFF" },
+    { label: "Losses", value: 23, color: "#6B7280" },
+    { label: "Draws", value: 12, color: "#10B981" }
+  ]}
+  title="Match Statistics"
+  subtitle="Your gaming performance this month"
+  height={300}
+  showLegend={true}
+/>
+
+// Breadcrumb Navigation
+<Breadcrumb 
+  items={[
+    { label: "Home", href: "/" },
+    { label: "Games", href: "/games" },
+    { label: "Tournament", href: "/games/tournament" },
+    { label: "Championship 2024", href: "#" }
+  ]}
+  size="md"
+  variant="default"
+/>
+
+// Statistics Display
+<Stats 
+  items={[
+    {
+      id: "1",
+      name: "Total Players",
+      value: "2,847",
+      change: { value: 12, type: "increase" },
+      icon: "👥"
+    },
+    {
+      id: "2", 
+      name: "Active Matches",
+      value: "1,234",
+      change: { value: 5, type: "increase" },
+      icon: "🎮"
+    }
+  ]}
+  variant="default"
+/>
 ```
 
 ### Sections Components
@@ -790,6 +889,9 @@ The RSPWN Design System includes the following complete set of components:
 - **Checkbox**: Boolean selection with helper text support
 - **Switch**: Toggle controls for settings and preferences
 - **DatePicker**: Date selection with calendar interface
+- **RadioGroup**: Single selection from multiple options
+- **Slider**: Range input with single or dual handles
+- **Stepper**: Multi-step form progress indicator
 
 ### UI Components (Interactive Elements)
 - **Button**: Action buttons with variant system (primary, secondary, ghost, danger)
@@ -803,6 +905,8 @@ The RSPWN Design System includes the following complete set of components:
 - **Avatar**: User profile images with fallback initials
 - **Badge**: Status indicators and labels
 - **Image**: Optimized images with loading states and fallbacks
+- **Icon**: SVG icon system with customizable size and color
+- **Toast**: Notification messages with auto-dismiss functionality
 
 ### Data Display Components
 - **Table**: Data tables with sorting, selection, and pagination
@@ -813,6 +917,9 @@ The RSPWN Design System includes the following complete set of components:
 - **Pagination**: Page navigation with customizable controls
 - **Tooltip**: Contextual help with positioning options
 - **Search**: Search input with autocomplete and filtering
+- **Chart**: Data visualization with bar, line, area, and pie chart types
+- **Breadcrumb**: Navigation path indicator for hierarchical content
+- **Stats**: Statistical metrics display with change indicators
 
 ### Section Components (Pre-built Layouts)
 - **HeroSection**: Landing page hero sections with CTAs
