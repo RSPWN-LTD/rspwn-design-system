@@ -56,9 +56,15 @@ export { iconPaths } from './components/ui/iconPaths'
 export { Chart } from './components/ui/Chart'
 export { Stats } from './components/ui/Stats'
 export { Slider } from './components/ui/Slider'
+export { Dropdown } from './components/ui/Dropdown'
+export { Popover } from './components/ui/Popover'
+export { Tabs } from './components/ui/Tabs'
 
 // Section Components
 export { SidebarNavigation } from './components/sections/SidebarNavigation'
+export { BentoGrid } from './components/sections/BentoGrid'
+export { HeroSection } from './components/sections/HeroSection'
+export { CallToAction } from './components/sections/CallToAction'
 
 // Layout Components  
 export { Show, Hide, ShowOnMobile, ShowOnTablet, ShowOnDesktop, HideOnMobile, HideOnTablet, HideOnDesktop } from './components/layout'
@@ -107,7 +113,13 @@ export type { IconName } from './components/ui/iconPaths'
 export type { ChartProps, ChartDataPoint } from './components/ui/Chart'
 export type { StatsProps, StatItem } from './components/ui/Stats'
 export type { SliderProps } from './components/ui/Slider'
+export type { DropdownProps } from './components/ui/Dropdown'
+export type { PopoverProps } from './components/ui/Popover'
+export type { TabsProps, TabListProps } from './components/ui/Tabs'
 export type { SidebarNavigationProps, NavigationItem, TeamItem } from './components/sections/SidebarNavigation'
+export type { BentoGridProps, BentoGridItem } from './components/sections/BentoGrid'
+export type { HeroSectionProps, HeroSectionVariant } from './components/sections/HeroSection'
+export type { CallToActionProps, CTAButton } from './components/sections/CallToAction'
 export type { 
   Breakpoint, 
   ResponsiveValue 
