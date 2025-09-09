@@ -64,7 +64,7 @@ const StyledNav = styled(Box)`
   z-index: 50;
 `
 
-const NavContainer = styled(Box)`
+const NavContainer = styled.div`
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 ${({ theme }) => theme.spacing[6]};
@@ -74,7 +74,7 @@ const NavContainer = styled(Box)`
   }
 `
 
-const NavContent = styled(Box)`
+const NavContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -93,7 +93,7 @@ const BrandLink = styled.a`
   }
 `
 
-const NavItems = styled(Box)<{ $hasOverflow: boolean; $forceMobile: boolean }>`
+const NavItems = styled.div<{ $hasOverflow: boolean; $forceMobile: boolean }>`
   display: none;
   align-items: center;
   gap: ${({ theme }) => theme.spacing[1]};
@@ -819,7 +819,7 @@ export const Navigation: React.FC<NavigationProps> = ({
   
   // Close dropdowns when clicking outside
   React.useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = () => {
       if (openDropdown !== null) {
         setOpenDropdown(null)
       }
@@ -841,10 +841,11 @@ export const Navigation: React.FC<NavigationProps> = ({
           </div>
           
           <NavItems 
-            ref={navItemsRef}
             $hasOverflow={overflowItems.length > 0}
             $forceMobile={forceMobileMenu}
+            style={{ position: 'relative' }}
           >
+            <div ref={navItemsRef} style={{ display: 'contents' }}>
             {visibleItems.map((item, index) => (
               <NavItemWrapper key={item.href || item.label}>
                 <LinkComponent
@@ -904,6 +905,7 @@ export const Navigation: React.FC<NavigationProps> = ({
                 )}
               </NavItemWrapper>
             ))}
+            </div>
           </NavItems>
           
           {/* Overflow menu for tablet/desktop */}
@@ -911,7 +913,7 @@ export const Navigation: React.FC<NavigationProps> = ({
             <OverflowMenuButton onClick={toggleOverflowMenu} $forceMobile={forceMobileMenu}>
               <MoreIcon />
               <OverflowDropdown $isOpen={overflowMenuOpen}>
-                {overflowItems.map((item, index) => (
+                {overflowItems.map((item) => (
                   <React.Fragment key={item.href || item.label}>
                     <OverflowMenuItem
                       href={item.href || '#'}
