@@ -53,6 +53,9 @@ export { Skeleton } from './components/ui/Skeleton'
 export { Image } from './components/ui/Image'
 export { Icon, IconCatalog } from './components/ui/Icon'
 export { iconPaths } from './components/ui/iconPaths'
+export { Chart } from './components/ui/Chart'
+export { Stats } from './components/ui/Stats'
+export { Slider } from './components/ui/Slider'
 
 // Layout Components  
 export { Show, Hide, ShowOnMobile, ShowOnTablet, ShowOnDesktop, HideOnMobile, HideOnTablet, HideOnDesktop } from './components/layout'
@@ -98,6 +101,9 @@ export {
 // Types
 export type { Theme } from './tokens/theme'
 export type { IconName } from './components/ui/iconPaths'
+export type { ChartProps, ChartDataPoint } from './components/ui/Chart'
+export type { StatsProps, StatItem } from './components/ui/Stats'
+export type { SliderProps } from './components/ui/Slider'
 export type { 
   Breakpoint, 
   ResponsiveValue 

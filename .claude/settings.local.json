@@ -25,7 +25,8 @@
       "mcp__linear-server__get_issue",
       "WebSearch",
       "Bash(cmd /c:*)",
-      "Bash(powershell:*)"
+      "Bash(powershell:*)",
+      "Bash(node:*)"
     ],
     "deny": [],
     "ask": []
