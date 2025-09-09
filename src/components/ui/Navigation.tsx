@@ -115,7 +115,7 @@ const NavItemLink = styled.a<{ $isActive?: boolean }>`
     background: rgba(255, 255, 255, 0.05);
     transform: translateY(-1px);
     
-    ${({ $isActive, theme }) => $isActive && css`
+    ${({ $isActive }) => $isActive && css`
       background: rgba(255, 255, 255, 0.12);
     `}
   }
@@ -238,7 +238,7 @@ const MobileNavItem = styled.a<{ $isActive?: boolean }>`
     color: ${({ theme }) => theme.colors.foundation.white};
     background: rgba(255, 255, 255, 0.05);
     
-    ${({ $isActive, theme }) => $isActive && css`
+    ${({ $isActive }) => $isActive && css`
       background: rgba(255, 255, 255, 0.12);
     `}
   }

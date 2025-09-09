@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { keyframes, css } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Typography } from '../foundation/Typography'
 import { Container } from '../foundation/Container'
 

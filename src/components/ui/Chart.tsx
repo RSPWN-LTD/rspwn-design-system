@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Typography } from '../foundation/Typography'
 
 export interface ChartDataPoint {
   label: string
@@ -176,7 +175,7 @@ const StyledGrid = styled.g`
 const StyledPath = styled.path<{ $isArea?: boolean; $color?: string }>`
   stroke: ${({ $color, theme }) => $color || theme.colors.innovation.primaryBlue};
   stroke-width: 2;
-  fill: ${({ $isArea, $color, theme }) => 
+  fill: ${({ $isArea, $color }) => 
     $isArea 
       ? `url(#gradient-${$color?.replace('#', '') || 'primary'})`
       : 'none'

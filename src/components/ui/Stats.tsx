@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Typography } from '../foundation/Typography'
 
 export interface StatItem {
   id: string
@@ -99,7 +98,7 @@ const StyledStatName = styled.div`
 `
 
 const StyledStatValue = styled.div<{ $variant: string }>`
-  font-size: ${({ $variant, theme }) => 
+  font-size: ${({ $variant }) => 
     $variant === 'compact' ? '1.75rem' : '2.25rem'
   };
   font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
