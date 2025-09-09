@@ -273,6 +273,17 @@ const StyledTitleWrapper = styled.div`
   margin: 0 auto;
 `
 
+const StyledHeroTitle = styled(Typography)`
+  margin-bottom: 1.5rem;
+`
+
+const StyledHeroSubtitle = styled(Typography)<{ $variant: HeroSectionVariant }>`
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  max-width: 48rem;
+  margin: ${({ $variant }) => $variant === 'centered' ? '0 auto' : '0'};
+`
+
 export const HeroSection: React.FC<HeroSectionProps> = ({
   variant = 'centered',
   title,
@@ -397,22 +408,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 </StyledAnnouncement>
               )}
               
-              <Typography variant="heading" style={{ marginBottom: '1.5rem' }}>
+              <StyledHeroTitle variant="heading">
                 {title}
-              </Typography>
+              </StyledHeroTitle>
               
               {subtitle && (
-                <Typography 
+                <StyledHeroSubtitle 
                   color="muted" 
-                  style={{ 
-                    fontSize: '1.25rem',
-                    lineHeight: '1.75rem',
-                    maxWidth: '48rem',
-                    margin: variant === 'centered' ? '0 auto' : '0'
-                  }}
+                  $variant={variant}
                 >
                   {subtitle}
-                </Typography>
+                </StyledHeroSubtitle>
               )}
               
               {(primaryAction || secondaryAction) && (

@@ -24,17 +24,6 @@ export interface BentoGridProps {
   className?: string
 }
 
-// Subtle professional animations
-const fadeInUp = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`
 
 const StyledBentoWrapper = styled.section<{ $variant: string }>`
   padding: ${({ $variant }) => 
@@ -215,6 +204,10 @@ const StyledSectionHeader = styled.div`
   }
 `
 
+const StyledItemTitle = styled(Typography)`
+  margin-bottom: 0.5rem;
+`
+
 export const BentoGrid: React.FC<BentoGridProps> = ({
   title,
   subtitle,
@@ -268,9 +261,9 @@ export const BentoGrid: React.FC<BentoGridProps> = ({
                     </StyledIconWrapper>
                   )}
                   <StyledTextWrapper>
-                    <Typography variant="subheading" style={{ marginBottom: '0.5rem' }}>
+                    <StyledItemTitle variant="subheading">
                       {item.title}
-                    </Typography>
+                    </StyledItemTitle>
                     {item.description && (
                       <Typography color="muted" variant="body">
                         {item.description}
